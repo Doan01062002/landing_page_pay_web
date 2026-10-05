@@ -556,7 +556,7 @@ p {
     padding: 10px;
     background: linear-gradient(180deg, transparent 55%, rgba(22, 24, 29, 0.4));
   }
-  .tcard__badges {
+  .tcard .tcard__badges {
     top: 10px;
     bottom: auto;
   }
@@ -575,7 +575,9 @@ p {
   bottom: 12px;
   right: 12px;
   display: flex;
+  align-items: flex-start;
   gap: 6px;
+  height: max-content;
 }
 .tcard__body {
   display: flex;
