@@ -2,7 +2,7 @@
 export const site = {
   brand: 'ChungAuto',
   domain: 'chungauto.vn',
-  tagline: 'Giải pháp website cho gara',
+  tagline: 'Giải pháp phần mềm ngành ô tô',
   logo: '/brand/logo-mobile.png',
   hotline: '1800 8282',
   zalo: 'Zalo OA ChungAuto',
@@ -14,7 +14,7 @@ export const site = {
   showrooms: 13,
   promo: {
     label: 'Ưu đãi tháng 10',
-    text: 'Triển khai website trong tháng này, tặng 1 landing page quảng cáo trị giá 3.500.000đ',
+    text: 'Triển khai phần mềm trong tháng này, tặng 1 landing page quảng cáo trị giá 3.500.000đ',
     giftValue: 3500000,
   },
 }

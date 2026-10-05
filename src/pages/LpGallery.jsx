@@ -26,7 +26,7 @@ export default function LpGallery() {
           </nav>
           <h1>Mẫu landing page tặng kèm</h1>
           <p>
-            Triển khai website, bạn được tặng 1 landing page quảng cáo trị giá {formatVND(site.promo.giftValue)}. Chọn 1 trong{' '}
+            Triển khai phần mềm, bạn được tặng 1 landing page quảng cáo trị giá {formatVND(site.promo.giftValue)}. Chọn 1 trong{' '}
             {landings.length} mẫu dưới đây. Chúng tôi thay video, ảnh xưởng và ưu đãi bằng nội dung thật của gara bạn.
           </p>
         </div>

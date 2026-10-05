@@ -82,9 +82,9 @@ export default function Gallery() {
           <nav className="crumbs" aria-label="Đường dẫn">
             <Link to="/">Trang chủ</Link>
             <span>/</span>
-            <span aria-current="page">Kho mẫu website</span>
+            <span aria-current="page">Kho mẫu phần mềm</span>
           </nav>
-          <h1>Kho mẫu website sửa chữa xe</h1>
+          <h1>Kho mẫu phần mềm ngành ô tô</h1>
           <p>
             {templates.length} mẫu cho gara ô tô, tiệm xe máy, lốp – ắc quy, detailing và phụ tùng. Mẫu nào cũng tặng kèm landing page quảng
             cáo trị giá {formatVND(site.promo.giftValue)}.
@@ -99,7 +99,7 @@ export default function Gallery() {
           >
             <Icon name="Search" size={20} />
             <label htmlFor="g-search-input" className="sr-only">
-              Tìm mẫu website
+              Tìm mẫu phần mềm
             </label>
             <input
               id="g-search-input"

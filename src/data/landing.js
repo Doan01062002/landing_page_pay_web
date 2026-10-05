@@ -1,5 +1,7 @@
 export const segments = [
   { icon: 'Car', label: 'Gara ô tô đa hãng' },
+  { icon: 'Store', label: 'Đại lý ô tô' },
+  { icon: 'Car', label: 'Showroom xe cũ' },
   { icon: 'Bike', label: 'Tiệm sửa xe máy' },
   { icon: 'CircleDot', label: 'Lốp & ắc quy' },
   { icon: 'Droplets', label: 'Rửa xe & detailing' },
@@ -21,8 +23,8 @@ export const steps = [
   },
   {
     day: 'Ngày 3 – 6',
-    title: 'Dựng website + landing page',
-    text: 'Website được dựng theo nhận diện của bạn. Song song, chúng tôi làm landing page quảng cáo cho chương trình khuyến mãi bạn chọn.',
+    title: 'Dựng phần mềm + landing page',
+    text: 'Phần mềm được dựng theo nhận diện của bạn. Song song, chúng tôi làm landing page quảng cáo cho chương trình khuyến mãi bạn chọn.',
   },
   {
     day: 'Ngày 7',
@@ -40,7 +42,7 @@ export const packages = [
     note: 'thanh toán 1 lần',
     gift: '1 landing page quảng cáo',
     features: [
-      'Website 6 – 9 trang theo mẫu bạn chọn',
+      'Phần mềm 6 – 9 trang theo mẫu bạn chọn',
       'Form đặt lịch, nút gọi & Zalo nổi',
       'Bảng giá dịch vụ, bảo dưỡng theo km',
       'Tên miền .vn + hosting năm đầu',
@@ -85,7 +87,7 @@ export const testimonials = [
     name: 'Anh Trần Minh Đức',
     role: 'Chủ Gara Minh Đức Auto, Bình Thạnh',
     quote:
-      'Trước đây khách chỉ gọi điện. Có website với form đặt lịch, mỗi tháng tôi nhận thêm khoảng 40 lịch hẹn online, chủ yếu là bảo dưỡng định kỳ.',
+      'Trước đây khách chỉ gọi điện. Có phần mềm với form đặt lịch, mỗi tháng tôi nhận thêm khoảng 40 lịch hẹn online, chủ yếu là bảo dưỡng định kỳ.',
     metric: '+40',
     metricLabel: 'lịch hẹn online / tháng',
     template: 'AutoPro Garage',
@@ -112,8 +114,8 @@ export const testimonials = [
 
 export const faqs = [
   {
-    q: 'Website và landing page khác gì nhau? Sao lại tặng thêm landing page?',
-    a: 'Website là cửa hàng online lâu dài, có nhiều trang (dịch vụ, bảng giá, chi nhánh, tin tức…) để khách tìm hiểu và đặt lịch. Landing page chỉ có 1 trang cho 1 chương trình khuyến mãi, dùng khi chạy quảng cáo: khách bấm quảng cáo, thấy đúng ưu đãi và để lại số điện thoại. Hai thứ bổ trợ nhau, nên chúng tôi tặng landing page để bạn chạy quảng cáo ngay sau khi có website.',
+    q: 'Phần mềm và landing page khác gì nhau? Sao lại tặng thêm landing page?',
+    a: 'Phần mềm là cửa hàng online lâu dài, có nhiều trang (dịch vụ, bảng giá, chi nhánh, tin tức…) để khách tìm hiểu và đặt lịch. Landing page chỉ có 1 trang cho 1 chương trình khuyến mãi, dùng khi chạy quảng cáo: khách bấm quảng cáo, thấy đúng ưu đãi và để lại số điện thoại. Hai thứ bổ trợ nhau, nên chúng tôi tặng landing page để bạn chạy quảng cáo ngay sau khi có phần mềm.',
   },
   {
     q: 'Tôi có được đổi màu, logo và nội dung của mẫu không?',
@@ -132,7 +134,7 @@ export const faqs = [
     a: 'Được. Bạn có trang quản trị để sửa giá dịch vụ, thêm chi nhánh, đăng tin khuyến mãi và xem danh sách lịch hẹn. Chúng tôi hướng dẫn 1-1 khi bàn giao.',
   },
   {
-    q: 'Website có hiển thị tốt trên điện thoại không?',
+    q: 'Phần mềm có hiển thị tốt trên điện thoại không?',
     a: 'Tất cả mẫu đều tối ưu cho điện thoại, vì hơn 80% khách tìm gara bằng di động. Bạn có thể bấm "Xem thử" rồi chọn chế độ Điện thoại để kiểm tra.',
   },
   {

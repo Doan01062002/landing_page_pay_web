@@ -9,7 +9,7 @@ import { site, formatVND } from '../data/site.js'
 import '../styles/lp.css'
 import '../styles/hero.css'
 
-const WORDS = ['gara ô tô', 'tiệm sửa xe máy', 'xưởng detailing', 'cửa hàng lốp', 'chuỗi phụ tùng']
+const WORDS = ['gara ô tô', 'đại lý ô tô', 'showroom xe cũ', 'tiệm sửa xe máy', 'xưởng detailing']
 
 const BOOKINGS = [
   { plate: '51G-246.81', service: 'Bảo dưỡng 40.000 km', time: '08:30 · Thứ Bảy' },
@@ -20,7 +20,7 @@ const BOOKINGS = [
 
 // Video demo: quay lại từ chính các mẫu (cuộn trang), cùng một đoạn video xưởng.
 const DEMOS = [
-  { type: 'video', src: '/videos/demo-autopro.mp4', poster: '/videos/demo-autopro.jpg', title: 'Mẫu AutoPro Garage trên máy tính', caption: 'Website gara ô tô: dịch vụ, bảng giá theo km, tra cứu, đặt lịch' },
+  { type: 'video', src: '/videos/demo-autopro.mp4', poster: '/videos/demo-autopro.jpg', title: 'Mẫu AutoPro Garage trên máy tính', caption: 'Phần mềm gara ô tô: dịch vụ, bảng giá theo km, tra cứu, đặt lịch' },
   { type: 'video', src: '/videos/demo-motofix.mp4', poster: '/videos/demo-motofix.jpg', title: 'Mẫu MotoFix 247 trên điện thoại', vertical: true, caption: 'Hơn 80% khách tìm tiệm sửa xe bằng điện thoại' },
   { type: 'video', src: '/videos/demo-ceramic.mp4', poster: '/videos/demo-ceramic.jpg', title: 'Landing page tặng kèm: Ceramic Studio', caption: 'Một ưu đãi, video xưởng, đếm ngược, form giữ suất' },
 ]
@@ -87,20 +87,20 @@ export default function HomeHero() {
           </Link>
 
           <h1 className="hh__title">
-            <span className="sr-only">Website cho {WORDS.join(', ')}: khách tự đặt lịch.</span>
-            <span aria-hidden="true">Website cho</span>
+            <span className="sr-only">Phần mềm cho {WORDS.join(', ')}: khách tự đặt lịch.</span>
+            <span aria-hidden="true">Phần mềm cho</span>
             <Rotator />
             <span aria-hidden="true">khách tự đặt lịch.</span>
           </h1>
 
           <p className="hh__lead">
-            {templates.length} mẫu dựng sẵn cho ngành sửa chữa xe, có bảng giá, đặt lịch theo chi nhánh và video xưởng. Bàn giao trong 7 ngày, tặng
+            {templates.length} mẫu dựng sẵn cho gara, đại lý và showroom ô tô: bảng giá, đặt lịch, tính giá lăn bánh, trả góp. Bàn giao trong 7 ngày, tặng
             kèm landing page quảng cáo.
           </p>
 
           <div className="hh__cta">
-            <Link to="/mau-website" className="btn btn--signal btn--lg">
-              Xem {templates.length} mẫu website <Icon name="ArrowRight" size={18} />
+            <Link to="/mau-phan-mem" className="btn btn--signal btn--lg">
+              Xem {templates.length} mẫu phần mềm <Icon name="ArrowRight" size={18} />
             </Link>
             <button type="button" className="hh-play" onClick={() => setDemo(0)}>
               <span className="hh-play__btn">
@@ -126,12 +126,12 @@ export default function HomeHero() {
           </ul>
         </div>
 
-        <div className="hh-stage" ref={stageRef} onPointerMove={onMove} onPointerLeave={onLeave} aria-label="Ví dụ website trên máy tính, điện thoại và video xưởng">
+        <div className="hh-stage" ref={stageRef} onPointerMove={onMove} onPointerLeave={onLeave} aria-label="Ví dụ phần mềm trên máy tính, điện thoại và video xưởng">
           <div className="hh-layer hh-layer--video" style={{ '--depth': 8 }}>
             <div className="hh-card hh-video">
               <AutoVideo video={SHOP_VIDEO} />
               <span className="hh-video__chip">
-                <i /> Video xưởng phát ngay trên website
+                <i /> Video xưởng phát ngay trên phần mềm
               </span>
             </div>
           </div>

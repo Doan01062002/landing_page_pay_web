@@ -10,14 +10,14 @@ export default function Footer() {
       <div className="wrap site-footer__grid">
         <div className="site-footer__brand">
           <Logo />
-          <p>Website và landing page cho gara ô tô, tiệm sửa xe máy, chuỗi lốp – ắc quy và cửa hàng phụ tùng. Một dịch vụ của hệ thống {site.showrooms} showroom {site.brand} trên toàn quốc.</p>
+          <p>Phần mềm và landing page cho gara ô tô, tiệm sửa xe máy, đại lý ô tô, showroom xe cũ và cửa hàng phụ tùng. Một dịch vụ của hệ thống {site.showrooms} showroom {site.brand} trên toàn quốc.</p>
         </div>
         <div>
           <h4>Kho mẫu</h4>
           <ul>
             {categories.slice(1).map((c) => (
               <li key={c.id}>
-                <Link to={`/mau-website?loai=${c.id}`}>{c.label}</Link>
+                <Link to={`/mau-phan-mem?loai=${c.id}`}>{c.label}</Link>
               </li>
             ))}
           </ul>
@@ -43,7 +43,7 @@ export default function Footer() {
       </div>
       <div className="wrap site-footer__bottom">
         <span>© 2026 {site.domain} · {site.company}</span>
-        <span>Mẫu website dùng dữ liệu và ảnh minh họa (StockSnap, CC0)</span>
+        <span>Mẫu phần mềm dùng dữ liệu minh họa. Ảnh: StockSnap (CC0), Wikimedia Commons (CC BY-SA)</span>
       </div>
     </footer>
   )

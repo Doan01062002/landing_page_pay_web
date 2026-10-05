@@ -2,6 +2,31 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import { getPages, PageHeader, About, Contact, NewsList } from './pages.jsx'
+import {
+  DealerHero,
+  UsedHero,
+  Highlights,
+  Versions,
+  Rolling,
+  Specs,
+  Colors,
+  Equipment,
+  Installment,
+  Offers,
+  Quote,
+  Faq,
+  Commitments,
+  Inventory,
+  Valuation,
+  BannerHero,
+  Perks,
+  Models,
+  Pledge,
+  Reasons,
+  PriceList,
+  StickyCall,
+  EMPTY_FILTER,
+} from './autoSections.jsx'
 import { CountUp, useScrolled } from '../components/Motion.jsx'
 import {
   Services,
@@ -31,13 +56,17 @@ function textOn(hex) {
 
 export const scrollToId = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 
-function TopBar({ brand }) {
+function TopBar({ brand, notice }) {
   return (
-    <div className="ts-topbar">
+    <div className={'ts-topbar' + (notice ? ' ts-topbar--notice' : '')}>
       <div className="ts-wrap ts-topbar__inner">
-        <span>
-          <Icon name="Clock" size={14} /> {brand.hours}
-        </span>
+        {notice ? (
+          <span className="ts-topbar__notice">{notice}</span>
+        ) : (
+          <span>
+            <Icon name="Clock" size={14} /> {brand.hours}
+          </span>
+        )}
         <span className="ts-topbar__addr">
           <Icon name="MapPin" size={14} /> {brand.address}
         </span>
@@ -68,10 +97,11 @@ function Nav({ t, cart, pages, page, to }) {
   const scrolled = useScrolled(20)
   // Menu: các trang con (trừ Trang chủ và Đặt lịch, vì Đặt lịch là nút riêng)
   // Tối đa 6 mục; nếu thừa thì bỏ Tin tức trước (vẫn có ở chân trang), luôn giữ Liên hệ
-  let links = pages.filter((p) => p.slug && p.slug !== 'dat-lich')
-  if (links.length > 6) links = links.filter((p) => p.slug !== 'tin-tuc')
+  let links = pages.filter((p) => p.slug && p.slug !== 'dat-lich' && p.slug !== 'bao-gia')
+  for (const drop of ['tin-tuc', 'hoi-dap', 'gioi-thieu']) if (links.length > 6) links = links.filter((p) => p.slug !== drop)
   links = links.slice(0, 6)
   const hasBooking = t.sections.includes('booking')
+  const hasQuote = t.sections.includes('quote')
   useEffect(() => setOpen(false), [page])
   return (
     <header className={'ts-nav' + (scrolled ? ' is-scrolled' : '')}>
@@ -96,6 +126,10 @@ function Nav({ t, cart, pages, page, to }) {
           {hasBooking ? (
             <Link to={to('dat-lich')} className="ts-btn ts-btn--p">
               <Icon name="CalendarCheck" size={16} /> Đặt lịch
+            </Link>
+          ) : hasQuote ? (
+            <Link to={to('bao-gia')} className="ts-btn ts-btn--p">
+              <Icon name="CalendarCheck" size={16} /> <span className="ts-btn__label">{t.quote.pageLabel}</span>
             </Link>
           ) : (
             <a href={`tel:${t.brand.hotline.replace(/\s/g, '')}`} className="ts-btn ts-btn--p">
@@ -144,8 +178,11 @@ function HeroButtons({ t }) {
   )
 }
 
-function Hero({ t, onSizeSearch }) {
+function Hero({ t, onSizeSearch, onQuote, filter, setFilter, onCarSearch }) {
   const h = t.hero
+  if (h.variant === 'dealer') return <DealerHero t={t} onQuote={onQuote} />
+  if (h.variant === 'banner') return <BannerHero t={t} onQuote={onQuote} />
+  if (h.variant === 'used') return <UsedHero t={t} filter={filter} setFilter={setFilter} onSearch={onCarSearch} />
   if (h.variant === 'overlay') {
     return (
       <section className="ts-hero ts-hero--overlay" id="top" style={{ backgroundImage: `url(${h.image})` }}>
@@ -336,12 +373,27 @@ function Footer({ t, pages, to }) {
         <div>
           <h4>Dịch vụ</h4>
           <ul>
-            {(t.services.length ? t.services : t.priceTable?.columns.map((c) => ({ title: `Gói ${c}` })) || []).slice(0, 4).map((s) => (
-              <li key={s.title}>{s.title}</li>
-            ))}
+            {(t.services.length
+              ? t.services
+              : t.priceTable
+                ? t.priceTable.columns.map((c) => ({ title: `Gói ${c}` }))
+                : t.versions
+                  ? t.versions.map((v) => ({ title: v.name }))
+                  : [...new Set((t.inventory || []).map((c) => c.brand))].map((b) => ({ title: `Xe ${b} cũ` }))
+            )
+              .slice(0, 4)
+              .map((s) => (
+                <li key={s.title}>{s.title}</li>
+              ))}
           </ul>
         </div>
       </div>
+      {t.disclaimer && (
+        <div className="ts-wrap ts-footer__note">
+          <p>{t.disclaimer}</p>
+          {t.credits && <p>Ảnh: Wikimedia Commons. {t.credits.join(' · ')}</p>}
+        </div>
+      )}
       <div className="ts-wrap ts-footer__bottom">
         <span>
           © 2026 {t.brand.name} {t.brand.suffix}. Nội dung minh họa.
@@ -364,6 +416,8 @@ export default function TemplateSite({ t, palette, embed, page = '', base = `/pr
   const [toast, setToast] = useState('')
   const [preset, setPreset] = useState('')
   const [sizeQuery, setSizeQuery] = useState('')
+  const [carFilter, setCarFilter] = useState(EMPTY_FILTER)
+  const [quotePreset, setQuotePreset] = useState(null)
 
   useEffect(() => {
     if (!toast) return
@@ -385,6 +439,20 @@ export default function TemplateSite({ t, palette, embed, page = '', base = `/pr
     },
     [current, navigate, to],
   )
+
+  // Mở form báo giá ở tab cho trước (cùng trang thì cuộn tới, khác trang thì chuyển sang trang Báo giá)
+  const onQuote = useCallback(
+    (tab, item) => {
+      setQuotePreset({ tab, item, n: Date.now() })
+      if (current.sections.includes('quote')) setTimeout(() => scrollToId('quote'), 0)
+      else navigate(to('bao-gia'))
+    },
+    [current, navigate, to],
+  )
+  const onCarSearch = useCallback(() => {
+    if (current.sections.includes('inventory')) setTimeout(() => scrollToId('inventory'), 0)
+    else navigate(to('xe-dang-ban'))
+  }, [current, navigate, to])
 
   const onSizeSearch = useCallback((q) => {
     setSizeQuery(q)
@@ -431,25 +499,67 @@ export default function TemplateSite({ t, palette, embed, page = '', base = `/pr
         return <About key={s} t={t} />
       case 'contact':
         return <Contact key={s} t={t} />
+      case 'highlights':
+        return <Highlights key={s} t={t} />
+      case 'versions':
+        return <Versions key={s} t={t} onQuote={onQuote} more={more('bang-gia')} />
+      case 'rolling':
+        return <Rolling key={s} t={t} />
+      case 'specs':
+        return <Specs key={s} t={t} more={more('thong-so')} />
+      case 'colors':
+        return <Colors key={s} t={t} />
+      case 'equipment':
+        return <Equipment key={s} t={t} />
+      case 'installment':
+        return <Installment key={s} t={t} onQuote={onQuote} more={more('tra-gop')} />
+      case 'offers':
+        return <Offers key={s} t={t} onQuote={onQuote} />
+      case 'quote':
+        return <Quote key={s} t={t} preset={quotePreset} />
+      case 'faq':
+        return <Faq key={s} t={t} />
+      case 'commitments':
+        return <Commitments key={s} t={t} />
+      case 'inventory':
+        return <Inventory key={s} t={t} filter={carFilter} setFilter={setCarFilter} onQuote={onQuote} more={more('xe-dang-ban')} />
+      case 'valuation':
+        return <Valuation key={s} t={t} />
+      case 'perks':
+        return <Perks key={s} t={t} />
+      case 'models':
+        return <Models key={s} t={t} onQuote={onQuote} more={more('mau-xe')} />
+      case 'pledge':
+        return <Pledge key={s} t={t} onQuote={onQuote} />
+      case 'reasons':
+        return <Reasons key={s} t={t} />
+      case 'pricelist':
+        return <PriceList key={s} t={t} onQuote={onQuote} more={more('bang-gia')} />
       default:
         return null
     }
   }
 
   return (
-    <div className={'ts' + (upper ? ' ts--upper' : '') + (embed ? ' ts--embed' : '')} style={style}>
-      <TopBar brand={t.brand} />
+    <div className={'ts' + (upper ? ' ts--upper' : '') + (embed ? ' ts--embed' : '') + (t.stickyBar ? ' ts--sticky' : '')} style={style}>
+      <TopBar brand={t.brand} notice={t.notice} />
       <Nav t={t} cart={cart} pages={pages} page={current.slug} to={to} />
-      {current.slug === '' ? <Hero t={t} onSizeSearch={onSizeSearch} /> : <PageHeader t={t} page={current} home={to('')} />}
+      {current.slug === '' ? <Hero t={t} onSizeSearch={onSizeSearch} onQuote={onQuote} filter={carFilter} setFilter={setCarFilter} onCarSearch={onCarSearch} /> : <PageHeader t={t} page={current} home={to('')} />}
       <main key={current.slug} className="ts-page">
         {current.sections.map(render)}
       </main>
       <CtaBand t={t} />
       <Footer t={t} pages={pages} to={to} />
+      {!embed && t.stickyBar && <StickyCall t={t} onQuote={onQuote} />}
       {!embed && (
-        <a className="ts-float" href={`tel:${t.brand.hotline.replace(/\s/g, '')}`} aria-label={`Gọi ${t.brand.hotline}`}>
-          <Icon name="Phone" size={22} />
-        </a>
+        <div className="ts-floats">
+          <a className="ts-float ts-float--zalo" href={`https://zalo.me/${t.brand.hotline.replace(/\s/g, '')}`} target="_blank" rel="noreferrer" aria-label={`Nhắn Zalo ${t.brand.hotline}`}>
+            Zalo
+          </a>
+          <a className="ts-float" href={`tel:${t.brand.hotline.replace(/\s/g, '')}`} aria-label={`Gọi ${t.brand.hotline}`}>
+            <Icon name="Phone" size={22} />
+          </a>
+        </div>
       )}
       {toast && (
         <div className="ts-toast" role="status">

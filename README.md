@@ -1,6 +1,6 @@
-# ChungAuto – Kho mẫu website cho ngành sửa chữa xe
+# ChungAuto – Kho mẫu phần mềm ngành ô tô
 
-Frontend (React + Vite) cho trang bán mẫu website dành cho gara ô tô, tiệm sửa xe máy, chuỗi lốp – ắc quy, detailing, phụ tùng. Chưa có backend, toàn bộ dữ liệu là dữ liệu mẫu.
+Frontend (React + Vite) cho trang bán mẫu phần mềm dành cho gara ô tô, tiệm sửa xe máy, chuỗi lốp – ắc quy, detailing, phụ tùng, đại lý ô tô và showroom xe cũ. Chưa có backend, toàn bộ dữ liệu là dữ liệu mẫu.
 
 ## Chạy dự án
 
@@ -16,8 +16,8 @@ Mở http://localhost:5180
 | Đường dẫn | Nội dung |
 | --- | --- |
 | `/` | Landing page chào hàng: tính năng, mẫu nổi bật, quà tặng landing page, quy trình 7 ngày, bảng giá, đánh giá, hỏi đáp, form tư vấn |
-| `/mau-website` | Kho mẫu: tìm kiếm (không dấu), lọc theo loại hình, tính năng, chi phí; sắp xếp. Hỗ trợ `?key=`, `?loai=` |
-| `/mau-website/:slug` | Chi tiết mẫu: xem trước máy tính + điện thoại, đổi bộ màu, "Chọn mẫu này", "Xem thử" |
+| `/mau-phan-mem` | Kho mẫu: tìm kiếm (không dấu), lọc theo loại hình, tính năng, chi phí; sắp xếp. Hỗ trợ `?key=`, `?loai=` |
+| `/mau-phan-mem/:slug` | Chi tiết mẫu: xem trước máy tính + điện thoại, đổi bộ màu, "Chọn mẫu này", "Xem thử" |
 | `/demo/:slug` | Xem thử toàn màn hình: đổi thiết bị (máy tính / máy tính bảng / điện thoại), đổi màu, đổi mẫu |
 | `/preview/:slug` | Website mẫu chạy độc lập (được nhúng trong iframe ở các trang trên) |
 | `/mau-landing-page` | 3 mẫu landing page quảng cáo tặng kèm |
@@ -46,6 +46,14 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Video trong `public/videos` lấy từ Mixkit (giấy phép miễn phí), đã nén tối đa 12 giây, bỏ tiếng. Thay bằng video của gara: nén bằng
   `ffmpeg -i in.mp4 -t 12 -an -vf scale=-2:720 -c:v libx264 -crf 27 -movflags +faststart mk-<id>.mp4` và tạo ảnh đại diện `mk-<id>.jpg`.
 - Ảnh xưởng trong `public/images/xuong` được trích từ chính các video.
+
+## Mẫu bán xe (đại lý, showroom xe cũ)
+
+- Dữ liệu: `src/data/autoTemplates.js` (Mitsubishi Xpander, showroom Xe Lướt, đại lý VinFast 3S nhiều dòng xe). Khối giao diện: `src/templates/autoSections.jsx`.
+- Công cụ: tính giá lăn bánh theo tỉnh, tính trả góp (dư nợ giảm dần), định giá thu mua xe cũ, danh sách xe có bộ lọc, form nhiều tab.
+- **Giá và thông số chỉ mang tính minh họa**, cần thay bằng số liệu chính thức của đại lý khi triển khai.
+- Ảnh xe trong `public/images/xe` lấy từ Wikimedia Commons (CC0, CC BY, CC BY-SA). Tác giả ghi ở trường `credits` của từng mẫu và hiển thị ở chân trang; khi dùng ảnh CC BY / BY-SA phải giữ ghi nguồn.
+- Đường dẫn cũ `/mau-website/...` tự chuyển sang `/mau-phan-mem/...`.
 
 ## Thêm một mẫu mới
 

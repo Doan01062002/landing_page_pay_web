@@ -7,7 +7,7 @@ import { useConsult } from './ConsultContext.jsx'
 import { useScrolled } from './Motion.jsx'
 
 const links = [
-  { to: '/mau-website', label: 'Kho mẫu' },
+  { to: '/mau-phan-mem', label: 'Kho mẫu' },
   { to: '/mau-landing-page', label: 'Landing tặng kèm' },
   { to: '/#quy-trinh', label: 'Quy trình' },
   { to: '/#bang-gia', label: 'Bảng giá' },

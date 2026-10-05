@@ -13,7 +13,7 @@ import { segments, steps, packages, testimonials, faqs } from '../data/landing.j
 import { site, formatVND } from '../data/site.js'
 import '../styles/landing.css'
 
-const featured = ['autopro', 'motofix', 'lopviet', 'shine', 'thanhdat', 'evcare'].map((s) => templates.find((t) => t.slug === s))
+const featured = ['autopro', 'vinfast', 'xpander', 'xeluot', 'motofix', 'shine'].map((s) => templates.find((t) => t.slug === s))
 
 const SLOT_LIST = ['08:00', '09:30', '11:00', '13:30', '15:00', '16:30']
 const SLOT_FREE = [0, 1, 2, 4, 5]
@@ -203,11 +203,11 @@ function FeaturedTemplates() {
       <div className="wrap">
         <div className="section-head section-head--row" data-reveal="up">
           <div>
-            <p className="eyebrow">Kho mẫu website</p>
-            <h2>Mẫu dựng sẵn cho từng loại hình sửa chữa xe</h2>
+            <p className="eyebrow">Kho mẫu phần mềm</p>
+            <h2>Mẫu dựng sẵn cho từng loại hình kinh doanh xe</h2>
             <p>Bấm “Xem thử” để trải nghiệm như khách hàng của bạn, trên máy tính, máy tính bảng và điện thoại.</p>
           </div>
-          <Link to="/mau-website" className="btn btn--primary">
+          <Link to="/mau-phan-mem" className="btn btn--primary">
             Xem tất cả {templates.length} mẫu <Icon name="ArrowRight" size={16} />
           </Link>
         </div>
@@ -232,7 +232,7 @@ const FLOW = [
   { icon: 'Target', title: 'Chạy quảng cáo', text: 'Facebook, Google, TikTok' },
   { icon: 'Gift', title: 'Landing page', text: 'Khách xem đúng ưu đãi' },
   { icon: 'Phone', title: 'Để lại số điện thoại', text: 'Gara gọi lại tư vấn' },
-  { icon: 'Monitor', title: 'Website', text: 'Xem thêm dịch vụ, đặt lịch' },
+  { icon: 'Monitor', title: 'Phần mềm', text: 'Xem thêm dịch vụ, đặt lịch' },
 ]
 
 function WebVsLanding() {
@@ -240,9 +240,9 @@ function WebVsLanding() {
     <section className="section" id="so-sanh">
       <div className="wrap">
         <div className="section-head" data-reveal="up">
-          <p className="eyebrow">Website và landing page</p>
+          <p className="eyebrow">Phần mềm và landing page</p>
           <h2>Hai công cụ, hai nhiệm vụ khác nhau</h2>
-          <p>Bạn nhận cả hai: website để khách tìm thấy và tin tưởng gara, landing page để chạy quảng cáo ra số điện thoại.</p>
+          <p>Bạn nhận cả hai: phần mềm để khách tìm thấy và tin tưởng cửa hàng, landing page để chạy quảng cáo ra số điện thoại.</p>
         </div>
 
         <div className="vs" data-stagger="up">
@@ -253,7 +253,7 @@ function WebVsLanding() {
                 <Icon name="Monitor" size={22} />
               </span>
               <div>
-                <h3>Website</h3>
+                <h3>Phần mềm</h3>
                 <p>Cửa hàng online lâu dài của gara</p>
               </div>
             </div>
@@ -273,8 +273,8 @@ function WebVsLanding() {
                 </div>
               ))}
             </dl>
-            <Link to="/mau-website" className="vs__link">
-              Xem kho mẫu website <Icon name="ArrowRight" size={16} />
+            <Link to="/mau-phan-mem" className="vs__link">
+              Xem kho mẫu phần mềm <Icon name="ArrowRight" size={16} />
             </Link>
           </article>
 
@@ -346,11 +346,11 @@ function Gift() {
       <div className="wrap gift__grid">
         <div className="gift__copy" data-reveal="left">
           <span className="gift__ribbon">
-            <Icon name="Gift" size={16} /> Quà tặng khi triển khai website
+            <Icon name="Gift" size={16} /> Quà tặng khi triển khai phần mềm
           </span>
           <h2>Thêm 1 landing page quảng cáo cho gara của bạn, miễn phí</h2>
           <p>
-            Website giới thiệu toàn bộ dịch vụ. Landing page tập trung vào <strong>một chương trình</strong> để chạy quảng cáo
+            Phần mềm giới thiệu toàn bộ dịch vụ. Landing page tập trung vào <strong>một chương trình</strong> để chạy quảng cáo
             Facebook, Google và thu số điện thoại khách quan tâm.
           </p>
           <div className="gift__campaigns">
@@ -451,7 +451,7 @@ function Process() {
       <div className="wrap">
         <div className="section-head" data-reveal="up">
           <p className="eyebrow">Quy trình triển khai</p>
-          <h2>Từ lúc chọn mẫu đến khi website chạy: 7 ngày</h2>
+          <h2>Từ lúc chọn mẫu đến khi phần mềm chạy: 7 ngày</h2>
         </div>
         <ol className="steps" data-stagger="up">
           {steps.map((s, i) => (
@@ -475,7 +475,7 @@ function Pricing() {
       <div className="wrap">
         <div className="section-head" data-reveal="up">
           <p className="eyebrow">Bảng giá triển khai</p>
-          <h2>Một lần thanh toán, website là của bạn</h2>
+          <h2>Một lần thanh toán, phần mềm là của bạn</h2>
           <p>Gói nào cũng tặng kèm landing page quảng cáo. Giá chưa gồm VAT.</p>
         </div>
         <div className="pricing" data-stagger="up">
@@ -585,7 +585,7 @@ function Consult() {
           <ol className="consult__next">
             <li>Gọi lại trong 30 phút (giờ hành chính)</li>
             <li>Gửi link mẫu và báo giá qua Zalo</li>
-            <li>Chốt nội dung, bắt đầu dựng website</li>
+            <li>Chốt nội dung, bắt đầu dựng phần mềm</li>
           </ol>
           <div className="consult__hotline">
             <Icon name="Phone" size={20} />

@@ -1,9 +1,12 @@
 // Dữ liệu mẫu (mock) cho kho giao diện. Mỗi mẫu được dựng bởi src/templates/TemplateSite.jsx
 // dựa trên cấu hình bên dưới: bộ màu, font, kiểu hero, thứ tự section và nội dung.
+import { dealerTemplates } from './autoTemplates.js'
 
 export const categories = [
   { id: 'all', label: 'Tất cả' },
   { id: 'oto', label: 'Gara ô tô' },
+  { id: 'daily', label: 'Đại lý ô tô' },
+  { id: 'xecu', label: 'Ô tô cũ' },
   { id: 'xemay', label: 'Sửa xe máy' },
   { id: 'lop', label: 'Lốp & ắc quy' },
   { id: 'detailing', label: 'Rửa xe, detailing' },
@@ -19,6 +22,9 @@ export const featureFilters = [
   { id: 'lookup', label: 'Tra cứu theo biển số' },
   { id: 'pricetable', label: 'Bảng giá theo km' },
   { id: 'beforeafter', label: 'Ảnh trước / sau' },
+  { id: 'rolling', label: 'Tính giá lăn bánh' },
+  { id: 'installment', label: 'Tính trả góp' },
+  { id: 'inventory', label: 'Danh sách xe, bộ lọc' },
 ]
 
 const img = (name) => `/images/${name}.jpg`
@@ -624,6 +630,7 @@ export const templates = [
     testimonials: [],
     news: [],
   },
+  ...dealerTemplates,
 ]
 
 export const getTemplate = (slug) => templates.find((t) => t.slug === slug)

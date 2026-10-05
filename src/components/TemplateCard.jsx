@@ -16,7 +16,7 @@ export default function TemplateCard({ t }) {
           <Link to={`/demo/${t.slug}`} className="btn btn--signal">
             <Icon name="Eye" size={16} /> Xem thử
           </Link>
-          <Link to={`/mau-website/${t.slug}`} className="btn btn--light">
+          <Link to={`/mau-phan-mem/${t.slug}`} className="btn btn--light">
             Chi tiết
           </Link>
         </div>
@@ -35,7 +35,7 @@ export default function TemplateCard({ t }) {
           </span>
         </div>
         <h3 className="tcard__name">
-          <Link to={`/mau-website/${t.slug}`}>{t.name}</Link>
+          <Link to={`/mau-phan-mem/${t.slug}`}>{t.name}</Link>
         </h3>
         <p className="tcard__tagline">{t.tagline}</p>
         <ul className="tcard__features">
@@ -54,7 +54,7 @@ export default function TemplateCard({ t }) {
               </>
             )}
           </span>
-          <span className="tcard__pages" title="Số trang của website, chưa kể trang quản trị">
+          <span className="tcard__pages" title="Số trang của phần mềm, chưa kể trang quản trị">
             <Icon name="FileText" size={14} /> {getPages(t).length} trang + quản trị
           </span>
         </div>

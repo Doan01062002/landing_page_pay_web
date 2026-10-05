@@ -105,10 +105,10 @@ export default function ConsultForm({ defaultTemplate = '', idPrefix = 'cf', com
         </div>
       </div>
       <div className="field">
-        <label htmlFor={`${idPrefix}-template`}>Mẫu website quan tâm</label>
+        <label htmlFor={`${idPrefix}-template`}>Mẫu phần mềm quan tâm</label>
         <select id={`${idPrefix}-template`} value={values.template} onChange={set('template')}>
           <option value="">Chưa chọn, cần tư vấn</option>
-          <optgroup label="Mẫu website">
+          <optgroup label="Mẫu phần mềm">
             {templates.map((t) => (
               <option key={t.slug} value={t.name}>
                 {t.name} · {t.categoryLabel}

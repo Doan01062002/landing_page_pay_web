@@ -31,9 +31,9 @@ export default function TemplateDetail() {
           <nav className="crumbs" aria-label="Đường dẫn">
             <Link to="/">Trang chủ</Link>
             <span>/</span>
-            <Link to="/mau-website">Kho mẫu</Link>
+            <Link to="/mau-phan-mem">Kho mẫu</Link>
             <span>/</span>
-            <Link to={`/mau-website?loai=${t.category}`}>{t.categoryLabel}</Link>
+            <Link to={`/mau-phan-mem?loai=${t.category}`}>{t.categoryLabel}</Link>
             <span>/</span>
             <span aria-current="page">{t.name}</span>
           </nav>
@@ -154,7 +154,7 @@ export default function TemplateDetail() {
             </ul>
           </div>
           <div>
-            <p className="eyebrow">Website {pages.length} trang</p>
+            <p className="eyebrow">Phần mềm {pages.length} trang</p>
             <h2 className="d-h2">Các trang có sẵn</h2>
             <ul className="d-pages" data-stagger="fade">
               {pages.map((p) => (
@@ -185,7 +185,7 @@ export default function TemplateDetail() {
               <p className="eyebrow">Có thể bạn quan tâm</p>
               <h2>Mẫu tương tự</h2>
             </div>
-            <Link to="/mau-website" className="btn btn--ghost">
+            <Link to="/mau-phan-mem" className="btn btn--ghost">
               Xem kho mẫu <Icon name="ArrowRight" size={16} />
             </Link>
           </div>

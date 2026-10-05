@@ -17,6 +17,14 @@ export const PAGE_META = {
   'tin-tuc': { label: 'Tin tức', icon: 'FileText', desc: 'Mẹo chăm sóc xe, lịch bảo dưỡng và chương trình khuyến mãi.' },
   'dat-lich': { label: 'Đặt lịch', icon: 'CalendarCheck', desc: 'Chọn dịch vụ, chi nhánh và khung giờ phù hợp.' },
   'lien-he': { label: 'Liên hệ', icon: 'Phone', desc: 'Gọi, nhắn tin hoặc ghé trực tiếp. Chúng tôi phản hồi trong giờ làm việc.' },
+  'thong-so': { label: 'Thông số', icon: 'Gauge', desc: 'Kích thước, động cơ, an toàn và trang bị từng phiên bản.' },
+  'hinh-anh': { label: 'Hình ảnh', icon: 'Eye', desc: 'Màu sắc, ngoại thất và nội thất thực tế.' },
+  'xe-dang-ban': { label: 'Xe đang bán', icon: 'Car', desc: 'Lọc theo hãng, giá, kiểu dáng. Xe đã kiểm định, giá công khai.' },
+  'dinh-gia': { label: 'Định giá xe', icon: 'Target', desc: 'Ước tính giá thu mua xe cũ, đổi xe cũ lấy xe khác.' },
+  'tra-gop': { label: 'Trả góp', icon: 'FileText', desc: 'Tính số tiền trả trước và trả hằng tháng theo kỳ hạn.' },
+  'hoi-dap': { label: 'Hỏi đáp', icon: 'MessageCircle', desc: 'Giải đáp về giá lăn bánh, trả góp, lái thử và giao xe.' },
+  'bao-gia': { label: 'Nhận báo giá', icon: 'CalendarCheck', desc: 'Để lại thông tin, tư vấn viên liên hệ trong 5 phút.' },
+  'mau-xe': { label: 'Các dòng xe', icon: 'Car', desc: 'Toàn bộ dòng xe đang phân phối, giá niêm yết tham khảo.' },
 }
 
 // Danh sách trang của một mẫu, kèm các section hiển thị trên từng trang.
@@ -29,14 +37,26 @@ export function getPages(t) {
     const extra = ['beforeafter', 'process'].filter(has)
     pages.push({ slug: 'dich-vu', sections: ['services', ...extra] })
   }
+  // Mẫu bán xe
+  if (has('inventory')) pages.push({ slug: 'xe-dang-ban', sections: ['inventory'] })
+  if (has('specs') || has('equipment')) pages.push({ slug: 'thong-so', sections: ['specs', 'equipment'].filter(has) })
+  if (has('colors')) pages.push({ slug: 'hinh-anh', sections: ['colors'] })
+  if (has('models')) pages.push({ slug: 'mau-xe', sections: ['models'] })
+  if (has('versions')) pages.push({ slug: 'bang-gia', label: 'Giá & Ưu đãi', desc: 'Giá niêm yết, giá lăn bánh theo tỉnh và ưu đãi tháng này.', sections: ['versions', 'rolling', 'offers'].filter(has) })
+  else if (has('pricelist')) pages.push({ slug: 'bang-gia', label: 'Bảng giá xe', desc: 'Giá niêm yết và giá lăn bánh tạm tính từng dòng xe.', sections: ['pricelist', 'rolling'].filter(has) })
+  if (has('valuation')) pages.push({ slug: 'dinh-gia', sections: ['valuation'] })
+  if (has('installment')) pages.push({ slug: 'tra-gop', sections: ['installment'] })
+  if (has('faq') && t.faqs?.length) pages.push({ slug: 'hoi-dap', sections: ['faq'] })
+  // Mẫu dịch vụ
   if (priceSections.length) pages.push({ slug: 'bang-gia', sections: priceSections })
   if (t.products) pages.push({ slug: 'san-pham', sections: ['products'] })
   if (has('lookup')) pages.push({ slug: 'tra-cuu', sections: ['lookup'] })
   if (t.branches.length > 1) pages.push({ slug: 'chi-nhanh', sections: ['branches'] })
   if (t.news.length) pages.push({ slug: 'tin-tuc', sections: ['newslist'] })
   if (has('booking')) pages.push({ slug: 'dat-lich', sections: ['booking'] })
+  if (has('quote')) pages.push({ slug: 'bao-gia', label: t.quote.pageLabel, sections: ['quote'] })
   pages.push({ slug: 'lien-he', sections: ['contact', ...(t.branches.length === 1 ? ['branches'] : [])] })
-  return pages.map((p) => ({ ...p, ...PAGE_META[p.slug] }))
+  return pages.map((p) => ({ ...PAGE_META[p.slug], ...p }))
 }
 
 /* ---------- Đầu trang con ---------- */
@@ -64,7 +84,7 @@ const VALUES = [
 ]
 
 export function About({ t }) {
-  const gallery = [t.hero.image, ...t.services.filter((s) => s.image).map((s) => s.image), ...(t.products || []).map((p) => p.image)].filter((v, i, a) => a.indexOf(v) === i).slice(0, 4)
+  const gallery = (t.aboutImages || [t.hero.image, ...t.services.filter((s) => s.image).map((s) => s.image), ...(t.products || []).map((p) => p.image)]).filter((v, i, a) => a.indexOf(v) === i).slice(0, 4)
   return (
     <section className="ts-section" id="about">
       <div className="ts-wrap ts-about">
@@ -76,12 +96,18 @@ export function About({ t }) {
         <div className="ts-about__copy" data-reveal="right">
           <p className="ts-eyebrow">{t.hero.eyebrow}</p>
           <h2>{t.hero.title}</h2>
-          <p>
-            {`${t.brand.name} ${t.brand.suffix}`.trim()} phục vụ khách hàng tại {t.brand.address}
-            {t.branches.length > 1 ? ` với ${t.branches.length} chi nhánh` : ''}. Mỗi chiếc xe đều được tiếp nhận, kiểm tra và báo giá rõ ràng
-            trước khi làm, kèm phiếu bảo hành cho công thợ và phụ tùng.
-          </p>
-          <p>{t.hero.text}</p>
+          {t.about ? (
+            t.about.map((p) => <p key={p}>{p}</p>)
+          ) : (
+            <>
+              <p>
+                {`${t.brand.name} ${t.brand.suffix}`.trim()} phục vụ khách hàng tại {t.brand.address}
+                {t.branches.length > 1 ? ` với ${t.branches.length} chi nhánh` : ''}. Mỗi chiếc xe đều được tiếp nhận, kiểm tra và báo giá rõ ràng
+                trước khi làm, kèm phiếu bảo hành cho công thợ và phụ tùng.
+              </p>
+              <p>{t.hero.text}</p>
+            </>
+          )}
           {t.hero.stats?.length > 0 && (
             <ul className="ts-about__stats">
               {t.hero.stats.map((s) => (
@@ -96,7 +122,7 @@ export function About({ t }) {
       </div>
       <div className="ts-wrap">
         <div className="ts-values" data-stagger="up">
-          {VALUES.map((v) => (
+          {(t.aboutValues || VALUES).map((v) => (
             <article key={v.title}>
               <span className="ts-service__icon">
                 <Icon name={v.icon} size={22} />

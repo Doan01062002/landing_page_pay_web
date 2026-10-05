@@ -33,7 +33,7 @@ export default function LpCard({ lp }) {
           </li>
         </ul>
         <div className="lpcard__foot">
-          <small>Ví dụ dùng kèm website {lp.forWebsite}</small>
+          <small>Ví dụ dùng kèm phần mềm {lp.forWebsite}</small>
           <Link to={`/demo-landing/${lp.slug}`} className="btn btn--ghost">
             <Icon name="Eye" size={16} /> Xem thử
           </Link>
