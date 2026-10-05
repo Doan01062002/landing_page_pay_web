@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import { useConsult } from '../components/ConsultContext.jsx'
-import { getTemplate, templates } from '../data/templates.js'
+import { getTemplate, templates, categories } from '../data/templates.js'
+import Picker from '../components/Picker.jsx'
 import { getLanding, landings } from '../data/landings.js'
 import { formatVND } from '../data/site.js'
 import NotFound from './NotFound.jsx'
@@ -57,6 +58,24 @@ export default function Demo({ kind = 'template' }) {
   const pages = useMemo(() => (kind === 'template' && t ? getPages(t) : []), [kind, t])
   const [page, setPage] = useState(params.get('trang') || '')
 
+  // Danh sách cho ô chọn mẫu: nhóm theo loại hình, có ảnh, số trang, giá
+  const templateOptions = useMemo(() => {
+    if (kind === 'template') {
+      const order = categories.map((c) => c.id)
+      return [...K.list]
+        .sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category))
+        .map((x) => ({
+          value: x.slug,
+          label: x.name,
+          sub: `${getPages(x).length} trang${x.isNew ? ' · Mới' : ''}`,
+          meta: x.free ? 'Miễn phí' : `${(x.price / 1e6).toLocaleString('vi-VN')} triệu`,
+          image: x.hero.image || x.hero.slides?.[0]?.image,
+          group: x.categoryLabel,
+        }))
+    }
+    return K.list.map((x) => ({ value: x.slug, label: x.name, sub: x.campaignType, meta: 'Tặng kèm', image: x.hero.video.poster }))
+  }, [kind, K])
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const src = useMemo(() => `${K.preview}/${slug}${page ? '/' + page : ''}?c=${palette}`, [slug, K.preview])
 
@@ -95,25 +114,27 @@ export default function Demo({ kind = 'template' }) {
             <span>{K.backLabel}</span>
           </Link>
           <div className="demo-bar__title">
-            <label htmlFor="demo-switch" className="sr-only">
-              Đổi mẫu
-            </label>
-            <select
-              id="demo-switch"
+            <Picker
+              variant="title"
+              ariaLabel="Đổi mẫu"
+              title={kind === 'template' ? `Chọn mẫu phần mềm (${K.list.length})` : `Chọn mẫu landing page (${K.list.length})`}
               value={t.slug}
-              onChange={(e) => {
+              options={templateOptions}
+              onChange={(slug) => {
                 setPalette(0)
                 setPage('')
-                navigate(`${K.base}/${e.target.value}`)
+                navigate(`${K.base}/${slug}`)
               }}
-            >
-              {K.list.map((x) => (
-                <option key={x.slug} value={x.slug}>
-                  {x.name}
-                </option>
-              ))}
-            </select>
-            <span>{K.sub(t)}</span>
+              renderButton={(o) => (
+                <>
+                  {o.image && <img src={o.image} alt="" className="picker__btn-thumb" />}
+                  <span className="picker__btn-text">
+                    <b>{o.label}</b>
+                    <small>{K.sub(t)}</small>
+                  </span>
+                </>
+              )}
+            />
           </div>
         </div>
 
@@ -129,16 +150,17 @@ export default function Demo({ kind = 'template' }) {
         <div className="demo-bar__right">
           {pages.length > 1 && (
             <div className="demo-bar__pages">
-              <label htmlFor="demo-page">
+              <span className="demo-bar__pages-label" aria-hidden="true">
                 <Icon name="FileText" size={15} /> Trang
-              </label>
-              <select id="demo-page" value={page} onChange={(e) => goPage(e.target.value)}>
-                {pages.map((p) => (
-                  <option key={p.slug} value={p.slug}>
-                    {p.label}
-                  </option>
-                ))}
-              </select>
+              </span>
+              <Picker
+                ariaLabel="Trang"
+                title={`Các trang của mẫu (${pages.length})`}
+                align="right"
+                value={page}
+                options={pages.map((p) => ({ value: p.slug, label: p.label, icon: p.icon }))}
+                onChange={goPage}
+              />
             </div>
           )}
           <div className="demo-bar__swatches" role="radiogroup" aria-label="Bộ màu">
