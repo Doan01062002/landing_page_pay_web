@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
 import LivePreview from './LivePreview.jsx'
+import { getPages } from '../templates/pages.jsx'
 import { featureFilters } from '../data/templates.js'
 import { formatVND } from '../data/site.js'
 
@@ -53,8 +54,8 @@ export default function TemplateCard({ t }) {
               </>
             )}
           </span>
-          <span className="tcard__gift" title="Tặng kèm landing page quảng cáo">
-            <Icon name="Gift" size={14} /> Tặng landing page
+          <span className="tcard__pages" title="Số trang của website, chưa kể trang quản trị">
+            <Icon name="FileText" size={14} /> {getPages(t).length} trang + quản trị
           </span>
         </div>
       </div>

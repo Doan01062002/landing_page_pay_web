@@ -221,6 +221,123 @@ function FeaturedTemplates() {
   )
 }
 
+const COMPARE_ROWS = [
+  ['Mục tiêu', 'Giới thiệu đầy đủ, nhận đặt lịch', 'Lấy số điện thoại khách quan tâm'],
+  ['Số trang', '6 – 9 trang + trang quản trị', '1 trang, 1 nút đăng ký'],
+  ['Khách đến từ', 'Google, Facebook, khách quen', 'Quảng cáo Facebook, Google, TikTok'],
+  ['Thời gian dùng', 'Nhiều năm', 'Theo từng đợt khuyến mãi'],
+]
+const SITEMAP = ['Giới thiệu', 'Dịch vụ', 'Bảng giá', 'Chi nhánh', 'Tin tức', 'Liên hệ']
+const FLOW = [
+  { icon: 'Target', title: 'Chạy quảng cáo', text: 'Facebook, Google, TikTok' },
+  { icon: 'Gift', title: 'Landing page', text: 'Khách xem đúng ưu đãi' },
+  { icon: 'Phone', title: 'Để lại số điện thoại', text: 'Gara gọi lại tư vấn' },
+  { icon: 'Monitor', title: 'Website', text: 'Xem thêm dịch vụ, đặt lịch' },
+]
+
+function WebVsLanding() {
+  return (
+    <section className="section" id="so-sanh">
+      <div className="wrap">
+        <div className="section-head" data-reveal="up">
+          <p className="eyebrow">Website và landing page</p>
+          <h2>Hai công cụ, hai nhiệm vụ khác nhau</h2>
+          <p>Bạn nhận cả hai: website để khách tìm thấy và tin tưởng gara, landing page để chạy quảng cáo ra số điện thoại.</p>
+        </div>
+
+        <div className="vs" data-stagger="up">
+          <article className="vs__card">
+            <span className="vs__tag">Bạn chọn từ kho mẫu</span>
+            <div className="vs__title">
+              <span className="vs__icon">
+                <Icon name="Monitor" size={22} />
+              </span>
+              <div>
+                <h3>Website</h3>
+                <p>Cửa hàng online lâu dài của gara</p>
+              </div>
+            </div>
+            <div className="vs__art vs__art--site" aria-hidden="true">
+              <span className="vs__root">Trang chủ</span>
+              <ul>
+                {SITEMAP.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            </div>
+            <dl className="vs__rows">
+              {COMPARE_ROWS.map(([k, a]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{a}</dd>
+                </div>
+              ))}
+            </dl>
+            <Link to="/mau-website" className="vs__link">
+              Xem kho mẫu website <Icon name="ArrowRight" size={16} />
+            </Link>
+          </article>
+
+          <article className="vs__card vs__card--gift">
+            <span className="vs__tag vs__tag--gift">
+              <Icon name="Gift" size={13} /> Tặng kèm · 0đ
+            </span>
+            <div className="vs__title">
+              <span className="vs__icon">
+                <Icon name="Target" size={22} />
+              </span>
+              <div>
+                <h3>Landing page</h3>
+                <p>Trang riêng cho một chương trình quảng cáo</p>
+              </div>
+            </div>
+            <div className="vs__art vs__art--lp" aria-hidden="true">
+              <span className="vs__lp-tag">Chỉ trong tháng 10</span>
+              <b>Thay dầu giảm 30%</b>
+              <span className="vs__lp-count">
+                <i>12</i>
+                <i>08</i>
+                <i>45</i>
+              </span>
+              <span className="vs__lp-btn">Giữ suất ưu đãi</span>
+            </div>
+            <dl className="vs__rows">
+              {COMPARE_ROWS.map(([k, , b]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{b}</dd>
+                </div>
+              ))}
+            </dl>
+            <Link to="/mau-landing-page" className="vs__link">
+              Xem mẫu landing page <Icon name="ArrowRight" size={16} />
+            </Link>
+          </article>
+        </div>
+
+        <div className="vs-flow" data-reveal="up">
+          <p className="vs-flow__label">Hai thứ phối hợp thế nào</p>
+          <ol>
+            {FLOW.map((s, i) => (
+              <li key={s.title}>
+                <span className="vs-flow__icon">
+                  <Icon name={s.icon} size={18} />
+                </span>
+                <span>
+                  <b>
+                    {i + 1}. {s.title}
+                  </b>
+                  <small>{s.text}</small>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Gift() {
   const { open } = useConsult()
   const campaigns = ['Thay dầu giảm 30%', 'Kiểm tra xe miễn phí mùa mưa', 'Vệ sinh điều hòa 199.000đ', 'Khai trương chi nhánh mới']
@@ -493,6 +610,7 @@ export default function Landing() {
       <Segments />
       <Features />
       <FeaturedTemplates />
+      <WebVsLanding />
       <Gift />
       <GiftTemplates />
       <Process />

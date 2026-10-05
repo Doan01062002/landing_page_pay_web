@@ -501,3 +501,37 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Danh sách trang của mẫu: mỗi trang là link xem thử */
+.d-pages li {
+  padding: 0;
+}
+.d-pages li > a,
+.d-pages li > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+}
+.d-pages li > a:hover {
+  color: var(--brand-deep);
+}
+.d-pages__eye {
+  margin-left: auto;
+  color: var(--ink-3) !important;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.d-pages li:hover .d-pages__eye {
+  opacity: 1;
+}
+.d-pages__admin {
+  border-style: dashed !important;
+  color: var(--ink-2);
+}
+.d-pages__note {
+  font-size: 14px;
+  color: var(--ink-3);
+}

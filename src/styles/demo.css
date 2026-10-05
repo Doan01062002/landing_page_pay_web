@@ -177,3 +177,40 @@
     box-shadow: none !important;
   }
 }
+
+/* Ô chọn trang của website mẫu */
+.demo-bar__pages {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 4px 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+.demo-bar__pages label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.demo-bar__pages select {
+  min-height: 34px;
+  border: 0;
+  background: var(--mist);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+@media (max-width: 1200px) {
+  .demo-bar__pages label {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .demo-bar__pages {
+    display: none;
+  }
+}

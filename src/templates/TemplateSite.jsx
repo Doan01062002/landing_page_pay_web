@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
+import { getPages, PageHeader, About, Contact, NewsList } from './pages.jsx'
 import { CountUp, useScrolled } from '../components/Motion.jsx'
 import {
   Services,
@@ -25,18 +27,6 @@ function textOn(hex) {
   }
   const L = 0.2126 * lin((n >> 16) & 255) + 0.7152 * lin((n >> 8) & 255) + 0.0722 * lin(n & 255)
   return (1.05 / (L + 0.05)) >= 4.5 ? '#ffffff' : '#141a24'
-}
-
-const navLabels = {
-  services: 'Dịch vụ',
-  pricetable: 'Bảng giá',
-  products: 'Sản phẩm',
-  packages: 'Gói dịch vụ',
-  beforeafter: 'Trước & sau',
-  lookup: 'Tra cứu',
-  process: 'Quy trình',
-  branches: 'Chi nhánh',
-  news: 'Tin tức',
 }
 
 export const scrollToId = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -73,27 +63,27 @@ function BrandMark({ brand }) {
   )
 }
 
-function Nav({ t, cart }) {
+function Nav({ t, cart, pages, page, to }) {
   const [open, setOpen] = useState(false)
   const scrolled = useScrolled(20)
-  const links = t.sections.filter((s) => navLabels[s]).slice(0, 5)
+  // Menu: các trang con (trừ Trang chủ và Đặt lịch, vì Đặt lịch là nút riêng)
+  // Tối đa 6 mục; nếu thừa thì bỏ Tin tức trước (vẫn có ở chân trang), luôn giữ Liên hệ
+  let links = pages.filter((p) => p.slug && p.slug !== 'dat-lich')
+  if (links.length > 6) links = links.filter((p) => p.slug !== 'tin-tuc')
+  links = links.slice(0, 6)
   const hasBooking = t.sections.includes('booking')
-  const go = (id) => (e) => {
-    e.preventDefault()
-    setOpen(false)
-    scrollToId(id)
-  }
+  useEffect(() => setOpen(false), [page])
   return (
     <header className={'ts-nav' + (scrolled ? ' is-scrolled' : '')}>
       <div className="ts-wrap ts-nav__inner">
-        <a href="#top" onClick={go('top')} aria-label="Về đầu trang">
+        <Link to={to('')} aria-label="Trang chủ">
           <BrandMark brand={t.brand} />
-        </a>
+        </Link>
         <nav className={'ts-nav__links' + (open ? ' is-open' : '')}>
-          {links.map((s) => (
-            <a key={s} href={`#${s}`} onClick={go(s)}>
-              {navLabels[s]}
-            </a>
+          {links.map((p) => (
+            <Link key={p.slug} to={to(p.slug)} className={page === p.slug ? 'is-active' : ''} aria-current={page === p.slug ? 'page' : undefined}>
+              {p.label}
+            </Link>
           ))}
         </nav>
         <div className="ts-nav__actions">
@@ -104,9 +94,9 @@ function Nav({ t, cart }) {
             </span>
           )}
           {hasBooking ? (
-            <a href="#booking" onClick={go('booking')} className="ts-btn ts-btn--p">
+            <Link to={to('dat-lich')} className="ts-btn ts-btn--p">
               <Icon name="CalendarCheck" size={16} /> Đặt lịch
-            </a>
+            </Link>
           ) : (
             <a href={`tel:${t.brand.hotline.replace(/\s/g, '')}`} className="ts-btn ts-btn--p">
               <Icon name="Phone" size={16} /> <span className="ts-btn__label">{t.brand.hotline}</span>
@@ -311,7 +301,7 @@ function CtaBand({ t }) {
   )
 }
 
-function Footer({ t }) {
+function Footer({ t, pages, to }) {
   return (
     <footer className="ts-footer">
       <div className="ts-wrap ts-footer__grid">
@@ -334,6 +324,16 @@ function Footer({ t }) {
           </ul>
         </div>
         <div>
+          <h4>Trang</h4>
+          <ul className="ts-footer__pages">
+            {pages.map((p) => (
+              <li key={p.slug}>
+                <Link to={to(p.slug)}>{p.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
           <h4>Dịch vụ</h4>
           <ul>
             {(t.services.length ? t.services : t.priceTable?.columns.map((c) => ({ title: `Gói ${c}` })) || []).slice(0, 4).map((s) => (
@@ -352,7 +352,14 @@ function Footer({ t }) {
   )
 }
 
-export default function TemplateSite({ t, palette, embed }) {
+export default function TemplateSite({ t, palette, embed, page = '', base = `/preview/${t.slug}`, search = '' }) {
+  const navigate = useNavigate()
+  const pages = useMemo(() => getPages(t), [t])
+  const current = pages.find((p) => p.slug === page) || pages[0]
+  const to = useCallback((slug) => (slug ? `${base}/${slug}` : base) + search, [base, search])
+  const hasPage = (slug) => pages.some((p) => p.slug === slug)
+  // Link "Xem trang …" dưới tiêu đề các khối ở Trang chủ
+  const more = (slug) => (current.slug === '' && hasPage(slug) ? { to: to(slug), label: `Xem trang ${pages.find((p) => p.slug === slug).label}` } : null)
   const [cart, setCart] = useState(0)
   const [toast, setToast] = useState('')
   const [preset, setPreset] = useState('')
@@ -369,10 +376,15 @@ export default function TemplateSite({ t, palette, embed }) {
     setToast(`Đã thêm “${name}” vào giỏ hàng`)
   }, [])
 
-  const bookPackage = useCallback((name) => {
-    setPreset(name)
-    scrollToId('booking')
-  }, [])
+  // Đặt lịch theo gói: cùng trang thì cuộn tới form, khác trang thì chuyển sang trang Đặt lịch
+  const bookPackage = useCallback(
+    (name) => {
+      setPreset(name)
+      if (current.sections.includes('booking')) scrollToId('booking')
+      else navigate(to('dat-lich'))
+    },
+    [current, navigate, to],
+  )
 
   const onSizeSearch = useCallback((q) => {
     setSizeQuery(q)
@@ -392,27 +404,33 @@ export default function TemplateSite({ t, palette, embed }) {
   const render = (s) => {
     switch (s) {
       case 'services':
-        return <Services key={s} t={t} />
+        return <Services key={s} t={t} more={more('dich-vu')} />
       case 'pricetable':
-        return t.sections.includes('booking') ? <PriceTable key={s} t={t} onBook={bookPackage} /> : <PriceTable key={s} t={t} />
+        return t.sections.includes('booking') ? <PriceTable key={s} t={t} onBook={bookPackage} more={more('bang-gia')} /> : <PriceTable key={s} t={t} more={more('bang-gia')} />
       case 'lookup':
         return <Lookup key={s} t={t} />
       case 'booking':
         return <Booking key={s} t={t} preset={preset} />
       case 'branches':
-        return <Branches key={s} t={t} />
+        return <Branches key={s} t={t} more={more('chi-nhanh')} />
       case 'products':
-        return <Products key={s} t={t} onAdd={addToCart} sizeQuery={sizeQuery} onClearSize={() => setSizeQuery('')} />
+        return <Products key={s} t={t} onAdd={addToCart} sizeQuery={sizeQuery} onClearSize={() => setSizeQuery('')} more={more('san-pham')} />
       case 'beforeafter':
         return <BeforeAfter key={s} t={t} />
       case 'packages':
-        return <Packages key={s} t={t} onBook={bookPackage} />
+        return <Packages key={s} t={t} onBook={bookPackage} more={more('bang-gia')} />
       case 'process':
         return <Process key={s} t={t} />
       case 'testimonials':
         return t.testimonials.length ? <Testimonials key={s} t={t} /> : null
       case 'news':
-        return t.news.length ? <News key={s} t={t} /> : null
+        return t.news.length ? <News key={s} t={t} more={more('tin-tuc')} /> : null
+      case 'newslist':
+        return <NewsList key={s} t={t} />
+      case 'about':
+        return <About key={s} t={t} />
+      case 'contact':
+        return <Contact key={s} t={t} />
       default:
         return null
     }
@@ -421,11 +439,13 @@ export default function TemplateSite({ t, palette, embed }) {
   return (
     <div className={'ts' + (upper ? ' ts--upper' : '') + (embed ? ' ts--embed' : '')} style={style}>
       <TopBar brand={t.brand} />
-      <Nav t={t} cart={cart} />
-      <Hero t={t} onSizeSearch={onSizeSearch} />
-      {t.sections.map(render)}
+      <Nav t={t} cart={cart} pages={pages} page={current.slug} to={to} />
+      {current.slug === '' ? <Hero t={t} onSizeSearch={onSizeSearch} /> : <PageHeader t={t} page={current} home={to('')} />}
+      <main key={current.slug} className="ts-page">
+        {current.sections.map(render)}
+      </main>
       <CtaBand t={t} />
-      <Footer t={t} />
+      <Footer t={t} pages={pages} to={to} />
       {!embed && (
         <a className="ts-float" href={`tel:${t.brand.hotline.replace(/\s/g, '')}`} aria-label={`Gọi ${t.brand.hotline}`}>
           <Icon name="Phone" size={22} />

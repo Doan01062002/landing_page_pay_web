@@ -6,6 +6,7 @@ import { getTemplate, templates } from '../data/templates.js'
 import { getLanding, landings } from '../data/landings.js'
 import { formatVND } from '../data/site.js'
 import NotFound from './NotFound.jsx'
+import { getPages } from '../templates/pages.jsx'
 import '../styles/demo.css'
 
 const devices = [
@@ -52,11 +53,28 @@ export default function Demo({ kind = 'template' }) {
   const frameRef = useRef(null)
   const [loaded, setLoaded] = useState(false)
   const { open } = useConsult()
+  // Website mẫu có nhiều trang; landing page chỉ có 1 trang
+  const pages = useMemo(() => (kind === 'template' && t ? getPages(t) : []), [kind, t])
+  const [page, setPage] = useState(params.get('trang') || '')
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const src = useMemo(() => `${K.preview}/${slug}?c=${palette}`, [slug, K.preview])
+  const src = useMemo(() => `${K.preview}/${slug}${page ? '/' + page : ''}?c=${palette}`, [slug, K.preview])
 
   useEffect(() => setLoaded(false), [slug])
+
+  // Khung mẫu báo trang đang mở (khi khách bấm menu bên trong) để ô chọn trang cập nhật theo
+  useEffect(() => {
+    const onMsg = (e) => {
+      if (e.origin === window.location.origin && e.data?.type === 'garaweb:route' && e.source === frameRef.current?.contentWindow) setPage(e.data.page)
+    }
+    window.addEventListener('message', onMsg)
+    return () => window.removeEventListener('message', onMsg)
+  }, [])
+
+  const goPage = (p) => {
+    setPage(p)
+    frameRef.current?.contentWindow?.postMessage({ type: 'garaweb:navigate', page: p }, window.location.origin)
+  }
 
   useEffect(() => {
     if (t) document.title = `Xem thử ${t.name} – ChungAuto`
@@ -85,6 +103,7 @@ export default function Demo({ kind = 'template' }) {
               value={t.slug}
               onChange={(e) => {
                 setPalette(0)
+                setPage('')
                 navigate(`${K.base}/${e.target.value}`)
               }}
             >
@@ -108,6 +127,20 @@ export default function Demo({ kind = 'template' }) {
         </div>
 
         <div className="demo-bar__right">
+          {pages.length > 1 && (
+            <div className="demo-bar__pages">
+              <label htmlFor="demo-page">
+                <Icon name="FileText" size={15} /> Trang
+              </label>
+              <select id="demo-page" value={page} onChange={(e) => goPage(e.target.value)}>
+                {pages.map((p) => (
+                  <option key={p.slug} value={p.slug}>
+                    {p.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="demo-bar__swatches" role="radiogroup" aria-label="Bộ màu">
             {palettes.map((p, i) => (
               <button

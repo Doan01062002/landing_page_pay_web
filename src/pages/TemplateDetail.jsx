@@ -7,21 +7,9 @@ import { useConsult } from '../components/ConsultContext.jsx'
 import { getTemplate, templates } from '../data/templates.js'
 import { site, formatVND } from '../data/site.js'
 import NotFound from './NotFound.jsx'
+import { getPages } from '../templates/pages.jsx'
 import '../styles/gallery.css'
 
-export const sectionPages = {
-  services: { label: 'Dịch vụ', icon: 'Wrench' },
-  pricetable: { label: 'Bảng giá', icon: 'Gauge' },
-  lookup: { label: 'Tra cứu bảo dưỡng', icon: 'History' },
-  booking: { label: 'Đặt lịch hẹn', icon: 'CalendarCheck' },
-  branches: { label: 'Hệ thống chi nhánh', icon: 'MapPin' },
-  products: { label: 'Sản phẩm & giỏ hàng', icon: 'ShoppingCart' },
-  beforeafter: { label: 'Ảnh trước / sau', icon: 'Sparkles' },
-  packages: { label: 'Gói dịch vụ', icon: 'Package' },
-  process: { label: 'Quy trình làm việc', icon: 'ListOrdered' },
-  testimonials: { label: 'Đánh giá khách hàng', icon: 'Star' },
-  news: { label: 'Tin tức, mẹo hay', icon: 'FileText' },
-}
 
 const formatDate = (iso) => iso.split('-').reverse().join('/')
 
@@ -32,6 +20,7 @@ export default function TemplateDetail() {
   const { open } = useConsult()
 
   if (!t) return <NotFound />
+  const pages = getPages(t)
 
   const related = templates.filter((x) => x.slug !== t.slug).sort((a, b) => (b.category === t.category) - (a.category === t.category) || b.popularity - a.popularity).slice(0, 3)
 
@@ -120,18 +109,22 @@ export default function TemplateDetail() {
               <div className="d-gift">
                 <Icon name="Gift" size={22} />
                 <p>
-                  <b>Tặng 1 landing page quảng cáo</b> trị giá {formatVND(site.promo.giftValue)} khi triển khai mẫu này trong tháng 10.
+                  <b>Tặng thêm 1 landing page quảng cáo</b> trị giá {formatVND(site.promo.giftValue)}: trang riêng cho một chương trình khuyến mãi,
+                  dùng khi chạy quảng cáo Facebook, Google.{' '}
+                  <Link to="/mau-landing-page" className="d-gift__link">
+                    Xem 3 mẫu landing
+                  </Link>
                 </p>
               </div>
 
               <dl className="d-meta">
                 <div>
-                  <dt>Thiết bị</dt>
-                  <dd>Máy tính, máy tính bảng, điện thoại</dd>
+                  <dt>Số trang</dt>
+                  <dd>{pages.length} trang + trang quản trị</dd>
                 </div>
                 <div>
-                  <dt>Số khu vực nội dung</dt>
-                  <dd>{t.sections.length + 2} (gồm đầu trang, chân trang)</dd>
+                  <dt>Thiết bị</dt>
+                  <dd>Máy tính, máy tính bảng, điện thoại</dd>
                 </div>
                 <div>
                   <dt>Cập nhật</dt>
@@ -161,16 +154,26 @@ export default function TemplateDetail() {
             </ul>
           </div>
           <div>
-            <p className="eyebrow">Các khu vực nội dung</p>
-            <h2 className="d-h2">Trang chủ gồm</h2>
+            <p className="eyebrow">Website {pages.length} trang</p>
+            <h2 className="d-h2">Các trang có sẵn</h2>
             <ul className="d-pages" data-stagger="fade">
-              {t.sections.map((s) => (
-                <li key={s}>
-                  <Icon name={sectionPages[s].icon} size={18} />
-                  {sectionPages[s].label}
+              {pages.map((p) => (
+                <li key={p.slug}>
+                  <Link to={`/demo/${t.slug}?c=${palette}${p.slug ? `&trang=${p.slug}` : ''}`}>
+                    <Icon name={p.icon} size={18} />
+                    {p.label}
+                    <Icon name="Eye" size={15} className="d-pages__eye" />
+                  </Link>
                 </li>
               ))}
+              <li className="d-pages__admin">
+                <span>
+                  <Icon name="Settings" size={18} />
+                  Trang quản trị
+                </span>
+              </li>
             </ul>
+            <p className="d-pages__note">Bấm vào tên trang để xem thử. Trang quản trị dùng để sửa giá, thêm chi nhánh, đăng tin và xem lịch hẹn.</p>
           </div>
         </div>
       </section>

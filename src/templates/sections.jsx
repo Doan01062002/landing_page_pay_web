@@ -1,25 +1,31 @@
 import { useMemo, useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import { motionAllowed, prefersReducedMotion, useInView } from '../components/Motion.jsx'
 
-function Head({ eyebrow, title, text, center }) {
+function Head({ eyebrow, title, text, center, more }) {
   return (
     <div className={'ts-head' + (center ? ' ts-head--center' : '')} data-reveal="up">
       {eyebrow && <p className="ts-eyebrow">{eyebrow}</p>}
       <h2>{title}</h2>
       {text && <p>{text}</p>}
+      {more && (
+        <Link to={more.to} className="ts-more">
+          {more.label} <Icon name="ArrowRight" size={15} />
+        </Link>
+      )}
     </div>
   )
 }
 
 /* ---------- Dịch vụ ---------- */
-export function Services({ t }) {
+export function Services({ t, more }) {
   if (!t.services.length) return null
   const withImages = t.services.some((s) => s.image)
   return (
     <section className="ts-section" id="services">
       <div className="ts-wrap">
-        <Head eyebrow="Dịch vụ" title="Chúng tôi làm gì cho xe của bạn" text="Giá niêm yết rõ ràng, báo giá chi tiết trước khi làm." />
+        <Head eyebrow="Dịch vụ" title="Chúng tôi làm gì cho xe của bạn" text="Giá niêm yết rõ ràng, báo giá chi tiết trước khi làm." more={more} />
         <div className={'ts-services' + (withImages ? ' ts-services--img' : ' ts-services--icon')} data-stagger="up">
           {t.services.map((s) => (
             <article key={s.title} className="ts-service">
@@ -44,12 +50,12 @@ export function Services({ t }) {
 }
 
 /* ---------- Bảng giá theo mốc ---------- */
-export function PriceTable({ t, onBook }) {
+export function PriceTable({ t, onBook, more }) {
   const pt = t.priceTable
   return (
     <section className="ts-section ts-section--soft" id="pricetable">
       <div className="ts-wrap">
-        <Head eyebrow="Bảng giá" title={pt.title} text={pt.note} />
+        <Head eyebrow="Bảng giá" title={pt.title} text={pt.note} more={more} />
         <p className="ts-swipe">
           Vuốt ngang để xem các cột khác <Icon name="ArrowRight" size={14} />
         </p>
@@ -393,7 +399,7 @@ const PIN_POS = [
   [84, 42],
 ]
 
-export function Branches({ t }) {
+export function Branches({ t, more }) {
   const [active, setActive] = useState(0)
   const single = t.branches.length === 1
   return (
@@ -403,6 +409,7 @@ export function Branches({ t }) {
           eyebrow={single ? 'Địa chỉ' : 'Hệ thống chi nhánh'}
           title={single ? 'Ghé xưởng của chúng tôi' : `${t.branches.length} điểm phục vụ gần bạn`}
           text={single ? undefined : 'Chọn chi nhánh để xem vị trí, giờ mở cửa và số điện thoại.'}
+          more={more}
         />
         <div className="ts-branches">
           <ul className="ts-branches__list" data-stagger="left">
@@ -472,7 +479,7 @@ export function Branches({ t }) {
 }
 
 /* ---------- Sản phẩm + giỏ hàng ---------- */
-export function Products({ t, onAdd, sizeQuery, onClearSize }) {
+export function Products({ t, onAdd, sizeQuery, onClearSize, more }) {
   const [added, setAdded] = useState('')
   const timer = useRef(null)
   const add = (name) => {
@@ -487,7 +494,7 @@ export function Products({ t, onAdd, sizeQuery, onClearSize }) {
     <section className="ts-section" id="products">
       <div className="ts-wrap">
         <div className="ts-head-row">
-          <Head eyebrow="Sản phẩm" title={t.category === 'lop' ? 'Lốp & ắc quy bán chạy' : 'Phụ tùng nổi bật'} />
+          <Head eyebrow="Sản phẩm" title={t.category === 'lop' ? 'Lốp & ắc quy bán chạy' : 'Phụ tùng nổi bật'} more={more} />
           {sizeQuery && (
             <div className="ts-filter-note">
               <span>
@@ -596,11 +603,11 @@ export function BeforeAfter({ t }) {
 }
 
 /* ---------- Gói dịch vụ ---------- */
-export function Packages({ t, onBook }) {
+export function Packages({ t, onBook, more }) {
   return (
     <section className="ts-section" id="packages">
       <div className="ts-wrap">
-        <Head eyebrow="Gói dịch vụ" title="Chọn gói phù hợp với xe của bạn" text="Giá cho xe sedan. SUV, bán tải cộng thêm 20%." center />
+        <Head eyebrow="Gói dịch vụ" title="Chọn gói phù hợp với xe của bạn" text="Giá cho xe sedan. SUV, bán tải cộng thêm 20%." center more={more} />
         <div className="ts-packages" data-stagger="up">
           {t.packages.map((p) => (
             <article key={p.name} className={'ts-package' + (p.featured ? ' is-featured' : '')}>
@@ -670,11 +677,11 @@ export function Testimonials({ t }) {
 }
 
 /* ---------- Tin tức ---------- */
-export function News({ t }) {
+export function News({ t, more }) {
   return (
     <section className="ts-section" id="news">
       <div className="ts-wrap">
-        <Head eyebrow="Tin tức" title="Mẹo chăm sóc xe" />
+        <Head eyebrow="Tin tức" title="Mẹo chăm sóc xe" more={more} />
         <div className="ts-news" data-stagger="up">
           {t.news.map((n) => (
             <article key={n.title} className="ts-newscard">

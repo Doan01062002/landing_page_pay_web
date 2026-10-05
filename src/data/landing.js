@@ -40,7 +40,7 @@ export const packages = [
     note: 'thanh toán 1 lần',
     gift: '1 landing page quảng cáo',
     features: [
-      'Chọn 1 mẫu bất kỳ trong kho',
+      'Website 6 – 9 trang theo mẫu bạn chọn',
       'Form đặt lịch, nút gọi & Zalo nổi',
       'Bảng giá dịch vụ, bảo dưỡng theo km',
       'Tên miền .vn + hosting năm đầu',
@@ -111,6 +111,10 @@ export const testimonials = [
 ]
 
 export const faqs = [
+  {
+    q: 'Website và landing page khác gì nhau? Sao lại tặng thêm landing page?',
+    a: 'Website là cửa hàng online lâu dài, có nhiều trang (dịch vụ, bảng giá, chi nhánh, tin tức…) để khách tìm hiểu và đặt lịch. Landing page chỉ có 1 trang cho 1 chương trình khuyến mãi, dùng khi chạy quảng cáo: khách bấm quảng cáo, thấy đúng ưu đãi và để lại số điện thoại. Hai thứ bổ trợ nhau, nên chúng tôi tặng landing page để bạn chạy quảng cáo ngay sau khi có website.',
+  },
   {
     q: 'Tôi có được đổi màu, logo và nội dung của mẫu không?',
     a: 'Có. Mỗi mẫu có sẵn 3 bộ màu, ngoài ra chúng tôi chỉnh theo màu nhận diện của bạn. Toàn bộ chữ, ảnh, bảng giá, chi nhánh đều thay bằng nội dung thật của gara.',

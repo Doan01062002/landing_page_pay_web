@@ -63,7 +63,7 @@ export default function App() {
         <Route path="/demo/:slug" element={<Demo />} />
         <Route path="/demo-landing/:slug" element={<Demo kind="landing" />} />
         <Route path="/lp/:slug" element={<LpPreview />} />
-        <Route path="/preview/:slug" element={<Preview />} />
+        <Route path="/preview/:slug/:page?" element={<Preview />} />
       </Routes>
     </ConsultProvider>
   )
