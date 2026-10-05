@@ -499,7 +499,7 @@ export default function LandingSite({ lp, embed }) {
       <Register lp={lp} />
       <Footer lp={lp} />
       {!embed && <StickyBar lp={lp} />}
-      {box && <Lightbox items={items} index={box.index} onClose={() => setBox(null)} onIndex={(i) => setBox((b) => ({ ...b, index: i }))} />}
+      {box && <Lightbox items={items} index={box.index} scopeStyle={style} onClose={() => setBox(null)} onIndex={(i) => setBox((b) => ({ ...b, index: i }))} />}
     </div>
   )
 }

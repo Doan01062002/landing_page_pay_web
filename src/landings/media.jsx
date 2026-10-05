@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Icon from '../components/Icon.jsx'
 
 /*
@@ -107,12 +108,21 @@ export function VideoCard({ video, onOpen, embed, featured }) {
 
 /*
   Trình xem lớn cho video và ảnh: ← → để chuyển, Esc để đóng, vuốt ngang trên điện thoại.
-  items: [{ type: 'video' | 'image', src, poster?, title, caption }]
+  items: [{ type: 'video' | 'image', src, poster?, title, caption, vertical? }]
+  scopeStyle: biến màu (--a, font…) của trang gọi, vì trình xem được gắn ra ngoài <body>.
 */
-export function Lightbox({ items, index, onClose, onIndex }) {
+export function Lightbox({ items, index, onClose, onIndex, scopeStyle }) {
   const item = items[index]
   const touch = useRef(null)
+  const closeRef = useRef(null)
   const go = useCallback((d) => onIndex((index + d + items.length) % items.length), [index, items.length, onIndex])
+
+  // Đưa focus vào nút đóng khi mở, trả lại chỗ cũ khi đóng.
+  useEffect(() => {
+    const before = document.activeElement
+    closeRef.current?.focus()
+    return () => before?.focus?.()
+  }, [])
 
   useEffect(() => {
     const onKey = (e) => {
@@ -129,51 +139,82 @@ export function Lightbox({ items, index, onClose, onIndex }) {
     }
   }, [go, onClose])
 
-  return (
-    <div
-      className="lp-lightbox"
-      role="dialog"
-      aria-modal="true"
-      aria-label={item.title}
-      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
-      onTouchStart={(e) => (touch.current = e.touches[0].clientX)}
-      onTouchEnd={(e) => {
-        if (touch.current == null) return
-        const dx = e.changedTouches[0].clientX - touch.current
-        if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1)
-        touch.current = null
-      }}
-    >
-      <button type="button" className="lp-lightbox__close" onClick={onClose} aria-label="Đóng">
-        <Icon name="X" size={22} />
-      </button>
-      {items.length > 1 && (
-        <>
-          <button type="button" className="lp-lightbox__nav lp-lightbox__nav--prev" onClick={() => go(-1)} aria-label="Trước">
-            <Icon name="ArrowLeft" size={22} />
-          </button>
-          <button type="button" className="lp-lightbox__nav lp-lightbox__nav--next" onClick={() => go(1)} aria-label="Sau">
-            <Icon name="ArrowRight" size={22} />
-          </button>
-        </>
-      )}
-      <figure className="lp-lightbox__stage" key={index}>
-        {item.type === 'video' ? (
-          <video src={item.src} poster={item.poster} controls autoPlay playsInline />
-        ) : (
-          <img src={item.src} alt={item.caption || item.title} />
-        )}
-        <figcaption>
-          <span>
-            <b>{item.title}</b>
-            {item.caption && <small>{item.caption}</small>}
-          </span>
-          <em>
+  // Gắn thẳng vào <body> để luôn phủ toàn màn hình, không bị header, nút nổi
+  // hay phần tử cha có transform/overflow che khuất.
+  return createPortal(
+    <div className="lp-scope" style={scopeStyle}>
+      <div
+        className="lp-lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label={item.title}
+        onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+        onTouchStart={(e) => (touch.current = e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          if (touch.current == null) return
+          const dx = e.changedTouches[0].clientX - touch.current
+          if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1)
+          touch.current = null
+        }}
+      >
+        <div className="lp-lightbox__top">
+          <em className="lp-lightbox__count">
             {index + 1} / {items.length}
           </em>
-        </figcaption>
-      </figure>
-    </div>
+          <button type="button" className="lp-lightbox__close" onClick={onClose} aria-label="Đóng (Esc)" ref={closeRef}>
+            <Icon name="X" size={22} />
+          </button>
+        </div>
+
+        <div className="lp-lightbox__main" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+          {items.length > 1 && (
+            <button type="button" className="lp-lightbox__nav lp-lightbox__nav--prev" onClick={() => go(-1)} aria-label="Trước">
+              <Icon name="ArrowLeft" size={22} />
+            </button>
+          )}
+          <figure className={'lp-lightbox__stage' + (item.vertical ? ' is-vertical' : '')} key={index}>
+            {item.type === 'video' ? (
+              <video src={item.src} poster={item.poster} controls autoPlay playsInline />
+            ) : (
+              <img src={item.src} alt={item.caption || item.title} />
+            )}
+            <figcaption>
+              <b>{item.title}</b>
+              {item.caption && <small>{item.caption}</small>}
+            </figcaption>
+          </figure>
+          {items.length > 1 && (
+            <button type="button" className="lp-lightbox__nav lp-lightbox__nav--next" onClick={() => go(1)} aria-label="Sau">
+              <Icon name="ArrowRight" size={22} />
+            </button>
+          )}
+        </div>
+
+        {items.length > 1 && (
+          <div className="lp-lightbox__thumbs" role="tablist" aria-label="Chọn nội dung">
+            {items.map((it, i) => (
+              <button
+                key={it.src}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={it.title}
+                className={i === index ? 'is-active' : ''}
+                onClick={() => onIndex(i)}
+              >
+                <img src={it.poster || it.src} alt="" loading="lazy" />
+                {it.type === 'video' && (
+                  <span>
+                    <Icon name="Play" size={12} />
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>,
+    document.body,
   )
 }
 

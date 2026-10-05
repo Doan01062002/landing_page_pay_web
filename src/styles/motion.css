@@ -195,7 +195,7 @@
 
 /* ---------- Chuyển trang ---------- */
 .motion .page {
-  animation: page-in 0.45s var(--ease-out) both;
+  animation: page-in 0.45s var(--ease-out) backwards;
 }
 
 /* ---------- Thanh tiến trình cuộn ---------- */

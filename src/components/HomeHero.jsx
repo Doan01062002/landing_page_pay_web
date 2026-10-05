@@ -21,7 +21,7 @@ const BOOKINGS = [
 // Video demo: quay lại từ chính các mẫu (cuộn trang), cùng một đoạn video xưởng.
 const DEMOS = [
   { type: 'video', src: '/videos/demo-autopro.mp4', poster: '/videos/demo-autopro.jpg', title: 'Mẫu AutoPro Garage trên máy tính', caption: 'Website gara ô tô: dịch vụ, bảng giá theo km, tra cứu, đặt lịch' },
-  { type: 'video', src: '/videos/demo-motofix.mp4', poster: '/videos/demo-motofix.jpg', title: 'Mẫu MotoFix 247 trên điện thoại', caption: 'Hơn 80% khách tìm tiệm sửa xe bằng điện thoại' },
+  { type: 'video', src: '/videos/demo-motofix.mp4', poster: '/videos/demo-motofix.jpg', title: 'Mẫu MotoFix 247 trên điện thoại', vertical: true, caption: 'Hơn 80% khách tìm tiệm sửa xe bằng điện thoại' },
   { type: 'video', src: '/videos/demo-ceramic.mp4', poster: '/videos/demo-ceramic.jpg', title: 'Landing page tặng kèm: Ceramic Studio', caption: 'Một ưu đãi, video xưởng, đếm ngược, form giữ suất' },
 ]
 
@@ -157,11 +157,7 @@ export default function HomeHero() {
         </div>
       </div>
 
-      {demo !== null && (
-        <div className="lp-scope">
-          <Lightbox items={DEMOS} index={demo} onClose={() => setDemo(null)} onIndex={setDemo} />
-        </div>
-      )}
+      {demo !== null && <Lightbox items={DEMOS} index={demo} onClose={() => setDemo(null)} onIndex={setDemo} />}
     </section>
   )
 }

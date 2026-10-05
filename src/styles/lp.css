@@ -186,7 +186,7 @@
   --soft: #f6f7f9;
   --a: var(--brand);
   --a-ink: #fff;
-  --a-strong: var(--brand-deep);
+  --a-strong: color-mix(in srgb, var(--a) 82%, #000);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .lp-mark {
@@ -1188,88 +1188,214 @@
   color: var(--ink-3);
 }
 
-/* ---------- Lightbox ---------- */
+/* ---------- Lightbox ----------
+   Gắn vào <body> qua portal. 3 tầng: thanh trên (số thứ tự, nút đóng),
+   khung xem (nút trước / sau hai bên), dải ảnh nhỏ để chọn nhanh. */
 .lp-lightbox {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 1000;
   display: grid;
-  place-items: center;
-  padding: 64px 72px;
-  background: rgba(250, 250, 251, 0.96);
-  backdrop-filter: blur(6px);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  padding: max(16px, env(safe-area-inset-top, 0px)) 20px max(18px, env(safe-area-inset-bottom, 0px));
+  background: rgba(247, 247, 248, 0.97);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  font-family: var(--fb, inherit);
   animation: fade 0.25s ease-out;
 }
-.lp-lightbox__stage {
-  margin: 0;
-  display: grid;
-  gap: 14px;
-  width: min(1100px, 100%);
-  animation: lp-zoom 0.4s var(--ease);
-}
-.lp-lightbox__stage video,
-.lp-lightbox__stage img {
-  width: 100%;
-  max-height: calc(100vh - 200px);
-  object-fit: contain;
-  border-radius: 18px;
-  background: #e9ebee;
-  box-shadow: 0 40px 80px -40px rgba(17, 20, 24, 0.5);
-}
-.lp-lightbox__stage figcaption {
+.lp-lightbox__top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 16px;
+  gap: 12px;
 }
-.lp-lightbox__stage figcaption span {
-  display: grid;
-}
-.lp-lightbox__stage figcaption small {
-  color: var(--ink-3);
-}
-.lp-lightbox__stage figcaption em {
+.lp-lightbox__count {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
   font-style: normal;
   font-size: 14px;
-  color: var(--ink-3);
+  font-weight: 600;
+  color: var(--ink-2);
   font-variant-numeric: tabular-nums;
 }
 .lp-lightbox__close,
 .lp-lightbox__nav {
-  position: absolute;
   display: grid;
   place-items: center;
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
   border: 1px solid var(--line);
   border-radius: 50%;
   background: #fff;
   color: var(--ink);
   cursor: pointer;
+  box-shadow: 0 6px 18px -10px rgba(17, 20, 24, 0.35);
   transition:
     transform 0.25s var(--ease),
-    border-color 0.2s;
-}
-.lp-lightbox__close {
-  top: 16px;
-  right: 16px;
+    border-color 0.2s,
+    color 0.2s;
 }
 .lp-lightbox__close:hover {
   transform: rotate(90deg);
-}
-.lp-lightbox__nav {
-  top: 50%;
-  transform: translateY(-50%);
-}
-.lp-lightbox__nav--prev {
-  left: 14px;
-}
-.lp-lightbox__nav--next {
-  right: 14px;
+  border-color: var(--a);
+  color: var(--a-strong);
 }
 .lp-lightbox__nav:hover {
+  transform: scale(1.06);
   border-color: var(--a);
-  transform: translateY(-50%) scale(1.06);
+  color: var(--a-strong);
+}
+.lp-lightbox__main {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 20px;
+  min-height: 0;
+}
+.lp-lightbox__main > .lp-lightbox__stage:only-child {
+  grid-column: 1 / -1;
+}
+.lp-lightbox__stage {
+  margin: 0;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 14px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  animation: lp-zoom 0.4s var(--ease);
+}
+/* Giữ đúng tỉ lệ khung hình, vừa trong vùng còn lại của màn hình */
+.lp-lightbox__stage video,
+.lp-lightbox__stage img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 1120px);
+  max-height: calc(100vh - 250px);
+  max-height: calc(100dvh - 250px);
+  border-radius: 16px;
+  background: #16181d;
+  box-shadow:
+    0 0 0 1px rgba(17, 20, 24, 0.08),
+    0 40px 80px -40px rgba(17, 20, 24, 0.55);
+}
+.lp-lightbox__stage.is-vertical video {
+  aspect-ratio: 9 / 16;
+}
+.lp-lightbox__stage figcaption {
+  display: grid;
+  gap: 2px;
+  max-width: 64ch;
+  text-align: center;
+  line-height: 1.4;
+}
+.lp-lightbox__stage figcaption b {
+  font-size: 16px;
+}
+.lp-lightbox__stage figcaption small {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.lp-lightbox__thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px;
+  scrollbar-width: none;
+}
+.lp-lightbox__thumbs::-webkit-scrollbar {
+  display: none;
+}
+.lp-lightbox__thumbs button {
+  position: relative;
+  flex: 0 0 auto;
+  width: 92px;
+  height: 58px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--line);
+  cursor: pointer;
+  opacity: 0.55;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s,
+    transform 0.25s var(--ease);
+}
+.lp-lightbox__thumbs button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+.lp-lightbox__thumbs button.is-active {
+  opacity: 1;
+  border-color: var(--a);
+}
+.lp-lightbox__thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lp-lightbox__thumbs span {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+}
+.lp-lightbox__thumbs span svg {
+  fill: currentColor;
+  margin-left: 1px;
+}
+
+@media (max-width: 640px) {
+  .lp-lightbox {
+    gap: 10px;
+    padding-inline: 12px;
+  }
+  .lp-lightbox__close {
+    width: 44px;
+    height: 44px;
+  }
+  /* Điện thoại: vuốt ngang hoặc chạm dải ảnh nhỏ để chuyển, bỏ nút hai bên */
+  .lp-lightbox__main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lp-lightbox__nav {
+    display: none;
+  }
+  .lp-lightbox__stage video,
+  .lp-lightbox__stage img {
+    max-height: calc(100vh - 230px);
+    max-height: calc(100dvh - 230px);
+    border-radius: 12px;
+  }
+  .lp-lightbox__stage figcaption b {
+    font-size: 15px;
+  }
+  .lp-lightbox__stage figcaption small {
+    font-size: 13px;
+  }
+  .lp-lightbox__thumbs {
+    justify-content: flex-start;
+  }
+  .lp-lightbox__thumbs button {
+    width: 72px;
+    height: 46px;
+  }
 }
 
 /* ---------- Hiệu ứng ---------- */
@@ -1442,7 +1568,7 @@
   --soft: #f6f7f9;
   --a: var(--brand);
   --a-ink: #fff;
-  --a-strong: var(--brand-deep);
+  --a-strong: color-mix(in srgb, var(--a) 82%, #000);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .lp-mark {
@@ -1583,23 +1709,6 @@
   .lp-contact dd {
     text-align: left;
   }
-  .lp-lightbox {
-    padding: 72px 12px 24px;
-  }
-  .lp-lightbox__nav {
-    top: auto;
-    bottom: 16px;
-    transform: none;
-  }
-  .lp-lightbox__nav:hover {
-    transform: none;
-  }
-  .lp-lightbox__nav--prev {
-    left: calc(50% - 56px);
-  }
-  .lp-lightbox__nav--next {
-    right: calc(50% - 56px);
-  }
   .lp-footer small {
     margin-left: 0;
   }
@@ -1645,7 +1754,7 @@
   --soft: #f6f7f9;
   --a: var(--brand);
   --a-ink: #fff;
-  --a-strong: var(--brand-deep);
+  --a-strong: color-mix(in srgb, var(--a) 82%, #000);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .lp-mark {
