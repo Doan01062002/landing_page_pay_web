@@ -130,15 +130,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .vid__box a, .link { color: var(--ink); font-weight: 600; text-align: left; }
 .vid__box a:hover, .link:hover { color: var(--red); text-decoration: underline; }
 
-/* ===== Vì sao chọn: 8 thẻ ===== */
-.goals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 40px 0 30px; }
-.goal { position: relative; overflow: hidden; min-height: 82px; padding: 16px; border-radius: 4px; background: var(--card); transition: transform .3s, background .3s; }
-.goal:hover { transform: translateY(-4px); }
-.goal p { position: relative; z-index: 1; font-size: 12.5px; font-weight: 700; line-height: 1.55; color: var(--ink); }
-.goal i { position: absolute; right: 8px; bottom: -10px; font: 700 42px/1 var(--f); font-style: normal; color: rgba(255, 255, 255, .9); }
-.goal.is-hot { background: var(--red); }
-.goal.is-hot p { color: var(--cream); }
-.goal.is-hot i { color: rgba(122, 16, 22, .5); }
 
 /* ===== Bảng giá: 2 thẻ danh sách ===== */
 .lists { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 50px; }
@@ -303,7 +294,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .offer__head { grid-column: 1 / -1; }
   .offer__head h2 br { display: none; }
   .offer__arrow { display: none; }
-  .goals { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .nav { position: fixed; inset: 60px 0 auto; flex-direction: column; gap: 0; padding: 10px 16px 20px; background: var(--red); box-shadow: 0 20px 30px rgba(0, 0, 0, .2); transform: translateY(-120%); transition: transform .35s; }
@@ -312,12 +302,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .nav .btn { margin-top: 14px; }
   .burger { display: block; }
   .brand { font-size: 17px; }
-  .hero { padding: 0 0 110px; }
+  .hero { padding: 0 0 36px; }
   .hero__photo { position: relative; width: 100%; height: 230px; }
   .hero__photo img { clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%); }
   .hero__shape { display: none; }
   .hero__in { padding-top: 20px; }
-  .feats { margin-top: -80px; }
+  .feats { margin-top: 0; padding-top: 16px; } /* điện thoại: thẻ nằm trên nền kem, không đè hero (tránh nền đỏ lộ sau thẻ) */
   .feats__grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .feat { min-height: 76px; padding: 14px; }
   .feat:last-child { grid-column: 1 / -1; }
