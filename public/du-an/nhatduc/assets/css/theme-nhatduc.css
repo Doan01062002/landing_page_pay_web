@@ -27,7 +27,7 @@
   --ink-2: #55606b;
   --ink-3: #8a939c;
   --line: #e6e8eb;
-  --bg-soft: #f4f5f7;
+  --bg-soft: #f6f7f9;
   --radius: 4px;
   --radius-sm: 4px;
   --shadow-sm: 0 2px 10px rgba(20, 28, 36, .06);
@@ -76,9 +76,9 @@ h2 { letter-spacing: 0; }
 .section__head--light .lead { color: rgba(255, 255, 255, .72); }
 
 /* ---------- Header: dải trên màu than, nav in hoa, viền đỏ dưới ---------- */
-.topbar { background: var(--char); color: rgba(255, 255, 255, .82); }
+.topbar { background: var(--bg-soft); color: var(--ink-2); border-bottom: 1px solid var(--line); }
 .topbar .ic { color: var(--red); }
-.header { border-bottom: 3px solid var(--red); }
+.header { border-bottom: 2px solid var(--red); }
 .header.is-scrolled { box-shadow: 0 10px 24px rgba(20, 28, 36, .1); }
 .nav a { border-radius: 0; text-transform: uppercase; font-size: .84rem; font-weight: 700; letter-spacing: .04em; color: var(--char); }
 .nav a::after { background: var(--red); height: 3px; bottom: 0; }
@@ -138,22 +138,22 @@ h2 { letter-spacing: 0; }
 .info-item__ic--gold { background: #fff4d6; color: #e2a100; }
 
 /* ---------- Dải số liệu: băng đỏ, số lớn trắng ---------- */
-.stats { margin-top: 0; background: linear-gradient(100deg, var(--blue-700), var(--red) 45%, #e5323b); }
+.stats { margin-top: 0; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 10px 30px rgba(20, 28, 36, .05); position: relative; }
 .stats__grid { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .stat { padding: 30px 18px; }
-.stat b { color: #fff; font-weight: 800; }
-.stat small { color: rgba(255, 255, 255, .86); font-weight: 500; }
-.stat + .stat::before { background: rgba(255, 255, 255, .3); top: 28%; bottom: 28%; }
+.stat b { color: var(--red); font-weight: 800; }
+.stat small { color: var(--ink-2); font-weight: 500; }
+.stat + .stat::before { background: var(--line); top: 28%; bottom: 28%; }
 
 /* ---------- Băng hãng xe: nền tối ---------- */
-.marquee { background: var(--char); color: #fff; border: 0; margin-top: 0; }
+.marquee { background: var(--bg-soft); color: var(--char); border-bottom: 1px solid var(--line); margin-top: 0; }
 .marquee__label { background: var(--red); color: #fff; }
-.marquee__row span { opacity: .9; }
+.marquee__row span { opacity: .75; }
 .marquee__row span::before { content: "◆"; color: var(--red); }
 
 /* ---------- Dịch vụ: thẻ ảnh + icon tròn đỏ đè lên mép ảnh, chữ căn giữa ---------- */
-.services { background: var(--bg-soft); }
-.vsvc { border: 0; border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: visible; }
+.services { background: #fff; }
+.vsvc { border: 1px solid var(--line); border-radius: var(--radius); box-shadow: none; overflow: visible; }
 .vsvc:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
 .yt { border-radius: 4px 4px 0 0; }
 .yt::after { background: linear-gradient(180deg, transparent 45%, rgba(20, 28, 36, .45)); }
@@ -186,55 +186,52 @@ h2 { letter-spacing: 0; }
 
 /* Đánh giá: băng xám than tràn viền, thẻ trắng dạng bong bóng lời nói */
 .reviews { isolation: isolate; margin-top: 56px; padding: 56px 0 64px; }
-.reviews::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); background: var(--char-2); }
-.reviews__summary { background: var(--red); color: #fff; border: 0; border-radius: var(--radius); box-shadow: none; }
-.reviews__score { color: #fff; }
-.reviews__summary p { color: rgba(255, 255, 255, .88); }
-.reviews__summary .btn--outline { color: #fff; border-color: rgba(255, 255, 255, .55); }
-.reviews__summary .btn--outline:hover { background: #fff; color: var(--red); }
+.reviews::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); background: var(--bg-soft); }
+.reviews__summary { background: #fff; color: var(--ink); border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: var(--radius); box-shadow: none; }
+.reviews__score { color: var(--red); }
+.reviews__summary p { color: var(--ink-2); }
+.reviews__summary .btn--outline { color: var(--red); border-color: var(--blue-100); }
+.reviews__summary .btn--outline:hover { background: var(--red); color: #fff; border-color: var(--red); }
 .reviews__track { overflow-y: visible; padding-bottom: 26px; scrollbar-color: rgba(255, 255, 255, .25) transparent; }
-.review { position: relative; border: 0; border-radius: var(--radius); box-shadow: none; overflow: visible; }
+.review { position: relative; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: none; overflow: visible; }
 .review::after { content: ""; position: absolute; left: 30px; bottom: -12px; border: 12px solid transparent; border-bottom: 0; border-top-color: #fff; }
 .review:hover { transform: translateY(-4px); }
 .review blockquote { font-style: italic; }
 .review blockquote::before { color: #f3c6c9; }
 .avatar { border-radius: 50%; clip-path: none; }
-.round-btn { border-radius: 4px; border-color: rgba(255, 255, 255, .3); background: transparent; color: #fff; }
-.round-btn:hover { background: var(--red); border-color: var(--red); }
+.round-btn { border-radius: 4px; border-color: var(--line); background: #fff; color: var(--char); }
+.round-btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
 
 /* ---------- Lý do chọn: icon tròn lớn, chữ căn giữa ---------- */
-.why--compact { padding: clamp(64px, 8vw, 96px) 0; background: var(--bg-soft); }
+.why--compact { padding: clamp(64px, 8vw, 96px) 0; background: #fff; }
 .why-strip { display: block; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; }
 .why-strip__head { text-align: center; margin-bottom: 40px; border: 0; }
 .why-strip__head .eyebrow { margin-bottom: 10px; }
 .why-strip__list { gap: 26px; }
 .why-strip__list li { align-items: center; text-align: center; gap: 14px; padding: 8px 10px; background: none; border: 0; box-shadow: none; }
 .why-strip__list li:hover { transform: none; box-shadow: none; }
-.why-strip__ic { width: 92px; height: 92px; border-radius: 50%; clip-path: none; background: var(--red); color: #fff;
-  box-shadow: 0 0 0 8px #fff, 0 0 0 9px #f0c9cb; transition: background .3s, transform .4s var(--ease); }
+.why-strip__ic { width: 88px; height: 88px; border-radius: 50%; clip-path: none; background: var(--blue-50); color: var(--red);
+  box-shadow: 0 0 0 8px #fff, 0 0 0 9px var(--blue-100); transition: background .3s, transform .4s var(--ease); }
 .why-strip__ic .ic { width: 36px; height: 36px; }
-.why-strip__list li:hover .why-strip__ic { background: var(--char); transform: translateY(-4px); }
-.why-strip__list b { font-family: var(--f-head); text-transform: uppercase; color: var(--red); font-size: 1rem; margin-top: 6px; }
+.why-strip__list li:hover .why-strip__ic { background: var(--red); color: #fff; transform: translateY(-4px); }
+.why-strip__list b { font-family: var(--f-head); text-transform: uppercase; color: var(--char); font-size: 1rem; margin-top: 6px; }
 .why-strip__list small { font-size: .9rem; color: var(--ink-2); }
 
 /* ---------- Quy trình: nền xám than ---------- */
-.process { background: linear-gradient(180deg, var(--char), var(--char-2)); color: #fff; }
-.process .section__head h2 { color: #fff; }
-.process .section__head h2::after { background:
-    linear-gradient(var(--red), var(--red)) center / 48px 3px no-repeat,
-    radial-gradient(circle, rgba(255, 255, 255, .45) 3px, transparent 3.5px) left center / 8px 8px no-repeat,
-    radial-gradient(circle, rgba(255, 255, 255, .45) 3px, transparent 3.5px) right center / 8px 8px no-repeat; }
-.process .lead { color: rgba(255, 255, 255, .72); }
-.process .eyebrow { color: #ff8d93; }
-.steps__line { background: rgba(255, 255, 255, .14); }
+.process { background: var(--bg-soft); color: var(--ink); }
+.process .section__head h2 { color: var(--char); }
+
+.process .lead { color: var(--ink-2); }
+.process .eyebrow { color: var(--red); }
+.steps__line { background: var(--line); }
 .steps__fill { background: var(--red); }
-.step__badge { border-radius: 50%; clip-path: none; width: 78px; height: 78px; background: transparent; border: 2px solid rgba(255, 255, 255, .3); color: #fff; box-shadow: none; }
+.step__badge { border-radius: 50%; clip-path: none; width: 78px; height: 78px; background: #fff; border: 2px solid var(--line); color: var(--red); box-shadow: var(--shadow-sm); }
 .step__badge .ic { margin-top: 0; }
 .step__badge i { top: -6px; right: -6px; bottom: auto; left: auto; transform: none; width: 28px; height: 28px; border-radius: 50%; background: var(--red); color: #fff; font-size: .85rem; }
 .step.is-lit .step__badge { background: var(--red); border-color: var(--red); color: #fff; transform: scale(1.05); box-shadow: 0 0 0 8px rgba(215, 30, 40, .18); }
 .step.is-lit .step__badge i { background: #fff; color: var(--red); }
-.step h3 { color: #fff; text-transform: uppercase; font-size: .92rem; line-height: 1.35; }
-.step p { color: rgba(255, 255, 255, .7); }
+.step h3 { color: var(--char); text-transform: uppercase; font-size: .92rem; line-height: 1.35; }
+.step p { color: var(--ink-2); }
 
 /* ---------- Bảng giá ---------- */
 .pricing { background: #fff; }
@@ -254,31 +251,33 @@ h2 { letter-spacing: 0; }
 .price-note { border-radius: 4px; }
 
 /* Ưu đãi: nền đỏ, nút trắng */
-.promo__ticket { border-radius: 6px; background: linear-gradient(110deg, var(--blue-700), var(--red) 55%, #e5323b); box-shadow: 0 20px 44px rgba(215, 30, 40, .28); }
-.promo__ticket::before { background: radial-gradient(circle, rgba(255, 255, 255, .18), transparent 65%); }
+.promo__ticket { border-radius: 6px; color: var(--ink); background: var(--blue-50); border: 1.5px dashed #ecb3b6; box-shadow: none; }
+.promo__ticket::before { display: none; }
 .promo h3 { text-transform: uppercase; }
-.promo h3 b { color: #ffe08a; }
-.promo p { color: rgba(255, 255, 255, .92); }
-.promo__tag { border-radius: 0; background: #fff; color: var(--red); }
-.promo__gift { color: #ffe08a; }
-.promo .btn--red { background: #fff; color: var(--red); box-shadow: 0 10px 24px rgba(0, 0, 0, .15); }
+.promo h3 { color: var(--char); }
+.promo h3 b { color: var(--red); }
+.promo p { color: var(--ink-2); }
+.promo__tag { border-radius: 0; background: var(--red); color: #fff; }
+.promo__gift { color: var(--red); }
+.promo__right { border-left-color: #ecb3b6; }
+.promo .btn--red { background: var(--red); color: #fff; box-shadow: none; }
 
 /* ---------- Đặt lịch: nền đỏ có ảnh xưởng mờ, form trắng ---------- */
-.booking { background: linear-gradient(120deg, var(--blue-700) 0%, var(--red) 55%, #e2333c 100%); color: #fff; }
-.booking::before { background-image: url("../img/hero-4-workshop-long.webp"); opacity: .14; mix-blend-mode: luminosity; }
-.booking::after { background: radial-gradient(circle, rgba(255, 255, 255, .14), transparent 65%); }
-.booking h2 { color: #fff; text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; }
-.booking .hl { color: #ffe08a; }
-.booking .eyebrow { color: #fff; opacity: .85; }
-.booking__perks li { color: rgba(255, 255, 255, .92); }
-.booking__perks .ic { background: #fff; color: var(--red); }
-.booking__call { background: rgba(0, 0, 0, .16); border-color: rgba(255, 255, 255, .25); border-radius: 4px; }
-.booking__call:hover { background: rgba(0, 0, 0, .26); }
-.booking__call small { color: rgba(255, 255, 255, .75); }
-.booking__call b { color: #fff; }
-.booking .hotline__icon { background: #fff; color: var(--red); }
-.booking .hotline__icon::before { border-color: #fff; }
-.form { border-radius: var(--radius); background: #fff; border: 0; border-top: 5px solid var(--char); box-shadow: var(--shadow-lg); }
+.booking { background: linear-gradient(135deg, #fff 0%, var(--bg-soft) 60%, #fbecec 100%); color: var(--ink); }
+.booking::before { background-image: url("../img/hero-4-workshop-long.webp"); opacity: .06; mix-blend-mode: multiply; }
+.booking::after { background: radial-gradient(circle, rgba(215, 30, 40, .08), transparent 65%); }
+.booking h2 { color: var(--char); text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; }
+.booking .hl { color: var(--red); }
+.booking .eyebrow { color: var(--red); }
+.booking__perks li { color: var(--ink); }
+.booking__perks .ic { background: var(--red); color: #fff; }
+.booking__call { background: #fff; border-color: var(--line); border-radius: 4px; box-shadow: var(--shadow-sm); }
+.booking__call:hover { background: var(--blue-50); }
+.booking__call small { color: var(--ink-3); }
+.booking__call b { color: var(--red); }
+.booking .hotline__icon { background: var(--red); color: #fff; }
+.booking .hotline__icon::before { border-color: var(--red); }
+.form { border-radius: var(--radius); background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--red); box-shadow: var(--shadow); }
 .form__head b { text-transform: uppercase; font-family: var(--f-head); color: var(--char); }
 .form__head > .ic { border-radius: 50%; clip-path: none; width: 46px; height: 46px; background: var(--blue-50); color: var(--red); }
 .field input, .field select { border-radius: 4px; background: #f7f8fa; }
@@ -288,7 +287,7 @@ h2 { letter-spacing: 0; }
 .form__foot .ic { color: var(--red); }
 
 /* ---------- Chân trang: tối, viền đỏ ---------- */
-.footer { background: #161c22; color: rgba(255, 255, 255, .7); border-top: 4px solid var(--red); }
+.footer { background: #2a323b; color: rgba(255, 255, 255, .74); border-top: 3px solid var(--red); }
 .footer h4 { color: #fff; text-transform: uppercase; font-size: 1rem; letter-spacing: .04em; position: relative; padding-bottom: 12px; }
 .footer h4::after { content: ""; position: absolute; left: 0; bottom: 0; width: 36px; height: 3px; background: var(--red); }
 .footer__contact li .ic { color: var(--red); }
@@ -335,8 +334,8 @@ h2 { letter-spacing: 0; }
   .hero__proof .info-item, .hero__proof .info-item:first-child { padding: 0 4px; }
   .hero__proof .info-item--sos a { flex-direction: column; text-align: center; gap: 6px; }
   .stat { padding: 20px 10px; }
-  .stat:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .25); }
-  .promo__right { border-top-color: rgba(255, 255, 255, .35); }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .promo__right { border-top-color: #ecb3b6; }
   .why-strip__list { gap: 22px 10px; }
   .why-strip__ic { width: 72px; height: 72px; }
   .why-strip__ic .ic { width: 28px; height: 28px; }
