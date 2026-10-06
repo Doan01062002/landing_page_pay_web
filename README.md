@@ -53,11 +53,19 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 ## Dự án đã triển khai
 
 - Dữ liệu: `src/data/projects.js` (loại: `website`, `landing`, `software`; tên, địa chỉ, ngày bàn giao, ảnh bìa, điểm nổi bật).
-- Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên) và `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2).
+- Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên), `nhatduc-motion` (bản Motion, xem bên dưới) và `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2).
 - Cập nhật sau khi sửa landing ở thư mục làm việc (`D:/Chungauto/landing_page_<x>`): chạy `node scripts/sync-du-an.mjs` (hoặc `node scripts/sync-du-an.mjs nhatduc`). Script chép `assets` + `index.html` vào `public/du-an/<slug>/` và tự chèn `<base href="/du-an/<slug>/">` để ảnh, CSS đúng cả khi link thiếu dấu `/` cuối.
 - Thêm dự án mới: khai báo thư mục trong `PROJECTS` của `scripts/sync-du-an.mjs`, chạy script, rồi thêm vào `projects.js`.
 - Giao diện: Đức Tùng dùng `assets/css/theme-ductung.css` (xanh + vàng cam), Nhật Đức dùng `assets/css/theme-nhatduc.css` (đỏ + xám than), cả hai nạp sau `styles.css` chung khung. Ảnh xưởng đã chỉnh màu/độ nét; bản gốc lưu ở `D:/Chungauto/_anh-goc`.
 - `vercel.json` và plugin `project-pages` trong `vite.config.js` trả `index.html` của dự án cho `/du-an/<slug>` (production và dev).
+
+### Gara Nhật Đức – bản Motion (`nhatduc-motion`)
+
+- Mã nguồn: `D:/Chungauto/landing_page_nhatduc_motion` (Vite + React, git riêng). framer-motion (nút, tab, popup), GSAP ScrollTrigger (ghim, cuộn ngang, parallax), Lenis (cuộn mượt). Nội dung sửa ở `src/content.js`.
+- Cập nhật: `npm run build` trong thư mục đó, rồi ở đây chạy `node scripts/sync-du-an.mjs nhatduc-motion` (chép nguyên `dist/`, dự án khai báo `dist: true`).
+- Video: đang là video tạm dựng từ ảnh xưởng (`npm run videos`). Hướng dẫn tạo video AI bằng MotionSites và thay file: `VIDEO-PROMPTS.md` trong thư mục dự án.
+- Máy bật "giảm chuyển động" (Windows: tắt hiệu ứng động) sẽ thấy bản tĩnh; thêm `?motion=1` vào link để xem đủ hiệu ứng.
+- Thiết kế và kế hoạch: `docs/superpowers/specs/2026-10-06-nhatduc-motion-design.md`, `docs/superpowers/plans/2026-10-06-nhatduc-motion.md`.
 
 ## Mẫu bán xe (đại lý, showroom xe cũ)
 

@@ -13,6 +13,21 @@ const dir = (slug) => `/du-an/${slug}/`
 
 export const projects = [
   {
+    slug: 'nhatduc-motion',
+    type: 'landing',
+    name: 'Gara Nhật Đức – bản Motion',
+    client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
+    area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
+    hotline: '08 3695 3695',
+    deployed: '10/2026',
+    url: dir('nhatduc-motion'),
+    cover: dir('nhatduc-motion') + 'img/storefront-2026.webp',
+    accent: '#d71e28',
+    summary:
+      'Bản landing hiện đại, tông sáng theo màu logo: video dựng từ ảnh xưởng, cuộn mượt, dịch vụ trượt ngang, ảnh xưởng chạy lệch tầng, bảng giá và form đặt lịch có chuyển động.',
+    highlights: ['Video dựng từ ảnh', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá động', 'Đặt lịch 30 giây', 'Nút gọi, Zalo nổi'],
+  },
+  {
     slug: 'nhatduc',
     type: 'landing',
     name: 'Gara Nhật Đức Long Biên',
