@@ -5,8 +5,7 @@ const CONFIG = {
   // URL nhận dữ liệu form (Google Apps Script Web App, webhook CRM, Make/Zapier…).
   // Để trống: lưu tạm vào trình duyệt + hiện popup cảm ơn.
   formEndpoint: '',
-  // ID video YouTube cho khối video lớn (VD: 'dQw4w9WgXcQ'). Để trống → mở videoLink (hoặc Fanpage).
-  youtubeId: '',
+  // Video của khối video lớn: link 1 video TikTok hoặc YouTube → phát ngay trên trang (popup).
   videoLink: 'https://www.tiktok.com/@garaotonhatduc/video/7657133340587281685',
   fanpage: 'https://www.facebook.com/garanhatduclongbien/',
   youtubeChannel: 'https://www.youtube.com/@minhhoiauto-garanhatduc',
@@ -279,42 +278,67 @@ const CONFIG = {
     hintObs.observe(ba);
   }
 
-  /* ---------- Video facade (click-to-play, không tải YouTube cho tới khi bấm) ---------- */
-  const facade = $('#videoFacade');
-  if (facade) {
-    if (CONFIG.youtubeId) {
-      $('img', facade).src = `https://i.ytimg.com/vi/${CONFIG.youtubeId}/hqdefault.jpg`;
-    }
-    facade.addEventListener('click', () => {
-      if (!CONFIG.youtubeId) { window.open(CONFIG.videoLink || CONFIG.fanpage, '_blank', 'noopener'); return; }
-      const ifr = document.createElement('iframe');
-      ifr.src = `https://www.youtube-nocookie.com/embed/${CONFIG.youtubeId}?autoplay=1&rel=0`;
-      ifr.title = 'Video phỏng vấn khách hàng';
-      ifr.allow = 'autoplay; encrypted-media; picture-in-picture';
-      ifr.allowFullscreen = true;
-      facade.replaceWith(ifr);
-    });
+  /* ---------- Video: phát TikTok / YouTube ngay trên trang (popup) ---------- */
+  // Nhận link video TikTok (…/video/<số>), YouTube (watch?v=, youtu.be/, shorts/) hoặc ID YouTube 11 ký tự.
+  const parseVideo = (url) => {
+    url = (url || '').trim();
+    if (!url) return null;
+    let m = url.match(/tiktok\.com\/.*\/video\/(\d+)/) || url.match(/^(\d{15,})$/);
+    if (m) return { kind: 'tiktok', id: m[1], url: url.includes('tiktok.com') ? url : CONFIG.tiktok };
+    m = url.match(/(?:youtube\.com\/(?:watch\?.*v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{11})/) || url.match(/^([\w-]{11})$/);
+    if (m) return { kind: 'youtube', id: m[1], url: 'https://www.youtube.com/watch?v=' + m[1] };
+    return null;
+  };
+
+  const player = $('#vplayer');
+  const pFrame = player && $('.vplayer__frame', player);
+  let vpFocus = null;
+  const openVideo = (v, title) => {
+    vpFocus = document.activeElement;
+    const ifr = document.createElement('iframe');
+    ifr.src = v.kind === 'tiktok'
+      ? 'https://www.tiktok.com/player/v1/' + v.id + '?autoplay=1&rel=0&description=1&music_info=0'
+      : 'https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    ifr.title = title || 'Video Gara Nhật Đức';
+    ifr.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    ifr.allowFullscreen = true;
+    pFrame.replaceChildren(ifr);
+    player.dataset.kind = v.kind;
+    $('.vplayer__title', player).textContent = title || '';
+    const ext = $('.vplayer__ext', player);
+    ext.href = v.url;
+    ext.textContent = v.kind === 'tiktok' ? 'Xem trên TikTok' : 'Xem trên YouTube';
+    player.hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('.vplayer__close', player).focus();
+  };
+  const closeVideo = () => {
+    if (!player || player.hidden) return;
+    pFrame.replaceChildren(); // xoá iframe = dừng phát
+    player.hidden = true;
+    document.body.style.overflow = '';
+    if (vpFocus && vpFocus.focus) vpFocus.focus();
+  };
+  if (player) {
+    $('.vplayer__close', player).addEventListener('click', closeVideo);
+    player.addEventListener('click', (e) => { if (e.target === player) closeVideo(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeVideo(); });
   }
 
-  /* ---------- Video dịch vụ: click-to-play, chỉ tải YouTube khi bấm ---------- */
-  $$('.yt').forEach((btn) => {
-    const id = (btn.dataset.yt || '').trim();
-    // Không có ID YouTube → bấm mở data-href (VD: video TikTok), nếu không có thì mở Fanpage
-    if (!id) { btn.addEventListener('click', () => window.open(btn.dataset.href || CONFIG.fanpage, '_blank', 'noopener')); return; }
-    const img = $('img', btn);
-    if (img) img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  // Có link video hợp lệ → phát trong popup; không có → mở link dự phòng (kênh) ở tab mới.
+  const bindVideo = (btn, link, fallback, title) => {
+    const v = parseVideo(link);
     btn.addEventListener('click', () => {
-      // dừng video khác đang phát để chỉ 1 video chạy
-      $$('.vsvc iframe').forEach((f) => f.replaceWith(f._facade));
-      const ifr = document.createElement('iframe');
-      ifr.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
-      ifr.title = btn.dataset.title || 'Video dịch vụ';
-      ifr.allow = 'autoplay; encrypted-media; picture-in-picture';
-      ifr.allowFullscreen = true;
-      ifr._facade = btn;
-      btn.replaceWith(ifr);
+      if (v && player) openVideo(v, title);
+      else window.open(fallback || CONFIG.fanpage, '_blank', 'noopener');
     });
-  });
+  };
+
+  const facade = $('#videoFacade');
+  const facadeTitle = $('.video__text h3');
+  if (facade) bindVideo(facade, CONFIG.videoLink, CONFIG.tiktok, facadeTitle && facadeTitle.textContent);
+
+  $$('.yt').forEach((btn) => bindVideo(btn, btn.dataset.video || btn.dataset.yt, btn.dataset.href, btn.dataset.title));
 
   /* ---------- Social links from config ---------- */
   $$('[data-social]').forEach((a) => {

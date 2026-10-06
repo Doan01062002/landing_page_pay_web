@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap"
     rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/hero-1-workshop-banner.webp">
-  <link rel="stylesheet" href="assets/css/styles.css?v=3">
+  <link rel="stylesheet" href="assets/css/styles.css?v=5">
   <link rel="stylesheet" href="assets/css/theme-nhatduc.css?v=2">
 
   <script type="application/ld+json">
@@ -414,10 +414,10 @@
           <p class="lead">Video thực tế từ kênh TikTok &amp; YouTube của Gara Nhật Đức. Bấm để xem.</p>
         </header>
 
-        <!-- data-yt = ID video YouTube (phát ngay trên trang). Để trống + data-href → mở link (TikTok…). -->
+        <!-- data-video = link 1 video TikTok hoặc YouTube → phát ngay trên trang (popup). Để trống → mở data-href (kênh) ở tab mới. -->
         <div class="vsvc-grid">
           <article class="vsvc reveal">
-            <button class="yt" data-yt="" data-href="https://www.tiktok.com/@garaotonhatduc"
+            <button class="yt" data-video="" data-href="https://www.tiktok.com/@garaotonhatduc"
               data-title="Bảo dưỡng tại Gara Nhật Đức" aria-label="Xem video bảo dưỡng trên TikTok Gara Nhật Đức">
               <img src="assets/img/innova-lift.webp" alt="" loading="lazy">
               <span class="yt__play"><svg class="ic"><use href="#i-play" /></svg></span>
@@ -433,8 +433,8 @@
           </article>
 
           <article class="vsvc reveal" data-delay="1">
-            <button class="yt" data-yt="" data-href="https://www.tiktok.com/@garaotonhatduc/video/7657133340587281685"
-              data-title="Sửa điều hoà Nissan Kicks" aria-label="Xem video sửa điều hoà Nissan Kicks trên TikTok">
+            <button class="yt" data-video="https://www.tiktok.com/@garaotonhatduc/video/7657133340587281685"
+              data-title="Sửa điều hoà Nissan Kicks" aria-label="Phát video sửa điều hoà Nissan Kicks">
               <img src="assets/img/workshop-top.webp" alt="" loading="lazy">
               <span class="yt__play"><svg class="ic"><use href="#i-play" /></svg></span><span class="yt__time">TikTok</span>
             </button>
@@ -449,8 +449,8 @@
           </article>
 
           <article class="vsvc reveal" data-delay="2">
-            <button class="yt" data-yt="" data-href="https://www.youtube.com/@minhhoiauto-garanhatduc"
-              data-title="Đánh bóng – hiệu chỉnh bề mặt sơn" aria-label="Xem video đồng sơn trên kênh YouTube Gara Nhật Đức">
+            <button class="yt" data-video="https://www.youtube.com/watch?v=cbJ1UoQdtfU" data-href="https://www.youtube.com/@minhhoiauto-garanhatduc"
+              data-title="Đánh bóng – hiệu chỉnh bề mặt sơn" aria-label="Phát video đánh bóng, hiệu chỉnh bề mặt sơn">
               <img src="assets/img/paint-booth.webp" alt="" loading="lazy">
               <span class="yt__play"><svg class="ic"><use href="#i-play" /></svg></span><span class="yt__time">YouTube</span>
             </button>
@@ -521,7 +521,7 @@
               alt="Toàn cảnh xưởng" loading="lazy"><span>Xưởng rộng rãi</span></a>
         </div>
 
-        <!-- Video thực tế (click-to-play) – link cấu hình trong assets/js/main.js (CONFIG.videoLink) -->
+        <!-- Video thực tế (bấm để phát ngay trên trang) – link cấu hình trong assets/js/main.js (CONFIG.videoLink) -->
         <div class="video reveal" data-delay="1">
           <div class="video__text">
             <span class="ba__tag ba__tag--red">26K+ lượt xem TikTok</span>
@@ -532,7 +532,7 @@
               <li><svg class="ic"><use href="#i-check" /></svg> Bàn giao xe chạy thử, điều hoà mát sâu</li>
             </ul>
           </div>
-          <button class="video__facade" id="videoFacade" aria-label="Xem video sửa điều hoà Nissan Kicks trên TikTok">
+          <button class="video__facade" id="videoFacade" aria-label="Phát video sửa điều hoà Nissan Kicks">
             <img src="assets/img/workshop-banner.webp" alt="" loading="lazy">
             <span class="video__play"><svg class="ic">
                 <use href="#i-play" />
@@ -993,6 +993,20 @@
   </nav>
 
   <!-- Lightbox -->
+  <!-- Popup phát video TikTok / YouTube (iframe chỉ tạo khi bấm, đóng là dừng phát) -->
+  <div class="vplayer" id="vplayer" role="dialog" aria-modal="true" aria-label="Xem video" hidden>
+    <div class="vplayer__box">
+      <button class="vplayer__close" aria-label="Đóng video"><svg class="ic">
+          <use href="#i-x" />
+        </svg></button>
+      <div class="vplayer__frame"></div>
+      <div class="vplayer__bar">
+        <b class="vplayer__title"></b>
+        <a class="vplayer__ext" href="#" target="_blank" rel="noopener">Xem trên TikTok</a>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh" hidden>
     <button class="lightbox__close" aria-label="Đóng"><svg class="ic">
         <use href="#i-x" />
@@ -1028,7 +1042,7 @@
     </div>
   </div>
 
-  <script src="assets/js/main.js?v=2" defer></script>
+  <script src="assets/js/main.js?v=3" defer></script>
 </body>
 
 </html>

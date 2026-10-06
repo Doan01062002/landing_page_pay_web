@@ -727,3 +727,19 @@ p { margin: 0; }
   .mbar__cta-btn i { position: absolute; top: -8px; right: -16px; padding: 2px 6px; border-radius: 99px; background: var(--red); color: #fff; font-style: normal; font-size: .62rem; font-weight: 800; box-shadow: 0 3px 8px rgba(238, 42, 47, .4); animation: badgePulse 1.6s ease-in-out infinite; }
   @keyframes badgePulse { 50% { transform: scale(1.12); } }
 }
+
+/* ===== Popup phát video (TikTok dọc 9:16, YouTube ngang 16:9) ===== */
+.vplayer { position: fixed; inset: 0; z-index: 320; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 64px 16px 24px; background: rgba(24, 6, 9, .9); animation: fadeIn .25s; }
+.vplayer[hidden] { display: none; }
+.vplayer__box { position: relative; width: min(960px, 100%, calc((100vh - 150px) * 16 / 9)); display: flex; flex-direction: column; gap: 10px; animation: zoomIn .3s var(--ease); }
+.vplayer[data-kind="tiktok"] .vplayer__box { width: min(400px, 100%, calc((100vh - 150px) * 9 / 16)); }
+.vplayer__frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+.vplayer[data-kind="tiktok"] .vplayer__frame { aspect-ratio: 9 / 16; }
+.vplayer__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vplayer__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #fff; font-size: .9rem; }
+.vplayer__title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vplayer__ext { flex-shrink: 0; color: #fff; opacity: .8; text-decoration: underline; }
+.vplayer__ext:hover { opacity: 1; }
+.vplayer__close { position: absolute; top: -50px; right: 0; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .14); color: #fff; display: grid; place-items: center; cursor: pointer; transition: background .2s; }
+.vplayer__close:hover { background: rgba(255, 255, 255, .28); }
+.vplayer__close .ic { width: 20px; height: 20px; }
