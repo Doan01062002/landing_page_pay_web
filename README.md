@@ -54,7 +54,9 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 
 - Dữ liệu: `src/data/projects.js` (loại: `website`, `landing`, `software`; tên, địa chỉ, ngày bàn giao, ảnh bìa, điểm nổi bật).
 - Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên) và `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2).
-- Thêm dự án: chép cả thư mục (có `index.html`) vào `public/du-an/<slug>/`, thêm `<base href="/du-an/<slug>/">` ngay sau thẻ `<meta charset>` để ảnh, CSS đúng cả khi link thiếu dấu `/` cuối, rồi khai báo trong `projects.js`.
+- Cập nhật sau khi sửa landing ở thư mục làm việc (`D:/Chungauto/landing_page_<x>`): chạy `node scripts/sync-du-an.mjs` (hoặc `node scripts/sync-du-an.mjs nhatduc`). Script chép `assets` + `index.html` vào `public/du-an/<slug>/` và tự chèn `<base href="/du-an/<slug>/">` để ảnh, CSS đúng cả khi link thiếu dấu `/` cuối.
+- Thêm dự án mới: khai báo thư mục trong `PROJECTS` của `scripts/sync-du-an.mjs`, chạy script, rồi thêm vào `projects.js`.
+- Giao diện: Đức Tùng dùng `assets/css/theme-ductung.css` (xanh + vàng cam), Nhật Đức dùng `assets/css/theme-nhatduc.css` (đỏ + xám than), cả hai nạp sau `styles.css` chung khung. Ảnh xưởng đã chỉnh màu/độ nét; bản gốc lưu ở `D:/Chungauto/_anh-goc`.
 - `vercel.json` và plugin `project-pages` trong `vite.config.js` trả `index.html` của dự án cho `/du-an/<slug>` (production và dev).
 
 ## Mẫu bán xe (đại lý, showroom xe cũ)

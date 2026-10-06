@@ -1,0 +1,235 @@
+/* =========================================================
+   Gara Đức Tùng – giao diện "xanh doanh nghiệp + vàng cam"
+   Tham khảo kimairtec.com.vn: chữ Be Vietnam Pro đậm 800, xanh dương chủ đạo,
+   vàng cam làm điểm nhấn & nút chính, tiêu đề mục căn giữa 2 màu,
+   dải cam kết nền xanh có thẻ đánh số, bo góc vừa (10px), nền sáng sạch.
+   File này nạp SAU styles.css và chỉ ghi đè.
+   ========================================================= */
+:root {
+  --blue: #0f6cc4;
+  --blue-600: #0b5aa8;
+  --blue-700: #094a8c;
+  --blue-50: #eef4fb;
+  --blue-100: #d6e4f5;
+  --navy: #0a2a5c;
+  --navy-2: #0d3a7a;
+  --accent: #f2a71b;
+  --accent-600: #c9860c;
+  --accent-50: #fff5e0;
+  --amber: #f2a71b;
+  --ink: #22303d;
+  --ink-2: #5a6b7d;
+  --ink-3: #8593a3;
+  --line: #e3eaf3;
+  --bg-soft: #f4f8fc;
+  --radius: 10px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 2px 10px rgba(15, 50, 100, .06);
+  --shadow: 0 14px 34px rgba(15, 50, 100, .10);
+  --shadow-lg: 0 24px 56px rgba(10, 42, 92, .22);
+}
+body { color: var(--ink); }
+h1, h2, h3, h4 { letter-spacing: -.015em; }
+
+/* ---------- Nút: bo vừa, vàng cam làm nút chính ---------- */
+.btn { border-radius: 8px; font-weight: 700; }
+.btn--primary, .btn--red, .btn--accent {
+  background: var(--amber); color: #1d2733; box-shadow: 0 10px 22px rgba(242, 167, 27, .32); }
+.btn--primary:hover, .btn--red:hover, .btn--accent:hover { background: #f6b53a; box-shadow: 0 14px 30px rgba(242, 167, 27, .42); }
+.btn--outline { border-radius: 8px; color: var(--blue); border-color: var(--blue-100); }
+.btn--outline:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn--ghost { border-radius: 8px; }
+.btn__spinner { border-color: rgba(29, 39, 51, .25); border-top-color: #1d2733; }
+
+/* ---------- Tiêu đề mục: dòng nhỏ vàng có gạch 2 bên, H2 xanh + chữ nhấn vàng ---------- */
+.eyebrow { color: var(--accent-600); font-size: .78rem; letter-spacing: .14em; gap: .7em; }
+.eyebrow::before, .eyebrow::after { content: ""; width: 22px; height: 2px; border-radius: 2px; background: currentColor; }
+.eyebrow--light { color: var(--amber); }
+.eyebrow--light::before { display: block; }
+.section__head h2 { color: var(--blue); font-weight: 800; }
+.hl-blue { color: var(--amber); }
+.hl-blue::after { display: none; }
+.lead { color: var(--ink-2); }
+
+/* ---------- Header ---------- */
+.topbar { background: var(--blue); color: rgba(255, 255, 255, .9); }
+.topbar .ic { color: #ffd27a; }
+.nav a { border-radius: 6px; font-weight: 600; }
+.nav a::after { background: var(--amber); height: 3px; }
+.nav a:hover, .nav a.is-current { color: var(--blue); }
+.hotline__icon { background: var(--blue); }
+.hotline__icon::before { border-color: var(--blue); }
+.hotline__text b { color: var(--blue); }
+.btn--sos { border-radius: 8px; }
+
+/* ---------- Hero: ảnh xưởng phủ xanh đậm, chữ nhấn vàng ---------- */
+.hero { padding: 64px 0 64px; min-height: min(80vh, 720px); }
+.hero::after { display: none; }
+.hero__shade { background:
+    radial-gradient(900px 520px at 85% 20%, rgba(242, 167, 27, .14), transparent 60%),
+    linear-gradient(100deg, rgba(8, 30, 66, .94) 0%, rgba(10, 42, 92, .86) 40%, rgba(15, 108, 196, .55) 75%, rgba(8, 30, 66, .45) 100%); }
+.hero__title { font-weight: 800; letter-spacing: -.02em; }
+.hero .hl { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--amber); }
+.hero__title::before { content: ""; display: block; width: 56px; height: 4px; border-radius: 2px; background: var(--amber); margin-bottom: 22px; }
+.rotator span { background: var(--amber); color: #1d2733; border-radius: 6px; }
+.hero__ticks .ic { color: var(--amber); }
+.hero .btn--ghost { background: transparent; border-color: rgba(255, 255, 255, .6); }
+.hero .btn--ghost:hover { background: #fff; color: var(--navy); }
+.hero__photo { border-radius: 14px; padding: 6px; background: rgba(255, 255, 255, .14); }
+.hero__photo-inner { border-radius: 10px; }
+.hero__deco { border-radius: 14px; }
+.hero__deco::before { background: radial-gradient(circle, rgba(242, 167, 27, .45), transparent 70%); }
+.hero__tag { border-radius: 6px; background: rgba(8, 30, 66, .65); }
+.hero__tag .ic { color: var(--amber); }
+.hero__infobar { border-radius: 10px; border-top: 3px solid var(--amber); }
+.info-item__ic { border-radius: 8px; background: var(--blue-50); color: var(--blue); }
+.hero__scroll { display: none; }
+
+/* ---------- Dải số liệu: băng xanh liền dưới hero (giống dải cam kết của Kimairtec) ---------- */
+.stats { margin-top: 0; background: linear-gradient(90deg, var(--blue-700), var(--blue) 55%, var(--blue-600)); }
+.stats__grid { background: none; border: 0; border-radius: 0; box-shadow: none; }
+.stat { padding: 26px 18px; color: #fff; }
+.stat + .stat::before { background: rgba(255, 255, 255, .18); }
+.stat b { color: #fff; font-weight: 800; }
+.stat b span { color: #fff; }
+.stat small { color: rgba(255, 255, 255, .78); font-weight: 500; }
+.stat:first-child b, .stat:nth-child(3) b { color: var(--amber); }
+.stat:first-child b span, .stat:nth-child(3) b span { color: var(--amber); }
+
+/* ---------- Dải hãng xe: nền sáng, chữ xanh ---------- */
+.marquee { background: var(--blue-50); color: var(--navy); border-bottom: 1px solid var(--line); }
+.marquee__label { background: var(--amber); color: #1d2733; }
+.marquee__row span { opacity: 1; color: var(--navy); }
+.marquee__row span::before { color: var(--amber); }
+
+/* ---------- Dịch vụ (thẻ video) ---------- */
+.services { background: #fff; }
+.vsvc { border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.vsvc:hover { transform: translateY(-6px); border-color: var(--blue-100); box-shadow: var(--shadow); }
+.yt::after { background: linear-gradient(180deg, transparent 40%, rgba(8, 30, 66, .5)); }
+.yt__play { background: var(--amber); color: #1d2733; width: 60px; height: 60px; margin: -30px 0 0 -30px; animation: none; box-shadow: 0 0 0 8px rgba(242, 167, 27, .28); }
+.yt__time { left: 12px; right: auto; top: 12px; bottom: auto; border-radius: 5px; background: var(--amber); color: #1d2733; font-weight: 800; }
+.vsvc__body { border-top: 0; }
+.vsvc__icon { border-radius: 8px; background: var(--blue-50); color: var(--blue); }
+.vsvc:hover .vsvc__icon { background: var(--blue); color: #fff; transform: none; }
+.vsvc h3 { color: var(--blue); }
+.svc__link { color: var(--blue); }
+.svc-more a { border-radius: 8px; }
+.svc-more a .ic { color: var(--accent-600); }
+
+/* ---------- Bảng giá ---------- */
+.pricing { background: var(--bg-soft); }
+.tabs { border-radius: 10px; background: #fff; }
+.tab { border-radius: 8px; }
+.tabs__ink { border-radius: 8px; background: var(--blue); box-shadow: 0 6px 16px rgba(15, 108, 196, .3); }
+.plan { border-radius: var(--radius); }
+.plan__km { border-radius: 5px; }
+.plan h3 { color: var(--navy); }
+.plan__price { color: var(--blue); font-weight: 800; }
+.plan--hot { border: 2px solid var(--blue); background: #fff; }
+.plan--hot::before { content: ""; position: absolute; left: -2px; right: -2px; top: -2px; height: 6px; border-radius: 10px 10px 0 0; background: var(--amber); }
+.plan--hot .plan__price { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--blue); animation: none; }
+.plan__ribbon { background: var(--amber); color: #1d2733; }
+.plan--free { border-color: var(--amber); background: linear-gradient(180deg, var(--accent-50), #fff 45%); }
+.plan li::before { background-color: var(--blue-50); }
+.price-note { border-radius: 8px; }
+.promo__ticket { border-radius: 12px; background: linear-gradient(120deg, var(--navy), var(--blue) 70%); }
+.promo__ticket::before { background: radial-gradient(circle, rgba(242, 167, 27, .35), transparent 65%); }
+.promo__tag { border-radius: 5px; }
+.promo h3 b { color: var(--amber); }
+
+/* ---------- Vì sao chọn: băng xanh full, 4 thẻ đánh số 01–04 ---------- */
+.why--compact { padding: clamp(64px, 8vw, 96px) 0; background:
+    radial-gradient(700px 400px at 100% 0%, rgba(242, 167, 27, .12), transparent 60%),
+    linear-gradient(135deg, var(--blue-700), var(--blue) 60%, #1a7fd6); color: #fff; }
+.why-strip { display: block; padding: 0; border: 0; border-radius: 0; background: none; }
+.why-strip__head { text-align: center; margin-bottom: 36px; }
+.why-strip__head .eyebrow { color: var(--amber); }
+.why-strip__head h2 { color: #fff; font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+.why-strip__head h2 .hl-blue { color: var(--amber); }
+.why-strip__list { counter-reset: why; gap: 18px; }
+.why-strip__list li { counter-increment: why; position: relative; padding: 24px 22px 26px; border-radius: var(--radius);
+  background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .16); box-shadow: none; }
+.why-strip__list li::after { content: counter(why, decimal-leading-zero); position: absolute; right: 18px; top: 14px; font-size: 2rem; font-weight: 800; color: rgba(255, 255, 255, .16); line-height: 1; }
+.why-strip__list li:hover { transform: translateY(-5px); background: rgba(255, 255, 255, .13); border-color: rgba(255, 255, 255, .3); box-shadow: none; }
+.why-strip__ic { border-radius: 8px; background: var(--amber); color: #1d2733; box-shadow: none; }
+.why-strip__list b { color: #fff; font-size: 1.02rem; }
+.why-strip__list small { color: rgba(255, 255, 255, .75); font-size: .86rem; }
+
+/* ---------- Quy trình: nền sáng (sau băng xanh) ---------- */
+.process { background: var(--bg-soft); color: var(--ink); }
+.process .section__head--light h2 { color: var(--blue); }
+.process .eyebrow--light { color: var(--accent-600); }
+.process .section__head .hl { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--amber); }
+.process .section__head--light .lead { color: var(--ink-2); }
+.steps__line { background: var(--blue-100); }
+.steps__fill { background: linear-gradient(90deg, var(--blue), var(--amber)); }
+.step__badge { background: #fff; border: 2px solid var(--blue-100); color: var(--blue); box-shadow: var(--shadow-sm); }
+.step__badge i { background: var(--amber); color: #1d2733; }
+.step.is-lit .step__badge { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 0 0 8px rgba(15, 108, 196, .12); }
+.step h3 { color: var(--navy); }
+.step p { color: var(--ink-2); }
+.step b { color: var(--navy); }
+
+/* ---------- Thực tế xưởng + đánh giá ---------- */
+.g-item { border-radius: var(--radius); }
+.g-item::after { background: linear-gradient(180deg, transparent 55%, rgba(8, 30, 66, .78)); }
+.g-item span { left: 12px; bottom: 10px; padding: 3px 10px; border-left: 3px solid var(--amber); background: rgba(8, 30, 66, .55); border-radius: 0 4px 4px 0; font-size: .84rem; }
+.video, .ba { border-radius: var(--radius); }
+.video__facade { border-radius: 8px; }
+.video__play { background: var(--amber); color: #1d2733; animation: none; box-shadow: 0 0 0 10px rgba(242, 167, 27, .3); }
+.video__points .ic { background: var(--blue-50); color: var(--blue); }
+.ba__tag { border-radius: 5px; }
+.reviews__summary { border-radius: var(--radius); background: linear-gradient(160deg, var(--blue), var(--navy)); }
+.review { border-radius: var(--radius); }
+.review blockquote::before { color: var(--blue-100); }
+.round-btn { border-radius: 8px; }
+.round-btn:hover { background: var(--blue); }
+
+/* ---------- Đặt lịch: băng xanh như khối CTA của Kimairtec ---------- */
+.booking { background: linear-gradient(135deg, var(--navy) 0%, var(--blue-700) 50%, var(--blue) 100%); }
+.booking::after { background: radial-gradient(circle, rgba(242, 167, 27, .22), transparent 65%); }
+.booking h2 .hl, .booking .hl { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--amber); }
+.booking__perks .ic { background: var(--amber); color: #1d2733; }
+.booking__call { border-radius: 10px; }
+.form { border-radius: 12px; border: 0; background: #fff; border-top: 5px solid var(--amber); }
+.form__head > .ic { border-radius: 8px; }
+.field input, .field select { border-radius: 8px; background: #f7f9fc; }
+.field input:focus, .field select:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(15, 108, 196, .12); }
+.form__picked { border-radius: 8px; background: var(--blue-50); color: var(--blue); }
+.form__foot .ic { color: var(--blue); }
+
+/* ---------- Chân trang ---------- */
+.footer { background: #08214a; border-top: 4px solid var(--amber); }
+.footer h4 { position: relative; padding-bottom: 10px; }
+.footer h4::after { content: ""; position: absolute; left: 0; bottom: 0; width: 34px; height: 3px; border-radius: 2px; background: var(--amber); }
+.footer__contact li .ic { color: var(--amber); }
+.footer__contact a:hover b { color: var(--amber); }
+.socials a { border-radius: 8px; }
+.socials a:hover { background: var(--amber); color: #1d2733; }
+.footer__map { border-radius: var(--radius); }
+
+/* ---------- Nút nổi, popup ---------- */
+.to-top { border-radius: 8px; }
+.modal__card { border-radius: 14px; }
+.scroll-progress span { background: linear-gradient(90deg, var(--amber), var(--blue)); }
+
+@media (max-width: 960px) {
+  .why-strip__list { grid-template-columns: repeat(2, 1fr); }
+  .why-strip__list li { align-items: flex-start; text-align: left; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 36px 0 48px; }
+  .hero__title::before { margin-bottom: 16px; width: 44px; }
+  .stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .stat { padding: 18px 10px; }
+  .stat:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, .18); }
+  .why-strip__list { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .why-strip__list li { padding: 16px 14px; }
+  .why-strip__list li::after { font-size: 1.4rem; right: 12px; top: 10px; }
+  .mbar__ic { border-radius: 10px; }
+  .mbar__cta-btn { background: var(--amber); color: #1d2733; box-shadow: 0 10px 22px rgba(242, 167, 27, .45); }
+  .mbar__cta-btn::before { border-color: var(--amber); }
+  .mbar__cta .mbar__lbl { color: var(--accent-600); }
+  .mbar::before { background: linear-gradient(90deg, var(--amber), var(--blue), var(--amber)); background-size: 300% 100%; }
+}
