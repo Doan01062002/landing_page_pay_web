@@ -99,7 +99,7 @@ const CONFIG = {
 
   /* ---------- Hero slideshow (Ken Burns) ---------- */
   const slides = $('.hero__slide');
-  const bars = $('.hero__bars i');
+  const bars = $$('.hero__bars i');
   if (slides.length > 1 && !reduceMotion) {
     let i = 0;
     setInterval(() => {
@@ -341,7 +341,14 @@ const CONFIG = {
   const facadeTitle = $('.video__text h3');
   if (facade) bindVideo(facade, CONFIG.videoLink, CONFIG.tiktok, facadeTitle && facadeTitle.textContent);
 
-  $$('.yt').forEach((btn) => bindVideo(btn, btn.dataset.video || btn.dataset.yt, btn.dataset.href, btn.dataset.title));
+  // Thẻ dịch vụ chưa có link video: chỉ hiện ảnh, không mở trang khác
+  $$('.yt').forEach((btn) => {
+    const link = btn.dataset.video || btn.dataset.yt;
+    if (parseVideo(link)) { bindVideo(btn, link, btn.dataset.href, btn.dataset.title); return; }
+    btn.classList.add('yt--photo');
+    btn.disabled = true;
+    btn.removeAttribute('aria-label');
+  });
 
   /* ---------- Social links from config ---------- */
   $$('[data-social]').forEach((a) => {
