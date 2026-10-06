@@ -28,6 +28,7 @@ const KINDS = {
     backLabel: 'Quay về chi tiết',
     sub: (t) => `${t.categoryLabel} · ${t.free ? 'Miễn phí' : `từ ${formatVND(t.price)}`}`,
     cta: 'Chọn mẫu này',
+    ctaShort: 'Chọn mẫu',
     consultName: (t) => t.name,
   },
   landing: {
@@ -39,6 +40,7 @@ const KINDS = {
     backLabel: 'Quay về danh sách',
     sub: (t) => `${t.campaignType} · Tặng kèm khi làm phần mềm`,
     cta: 'Chọn mẫu landing này',
+    ctaShort: 'Chọn mẫu',
     consultName: (t) => `Landing ${t.name}`,
   },
   // Dự án đã triển khai: trang tĩnh /du-an/<slug>/, không đổi màu, có nút mở trang thật
@@ -51,6 +53,7 @@ const KINDS = {
     backLabel: 'Quay về dự án',
     sub: (t) => `${typeLabel(t.type)} · Đã triển khai ${t.deployed}`,
     cta: 'Làm trang như thế này',
+    ctaShort: 'Làm trang này',
     consultName: (t) => `Làm giống dự án ${t.name}`,
   },
 }
@@ -126,9 +129,9 @@ export default function Demo({ kind = 'template' }) {
     <div className="demo">
       <header className="demo-bar">
         <div className="demo-bar__left">
-          <Link to={K.back(t)} className="demo-bar__back">
-            <Icon name="ArrowLeft" size={18} />
-            <span>{K.backLabel}</span>
+          <Link to={K.back(t)} className="demo-bar__back" title={K.backLabel} aria-label={K.backLabel}>
+            <Icon name="ArrowLeft" size={17} />
+            <span className="demo-bar__back-label">{K.backLabel}</span>
           </Link>
           <div className="demo-bar__title">
             <Picker
@@ -204,12 +207,25 @@ export default function Demo({ kind = 'template' }) {
             ))}
           </div>
           {K.url && (
-            <a href={K.url(t)} target="_blank" rel="noreferrer" className="btn btn--ghost" title="Mở trang thật trong tab mới">
-              <Icon name="ExternalLink" size={16} /> Mở trang thật
+            <a
+              href={K.url(t)}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn--ghost demo-bar__ext-btn"
+              title="Mở trang thật trong tab mới"
+            >
+              <Icon name="ExternalLink" size={15} />
+              <span className="demo-bar__btn-label">Mở trang thật</span>
             </a>
           )}
-          <button type="button" className="btn btn--signal" onClick={() => open(K.consultName(t))}>
-            {K.cta}
+          <button
+            type="button"
+            className="btn btn--signal demo-bar__cta-btn"
+            onClick={() => open(K.consultName(t))}
+            title={K.cta}
+          >
+            <span className="demo-bar__cta-full">{K.cta}</span>
+            <span className="demo-bar__cta-short">{K.ctaShort || K.cta}</span>
           </button>
         </div>
       </header>
