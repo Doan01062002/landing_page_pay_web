@@ -404,7 +404,7 @@ p {
   margin-inline: auto;
 }
 .site-nav__link {
-  padding: 8px 10px;
+  padding: 8px 9px;
   white-space: nowrap;
   border-radius: var(--r-sm);
   font-weight: 500;
@@ -423,12 +423,14 @@ p {
 .site-header__actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 .site-header__phone {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
   color: var(--brand-deep);
 }
 .site-header__phone span {

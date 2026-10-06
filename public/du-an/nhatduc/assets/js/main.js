@@ -98,13 +98,16 @@ const CONFIG = {
   $$('.reveal, .hl-blue').forEach((el) => revealObs.observe(el));
 
   /* ---------- Hero slideshow (Ken Burns) ---------- */
-  const slides = $$('.hero__slide');
+  const slides = $('.hero__slide');
+  const bars = $('.hero__bars i');
   if (slides.length > 1 && !reduceMotion) {
     let i = 0;
     setInterval(() => {
       slides[i].classList.remove('is-active');
+      if (bars[i]) bars[i].classList.remove('is-active');
       i = (i + 1) % slides.length;
       slides[i].classList.add('is-active');
+      if (bars[i]) bars[i].classList.add('is-active');
     }, 6000);
   }
 
