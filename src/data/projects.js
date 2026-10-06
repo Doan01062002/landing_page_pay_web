@@ -13,36 +13,6 @@ const dir = (slug) => `/du-an/${slug}/`
 
 export const projects = [
   {
-    slug: 'nhatduc-ladi',
-    type: 'landing',
-    name: 'Gara Nhật Đức – bản Ladi',
-    client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
-    area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
-    hotline: '08 3695 3695',
-    deployed: '10/2026',
-    url: dir('nhatduc-ladi'),
-    cover: dir('nhatduc-ladi') + 'assets/img/storefront-2026.webp',
-    accent: '#d71e28',
-    summary:
-      'Landing kiểu LadiPage đỏ – vàng: hero cắt chéo, 5 thẻ dịch vụ, ưu đãi đặt lịch online, bảng giá 2 nhóm, ảnh xưởng trượt, đếm ngược ưu đãi tháng, popup tri ân và form đặt lịch.',
-    highlights: ['Popup ưu đãi', 'Đếm ngược ưu đãi', 'Bảng giá 2 nhóm', 'Ảnh xưởng trượt', 'Video YouTube, TikTok', 'Đặt lịch 30 giây'],
-  },
-  {
-    slug: 'nhatduc-motion',
-    type: 'landing',
-    name: 'Gara Nhật Đức – bản Motion',
-    client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
-    area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
-    hotline: '08 3695 3695',
-    deployed: '10/2026',
-    url: dir('nhatduc-motion'),
-    cover: dir('nhatduc-motion') + 'videos/hero-1.jpg',
-    accent: '#d71e28',
-    summary:
-      'Bản landing cao cấp kiểu editorial, nền kem xen nền tối, màu theo logo: hero video 3 cảnh, băng ảnh xưởng thật xếp vòng cung, mục xưởng 3 khu vực, bảng giá 3 gói, đặt lịch 30 giây.',
-    highlights: ['Hero video 3 cảnh', 'Ảnh xưởng thật', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá 3 gói', 'Đặt lịch 30 giây'],
-  },
-  {
     slug: 'nhatduc',
     type: 'landing',
     name: 'Gara Nhật Đức Long Biên',
@@ -58,6 +28,21 @@ export const projects = [
     highlights: ['Ảnh xưởng thật', 'Video TikTok, YouTube', 'Bảng giá dịch vụ', 'Đặt lịch 30 giây', 'Bản đồ chỉ đường', 'Nút gọi, Zalo nổi'],
   },
   {
+    slug: 'nhatduc-ladi',
+    type: 'landing',
+    name: 'Gara Nhật Đức – bản Ladi',
+    client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
+    area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
+    hotline: '08 3695 3695',
+    deployed: '10/2026',
+    url: dir('nhatduc-ladi'),
+    cover: dir('nhatduc-ladi') + 'assets/img/storefront-2026.webp',
+    accent: '#d71e28',
+    summary:
+      'Landing kiểu LadiPage đỏ – vàng: hero cắt chéo, 5 thẻ dịch vụ, ưu đãi đặt lịch online, bảng giá 2 nhóm, ảnh xưởng trượt, đếm ngược ưu đãi tháng, popup tri ân và form đặt lịch.',
+    highlights: ['Popup ưu đãi', 'Đếm ngược ưu đãi', 'Bảng giá 2 nhóm', 'Ảnh xưởng trượt', 'Video YouTube, TikTok', 'Đặt lịch 30 giây'],
+  },
+  {
     slug: 'carcarservice',
     type: 'landing',
     name: 'Gara Ô Tô Đức Tùng – Cơ sở 2',
@@ -71,6 +56,21 @@ export const projects = [
     summary:
       'Landing page cho gara sửa chữa, bảo dưỡng, sơn gò và cứu hộ 24/7. Nhấn mạnh báo giá minh bạch, ưu đãi giảm 10% công thợ khi đặt lịch trước.',
     highlights: ['Ảnh xưởng thật', 'Bảng giá dịch vụ', '4 cam kết, 5 bước', 'Đặt lịch giảm 10%', 'Bản đồ chỉ đường', 'Nút gọi, Zalo nổi'],
+  },
+  {
+    slug: 'nhatduc-motion',
+    type: 'landing',
+    name: 'Gara Nhật Đức – bản Motion',
+    client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
+    area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
+    hotline: '08 3695 3695',
+    deployed: '10/2026',
+    url: dir('nhatduc-motion'),
+    cover: dir('nhatduc-motion') + 'videos/hero-1.jpg',
+    accent: '#d71e28',
+    summary:
+      'Bản landing cao cấp kiểu editorial, nền kem xen nền tối, màu theo logo: hero video 3 cảnh, băng ảnh xưởng thật xếp vòng cung, mục xưởng 3 khu vực, bảng giá 3 gói, đặt lịch 30 giây.',
+    highlights: ['Hero video 3 cảnh', 'Ảnh xưởng thật', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá 3 gói', 'Đặt lịch 30 giây'],
   },
 ]
 
