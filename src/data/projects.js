@@ -74,7 +74,7 @@ export const projects = [
   },
   {
     slug: 'autohc',
-    type: 'website',
+    type: 'landing',
     name: 'Gara Auto HC 579',
     client: 'Gara ô tô AUTO HC 579',
     area: '579 Phúc Diễn, Nam Từ Liêm, Hà Nội',
@@ -84,8 +84,8 @@ export const projects = [
     cover: dir('autohc') + 'assets/img/bn-son.webp',
     accent: '#024e98',
     summary:
-      'Website gara kiêm cửa hàng phụ tùng, xanh – cam theo logo: banner tự chạy, menu sản phẩm – dịch vụ nhiều cấp, khuyến mại tháng, 10 dịch vụ nổi bật, sản phẩm theo tab, tư vấn kỹ thuật, video, đặt lịch có bản đồ.',
-    highlights: ['Menu nhiều cấp', 'Tìm kiếm nhanh', 'Sản phẩm theo tab', 'Xem nhanh, đặt mua', 'Đặt lịch + bản đồ', 'Nút gọi, Zalo, Messenger'],
+      'Landing page gara theo giao diện autohc.vn, xanh – cam theo logo: banner tự chạy, mã QR Zalo và bản đồ, 10 dịch vụ nổi bật, khuyến mại tháng, bảng giá dịch vụ, video, phản hồi khách và form đặt lịch kèm bản đồ.',
+    highlights: ['Banner tự chạy', 'Menu dính khi cuộn', 'Bảng giá dịch vụ', 'Bấm là đặt lịch', 'Đặt lịch + bản đồ', 'Nút gọi, Zalo, Messenger'],
   },
 ]
 

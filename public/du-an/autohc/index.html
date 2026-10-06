@@ -53,13 +53,7 @@
   <!-- ĐẦU TRANG -->
   <header class="header" id="top">
     <div class="container header__in">
-      <button class="header__burger" type="button" aria-label="Mở menu" data-open-drawer><svg><use href="#i-menu"/></svg></button>
       <a class="logo" href="#top" aria-label="AUTO HC 579 - Trang chủ" data-logo></a>
-      <form class="search" role="search" data-search>
-        <input type="search" name="q" placeholder="Nhập từ khóa tìm kiếm" autocomplete="off" aria-label="Tìm kiếm">
-        <button type="submit" aria-label="Tìm"><svg><use href="#i-search"/></svg></button>
-        <div class="search__drop" hidden></div>
-      </form>
       <div class="header__info">
         <a class="hinfo" data-tel>
           <span class="hinfo__ic"><svg><use href="#i-phone-ring"/></svg></span>
@@ -69,30 +63,28 @@
           <span class="hinfo__ic"><svg><use href="#i-calendar"/></svg></span>
           <span><b>Thứ 2 - Chủ nhật</b><small>08h00 - 18h00</small></span>
         </div>
+        <a class="btn btn--orange header__cta" href="#dat-lich"><svg><use href="#i-calendar"/></svg> ĐẶT LỊCH NGAY</a>
       </div>
       <a class="header__call" data-tel aria-label="Gọi hotline"><svg><use href="#i-phone-ring"/></svg></a>
     </div>
-    <div class="msearch">
-      <form class="search search--m" role="search" data-search>
-        <input type="search" name="q" placeholder="Tìm kiếm sản phẩm" autocomplete="off" aria-label="Tìm kiếm">
-        <button type="submit" aria-label="Tìm"><svg><use href="#i-search"/></svg></button>
-        <div class="search__drop" hidden></div>
-      </form>
-    </div>
-
-    <!-- MENU -->
-    <nav class="nav" aria-label="Menu chính">
-      <div class="container nav__in">
-        <div class="vmenu">
-          <button class="vmenu__btn" type="button" aria-expanded="false"><svg class="ic"><use href="#i-menu"/></svg> SẢN PHẨM - DỊCH VỤ <svg class="ic ic--sm"><use href="#i-down"/></svg></button>
-          <ul class="vmenu__list" data-vmenu></ul>
-        </div>
-        <ul class="menu" data-menu>
-          <li><a href="#top" class="menu__home" aria-label="Trang chủ"><svg><use href="#i-home"/></svg></a></li>
-        </ul>
-      </div>
-    </nav>
   </header>
+
+  <!-- MENU (chỉ cuộn tới các mục) -->
+  <nav class="nav" aria-label="Menu">
+    <div class="container nav__in">
+      <ul class="menu">
+        <li><a href="#top" class="menu__home" aria-label="Lên đầu trang"><svg><use href="#i-home"/></svg></a></li>
+        <li><a href="#dich-vu">Dịch vụ</a></li>
+        <li><a href="#khuyen-mai">Khuyến mại</a></li>
+        <li><a href="#bang-gia">Bảng giá</a></li>
+        <li><a href="#kinh-nghiem">Kinh nghiệm</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#phan-hoi">Khách hàng</a></li>
+        <li><a href="#dat-lich">Liên hệ</a></li>
+      </ul>
+      <a class="nav__hot" data-tel><svg><use href="#i-phone"/></svg> <span data-bind="hotlineDots"></span></a>
+    </div>
+  </nav>
 
   <main>
     <!-- BANNER -->
@@ -206,12 +198,23 @@
       </div>
     </section>
 
+    <!-- DỊCH VỤ NỔI BẬT -->
+    <section class="svc" id="dich-vu">
+      <div class="svc__band"><div class="stitle stitle--light"><h2>DỊCH VỤ NỔI BẬT</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div></div>
+      <div class="container">
+        <div class="slider svc__slider" data-slider="svc" data-auto="4000">
+          <div class="slider__track" data-services></div>
+          <div class="slider__dots"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- KHUYẾN MẠI -->
     <section class="sec deal" id="khuyen-mai">
       <div class="container">
-        <div class="stitle"><h2>KHUYẾN MẠI <span data-bind="dealMonth"></span></h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="stitle"><h2>KHUYẾN MẠI <span data-bind="dealMonth"></span></h2><p>Đặt lịch trước qua hotline hoặc form bên dưới để giữ ưu đãi</p></div>
         <div class="deal__in">
-          <a class="promo" href="#dat-lich" data-quote="Thay giảm xóc, má phanh - giảm 10-20%">
+          <a class="promo" data-book="Má phanh, giảm xóc" data-note="Ưu đãi giảm 10-20% thay giảm xóc, má phanh">
             <div class="promo__text">
               <div class="promo__logo" data-logo></div>
               <p class="promo__k">GIẢM GIÁ</p>
@@ -227,51 +230,24 @@
       </div>
     </section>
 
-    <!-- DỊCH VỤ NỔI BẬT -->
-    <section class="svc" id="dich-vu">
-      <div class="svc__band"><div class="stitle stitle--light"><h2>DỊCH VỤ NỔI BẬT</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div></div>
+    <!-- BẢNG GIÁ DỊCH VỤ -->
+    <section class="sec strat" id="bang-gia">
       <div class="container">
-        <div class="slider svc__slider" data-slider="svc" data-auto="4000">
-          <div class="slider__track" data-services></div>
-          <div class="slider__dots"></div>
-        </div>
+        <div class="stitle"><h2>BẢNG GIÁ DỊCH VỤ</h2><p>Giá tham khảo – báo giá chính xác sau khi kiểm tra xe, miễn phí</p></div>
+        <div class="pgrid" data-products="price"></div>
       </div>
     </section>
 
-    <!-- SẢN PHẨM CHIẾN LƯỢC -->
-    <section class="sec strat" id="san-pham">
+    <!-- KINH NGHIỆM -->
+    <section class="sec blog" id="kinh-nghiem">
       <div class="container">
-        <div class="stitle"><h2>SẢN PHẨM CHIẾN LƯỢC</h2><p>Uy tín và sự chuyên nghiệp tạo nên thương hiệu</p></div>
-        <div class="tabs" role="tablist" data-tabs>
-          <button role="tab" aria-selected="true" data-tab="phu-kien">Phụ kiện xe</button>
-          <button role="tab" aria-selected="false" data-tab="phu-tung">Phụ tùng xe</button>
-          <button role="tab" aria-selected="false" data-tab="dich-vu">Báo giá dịch vụ</button>
-        </div>
-        <div class="slider pgrid" data-slider="strat">
-          <div class="slider__track" data-products="strat"></div>
-          <button class="slider__nav slider__nav--prev" type="button" aria-label="Trước"><svg><use href="#i-left"/></svg></button>
-          <button class="slider__nav slider__nav--next" type="button" aria-label="Sau"><svg><use href="#i-right"/></svg></button>
-        </div>
+        <div class="stitle"><h2>CHIA SẺ KINH NGHIỆM</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="slider blog__grid" data-slider="blog"><div class="slider__track" data-posts></div><div class="slider__dots"></div></div>
       </div>
     </section>
 
-    <!-- TƯ VẤN KỸ THUẬT -->
-    <section class="sec blog" id="tin-tuc">
-      <div class="container">
-        <div class="stitle"><h2>TƯ VẤN KỸ THUẬT</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
-        <div class="slider blog__grid" data-slider="blog1"><div class="slider__track" data-posts="tech"></div><div class="slider__dots"></div></div>
-      </div>
-    </section>
-
-    <!-- CHIA SẺ KINH NGHIỆM -->
-    <section class="sec blog">
-      <div class="container">
-        <div class="stitle"><h2>CHIA SẺ KINH NGHIỆM</h2><p>Auto HC 579 Chăm sóc sửa chữa xe đúng nghĩa</p></div>
-        <div class="slider blog__grid" data-slider="blog2"><div class="slider__track" data-posts="share"></div><div class="slider__dots"></div></div>
-      </div>
-    </section>
-
-    <!-- LIÊN HỆ ĐẶT LỊCH -->
+    
+<!-- LIÊN HỆ ĐẶT LỊCH -->
     <section class="sec book" id="dat-lich">
       <div class="container">
         <div class="stitle"><h2>LIÊN HỆ ĐẶT LỊCH</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
@@ -307,7 +283,7 @@
     </section>
 
     <!-- PHẢN HỒI KHÁCH HÀNG -->
-    <section class="sec fb">
+    <section class="sec fb" id="phan-hoi">
       <div class="container">
         <div class="stitle"><h2>PHẢN HỒI KHÁCH HÀNG</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
         <div class="slider fb__grid" data-slider="fb"><div class="slider__track" data-feedback></div><div class="slider__dots"></div></div>
@@ -328,9 +304,6 @@
         </ul>
         <div class="footer__social">
           <a data-fb target="_blank" rel="noopener" aria-label="Facebook"><svg><use href="#i-fb"/></svg></a>
-          <a href="#" aria-label="Twitter" data-soon><svg><use href="#i-tw"/></svg></a>
-          <a href="#" aria-label="Pinterest" data-soon><svg><use href="#i-pin-p"/></svg></a>
-          <a href="#" aria-label="Instagram" data-soon><svg><use href="#i-ig"/></svg></a>
         </div>
       </div>
       <div class="fcol">
@@ -338,8 +311,14 @@
         <ul data-footer="svc"></ul>
       </div>
       <div class="fcol">
-        <h4>AUTO HC 579 <svg class="ic ic--sm"><use href="#i-down"/></svg></h4>
-        <ul data-footer="policy"></ul>
+        <h4>XEM NHANH <svg class="ic ic--sm"><use href="#i-down"/></svg></h4>
+        <ul>
+          <li><a href="#dich-vu">Dịch vụ nổi bật</a></li>
+          <li><a href="#khuyen-mai">Khuyến mại tháng</a></li>
+          <li><a href="#bang-gia">Bảng giá dịch vụ</a></li>
+          <li><a href="#video">Video</a></li>
+          <li><a href="#dat-lich">Đặt lịch – chỉ đường</a></li>
+        </ul>
       </div>
       <div class="fcol fcol--fb">
         <h4>FANPAGE</h4>
@@ -366,17 +345,9 @@
     <a data-tel><svg><use href="#i-phone"/></svg>Hotline</a>
     <a data-zalo target="_blank" rel="noopener"><span class="mbar__zalo">Zalo</span>Zalo</a>
     <a data-msg target="_blank" rel="noopener"><svg><use href="#i-msg"/></svg>Messenger</a>
-    <a data-map target="_blank" rel="noopener"><svg><use href="#i-map"/></svg>Bản đồ</a>
+    <a href="#dat-lich" class="mbar__book"><svg><use href="#i-calendar"/></svg>Đặt lịch</a>
   </nav>
 
-  <!-- MENU ĐIỆN THOẠI -->
-  <div class="drawer" hidden>
-    <div class="drawer__bg" data-close-drawer></div>
-    <aside class="drawer__panel" aria-label="Menu">
-      <div class="drawer__head"><div class="drawer__logo" data-logo></div><button type="button" aria-label="Đóng menu" data-close-drawer><svg><use href="#i-close"/></svg></button></div>
-      <ul class="drawer__menu" data-drawer-menu></ul>
-    </aside>
-  </div>
 
   <!-- POPUP -->
   <div class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
