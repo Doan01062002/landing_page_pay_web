@@ -375,3 +375,86 @@ h2 { letter-spacing: 0; }
   .mbar__cta .mbar__lbl { color: var(--red); }
   .mbar::before { background: var(--steel); animation: none; }
 }
+
+/* =========================================================
+   Cỡ chữ nhỏ, tinh tế: tiêu đề nhỏ hơn và bớt đậm (900/800 → 700),
+   in hoa giãn chữ nhẹ; nút, menu, nhãn nhỏ gọn. Đặt cuối file để ghi đè.
+   ========================================================= */
+body { font-size: 15px; }
+.lead { font-size: .96rem; }
+.eyebrow { font-size: .68rem; letter-spacing: .2em; }
+
+/* Header */
+.topbar { font-size: .74rem; }
+.brand__text strong { font-size: .95rem; font-weight: 800; }
+.brand__text small { font-size: .66rem; }
+.nav a { font-size: .76rem; font-weight: 600; letter-spacing: .07em; }
+.hotline__text small { font-size: .62rem; }
+.hotline__text b { font-size: 1rem; font-weight: 700; }
+.hotline__text .hotline__sub { font-size: .68rem; }
+.btn--sos { font-size: .76rem; min-height: 40px; }
+
+/* Nút */
+.btn { font-size: .8rem; font-weight: 700; letter-spacing: .06em; }
+.btn--lg { font-size: .84rem; min-height: 50px; padding: .85em 1.5em; }
+.hero .btn--lg { min-height: 50px; padding: .85em 1.5em; }
+.btn--sm { font-size: .76rem; }
+.hero .btn--ghost span { font-size: .95rem; }
+
+/* Hero */
+.hero__kicker { font-size: .68rem; }
+.hero__title, .hero--split .hero__title { font-size: clamp(1.5rem, 2.3vw, 2.15rem); font-weight: 700; letter-spacing: .01em; line-height: 1.2; }
+.hero__sub { font-size: .95rem; }
+
+/* Tiêu đề mục */
+.section__head h2, .why-strip__head h2 { font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 700; letter-spacing: .03em; line-height: 1.35; }
+.booking h2 { font-size: clamp(1.3rem, 2.3vw, 1.75rem); font-weight: 700; letter-spacing: .02em; }
+
+/* Số liệu, băng hãng xe */
+.stat b { font-size: clamp(1.4rem, 2.4vw, 1.95rem); font-weight: 700; }
+.stat small { font-size: .78rem; font-weight: 500; }
+.marquee__label { font-size: .72rem; }
+.marquee__row span { font-size: .8rem; font-weight: 700; }
+
+/* Dịch vụ, xưởng, video */
+.vsvc h3 { font-size: .9rem; font-weight: 700; letter-spacing: .02em; }
+.vsvc p { font-size: .86rem; }
+.svc__link { font-size: .74rem; }
+.svc-more a, .svc-more__label { font-size: .82rem; }
+.yt__time { font-size: .66rem; }
+.g-item span { font-size: .7rem; }
+.video__text h3 { font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 700; }
+.video__points li { font-size: .88rem; }
+
+/* Đánh giá, cam kết */
+.reviews__score { font-size: 2.8rem; font-weight: 700; }
+.reviews__summary p, .review blockquote { font-size: .86rem; }
+.review__top b { font-size: .88rem; }
+.why-strip__list b { font-size: .84rem; font-weight: 700; }
+
+/* Bảng giá, ưu đãi */
+.tab { font-size: .74rem; }
+.plan__km { font-size: .7rem; font-weight: 700; }
+.plan h3 { font-size: .9rem; font-weight: 700; }
+.plan__price { font-size: 1.6rem; font-weight: 700; }
+.plan li { font-size: .86rem; }
+.price-note { font-size: .84rem; }
+.promo h3 { font-size: clamp(1rem, 1.8vw, 1.3rem); font-weight: 700; }
+.promo p { font-size: .88rem; }
+
+/* Đặt lịch, chân trang */
+.booking__perks li { font-size: .9rem; }
+.booking__call b { font-size: 1.25rem; font-weight: 700; }
+.form__head b { font-size: 1rem; }
+.field input, .field select { font-size: .92rem; height: 54px; }
+.footer h4 { font-size: .86rem; }
+.footer__brand p, .footer__contact li { font-size: .86rem; }
+.footer__bottom { font-size: .76rem; }
+
+@media (max-width: 640px) {
+  .hero--split .hero__title { font-size: 1.32rem; }
+  .section__head h2, .why-strip__head h2 { font-size: 1.12rem; }
+  .stat b { font-size: 1.35rem; }
+  .btn--lg, .hero .btn--lg { font-size: .8rem; }
+  .nav a { font-size: .95rem; letter-spacing: 0; }
+}
