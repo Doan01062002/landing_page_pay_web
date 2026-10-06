@@ -21,11 +21,11 @@ export const projects = [
     hotline: '08 3695 3695',
     deployed: '10/2026',
     url: dir('nhatduc-motion'),
-    cover: dir('nhatduc-motion') + 'img/storefront-2026.webp',
+    cover: dir('nhatduc-motion') + 'videos/hero-1.jpg',
     accent: '#d71e28',
     summary:
-      'Bản landing hiện đại, tông sáng theo màu logo: video dựng từ ảnh xưởng, cuộn mượt, dịch vụ trượt ngang, ảnh xưởng chạy lệch tầng, bảng giá và form đặt lịch có chuyển động.',
-    highlights: ['Video dựng từ ảnh', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá động', 'Đặt lịch 30 giây', 'Nút gọi, Zalo nổi'],
+      'Bản landing cao cấp kiểu editorial, nền kem xen nền tối, màu theo logo: hero video 3 cảnh, băng ảnh xưởng thật xếp vòng cung, mục xưởng 3 khu vực, bảng giá 3 gói, đặt lịch 30 giây.',
+    highlights: ['Hero video 3 cảnh', 'Ảnh xưởng thật', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá 3 gói', 'Đặt lịch 30 giây'],
   },
   {
     slug: 'nhatduc',
