@@ -308,6 +308,18 @@ h2 { letter-spacing: 0; }
 .scroll-progress span { background: var(--red); }
 
 /* ---------- Responsive ---------- */
+/* ---------- Nhịp các mục: đệm vừa phải, nền xen kẽ trắng / xám nhạt để không có 2 mục trắng liền nhau ----------
+   Thứ tự: dịch vụ (xám) → thực tế xưởng (trắng, kết thúc bằng băng đánh giá xám) → cam kết (trắng) → bảng giá (xám) → đặt lịch */
+.section { padding: clamp(52px, 6.5vw, 84px) 0; }
+.marquee { background: #fff; border-top: 1px solid var(--line); }
+.services { background: var(--bg-soft); }
+.vsvc { border-color: transparent; }
+.proof { padding-bottom: 0; }
+.reviews { margin-top: clamp(44px, 5vw, 64px); padding: clamp(44px, 5vw, 60px) 0; }
+.why--compact { background: #fff; padding: clamp(52px, 6.5vw, 84px) 0; }
+.pricing { background: var(--bg-soft); }
+.booking { background: linear-gradient(135deg, #fff 0%, #fff 40%, #fbecec 100%); }
+
 @media (max-width: 1200px) {
   .hero--split { --vis-w: 46%; --cut: 80px; background-image: linear-gradient(90deg, transparent 46%, var(--bg-soft) 46%); }
   .hero--split .hero__inner { grid-template-columns: 46fr 54fr; }
