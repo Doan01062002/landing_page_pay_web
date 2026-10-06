@@ -1,4 +1,4 @@
-// Chép landing page từ thư mục làm việc (D:/Chungauto/landing_page_<x>) vào public/du-an/<slug>/.
+// Chép landing page từ thư mục làm việc (D:/Chungauto/landing_page_<x>) vào public/du-an/<slug>/ (mẫu bán: public/mau/<slug>/).
 // - Landing HTML tĩnh: chép assets + index.html, chèn <base href> để ảnh, CSS đúng kể cả khi link thiếu dấu "/" cuối.
 // - Landing build bằng Vite (dist: true): chép nguyên dist/ (Vite đã đặt base /du-an/<slug>/, không cần <base>).
 //   Nhớ chạy `npm run build` trong thư mục đó trước.
@@ -13,15 +13,17 @@ const PROJECTS = {
   nhatduc: { folder: 'landing_page_nhatduc' },
   'nhatduc-motion': { folder: 'landing_page_nhatduc_motion', dist: true },
   'nhatduc-ladi': { folder: 'landing_page_nhatduc_ladi' },
+  // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
+  autoprime: { folder: 'web_autoprime', dist: true, dir: 'mau' },
 }
 
 const only = process.argv[2]
 if (only && !PROJECTS[only]) throw new Error(`Không có dự án "${only}". Có: ${Object.keys(PROJECTS).join(', ')}`)
 
-for (const [slug, { folder, dist }] of Object.entries(PROJECTS)) {
+for (const [slug, { folder, dist, dir = 'du-an' }] of Object.entries(PROJECTS)) {
   if (only && only !== slug) continue
   const src = dist ? join(SRC_ROOT, folder, 'dist') : join(SRC_ROOT, folder)
-  const dest = join('public', 'du-an', slug)
+  const dest = join('public', dir, slug)
   if (!existsSync(join(src, 'index.html'))) throw new Error(`Không thấy ${src}/index.html${dist ? ' (chạy npm run build trước)' : ''}`)
 
   if (dist) {

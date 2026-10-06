@@ -29,6 +29,8 @@ export const PAGE_META = {
 
 // Danh sách trang của một mẫu, kèm các section hiển thị trên từng trang.
 export function getPages(t) {
+  // Mẫu dựng riêng chạy dạng trang tĩnh (t.url): một trang dài, không qua bộ dựng TemplateSite
+  if (t.url) return [{ ...PAGE_META[''], slug: '', sections: [] }]
   const has = (s) => t.sections.includes(s)
   const pages = [{ slug: '', sections: t.sections }]
   pages.push({ slug: 'gioi-thieu', sections: ['about', ...(t.process ? ['process'] : []), ...(t.testimonials.length ? ['testimonials'] : [])] })

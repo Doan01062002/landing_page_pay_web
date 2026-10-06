@@ -73,6 +73,12 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Luôn chạy đủ video và hiệu ứng, kể cả máy bật "giảm chuyển động" (nhiều máy Windows tắt sẵn hiệu ứng động). Thêm `?motion=0` vào link để xem bản tĩnh.
 - Thiết kế và kế hoạch: `docs/superpowers/specs/2026-10-06-nhatduc-motion-design.md`, `docs/superpowers/plans/2026-10-06-nhatduc-motion.md`.
 
+## Mẫu AUTOPRIME (showroom + phụ tùng, chạy trang tĩnh)
+
+- Mã nguồn: `D:/Chungauto/web_autoprime` (Vite + React). Hero theo video MotionSites, phần dưới theo bố cục EGA Autocare. Xem README trong thư mục đó.
+- Cập nhật: `npm run build` ở đó, rồi `node scripts/sync-du-an.mjs autoprime` → `public/mau/autoprime/` (chạy tại `/mau/autoprime/`).
+- Kho mẫu hỗ trợ mẫu có trường `url`: thẻ, trang chi tiết, trang xem thử dùng trang tĩnh đó thay cho bộ dựng TemplateSite.
+
 ## Mẫu bán xe (đại lý, showroom xe cũ)
 
 - Dữ liệu: `src/data/autoTemplates.js` (Mitsubishi Xpander, showroom Xe Lướt, đại lý VinFast 3S nhiều dòng xe). Khối giao diện: `src/templates/autoSections.jsx`.

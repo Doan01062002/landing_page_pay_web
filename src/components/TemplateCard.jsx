@@ -11,7 +11,7 @@ export default function TemplateCard({ t }) {
   return (
     <article className="tcard">
       <div className="tcard__media">
-        <LivePreview slug={t.slug} tall />
+        <LivePreview slug={t.slug} url={t.url} tall />
         <div className="tcard__overlay">
           <Link to={`/demo/${t.slug}`} className="btn btn--signal">
             <Icon name="Eye" size={16} /> Xem thử

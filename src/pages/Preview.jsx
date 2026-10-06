@@ -32,13 +32,19 @@ export default function Preview() {
     if (window.parent !== window) window.parent.postMessage({ type: 'garaweb:route', page }, window.location.origin)
   }, [page])
 
+  // Mẫu dựng riêng chạy dạng trang tĩnh → chuyển sang trang đó
   useEffect(() => {
-    if (!t) return
+    if (t?.url) window.location.replace(t.url)
+  }, [t])
+
+  useEffect(() => {
+    if (!t || t.url) return
     const name = `${t.brand.name} ${t.brand.suffix}`.trim()
     document.title = page && PAGE_META[page] ? `${PAGE_META[page].label} – ${name}` : name
   }, [t, page])
 
   if (!t) return <p style={{ padding: 24 }}>Không tìm thấy mẫu “{slug}”.</p>
+  if (t.url) return null
 
   return <TemplateSite t={t} palette={t.palettes[pi] || t.palettes[0]} embed={embed} page={page} base={base} search={search} />
 }

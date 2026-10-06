@@ -631,6 +631,33 @@ export const templates = [
     news: [],
   },
   ...dealerTemplates,
+  // Mẫu dựng riêng (D:/Chungauto/web_autoprime), chạy trang tĩnh tại `url` thay vì bộ dựng TemplateSite.
+  {
+    slug: 'autoprime',
+    url: '/mau/autoprime/',
+    name: 'AUTOPRIME – Showroom & phụ tùng',
+    category: 'daily',
+    categoryLabel: 'Đại lý ô tô',
+    price: 12900000,
+    free: false,
+    isNew: true,
+    popularity: 99,
+    released: '2026-10-06',
+    tagline: 'Showroom ô tô kèm cửa hàng phụ tùng: hero video điện ảnh, flash sale, giỏ hàng, báo giá lăn bánh, lái thử.',
+    description:
+      'Phong cách showroom cao cấp đen – vàng: hero video toàn màn hình kiểu MotionSites, bên dưới bố cục cửa hàng như theme EGA – flash sale phụ tùng có đếm ngược, mã ưu đãi copy nhanh, xe mới đang bán, quy trình mua xe, ảnh trước/sau, gói phụ kiện, phụ tùng theo nhóm, video ngắn, cẩm nang. Có giỏ hàng, form báo giá lăn bánh và đặt lịch lái thử.',
+    features: ['shop', 'booking', 'beforeafter', 'inventory'],
+    highlights: [
+      'Hero video nền toàn màn hình, tiêu đề lớn, thẻ kính "Đặt lịch lái thử"',
+      'Flash sale phụ tùng: đếm ngược, % giảm, thanh "vừa mở bán"',
+      'Mã ưu đãi dạng vé, bấm COPY là sao chép',
+      'Giỏ hàng phụ tùng, đặt hàng, báo giá lăn bánh theo dòng xe',
+      'Quy trình mua xe 5 bước, ảnh trước/sau kéo so sánh, 4 gói phụ kiện',
+      'Video ngắn bấm phát, cẩm nang, chân trang đầy đủ chính sách',
+    ],
+    palettes: [{ name: 'Đen vàng', p: '#F5A623', a: '#12161C' }],
+    hero: { image: '/mau/autoprime/img/hero.jpg' },
+  },
 ]
 
 export const getTemplate = (slug) => templates.find((t) => t.slug === slug)

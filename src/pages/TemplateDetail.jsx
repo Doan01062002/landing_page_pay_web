@@ -46,14 +46,14 @@ export default function TemplateDetail() {
                   <span>{t.slug}.chungauto.vn</span>
                 </div>
                 <Link to={`/demo/${t.slug}?c=${palette}`} className="d-browser__link" aria-label={`Xem thử mẫu ${t.name}`}>
-                  <LivePreview slug={t.slug} palette={palette} tall title={`Mẫu ${t.name} trên máy tính`} />
+                  <LivePreview slug={t.slug} url={t.url} palette={palette} tall title={`Mẫu ${t.name} trên máy tính`} />
                   <span className="d-browser__hint">
                     <Icon name="MousePointerClick" size={18} /> Bấm để xem thử toàn màn hình
                   </span>
                 </Link>
               </div>
               <div className="d-phone">
-                <LivePreview slug={t.slug} palette={palette} device="mobile" title={`Mẫu ${t.name} trên điện thoại`} />
+                <LivePreview slug={t.slug} url={t.url} palette={palette} device="mobile" title={`Mẫu ${t.name} trên điện thoại`} />
               </div>
             </div>
 

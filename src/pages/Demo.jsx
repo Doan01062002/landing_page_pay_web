@@ -94,7 +94,8 @@ export default function Demo({ kind = 'template' }) {
   }, [kind, K])
 
   const src = useMemo(
-    () => (K.url ? (t ? K.url(t) : '') : `${K.preview}/${slug}${page ? '/' + page : ''}?c=${palette}`),
+    // Mẫu dựng riêng (t.url) chạy trang tĩnh của nó thay vì /preview
+    () => (K.url ? (t ? K.url(t) : '') : t?.url ? t.url : `${K.preview}/${slug}${page ? '/' + page : ''}?c=${palette}`),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [slug, K],
   )
