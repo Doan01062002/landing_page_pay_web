@@ -320,6 +320,15 @@ h2 { letter-spacing: 0; }
 .pricing { background: var(--bg-soft); }
 .booking { background: linear-gradient(135deg, #fff 0%, #fff 40%, #fbecec 100%); }
 
+/* ---------- Hero gọn: nhãn – tiêu đề 2 dòng – 1 dòng mô tả – 2 nút ---------- */
+.hero__kicker { gap: 12px; margin-bottom: 18px; }
+.hero--split .hero__title { font-size: clamp(1.9rem, 3vw, 2.75rem); line-height: 1.15; }
+.hero__title .hl { margin-top: 4px; }
+.hero__sub { margin-top: 18px; color: var(--ink-2); font-size: 1.05rem; line-height: 1.6; max-width: 34em; }
+.hero--split .hero__cta { margin-top: 30px; gap: 12px; }
+.hero .btn--lg { min-height: 54px; padding: .9em 1.6em; }
+.hero .btn--ghost span { font-family: "Be Vietnam Pro", sans-serif; letter-spacing: .02em; font-size: 1.05rem; }
+
 @media (max-width: 1200px) {
   .hero--split { --vis-w: 46%; --cut: 80px; background-image: linear-gradient(90deg, transparent 46%, var(--bg-soft) 46%); }
   .hero--split .hero__inner { grid-template-columns: 46fr 54fr; }

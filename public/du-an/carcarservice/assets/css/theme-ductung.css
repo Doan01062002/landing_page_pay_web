@@ -231,6 +231,20 @@ h1, h2, h3, h4 { letter-spacing: -.015em; }
 .proof { background: #fff; }
 .booking { background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-soft) 45%, #e6f0fb 100%); }
 
+/* ---------- Hero gọn: nhãn – tiêu đề 2 dòng – 1 dòng mô tả – 2 nút; ảnh chỉ còn 1 nhãn ---------- */
+.hero__title::before { display: none; }
+.hero__eyebrow { color: var(--amber); margin-bottom: 18px; }
+.hero__eyebrow::before { display: block; }
+.hero__eyebrow::after { display: none; }
+.hero__title { font-size: clamp(2.1rem, 3.8vw, 3.25rem); line-height: 1.12; }
+.hero__title .hl { margin-top: 4px; }
+.hero__sub { margin-top: 20px; color: rgba(255, 255, 255, .86); font-size: 1.08rem; line-height: 1.6; max-width: 32em; }
+.hero__cta { margin-top: 32px; gap: 12px; }
+.hero .btn--lg { min-height: 54px; padding: .9em 1.6em; }
+.hero .btn--ghost span { letter-spacing: .02em; font-size: 1.05rem; }
+.hero__media { padding-bottom: 0; }
+.hero__photo { box-shadow: 0 30px 60px rgba(4, 20, 60, .35); }
+
 @media (max-width: 960px) {
   .why-strip__list { grid-template-columns: repeat(2, 1fr); }
   .why-strip__list li { align-items: flex-start; text-align: left; }
