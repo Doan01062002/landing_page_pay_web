@@ -21,7 +21,7 @@ export const projects = [
     hotline: '08 3695 3695',
     deployed: '10/2026',
     url: dir('nhatduc'),
-    cover: dir('nhatduc') + 'assets/img/storefront.webp',
+    cover: dir('nhatduc') + 'assets/img/storefront-2026.webp',
     accent: '#d71e28',
     summary:
       'Landing page cho trung tâm sửa chữa, đồng sơn, điều hoà xe 2–16 chỗ. Ảnh thật của xưởng, video TikTok và YouTube của gara, bảng giá rõ ràng và form đặt lịch 30 giây.',
