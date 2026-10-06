@@ -4,6 +4,8 @@ import Icon from '../components/Icon.jsx'
 import TemplateCard from '../components/TemplateCard.jsx'
 import LpCard from '../components/LpCard.jsx'
 import { landings } from '../data/landings.js'
+import ProjectCard from '../components/ProjectCard.jsx'
+import { projects } from '../data/projects.js'
 import ConsultForm from '../components/ConsultForm.jsx'
 import { useConsult } from '../components/ConsultContext.jsx'
 import { CountUp, motionAllowed, useCycle } from '../components/Motion.jsx'
@@ -445,6 +447,30 @@ function GiftTemplates() {
   )
 }
 
+function Projects() {
+  return (
+    <section className="section" id="du-an">
+      <div className="wrap">
+        <div className="section-head section-head--row" data-reveal="up">
+          <div>
+            <p className="eyebrow">Dự án đã triển khai</p>
+            <h2>Gara thật đang dùng trang chúng tôi làm</h2>
+            <p>Không phải mẫu: đây là trang đã bàn giao cho từng cơ sở, với ảnh xưởng, hotline và địa chỉ thật.</p>
+          </div>
+          <Link to="/du-an" className="btn btn--primary">
+            Xem tất cả dự án <Icon name="ArrowRight" size={16} />
+          </Link>
+        </div>
+        <div className={'lpg lpg--row' + (projects.length === 2 ? ' lpg--two' : '')} data-stagger="up">
+          {projects.slice(0, 3).map((p) => (
+            <ProjectCard key={p.slug} p={p} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Process() {
   return (
     <section className="section section--mist" id="quy-trinh">
@@ -613,6 +639,7 @@ export default function Landing() {
       <WebVsLanding />
       <Gift />
       <GiftTemplates />
+      <Projects />
       <Process />
       <Pricing />
       <Testimonials />

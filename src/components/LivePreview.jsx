@@ -12,7 +12,7 @@ const DEVICES = {
   - tall: iframe cao gấp 3 khung nhìn, rê chuột vào thẻ cha thì trang mẫu cuộn xuống
   - auto: tự cuộn xuống rồi lên liên tục (dùng ở hero)
 */
-export default function LivePreview({ slug, palette = 0, device = 'desktop', className = '', title, tall = false, auto = false, path = '/preview' }) {
+export default function LivePreview({ slug, palette = 0, device = 'desktop', className = '', title, tall = false, auto = false, path = '/preview', url }) {
   const { w, h } = DEVICES[device]
   const frameH = tall || auto ? h * 3 : h
   const boxRef = useRef(null)
@@ -20,9 +20,9 @@ export default function LivePreview({ slug, palette = 0, device = 'desktop', cla
   const paletteRef = useRef(palette)
   const [scale, setScale] = useState(0.25)
 
-  // src chỉ phụ thuộc slug: đổi màu không làm iframe tải lại.
+  // src chỉ phụ thuộc slug: đổi màu không làm iframe tải lại. url: trang tĩnh (dự án đã triển khai)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const src = useMemo(() => `${path}/${slug}?embed=1&c=${palette}`, [slug, path])
+  const src = useMemo(() => url || `${path}/${slug}?embed=1&c=${palette}`, [slug, path, url])
 
   useEffect(() => {
     const el = boxRef.current

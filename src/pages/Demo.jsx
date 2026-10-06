@@ -5,6 +5,7 @@ import { useConsult } from '../components/ConsultContext.jsx'
 import { getTemplate, templates, categories } from '../data/templates.js'
 import Picker from '../components/Picker.jsx'
 import { getLanding, landings } from '../data/landings.js'
+import { getProject, projects, typeLabel } from '../data/projects.js'
 import { formatVND } from '../data/site.js'
 import NotFound from './NotFound.jsx'
 import { getPages } from '../templates/pages.jsx'
@@ -40,6 +41,18 @@ const KINDS = {
     cta: 'Chọn mẫu landing này',
     consultName: (t) => `Landing ${t.name}`,
   },
+  // Dự án đã triển khai: trang tĩnh /du-an/<slug>/, không đổi màu, có nút mở trang thật
+  project: {
+    list: projects,
+    get: getProject,
+    base: '/demo-du-an',
+    url: (t) => t.url,
+    back: () => '/du-an',
+    backLabel: 'Quay về dự án',
+    sub: (t) => `${typeLabel(t.type)} · Đã triển khai ${t.deployed}`,
+    cta: 'Làm trang như thế này',
+    consultName: (t) => `Làm giống dự án ${t.name}`,
+  },
 }
 
 export default function Demo({ kind = 'template' }) {
@@ -73,11 +86,15 @@ export default function Demo({ kind = 'template' }) {
           group: x.categoryLabel,
         }))
     }
+    if (kind === 'project') return K.list.map((x) => ({ value: x.slug, label: x.name, sub: x.area, meta: typeLabel(x.type), image: x.cover }))
     return K.list.map((x) => ({ value: x.slug, label: x.name, sub: x.campaignType, meta: 'Tặng kèm', image: x.hero.video.poster }))
   }, [kind, K])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const src = useMemo(() => `${K.preview}/${slug}${page ? '/' + page : ''}?c=${palette}`, [slug, K.preview])
+  const src = useMemo(
+    () => (K.url ? (t ? K.url(t) : '') : `${K.preview}/${slug}${page ? '/' + page : ''}?c=${palette}`),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [slug, K],
+  )
 
   useEffect(() => setLoaded(false), [slug])
 
@@ -117,7 +134,13 @@ export default function Demo({ kind = 'template' }) {
             <Picker
               variant="title"
               ariaLabel="Đổi mẫu"
-              title={kind === 'template' ? `Chọn mẫu phần mềm (${K.list.length})` : `Chọn mẫu landing page (${K.list.length})`}
+              title={
+                kind === 'template'
+                  ? `Chọn mẫu phần mềm (${K.list.length})`
+                  : kind === 'project'
+                    ? `Dự án đã triển khai (${K.list.length})`
+                    : `Chọn mẫu landing page (${K.list.length})`
+              }
               value={t.slug}
               options={templateOptions}
               onChange={(slug) => {
@@ -180,6 +203,11 @@ export default function Demo({ kind = 'template' }) {
               </button>
             ))}
           </div>
+          {K.url && (
+            <a href={K.url(t)} target="_blank" rel="noreferrer" className="btn btn--ghost" title="Mở trang thật trong tab mới">
+              <Icon name="ExternalLink" size={16} /> Mở trang thật
+            </a>
+          )}
           <button type="button" className="btn btn--signal" onClick={() => open(K.consultName(t))}>
             {K.cta}
           </button>

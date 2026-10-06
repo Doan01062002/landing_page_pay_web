@@ -27,6 +27,7 @@ export default function Footer() {
           <ul>
             <li><Link to="/#bang-gia">Bảng giá triển khai</Link></li>
             <li><Link to="/mau-landing-page">Mẫu landing page tặng kèm</Link></li>
+            <li><Link to="/du-an">Dự án đã triển khai</Link></li>
             <li><Link to="/#quy-trinh">Quy trình 7 ngày</Link></li>
             <li><Link to="/#hoi-dap">Câu hỏi thường gặp</Link></li>
           </ul>

@@ -23,6 +23,9 @@ Mở http://localhost:5180
 | `/mau-landing-page` | 3 mẫu landing page quảng cáo tặng kèm |
 | `/demo-landing/:slug` | Xem thử landing page theo thiết bị |
 | `/lp/:slug` | Landing page tặng kèm chạy độc lập |
+| `/du-an` | Dự án đã triển khai cho khách thật (website, landing page, phần mềm) |
+| `/demo-du-an/:slug` | Xem thử dự án theo thiết bị |
+| `/du-an/:slug/` | Trang thật của dự án (file tĩnh), gửi link này cho cơ sở |
 
 ## Cấu trúc
 
@@ -46,6 +49,13 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Video trong `public/videos` lấy từ Mixkit (giấy phép miễn phí), đã nén tối đa 12 giây, bỏ tiếng. Thay bằng video của gara: nén bằng
   `ffmpeg -i in.mp4 -t 12 -an -vf scale=-2:720 -c:v libx264 -crf 27 -movflags +faststart mk-<id>.mp4` và tạo ảnh đại diện `mk-<id>.jpg`.
 - Ảnh xưởng trong `public/images/xuong` được trích từ chính các video.
+
+## Dự án đã triển khai
+
+- Dữ liệu: `src/data/projects.js` (loại: `website`, `landing`, `software`; tên, địa chỉ, ngày bàn giao, ảnh bìa, điểm nổi bật).
+- Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên) và `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2).
+- Thêm dự án: chép cả thư mục (có `index.html`) vào `public/du-an/<slug>/`, thêm `<base href="/du-an/<slug>/">` ngay sau thẻ `<meta charset>` để ảnh, CSS đúng cả khi link thiếu dấu `/` cuối, rồi khai báo trong `projects.js`.
+- `vercel.json` và plugin `project-pages` trong `vite.config.js` trả `index.html` của dự án cho `/du-an/<slug>` (production và dev).
 
 ## Mẫu bán xe (đại lý, showroom xe cũ)
 

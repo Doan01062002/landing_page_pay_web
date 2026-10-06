@@ -1,6 +1,6 @@
 import {
   ArrowLeft, ArrowRight, ArrowUp, BadgeCheck, BatteryCharging, BatteryFull, Bike, CalendarCheck, CalendarDays, Car, Check,
-  ChevronDown, Circle, CircleDot, Clock, Cpu, Crosshair, Droplet, Droplets, Eye, FileText, Gauge, Gift, History,
+  ChevronDown, Circle, CircleDot, Clock, Copy, Cpu, Crosshair, Droplet, Droplets, ExternalLink, Eye, FileText, Gauge, Gift, History,
   ListOrdered, MapPin, Menu, MessageCircle, Minus, Monitor, MousePointerClick, Navigation, Package, PaintBucket, Pause, Phone, Play,
   PlugZap, RefreshCcw, ScanSearch, Search, Settings, ShieldCheck, ShoppingCart, Siren, SlidersHorizontal, Smartphone,
   Sparkles, Star, Store, Tablet, Target, Thermometer, Timer, Truck, Wrench, X, Zap,
@@ -9,7 +9,7 @@ import {
 // Chỉ nạp các icon thực sự dùng. Thêm icon mới: import ở trên và khai báo trong bảng này.
 const icons = {
   ArrowLeft, ArrowRight, ArrowUp, BadgeCheck, BatteryCharging, BatteryFull, Bike, CalendarCheck, CalendarDays, Car, Check,
-  ChevronDown, Circle, CircleDot, Clock, Cpu, Crosshair, Droplet, Droplets, Eye, FileText, Gauge, Gift, History,
+  ChevronDown, Circle, CircleDot, Clock, Copy, Cpu, Crosshair, Droplet, Droplets, ExternalLink, Eye, FileText, Gauge, Gift, History,
   ListOrdered, MapPin, Menu, MessageCircle, Minus, Monitor, MousePointerClick, Navigation, Package, PaintBucket, Pause, Phone, Play,
   PlugZap, RefreshCcw, ScanSearch, Search, Settings, ShieldCheck, ShoppingCart, Siren, SlidersHorizontal, Smartphone,
   Sparkles, Star, Store, Tablet, Target, Thermometer, Timer, Truck, Wrench, X, Zap,
