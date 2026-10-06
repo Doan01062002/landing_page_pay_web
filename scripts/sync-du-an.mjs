@@ -14,7 +14,6 @@ const PROJECTS = {
   'nhatduc-motion': { folder: 'landing_page_nhatduc_motion', dist: true },
   'nhatduc-ladi': { folder: 'landing_page_nhatduc_ladi' },
   // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
-  autoprime: { folder: 'web_autoprime', dist: true, dir: 'mau' },
 }
 
 const only = process.argv[2]
