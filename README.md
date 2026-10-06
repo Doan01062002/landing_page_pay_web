@@ -73,6 +73,10 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Luôn chạy đủ video và hiệu ứng, kể cả máy bật "giảm chuyển động" (nhiều máy Windows tắt sẵn hiệu ứng động). Thêm `?motion=0` vào link để xem bản tĩnh.
 - Thiết kế và kế hoạch: `docs/superpowers/specs/2026-10-06-nhatduc-motion-design.md`, `docs/superpowers/plans/2026-10-06-nhatduc-motion.md`.
 
+## Dự án Gara Auto HC 579 (dựng lại autohc.vn)
+
+- Mã nguồn: `D:/Chungauto/landing_page_autohc` (HTML/CSS/JS tĩnh, không backend). Cập nhật: `node scripts/sync-du-an.mjs autohc` → `/du-an/autohc/`.
+
 ## Mẫu dựng riêng (trang tĩnh)
 
 - Kho mẫu hỗ trợ mẫu có trường `url` (vd `/mau/<slug>/`): thẻ, trang chi tiết, trang xem thử dùng trang tĩnh đó thay cho bộ dựng TemplateSite. Khai báo dự án trong `scripts/sync-du-an.mjs` với `dir: 'mau'`.

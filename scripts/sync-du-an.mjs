@@ -13,6 +13,7 @@ const PROJECTS = {
   nhatduc: { folder: 'landing_page_nhatduc' },
   'nhatduc-motion': { folder: 'landing_page_nhatduc_motion', dist: true },
   'nhatduc-ladi': { folder: 'landing_page_nhatduc_ladi' },
+  autohc: { folder: 'landing_page_autohc' },
   // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
 }
 

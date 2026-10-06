@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <!-- Đặt trong /du-an/autohc/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/autohc/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auto HC 579 - Chăm sóc sửa chữa xe đúng nghĩa</title>
+  <meta name="description" content="AUTO HC 579 chuyên sửa chữa, bảo dưỡng, sơn gò, điều hoà, chăm sóc xe ô tô tại 579 Phúc Diễn, Nam Từ Liêm, Hà Nội. Hotline 0979.427.059.">
+  <meta name="theme-color" content="#024e98">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&family=Mulish:ital,wght@0,800;0,900;1,900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Bộ biểu tượng -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></g></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></symbol>
+    <symbol id="i-phone-ring" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14.5 3.5a7 7 0 0 1 6 6M14 7a3.5 3.5 0 0 1 3 3"/></g><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><path fill="currentColor" d="M7 2h2v2h6V2h2v2h3a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3zm12 7H5v10h14zM7 11h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm-8 4h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 6h16M4 12h16M4 18h10"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m15 6-6 6 6 6"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3 2 12h3v9h6v-6h2v6h6v-9h3z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.4 3.5 2.1-1 1.7L11 13V7h2z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2 3 6.6 7 .7-5.3 4.8 1.6 7L12 17.5 5.7 21l1.6-7L2 9.3l7-.7z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3 3 10.5l7 2.5 2.5 7z"/></symbol>
+    <symbol id="i-user-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.3 0-7 1.6-7 4v2h9.3A6 6 0 0 1 12 13.1 12 12 0 0 0 9 13zm8-1a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm.6 5.4V14h-1.4v4l2.8 1.7.7-1.2z"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8V6.2c0-.8.2-1.2 1.4-1.2H17V2h-2.6C11.3 2 10 3.5 10 6v2H8v3h2v11h4V11h2.7l.3-3z"/></symbol>
+    <symbol id="i-tw" viewBox="0 0 24 24"><path fill="currentColor" d="M22 5.9a8 8 0 0 1-2.3.6 4 4 0 0 0 1.8-2.2 8 8 0 0 1-2.6 1 4 4 0 0 0-6.9 3.7A11.4 11.4 0 0 1 3.7 4.8a4 4 0 0 0 1.2 5.4 4 4 0 0 1-1.8-.5 4 4 0 0 0 3.2 4 4 4 0 0 1-1.8.1 4 4 0 0 0 3.8 2.8A8.1 8.1 0 0 1 2 18.2 11.4 11.4 0 0 0 8.2 20c7.4 0 11.5-6.2 11.5-11.5v-.5A8 8 0 0 0 22 5.9z"/></symbol>
+    <symbol id="i-pin-p" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.5 1.8-2.5.9 0 1.3.6 1.3 1.4 0 .9-.6 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.2-1.9 3.2-4.7 0-2.4-1.8-4.2-4.3-4.2-2.9 0-4.6 2.2-4.6 4.4 0 .9.3 1.8.8 2.3l.1.4-.3 1.2c0 .2-.2.3-.4.2-1.3-.6-2.1-2.5-2.1-4 0-3.3 2.4-6.3 6.9-6.3 3.6 0 6.4 2.6 6.4 6 0 3.6-2.3 6.5-5.4 6.5-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2.1-1.3 2.8A10 10 0 1 0 12 2z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></symbol>
+    <symbol id="i-msg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.2 7.1V22l3-1.6c1.2.3 2.5.5 3.8.5 5.6 0 10-4.1 10-9.4S17.6 2 12 2zm1 12.6-2.6-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7z"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 21s-6-5.6-6-10.5a6 6 0 0 1 12 0C18 15.4 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></g></symbol>
+    <symbol id="i-fast" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15" r="6"/><path d="M24 5v3M24 22v3M14 15h3M31 15h3M17 8l2 2M29 20l2 2M31 8l-2 2M17 22l2-2"/><path d="M6 34h7l7 3h9a2 2 0 0 1 0 4h-8M13 40l9 3 18-7a2.5 2.5 0 0 0-2-4.6L29 35"/><path d="M4 31v12"/></g></symbol>
+    <symbol id="i-24" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M40 24A16 16 0 1 1 30 9.2"/><path d="m31 4 1 6-6 1"/></g><path fill="currentColor" d="M10.4 15.2a4 4 0 0 1 3.5-.9l2.4 4.4-2 1.9a12 12 0 0 0 5.2 5.2l1.9-2 4.4 2.4a4 4 0 0 1-.9 3.5c-6.6.7-15.3-8-14.5-14.5z" transform="translate(2 4) scale(.9)"/><text x="27" y="31" font-family="Roboto,Arial" font-weight="700" font-size="11" fill="currentColor">24</text></symbol>
+    <symbol id="i-tools" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M30 6a8 8 0 0 0-7.5 10.6L8 31.1a3.5 3.5 0 0 0 5 5l14.4-14.5A8 8 0 0 0 38 14l-5 5-4-4 5-5z"/><path d="m27 29 9 9a3 3 0 0 0 4-4l-9-9M10 8l5 5M8 12l4-4 6 6-4 4z"/></g></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m6 15 6-6 6 6"/></symbol>
+  </svg>
+
+  <!-- THANH ĐỊA CHỈ -->
+  <div class="topbar">
+    <div class="container"><svg class="ic"><use href="#i-pin"/></svg> <span data-bind="address"></span></div>
+  </div>
+
+  <!-- ĐẦU TRANG -->
+  <header class="header" id="top">
+    <div class="container header__in">
+      <button class="header__burger" type="button" aria-label="Mở menu" data-open-drawer><svg><use href="#i-menu"/></svg></button>
+      <a class="logo" href="#top" aria-label="AUTO HC 579 - Trang chủ" data-logo></a>
+      <form class="search" role="search" data-search>
+        <input type="search" name="q" placeholder="Nhập từ khóa tìm kiếm" autocomplete="off" aria-label="Tìm kiếm">
+        <button type="submit" aria-label="Tìm"><svg><use href="#i-search"/></svg></button>
+        <div class="search__drop" hidden></div>
+      </form>
+      <div class="header__info">
+        <a class="hinfo" data-tel>
+          <span class="hinfo__ic"><svg><use href="#i-phone-ring"/></svg></span>
+          <span><b>Hỗ trợ 24/7</b><small data-bind="hotline"></small></span>
+        </a>
+        <div class="hinfo">
+          <span class="hinfo__ic"><svg><use href="#i-calendar"/></svg></span>
+          <span><b>Thứ 2 - Chủ nhật</b><small>08h00 - 18h00</small></span>
+        </div>
+      </div>
+      <a class="header__call" data-tel aria-label="Gọi hotline"><svg><use href="#i-phone-ring"/></svg></a>
+    </div>
+    <div class="msearch">
+      <form class="search search--m" role="search" data-search>
+        <input type="search" name="q" placeholder="Tìm kiếm sản phẩm" autocomplete="off" aria-label="Tìm kiếm">
+        <button type="submit" aria-label="Tìm"><svg><use href="#i-search"/></svg></button>
+        <div class="search__drop" hidden></div>
+      </form>
+    </div>
+
+    <!-- MENU -->
+    <nav class="nav" aria-label="Menu chính">
+      <div class="container nav__in">
+        <div class="vmenu">
+          <button class="vmenu__btn" type="button" aria-expanded="false"><svg class="ic"><use href="#i-menu"/></svg> SẢN PHẨM - DỊCH VỤ <svg class="ic ic--sm"><use href="#i-down"/></svg></button>
+          <ul class="vmenu__list" data-vmenu></ul>
+        </div>
+        <ul class="menu" data-menu>
+          <li><a href="#top" class="menu__home" aria-label="Trang chủ"><svg><use href="#i-home"/></svg></a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- BANNER -->
+    <section class="hero" aria-label="Chương trình nổi bật">
+      <div class="slider hero__slider" data-slider="hero" data-auto="5000">
+        <div class="slider__track">
+          <!-- 1. Sơn gò -->
+          <article class="bn bn--son">
+            <div class="bn__photo"><img src="assets/img/bn-son.webp" alt="Phòng sơn sấy ô tô"></div>
+            <div class="bn__panel">
+              <div class="bn__logo" data-logo></div>
+              <h2 class="bn__title">SƠN GÒ Ô TÔ</h2>
+              <div class="bn__circles">
+                <img src="assets/img/c-dent.webp" alt="Gò móp">
+                <img src="assets/img/c-polish.webp" alt="Đánh bóng">
+                <img src="assets/img/c-wheel.webp" alt="Sơn lazang">
+              </div>
+              <div class="bn__contact">
+                <span><i><svg><use href="#i-phone"/></svg></i><small>Hotline</small><b data-bind="hotlineDots"></b></span>
+                <span><i><svg><use href="#i-map"/></svg></i><small>Website</small><b>www.autohc.vn</b></span>
+              </div>
+            </div>
+          </article>
+          <!-- 2. Phim cách nhiệt -->
+          <article class="bn bn--phim">
+            <div class="bn__photo"><img src="assets/img/bn-phim.webp" alt="Lái xe ban đêm qua kính lái"></div>
+            <div class="bn__white">
+              <p class="bn__warranty">BẢO HÀNH<br>ĐIỆN TỬ<br><b>10</b> NĂM</p>
+              <h2 class="bn__film">PHIM CÁCH NHIỆT <em>CAO CẤP</em></h2>
+              <p class="bn__film2">CHÍNH HÃNG</p>
+            </div>
+            <div class="bn__right">
+              <p class="bn__brand">Crystal<span>Line</span></p>
+              <p class="bn__layers">200 <small>lớp</small></p>
+              <p class="bn__tag">Phim cách nhiệt cao cấp</p>
+              <ul class="bn__badges"><li><b>99%</b>cản UV</li><li><b>55%</b>giảm nhiệt</li><li><b>1000+</b>lớp phim</li><li class="gold"><b>10</b>năm BH</li></ul>
+            </div>
+          </article>
+          <!-- 3. Phụ tùng -->
+          <article class="bn bn--pt">
+            <div class="bn__photo"><img src="assets/img/bn-phu-tung.webp" alt="Động cơ ô tô"></div>
+            <h2 class="bn__serif">PHỤ TÙNG, PHỤ KIỆN Ô TÔ CHÍNH HÃNG - AUTOHC.VN</h2>
+            <div class="bn__logo bn__logo--big" data-logo></div>
+          </article>
+          <!-- 4. Sửa chữa bảo dưỡng -->
+          <article class="bn bn--bd">
+            <div class="bn__photo"><img src="assets/img/bn-bao-duong.webp" alt="Kỹ thuật viên bảo dưỡng ô tô"></div>
+            <div class="bn__panel bn__panel--left">
+              <div class="bn__logo" data-logo></div>
+              <h2 class="bn__title">SỬA CHỮA VÀ<br>BẢO DƯỠNG Ô TÔ</h2>
+              <div class="bn__contact">
+                <span><i><svg><use href="#i-phone"/></svg></i><small>Hotline</small><b data-bind="hotlineDots"></b></span>
+                <span><i><svg><use href="#i-map"/></svg></i><small>Website</small><b>www.autohc.vn</b></span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <button class="slider__nav slider__nav--prev" type="button" aria-label="Ảnh trước"><svg><use href="#i-left"/></svg></button>
+        <button class="slider__nav slider__nav--next" type="button" aria-label="Ảnh sau"><svg><use href="#i-right"/></svg></button>
+        <div class="slider__dots"></div>
+      </div>
+    </section>
+
+    <!-- GIỚI THIỆU -->
+    <section class="about">
+      <div class="container about__in">
+        <div class="about__cards">
+          <div class="qr">
+            <p class="qr__head">YÊU CẦU TƯ VẤN – BÁO GIÁ – ĐẶT LỊCH QUA ZALO</p>
+            <div class="qr__row">
+              <div class="qr__left">
+                <div class="qr__logo" data-logo></div>
+                <p>Hotline/Zalo<br><span data-bind="hotlineDots"></span><br><span data-bind="zaloDots"></span></p>
+              </div>
+              <div class="qr__right">
+                <p class="qr__note">Mở zalo, bấm quét QR để quét<br>Trực tiếp kết nối đến điện thoại</p>
+                <span class="qr__arrow"></span>
+                <a class="qr__code" data-zalo target="_blank" rel="noopener" aria-label="Mã QR Zalo"><img src="assets/img/qr-zalo.svg" alt="QR Zalo AUTO HC 579"><b>Zalo</b></a>
+              </div>
+            </div>
+          </div>
+          <div class="qr">
+            <p class="qr__head">QUÉT MÃ QRCODE VỊ TRÍ - ĐỊNH VỊ BẢN ĐỒ</p>
+            <p class="qr__addr">579 Phúc Diễn – Xuân Phương - Nam Từ Liêm – Hà Nội</p>
+            <div class="qr__row">
+              <div class="qr__left">
+                <div class="qr__logo" data-logo></div>
+                <p class="qr__gmap"><svg viewBox="0 0 40 48" width="44"><path d="M4 8a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v32a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" fill="#34a853"/><path d="M4 8a4 4 0 0 1 4-4h12L4 26z" fill="#4285f4"/><path d="M36 26 20 44h12a4 4 0 0 0 4-4z" fill="#fbbc04"/><path d="M28 2a9 9 0 0 0-9 9c0 6.7 9 15 9 15s9-8.3 9-15a9 9 0 0 0-9-9z" fill="#ea4335"/><circle cx="28" cy="11" r="3.4" fill="#a50e0e"/></svg> Google Maps</p>
+              </div>
+              <div class="qr__right">
+                <p class="qr__note qr__note--b">GARAGE AUTO HC 579<br>Hotline : <span data-bind="hotlineDots"></span></p>
+                <span class="qr__arrow"></span>
+                <a class="qr__code" data-map target="_blank" rel="noopener" aria-label="Mã QR bản đồ"><img src="assets/img/qr-map.svg" alt="QR vị trí AUTO HC 579"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about__text">
+          <h1 class="about__title">WELCOME TO <span>AUTO HC 579!</span></h1>
+          <p><b>AUTO HC 579</b> chuyên sửa chữa, bảo dưỡng các dòng xe Kia, Huyndai, Toyota, Honda, Mazda, Ford, Nissan, Mitsubisi... với các hạng mục công việc như: sửa chữa điều hòa, sửa chữa đại tu máy gầm, bảo dưỡng định kỳ, sơn gò ô tô, chăm sóc xe ô tô toàn diện.</p>
+          <p>Phương châm của chúng tôi là: <i>"Chăm sóc, sửa chữa xe đúng nghĩa"</i>. Chúng tôi lựa chọn <i>"chất lượng"</i>, <i>"uy tín"</i> để mang đến dịch vụ, sản phẩm tốt nhất, có giá trị thật và chi phí bạn bỏ ra một cách xứng đáng.</p>
+          <div class="slider feats" data-slider="feats" data-only-mobile>
+            <div class="slider__track">
+              <div class="feat"><span class="feat__ic"><svg><use href="#i-fast"/></svg></span><div><h3>Dịch vụ nhanh chóng</h3><p>Hỗ trợ khách hàng ngay khi khách hàng liên lạc với chúng tôi</p></div></div>
+              <div class="feat"><span class="feat__ic"><svg><use href="#i-24"/></svg></span><div><h3>Hỗ trợ 24/7</h3><p>Thời gian làm việc chính từ 7h - 21h hằng ngày</p></div></div>
+              <div class="feat"><span class="feat__ic"><svg><use href="#i-tools"/></svg></span><div><h3>Bảo hành chu đáo</h3><p>Tất cả các trường hợp phát sinh lỗi do chúng tôi, Quý khách sẽ được hỗ trợ miễn phí</p></div></div>
+            </div>
+            <div class="slider__dots"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KHUYẾN MẠI -->
+    <section class="sec deal" id="khuyen-mai">
+      <div class="container">
+        <div class="stitle"><h2>KHUYẾN MẠI <span data-bind="dealMonth"></span></h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="deal__in">
+          <a class="promo" href="#dat-lich" data-quote="Thay giảm xóc, má phanh - giảm 10-20%">
+            <div class="promo__text">
+              <div class="promo__logo" data-logo></div>
+              <p class="promo__k">GIẢM GIÁ</p>
+              <p class="promo__big">10-20%</p>
+              <p class="promo__d">THAY GIẢM XÓC, MÁ PHANH,<br>PHỤ TÙNG THAY THẾ...</p>
+              <p class="promo__c"><i><svg><use href="#i-phone"/></svg></i><span><small>Hotline</small><span data-bind="hotlineDots"></span></span></p>
+              <p class="promo__c"><i><svg><use href="#i-map"/></svg></i><span><small>Website</small>www.autohc.vn</span></p>
+            </div>
+            <div class="promo__img"><img src="assets/img/promo.webp" alt="Thay giảm xóc, má phanh"></div>
+          </a>
+          <div class="deal__grid" data-products="deal"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DỊCH VỤ NỔI BẬT -->
+    <section class="svc" id="dich-vu">
+      <div class="svc__band"><div class="stitle stitle--light"><h2>DỊCH VỤ NỔI BẬT</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div></div>
+      <div class="container">
+        <div class="slider svc__slider" data-slider="svc" data-auto="4000">
+          <div class="slider__track" data-services></div>
+          <div class="slider__dots"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SẢN PHẨM CHIẾN LƯỢC -->
+    <section class="sec strat" id="san-pham">
+      <div class="container">
+        <div class="stitle"><h2>SẢN PHẨM CHIẾN LƯỢC</h2><p>Uy tín và sự chuyên nghiệp tạo nên thương hiệu</p></div>
+        <div class="tabs" role="tablist" data-tabs>
+          <button role="tab" aria-selected="true" data-tab="phu-kien">Phụ kiện xe</button>
+          <button role="tab" aria-selected="false" data-tab="phu-tung">Phụ tùng xe</button>
+          <button role="tab" aria-selected="false" data-tab="dich-vu">Báo giá dịch vụ</button>
+        </div>
+        <div class="slider pgrid" data-slider="strat">
+          <div class="slider__track" data-products="strat"></div>
+          <button class="slider__nav slider__nav--prev" type="button" aria-label="Trước"><svg><use href="#i-left"/></svg></button>
+          <button class="slider__nav slider__nav--next" type="button" aria-label="Sau"><svg><use href="#i-right"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TƯ VẤN KỸ THUẬT -->
+    <section class="sec blog" id="tin-tuc">
+      <div class="container">
+        <div class="stitle"><h2>TƯ VẤN KỸ THUẬT</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="slider blog__grid" data-slider="blog1"><div class="slider__track" data-posts="tech"></div><div class="slider__dots"></div></div>
+      </div>
+    </section>
+
+    <!-- CHIA SẺ KINH NGHIỆM -->
+    <section class="sec blog">
+      <div class="container">
+        <div class="stitle"><h2>CHIA SẺ KINH NGHIỆM</h2><p>Auto HC 579 Chăm sóc sửa chữa xe đúng nghĩa</p></div>
+        <div class="slider blog__grid" data-slider="blog2"><div class="slider__track" data-posts="share"></div><div class="slider__dots"></div></div>
+      </div>
+    </section>
+
+    <!-- LIÊN HỆ ĐẶT LỊCH -->
+    <section class="sec book" id="dat-lich">
+      <div class="container">
+        <div class="stitle"><h2>LIÊN HỆ ĐẶT LỊCH</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="book__in">
+          <form class="bform" data-form="book" novalidate>
+            <div class="bform__row">
+              <label>Họ và tên<input name="name" required placeholder="Nguyễn Văn A" autocomplete="name"></label>
+              <label>Số điện thoại<input name="phone" type="tel" required placeholder="09xx xxx xxx" autocomplete="tel" inputmode="tel"></label>
+            </div>
+            <div class="bform__row">
+              <label>Dòng xe<input name="car" placeholder="VD: Toyota Vios 2020"></label>
+              <label>Ngày hẹn<input name="date" type="date"></label>
+            </div>
+            <label>Dịch vụ cần làm<select name="service" data-service-select></select></label>
+            <label>Ghi chú<textarea name="note" rows="3" placeholder="Tình trạng xe, yêu cầu thêm..."></textarea></label>
+            <p class="bform__err" role="alert" hidden></p>
+            <button class="btn btn--blue" type="submit">ĐẶT LỊCH NGAY</button>
+            <p class="bform__small">Hoặc gọi ngay <a data-tel><b data-bind="hotlineDots"></b></a> – kỹ thuật viên tư vấn miễn phí.</p>
+          </form>
+          <div class="book__map">
+            <iframe title="Bản đồ AUTO HC 579" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-map-embed></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="sec video" id="video">
+      <div class="container">
+        <div class="stitle"><h2>VIDEO</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="slider video__grid" data-slider="video"><div class="slider__track" data-videos></div><div class="slider__dots"></div></div>
+      </div>
+    </section>
+
+    <!-- PHẢN HỒI KHÁCH HÀNG -->
+    <section class="sec fb">
+      <div class="container">
+        <div class="stitle"><h2>PHẢN HỒI KHÁCH HÀNG</h2><p>AUTO HC 579 Chăm sóc, sửa chữa xe đúng nghĩa</p></div>
+        <div class="slider fb__grid" data-slider="fb"><div class="slider__track" data-feedback></div><div class="slider__dots"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CHÂN TRANG -->
+  <footer class="footer" id="lien-he">
+    <div class="container footer__in">
+      <div class="footer__brand">
+        <div class="footer__logo" data-logo></div>
+        <ul class="footer__contact">
+          <li><svg><use href="#i-phone"/></svg><span><a data-tel data-bind="hotlineDots"></a> - <a data-tel2 data-bind="hotline2"></a></span></li>
+          <li><svg><use href="#i-send"/></svg><span>Email: <a data-mail data-bind="email"></a></span></li>
+          <li><svg><use href="#i-user-clock"/></svg><span>Mở cửa: Từ 8h00 - 18h00 hàng tuần</span></li>
+          <li><svg><use href="#i-pin"/></svg><span>Địa chỉ: Số 579 Phúc Diễn, Xuân Phương, Nam Từ Liêm, Hà Nội</span></li>
+        </ul>
+        <div class="footer__social">
+          <a data-fb target="_blank" rel="noopener" aria-label="Facebook"><svg><use href="#i-fb"/></svg></a>
+          <a href="#" aria-label="Twitter" data-soon><svg><use href="#i-tw"/></svg></a>
+          <a href="#" aria-label="Pinterest" data-soon><svg><use href="#i-pin-p"/></svg></a>
+          <a href="#" aria-label="Instagram" data-soon><svg><use href="#i-ig"/></svg></a>
+        </div>
+      </div>
+      <div class="fcol">
+        <h4>DỊCH VỤ <svg class="ic ic--sm"><use href="#i-down"/></svg></h4>
+        <ul data-footer="svc"></ul>
+      </div>
+      <div class="fcol">
+        <h4>AUTO HC 579 <svg class="ic ic--sm"><use href="#i-down"/></svg></h4>
+        <ul data-footer="policy"></ul>
+      </div>
+      <div class="fcol fcol--fb">
+        <h4>FANPAGE</h4>
+        <a class="fanpage" data-fb target="_blank" rel="noopener">
+          <span class="fanpage__cover"><img src="assets/img/s-bao-duong.webp" alt=""></span>
+          <span class="fanpage__row"><span class="fanpage__ava" data-logo></span><span><b>Gara Ô tô HC 579</b><small>Dịch vụ sửa chữa ô tô</small></span></span>
+          <span class="fanpage__btn"><svg><use href="#i-fb"/></svg> Theo dõi Trang</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer__copy">© Bản quyền thuộc về AutoHC<small class="footer__credit">Ảnh, video minh hoạ: Mixkit, StockSnap (CC0) và Wikimedia Commons – Fernost (PD), Danielrayyan09 (CC BY 4.0), Sinafe, SnapMeUp (CC BY-SA 4.0), Ralf Schumacher, Dvortygirl (CC BY-SA 3.0), Scoo (CC BY-SA 2.5), Retired electrician (CC0).</small></div>
+  </footer>
+
+  <!-- NÚT NỔI -->
+  <div class="float">
+    <a class="float__b float__b--call" data-tel aria-label="Gọi hotline"><svg><use href="#i-phone"/></svg></a>
+    <a class="float__b float__b--zalo" data-zalo target="_blank" rel="noopener" aria-label="Chat Zalo"><span>Zalo</span></a>
+    <a class="float__b float__b--msg" data-msg target="_blank" rel="noopener" aria-label="Chat Messenger"><svg><use href="#i-msg"/></svg></a>
+  </div>
+  <button class="totop" type="button" aria-label="Lên đầu trang" hidden><svg><use href="#i-up"/></svg></button>
+
+  <!-- THANH DƯỚI (ĐIỆN THOẠI) -->
+  <nav class="mbar" aria-label="Liên hệ nhanh">
+    <a data-tel><svg><use href="#i-phone"/></svg>Hotline</a>
+    <a data-zalo target="_blank" rel="noopener"><span class="mbar__zalo">Zalo</span>Zalo</a>
+    <a data-msg target="_blank" rel="noopener"><svg><use href="#i-msg"/></svg>Messenger</a>
+    <a data-map target="_blank" rel="noopener"><svg><use href="#i-map"/></svg>Bản đồ</a>
+  </nav>
+
+  <!-- MENU ĐIỆN THOẠI -->
+  <div class="drawer" hidden>
+    <div class="drawer__bg" data-close-drawer></div>
+    <aside class="drawer__panel" aria-label="Menu">
+      <div class="drawer__head"><div class="drawer__logo" data-logo></div><button type="button" aria-label="Đóng menu" data-close-drawer><svg><use href="#i-close"/></svg></button></div>
+      <ul class="drawer__menu" data-drawer-menu></ul>
+    </aside>
+  </div>
+
+  <!-- POPUP -->
+  <div class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal__bg" data-close-modal></div>
+    <div class="modal__box">
+      <button class="modal__x" type="button" aria-label="Đóng" data-close-modal><svg><use href="#i-close"/></svg></button>
+      <div class="modal__body"></div>
+    </div>
+  </div>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

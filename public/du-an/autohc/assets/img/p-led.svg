@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9eef5"/></radialGradient>
+    <linearGradient id="al" x1="0" x2="1"><stop offset="0" stop-color="#5b6470"/><stop offset=".45" stop-color="#d9dee5"/><stop offset=".6" stop-color="#f4f6f8"/><stop offset="1" stop-color="#6c7580"/></linearGradient>
+    <linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#9a6b12"/><stop offset=".5" stop-color="#f2c45a"/><stop offset="1" stop-color="#a87414"/></linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset=".35" stop-color="#cfe6ff" stop-opacity=".55"/><stop offset="1" stop-color="#cfe6ff" stop-opacity="0"/></radialGradient>
+    <g id="bulb">
+      <ellipse cx="0" cy="-150" rx="70" ry="70" fill="url(#glow)"/>
+      <rect x="-16" y="-150" width="32" height="120" rx="6" fill="url(#al)"/>
+      <rect x="-12" y="-138" width="24" height="16" rx="2" fill="#fff9e0" stroke="#f2c45a" stroke-width="2"/>
+      <rect x="-12" y="-110" width="24" height="16" rx="2" fill="#fff9e0" stroke="#f2c45a" stroke-width="2"/>
+      <rect x="-12" y="-82" width="24" height="16" rx="2" fill="#fff9e0" stroke="#f2c45a" stroke-width="2"/>
+      <rect x="-44" y="-30" width="88" height="22" rx="4" fill="url(#gold)"/>
+      <rect x="-34" y="-8" width="68" height="18" fill="#2b2f35"/>
+      <g fill="url(#al)" stroke="#59616b" stroke-width="1.5">
+        <rect x="-52" y="10" width="104" height="14" rx="3"/>
+        <rect x="-52" y="30" width="104" height="14" rx="3"/>
+        <rect x="-52" y="50" width="104" height="14" rx="3"/>
+        <rect x="-52" y="70" width="104" height="14" rx="3"/>
+        <rect x="-52" y="90" width="104" height="14" rx="3"/>
+      </g>
+      <rect x="-30" y="104" width="60" height="44" rx="6" fill="#1f2328"/>
+      <circle cx="0" cy="126" r="11" fill="#3a4049"/>
+      <path d="M0 148 v40" stroke="#1f2328" stroke-width="8" fill="none"/>
+    </g>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <use href="#bulb" transform="translate(220 330) rotate(-12)"/>
+  <use href="#bulb" transform="translate(385 345) rotate(10)"/>
+  <rect x="150" y="510" width="300" height="10" rx="5" fill="#000" opacity=".06"/>
+</svg>

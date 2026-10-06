@@ -72,6 +72,21 @@ export const projects = [
       'Bản landing cao cấp kiểu editorial, nền kem xen nền tối, màu theo logo: hero video 3 cảnh, băng ảnh xưởng thật xếp vòng cung, mục xưởng 3 khu vực, bảng giá 3 gói, đặt lịch 30 giây.',
     highlights: ['Hero video 3 cảnh', 'Ảnh xưởng thật', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá 3 gói', 'Đặt lịch 30 giây'],
   },
+  {
+    slug: 'autohc',
+    type: 'website',
+    name: 'Gara Auto HC 579',
+    client: 'Gara ô tô AUTO HC 579',
+    area: '579 Phúc Diễn, Nam Từ Liêm, Hà Nội',
+    hotline: '0979 427 059',
+    deployed: '10/2026',
+    url: dir('autohc'),
+    cover: dir('autohc') + 'assets/img/bn-son.webp',
+    accent: '#024e98',
+    summary:
+      'Website gara kiêm cửa hàng phụ tùng, xanh – cam theo logo: banner tự chạy, menu sản phẩm – dịch vụ nhiều cấp, khuyến mại tháng, 10 dịch vụ nổi bật, sản phẩm theo tab, tư vấn kỹ thuật, video, đặt lịch có bản đồ.',
+    highlights: ['Menu nhiều cấp', 'Tìm kiếm nhanh', 'Sản phẩm theo tab', 'Xem nhanh, đặt mua', 'Đặt lịch + bản đồ', 'Nút gọi, Zalo, Messenger'],
+  },
 ]
 
 export const getProject = (slug) => projects.find((p) => p.slug === slug)
