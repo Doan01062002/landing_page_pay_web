@@ -59,6 +59,12 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Giao diện: Đức Tùng dùng `assets/css/theme-ductung.css` (xanh + vàng cam), Nhật Đức dùng `assets/css/theme-nhatduc.css` (đỏ + xám than), cả hai nạp sau `styles.css` chung khung. Ảnh xưởng đã chỉnh màu/độ nét; bản gốc lưu ở `D:/Chungauto/_anh-goc`.
 - `vercel.json` và plugin `project-pages` trong `vite.config.js` trả `index.html` của dự án cho `/du-an/<slug>` (production và dev).
 
+### Gara Nhật Đức – bản Ladi (`nhatduc-ladi`)
+
+- Mã nguồn: `D:/Chungauto/landing_page_nhatduc_ladi` (HTML/CSS/JS tĩnh, git riêng). Bố cục theo mẫu landing LadiPage (w.tuybutky.com/khoa-hoc-marketing-0098), màu đỏ logo + vàng cam.
+- Cấu hình form và thời gian hiện popup: `CONFIG` đầu `assets/js/main.js`. Đếm ngược chạy tới hết tháng (ưu đãi tháng).
+- Cập nhật: `node scripts/sync-du-an.mjs nhatduc-ladi`.
+
 ### Gara Nhật Đức – bản Motion (`nhatduc-motion`)
 
 - Mã nguồn: `D:/Chungauto/landing_page_nhatduc_motion` (Vite + React, git riêng). framer-motion (nút, tab, popup), GSAP ScrollTrigger (ghim, cuộn ngang, parallax), Lenis (cuộn mượt). Nội dung sửa ở `src/content.js`.

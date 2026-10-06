@@ -12,6 +12,7 @@ const PROJECTS = {
   carcarservice: { folder: 'landing_page_carcarservice' },
   nhatduc: { folder: 'landing_page_nhatduc' },
   'nhatduc-motion': { folder: 'landing_page_nhatduc_motion', dist: true },
+  'nhatduc-ladi': { folder: 'landing_page_nhatduc_ladi' },
 }
 
 const only = process.argv[2]

@@ -13,6 +13,21 @@ const dir = (slug) => `/du-an/${slug}/`
 
 export const projects = [
   {
+    slug: 'nhatduc-ladi',
+    type: 'landing',
+    name: 'Gara Nhật Đức – bản Ladi',
+    client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
+    area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
+    hotline: '08 3695 3695',
+    deployed: '10/2026',
+    url: dir('nhatduc-ladi'),
+    cover: dir('nhatduc-ladi') + 'assets/img/storefront-2026.webp',
+    accent: '#d71e28',
+    summary:
+      'Landing kiểu LadiPage đỏ – vàng: hero cắt chéo, 5 thẻ dịch vụ, ưu đãi đặt lịch online, bảng giá 2 nhóm, ảnh xưởng trượt, đếm ngược ưu đãi tháng, popup tri ân và form đặt lịch.',
+    highlights: ['Popup ưu đãi', 'Đếm ngược ưu đãi', 'Bảng giá 2 nhóm', 'Ảnh xưởng trượt', 'Video YouTube, TikTok', 'Đặt lịch 30 giây'],
+  },
+  {
     slug: 'nhatduc-motion',
     type: 'landing',
     name: 'Gara Nhật Đức – bản Motion',
