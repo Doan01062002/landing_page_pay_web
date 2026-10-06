@@ -747,3 +747,25 @@ p { margin: 0; }
 /* Thẻ dịch vụ chưa có video: ảnh tĩnh */
 .yt.yt--photo { cursor: default; }
 .yt--photo .yt__play, .yt--photo .yt__time { display: none; }
+
+/* =========================================================
+   Nút nổi: 2 hình tròn bên phải (Zalo xanh + gọi vàng), quầng sáng lan + chuông rung.
+   Dùng chung mọi kích thước màn hình, thay cho thanh thao tác dưới đáy trên điện thoại.
+   ========================================================= */
+.fab { right: 18px; bottom: 22px; gap: 14px; }
+.fab__btn { width: 56px; height: 56px; box-shadow: none; }
+.fab__ring { display: none; }
+.fab__btn--zalo { background: #0068ff; color: #fff; box-shadow: 0 0 0 6px rgba(0, 104, 255, .2); animation: fabHaloBlue 1.6s infinite; }
+.fab__btn--zalo .zalo-txt { font-size: .82rem; font-weight: 800; color: #fff; }
+.fab__btn--call { background: linear-gradient(120deg, #f3ab53, #ffd28a 55%, #fbbe72); color: #7a1016; box-shadow: 0 0 0 6px rgba(243, 171, 83, .35); animation: fabHaloGold 1.6s infinite; }
+.fab__btn--call .ic { width: 26px; height: 26px; animation: fabShake 1.6s infinite; }
+@keyframes fabHaloBlue { 50% { box-shadow: 0 0 0 12px rgba(0, 104, 255, 0); } }
+@keyframes fabHaloGold { 50% { box-shadow: 0 0 0 12px rgba(243, 171, 83, 0); } }
+@keyframes fabShake { 0%, 50%, 100% { rotate: 0deg; } 10%, 30% { rotate: -15deg; } 20%, 40% { rotate: 15deg; } }
+@media (max-width: 640px) {
+  body { padding-bottom: 0; }
+  .fab { display: flex; right: 12px; bottom: 16px; gap: 12px; }
+  .fab__btn { width: 48px; height: 48px; }
+  .fab__btn--call .ic { width: 22px; height: 22px; }
+  .mbar { display: none; }
+}

@@ -236,8 +236,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .foot__zalo { display: inline-block; margin-top: 14px; padding: 9px 18px; border-radius: 4px; background: #fff; color: #0068ff; font-weight: 700; font-size: 13px; }
 .foot__copy { margin-top: 36px; padding: 18px 16px; border-top: 1px solid rgba(255, 255, 255, .1); text-align: center; font-size: 12px; color: rgba(255, 255, 255, .55); }
 
-/* ===== Nút nổi ===== */
-.ring { position: fixed; left: 18px; bottom: 22px; z-index: 50; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--gold-grad); color: var(--wine); box-shadow: 0 0 0 6px rgba(243, 171, 83, .35); animation: ring 1.6s infinite; }
+/* ===== Nút nổi: 2 hình tròn bên phải ===== */
+.ring { position: fixed; right: 18px; bottom: 22px; z-index: 50; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--gold-grad); color: var(--wine); box-shadow: 0 0 0 6px rgba(243, 171, 83, .35); animation: ring 1.6s infinite; }
 .ring .ic { width: 26px; height: 26px; animation: shake 1.6s infinite; }
 .ring--zalo { bottom: 92px; background: #0068ff; color: #fff; font-weight: 800; font-size: 13px; box-shadow: 0 0 0 6px rgba(0, 104, 255, .2); }
 @keyframes ring { 50% { box-shadow: 0 0 0 12px rgba(243, 171, 83, 0); } }
@@ -322,7 +322,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .pop__left h3 br { display: none; }
   .pop__gift { width: 52px; height: 52px; }
   .pop__close { right: 6px; top: 6px; }
-  .ring { width: 48px; height: 48px; left: 12px; bottom: 16px; }
+  .ring { width: 48px; height: 48px; right: 12px; bottom: 16px; }
   .ring--zalo { bottom: 74px; }
   .vmodal__close { right: 0; }
 }
