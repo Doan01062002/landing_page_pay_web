@@ -10,39 +10,50 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  gap: 16px;
-  min-height: 64px;
-  padding: 8px 20px;
+  gap: 12px;
+  min-height: 58px;
+  padding: 6px 16px;
   background: #fff;
   border-bottom: 1px solid var(--line);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   z-index: 2;
 }
 .demo-bar__left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   min-width: 0;
 }
 .demo-bar__back {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 8px 12px 8px 8px;
-  border-radius: var(--r-sm);
+  height: 38px;
+  padding: 0 12px 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
   font-weight: 600;
-  font-size: 14.5px;
+  font-size: 13.5px;
   color: var(--ink-2);
   flex-shrink: 0;
+  transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 .demo-bar__back:hover {
   background: var(--mist);
+  border-color: rgba(11, 12, 15, 0.18);
   color: var(--brand-deep);
+  transform: translateX(-1px);
+}
+.demo-bar__back:active {
+  transform: scale(0.95);
 }
 .demo-bar__title {
   display: grid;
   min-width: 0;
-  padding-left: 16px;
+  padding-left: 14px;
   border-left: 1px solid var(--line);
   line-height: 1.2;
 }
@@ -75,7 +86,56 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 16px;
+  gap: 8px;
+}
+.demo-bar .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  height: 38px;
+  padding: 0 15px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.demo-bar .btn:active {
+  transform: scale(0.96);
+}
+.demo-bar .btn--ghost {
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.demo-bar .btn--ghost:hover {
+  background: var(--mist);
+  border-color: rgba(11, 12, 15, 0.2);
+  color: var(--brand-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+.demo-bar .btn--signal {
+  background: linear-gradient(135deg, #ef3340 0%, #d71e28 100%);
+  border: 1px solid rgba(215, 30, 40, 0.3);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(215, 30, 40, 0.26);
+}
+.demo-bar .btn--signal:hover {
+  background: linear-gradient(135deg, #ff453a 0%, #c4131c 100%);
+  box-shadow: 0 6px 16px rgba(215, 30, 40, 0.35);
+  transform: translateY(-1px);
+}
+.demo-bar__cta-short {
+  display: none;
+}
+.demo-bar__cta-full {
+  display: inline;
 }
 .demo-bar__swatches {
   display: flex;
@@ -125,22 +185,47 @@
 
 @media (max-width: 1100px) {
   .demo-bar__devices span,
-  .demo-bar__back span {
+  .demo-bar__back-label {
     display: none;
+  }
+  .demo-bar__back {
+    width: 38px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .demo-bar__cta-full {
+    display: none;
+  }
+  .demo-bar__cta-short {
+    display: inline;
   }
 }
 
 @media (max-width: 760px) {
   .demo-bar {
     grid-template-columns: minmax(0, 1fr) auto;
-    padding: 8px 12px;
+    padding: 8px 10px;
+    gap: 8px;
   }
   .demo-bar__devices,
-  .demo-bar__swatches {
+  .demo-bar__swatches,
+  .demo-bar__pages {
     display: none;
   }
+  .demo-bar__right {
+    gap: 6px;
+  }
+  .demo-bar__btn-label {
+    display: none;
+  }
+  .demo-bar__ext-btn {
+    width: 38px;
+    padding: 0 !important;
+  }
   .demo-bar__title {
-    padding-left: 10px;
+    padding-left: 8px;
   }
   .demo-bar__left {
     gap: 6px;
@@ -157,6 +242,31 @@
   }
 }
 
+@media (max-width: 440px) {
+  .demo-bar__back,
+  .demo-bar__ext-btn {
+    width: 35px;
+    height: 35px;
+    min-height: 35px;
+  }
+  .demo-bar .btn {
+    min-height: 35px;
+    height: 35px;
+    font-size: 13px;
+    padding: 0 11px;
+  }
+  .picker__btn-thumb {
+    width: 38px;
+    height: 28px;
+  }
+  .picker__btn-text b {
+    font-size: 15px;
+  }
+  .picker__btn-text small {
+    font-size: 11px;
+  }
+}
+
 /* Ô chọn trang của website mẫu */
 .demo-bar__pages {
   display: flex;
@@ -167,11 +277,6 @@
 .demo-bar__right .btn {
   flex-shrink: 0;
   white-space: nowrap;
-}
-@media (max-width: 760px) {
-  .demo-bar__pages {
-    display: none;
-  }
 }
 
 /* ---------- Ô chọn tự dựng (Picker) ---------- */
