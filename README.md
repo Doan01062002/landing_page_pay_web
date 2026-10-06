@@ -64,7 +64,7 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Mã nguồn: `D:/Chungauto/landing_page_nhatduc_motion` (Vite + React, git riêng). framer-motion (nút, tab, popup), GSAP ScrollTrigger (ghim, cuộn ngang, parallax), Lenis (cuộn mượt). Nội dung sửa ở `src/content.js`.
 - Cập nhật: `npm run build` trong thư mục đó, rồi ở đây chạy `node scripts/sync-du-an.mjs nhatduc-motion` (chép nguyên `dist/`, dự án khai báo `dist: true`).
 - Video: đang là video tạm dựng từ ảnh xưởng (`npm run videos`). Hướng dẫn tạo video AI bằng MotionSites và thay file: `VIDEO-PROMPTS.md` trong thư mục dự án.
-- Máy bật "giảm chuyển động" (Windows: tắt hiệu ứng động) sẽ thấy bản tĩnh; thêm `?motion=1` vào link để xem đủ hiệu ứng.
+- Luôn chạy đủ video và hiệu ứng, kể cả máy bật "giảm chuyển động" (nhiều máy Windows tắt sẵn hiệu ứng động). Thêm `?motion=0` vào link để xem bản tĩnh.
 - Thiết kế và kế hoạch: `docs/superpowers/specs/2026-10-06-nhatduc-motion-design.md`, `docs/superpowers/plans/2026-10-06-nhatduc-motion.md`.
 
 ## Mẫu bán xe (đại lý, showroom xe cũ)
