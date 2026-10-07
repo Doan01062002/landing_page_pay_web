@@ -15,6 +15,12 @@ const PROJECTS = {
   'nhatduc-ladi': { folder: 'landing_page_nhatduc_ladi' },
   minhphat: { folder: 'landing_page_minhphat' },
   vinfast: { folder: 'landing_page_vinfast' },
+  // Trang bán hàng mẫu (phụ kiện, độ xe)
+  dopro: { folder: 'landing_page_dopro' },
+  ankhang: { folder: 'landing_page_ankhang' },
+  lumen: { folder: 'landing_page_lumen' },
+  vanhviet: { folder: 'landing_page_vanhviet' },
+  bongstudio: { folder: 'landing_page_bongstudio' },
   // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
 }
 

@@ -81,7 +81,14 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 ## Bản mẫu: Landing page xe điện VinFast (`vinfast`)
 
 - Trang demo học tập một file, **không phải web chính thức của VinFast**. Mã nguồn: `D:/Chungauto/landing_page_vinfast/index.html` (không có thư mục `assets`; ảnh xe, ảnh 360° lấy trực tiếp từ máy chủ VinFast). Cập nhật: `node scripts/sync-du-an.mjs vinfast` → `/du-an/vinfast/`.
-- Dự án có `demo: true` trong `src/data/projects.js`: thẻ hiện nhãn tím "Bản mẫu" thay cho "Đã triển khai".
+- Hiện trong Kho mẫu như các mẫu dựng riêng khác (nhãn tím "Dựng riêng").
+
+## Trang bán hàng mẫu (`dopro`, `ankhang`, `lumen`, `vanhviet`, `bongstudio`)
+
+- 5 cửa hàng phụ kiện / độ xe với **thương hiệu hư cấu** (thông tin liên hệ minh hoạ, giỏ hàng lưu localStorage, đặt hàng và đặt lịch chỉ hiện thông báo, không gửi đi đâu). `type: 'shop'` trong `projects.js` → loại "Trang bán hàng" trong Kho mẫu.
+  - Độ Pro Garage (độ xe hiệu suất, ngành `phutung`), An Khang Auto (phụ kiện gia đình, `phutung`), Lumen (độ đèn, `phutung`), Vành Việt (mâm & lốp, `lop`), Bóng Studio (chăm sóc xe, `detailing`).
+- Mã nguồn: `D:/Chungauto/landing_page_<slug>` (HTML/CSS/JS tĩnh, GSAP + ScrollTrigger, font có đủ dấu tiếng Việt, ảnh Unsplash nhúng trực tiếp). Cập nhật: `node scripts/sync-du-an.mjs <slug>` → `/du-an/<slug>/`.
+- Thứ tự trong Kho mẫu = thứ tự mảng `projects` trong `src/data/projects.js`.
 
 ## Mẫu dựng riêng (trang tĩnh)
 

@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/bongstudio/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/bongstudio/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BÓNG STUDIO – Chăm sóc &amp; bảo vệ xe</title>
+<meta name="description" content="BÓNG STUDIO – dung dịch rửa xe pH trung tính, sáp đánh bóng, ceramic DIY, khăn microfiber và gói dán phim cách nhiệt, PPF, phủ ceramic đặt lịch online. Cửa hàng mẫu – thương hiệu minh hoạ.">
+<meta name="theme-color" content="#0f3d32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>(function(d){d.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)d.classList.add('gsap-ok');}catch(e){}setTimeout(function(){if(!window.gsap)d.classList.remove('gsap-ok');},3500);})(document.documentElement);</script>
+</head>
+<body>
+
+<a class="skip" href="#cua-hang">Bỏ qua tới cửa hàng</a>
+
+<!-- ===== PROMO BAR ===== -->
+<div class="promo" role="region" aria-label="Khuyến mãi">
+  <div class="container promo__in">
+    <span class="promo__tag">Flash sale</span>
+    <span class="promo__txt">Giảm đến <b>30%</b> dòng sáp &amp; ceramic · Tặng khăn microfiber cho đơn từ 1.000.000₫</span>
+    <span class="promo__cd" aria-live="off">Kết thúc sau <b data-countdown>--:--:--</b></span>
+    <a href="#cua-hang" class="promo__link">Mua ngay</a>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="hdr" id="hdr">
+  <div class="container hdr__in">
+    <button class="icon-btn hdr__burger" type="button" aria-label="Mở menu" aria-controls="mnav" aria-expanded="false" data-open-menu>
+      <span class="burger"><i></i><i></i><i></i></span>
+    </button>
+    <a href="#top" class="logo" aria-label="BÓNG STUDIO – về đầu trang">
+      <svg class="logo__mark" viewBox="0 0 40 48" aria-hidden="true"><defs><linearGradient id="lgDrop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c6b57"/><stop offset="1" stop-color="#0a2a22"/></linearGradient></defs><path d="M20 2C20 2 5 19.5 5 29.5a15 15 0 0 0 30 0C35 19.5 20 2 20 2Z" fill="url(#lgDrop)"/><path d="M12.5 29c0-5 3.4-10.4 6-13.6" fill="none" stroke="#faf7f2" stroke-width="2.6" stroke-linecap="round" opacity=".85"/><circle cx="26" cy="35" r="3.2" fill="#c8a45c"/></svg>
+      <span class="logo__word"><b>BÓNG</b><small>STUDIO</small></span>
+    </a>
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="#cua-hang">Cửa hàng</a>
+      <a href="#combo">Combo</a>
+      <a href="#dich-vu">Dịch vụ</a>
+      <a href="#bang-gia">Bảng giá</a>
+      <a href="#meo-hay">Mẹo hay</a>
+      <a href="#danh-gia">Đánh giá</a>
+    </nav>
+    <form class="search" role="search" data-search-form>
+      <span class="search__ic" data-i="search"></span>
+      <input type="search" name="q" placeholder="Tìm sáp, ceramic, khăn…" aria-label="Tìm sản phẩm" autocomplete="off" data-search>
+    </form>
+    <button class="icon-btn hdr__search-m" type="button" aria-label="Tìm sản phẩm" data-goto-search><span data-i="search"></span></button>
+    <button class="icon-btn cart-btn" type="button" aria-label="Mở giỏ hàng" data-open-cart>
+      <span data-i="bag"></span><b class="cart-count" data-cart-count>0</b>
+    </button>
+    <a href="#dat-lich" class="btn btn--gold btn--sm hdr__cta">Đặt lịch</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ===== HERO ===== -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__ripple" aria-hidden="true"></div>
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow" data-intro><span class="dot"></span>Studio chăm sóc &amp; bảo vệ xe · Cần Thơ</p>
+      <h1 id="hero-title" class="hero__title">
+        <span class="w" data-intro>Độ</span> <span class="w" data-intro>bóng</span> <em class="w" data-intro>như</em> <em class="w" data-intro>gương,</em><br>
+        <span class="w" data-intro>bảo</span> <span class="w" data-intro>vệ</span> <em class="w" data-intro>bền</em> <em class="w" data-intro>lâu.</em>
+      </h1>
+      <p class="hero__lead" data-intro>Dung dịch pH trung tính, sáp Carnauba, ceramic phủ DIY và khăn microfiber chuẩn studio – cùng gói dán phim cách nhiệt, PPF, phủ ceramic đặt lịch online chỉ trong 30 giây.</p>
+      <div class="hero__cta" data-intro>
+        <a href="#cua-hang" class="btn btn--green">Mua sản phẩm <span data-i="arrow"></span></a>
+        <a href="#bang-gia" class="btn btn--ghost">Xem gói dịch vụ</a>
+      </div>
+      <dl class="hero__stats" data-intro>
+        <div><dt><b data-count="12500" data-suffix="+">0</b></dt><dd>xe đã được chăm</dd></div>
+        <div><dt><b data-count="4.9" data-dec="1">0</b><span class="star">★</span></dt><dd>đánh giá trung bình</dd></div>
+        <div><dt><b data-count="5">0</b> năm</dt><dd>bảo hành ceramic</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero__visual" data-intro-visual>
+      <figure class="panel">
+        <div class="panel__img">
+          <img src="https://images.unsplash.com/photo-1600793575654-910699b5e4d4?auto=format&amp;fit=crop&amp;w=1100&amp;q=72" width="1100" height="1300" alt="Đuôi xe thể thao sơn đen bóng như gương dưới ánh đèn studio" fetchpriority="high">
+        </div>
+        <div class="panel__shade" aria-hidden="true"></div>
+        <div class="beads" aria-hidden="true" data-beads></div>
+        <figcaption class="chip chip--tl" data-float>
+          <span class="chip__ic" data-i="drop"></span>
+          <span><b>Hiệu ứng lá sen</b><small>Góc tiếp xúc nước 110°</small></span>
+        </figcaption>
+        <div class="hero-card" data-float>
+          <div class="hero-card__pk" data-pk="9"></div>
+          <div class="hero-card__txt">
+            <small>Bán chạy tuần này</small>
+            <b>Bộ ceramic phủ DIY 9H</b>
+            <span><b class="price">1.290.000₫</b> <s>1.590.000₫</s></span>
+          </div>
+          <button class="hero-card__add" type="button" data-add="9" aria-label="Thêm Bộ ceramic phủ DIY 9H vào giỏ"><span data-i="plus"></span></button>
+        </div>
+      </figure>
+      <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="sealPath" d="M100 100 m-78 0 a78 78 0 1 1 156 0 a78 78 0 1 1 -156 0"/></defs>
+        <circle cx="100" cy="100" r="98" fill="#0f3d32"/>
+        <text font-size="14" fill="#e9d9b3"><textPath href="#sealPath" textLength="486" lengthAdjust="spacing">PHỦ CERAMIC 9H · BẢO HÀNH 5 NĂM · ĐỘ BÓNG GƯƠNG ·</textPath></text>
+        <path d="M100 58C100 58 78 84 78 99a22 22 0 0 0 44 0C122 84 100 58 100 58Z" fill="#c8a45c"/>
+        <path d="M89 99c0-7 4.6-14.6 8.4-19" fill="none" stroke="#0f3d32" stroke-width="3.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE + TRUST ===== -->
+<section class="band" id="cam-ket" aria-label="Cam kết của BÓNG STUDIO">
+  <div class="marquee" data-marquee aria-hidden="true">
+    <div class="marquee__track">
+      <span>Rửa xe pH trung tính</span><i>✦</i><span>Sáp Carnauba thượng hạng</span><i>✦</i><span>Ceramic 9H</span><i>✦</i><span>PPF tự phục hồi vết xước</span><i>✦</i><span>Phim cách nhiệt cản 99% UV</span><i>✦</i><span>Khăn microfiber 380 GSM</span><i>✦</i>
+      <span>Rửa xe pH trung tính</span><i>✦</i><span>Sáp Carnauba thượng hạng</span><i>✦</i><span>Ceramic 9H</span><i>✦</i><span>PPF tự phục hồi vết xước</span><i>✦</i><span>Phim cách nhiệt cản 99% UV</span><i>✦</i><span>Khăn microfiber 380 GSM</span><i>✦</i>
+    </div>
+  </div>
+  <div class="container trust">
+    <div class="trust__item" data-reveal><span class="trust__ic" data-i="shield"></span><div><b>Bảo hành đến 5 năm</b><small>Ceramic &amp; PPF có phiếu bảo hành điện tử</small></div></div>
+    <div class="trust__item" data-reveal><span class="trust__ic" data-i="van"></span><div><b>Thi công tận nơi</b><small>Đội kỹ thuật đến tận nhà nội ô Cần Thơ</small></div></div>
+    <div class="trust__item" data-reveal><span class="trust__ic" data-i="swap"></span><div><b>Đổi trả 7 ngày</b><small>Sản phẩm lỗi đổi mới, không cần lý do</small></div></div>
+    <div class="trust__item" data-reveal><span class="trust__ic" data-i="bolt"></span><div><b>Giao nhanh 2 giờ</b><small>Miễn phí giao cho đơn từ 500.000₫</small></div></div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="sec cats" id="danh-muc" aria-labelledby="cats-title">
+  <div class="container">
+    <div class="sec__head">
+      <div>
+        <p class="kicker" data-reveal>Danh mục</p>
+        <h2 class="h2" id="cats-title" data-reveal>Mọi thứ cho một lớp sơn <em>khoẻ &amp; bóng</em></h2>
+      </div>
+      <p class="sec__sub" data-reveal>Chọn nhóm sản phẩm – cửa hàng bên dưới sẽ lọc ngay cho bạn.</p>
+    </div>
+    <div class="cats__grid" data-cats></div>
+  </div>
+</section>
+
+<!-- ===== GLOSS STORY (pinned) ===== -->
+<section class="story" id="guong-do-bong" aria-labelledby="story-title">
+  <div class="story__pin" data-story>
+    <div class="container story__grid">
+      <div class="story__copy">
+        <p class="kicker kicker--gold">Gương độ bóng</p>
+        <h2 class="h2 h2--light" id="story-title">Ba bước để mặt sơn <em>soi được bầu trời</em></h2>
+        <ol class="steps" data-steps>
+          <li class="step is-active">
+            <span class="step__n">01</span>
+            <div><h3>Rửa &amp; tẩy bụi sắt</h3><p>Bọt tuyết pH trung tính nhấc bụi bẩn, dung dịch đổi màu hoà tan bụi sắt bám sâu – không làm mòn lớp clear coat.</p></div>
+          </li>
+          <li class="step">
+            <span class="step__n">02</span>
+            <div><h3>Đánh bóng xoá xước</h3><p>Kem đánh bóng 1 bước cùng máy mini xoá vết xoáy, trả lại độ trong và chiều sâu cho màu sơn.</p></div>
+          </li>
+          <li class="step">
+            <span class="step__n">03</span>
+            <div><h3>Phủ ceramic 9H</h3><p>Lớp gốm siêu mỏng khoá độ bóng, nước lăn thành giọt, chống tia UV và phân chim đến 5 năm.</p></div>
+          </li>
+        </ol>
+        <div class="story__progress" aria-hidden="true"><i data-story-bar></i></div>
+      </div>
+      <div class="story__visual">
+        <div class="gloss" data-gloss>
+          <div class="gloss__layer gloss__l3"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&amp;fit=crop&amp;w=1000&amp;h=1100&amp;q=70" width="1000" height="1100" alt="Đầu xe sơn đen sau khi phủ ceramic, bóng sâu" loading="lazy" decoding="async"><span class="gloss__reflect"></span></div>
+          <div class="gloss__layer gloss__l2"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&amp;fit=crop&amp;w=1000&amp;h=1100&amp;q=70" width="1000" height="1100" alt="" loading="lazy" decoding="async"><span class="gloss__swirl gloss__swirl--soft"></span></div>
+          <div class="gloss__layer gloss__l1"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&amp;fit=crop&amp;w=1000&amp;h=1100&amp;q=70" width="1000" height="1100" alt="" loading="lazy" decoding="async"><span class="gloss__swirl"></span></div>
+          <div class="gloss__layer gloss__l0"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&amp;fit=crop&amp;w=1000&amp;h=1100&amp;q=70" width="1000" height="1100" alt="" loading="lazy" decoding="async"><span class="gloss__dust"></span></div>
+          <div class="gloss__suds" aria-hidden="true" data-suds></div>
+          <div class="gloss__beads" aria-hidden="true" data-gbeads></div>
+          <span class="gloss__sheen" aria-hidden="true" data-sheen></span>
+          <div class="gloss__hud">
+            <div class="meter"><small>Độ bóng</small><b><span data-gu>18</span> <i>GU</i></b></div>
+            <div class="meter meter--r"><small>Trạng thái</small><b data-state>Xỉn màu</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHOP ===== -->
+<section class="sec shop" id="cua-hang" aria-labelledby="shop-title">
+  <div class="container">
+    <div class="sec__head">
+      <div>
+        <p class="kicker" data-reveal>Cửa hàng</p>
+        <h2 class="h2" id="shop-title" data-reveal>Sản phẩm chăm xe <em>chuẩn studio</em></h2>
+      </div>
+      <div class="flash" data-reveal>
+        <span class="flash__ic" data-i="bolt"></span>
+        <div><b>Flash sale hôm nay</b><small>Kết thúc sau</small></div>
+        <div class="flash__cd" data-countdown-boxes><span>00</span><i>:</i><span>00</span><i>:</i><span>00</span></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="chips" role="tablist" aria-label="Lọc theo danh mục" data-cat-chips></div>
+      <div class="toolbar__row">
+        <label class="field-search">
+          <span data-i="search"></span>
+          <input type="search" placeholder="Tìm trong cửa hàng…" aria-label="Tìm trong cửa hàng" data-shop-search>
+        </label>
+        <div class="filters">
+          <label class="sel">
+            <span class="sr">Khoảng giá</span>
+            <select data-price>
+              <option value="all">Mọi mức giá</option>
+              <option value="0-300000">Dưới 300.000₫</option>
+              <option value="300000-1000000">300.000₫ – 1 triệu</option>
+              <option value="1000000-99999999">Trên 1 triệu</option>
+            </select>
+          </label>
+          <label class="sel">
+            <span class="sr">Sắp xếp</span>
+            <select data-sort>
+              <option value="hot">Nổi bật</option>
+              <option value="asc">Giá tăng dần</option>
+              <option value="desc">Giá giảm dần</option>
+              <option value="sale">Giảm nhiều nhất</option>
+              <option value="rate">Đánh giá cao</option>
+            </select>
+          </label>
+          <label class="toggle"><input type="checkbox" data-onsale><span></span>Đang giảm giá</label>
+        </div>
+      </div>
+      <p class="result" aria-live="polite" data-result></p>
+    </div>
+
+    <div class="grid" data-grid></div>
+    <div class="empty" data-empty hidden>
+      <p><b>Chưa tìm thấy sản phẩm phù hợp.</b><br>Thử từ khoá khác hoặc bỏ bớt bộ lọc nhé.</p>
+      <button class="btn btn--ghost btn--sm" type="button" data-reset>Xoá bộ lọc</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMBO BUILDER ===== -->
+<section class="sec combo" id="combo" aria-labelledby="combo-title">
+  <div class="container">
+    <div class="sec__head">
+      <div>
+        <p class="kicker" data-reveal>Tự chọn combo chăm sóc</p>
+        <h2 class="h2" id="combo-title" data-reveal>Ghép bộ chăm xe <em>của riêng bạn</em></h2>
+      </div>
+      <p class="sec__sub" data-reveal>Chọn từ 3 món giảm ngay 10%. Đơn từ 1.000.000₫ tặng khăn microfiber lau khô 60×90.</p>
+    </div>
+    <div class="combo__grid">
+      <div class="combo__list" data-combo-list></div>
+      <aside class="summary" aria-label="Tóm tắt combo">
+        <h3>Combo của bạn</h3>
+        <ul class="summary__items" data-combo-items></ul>
+        <dl class="summary__rows">
+          <div><dt>Tạm tính</dt><dd data-combo-sub>0₫</dd></div>
+          <div class="is-disc"><dt>Giảm combo <small data-combo-disc-note>(từ 3 món)</small></dt><dd data-combo-disc>−0₫</dd></div>
+          <div class="summary__total"><dt>Tổng cộng</dt><dd data-combo-total>0₫</dd></div>
+        </dl>
+        <div class="gift" data-gift>
+          <div class="gift__txt"><span data-i="gift"></span><p data-gift-msg>Mua thêm 1.000.000₫ để nhận khăn microfiber</p></div>
+          <div class="gift__bar"><i data-gift-bar></i></div>
+        </div>
+        <button class="btn btn--gold btn--block" type="button" data-combo-add>Thêm combo vào giỏ</button>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="sec services" id="dich-vu" aria-labelledby="svc-title">
+  <div class="container">
+    <div class="sec__head">
+      <div>
+        <p class="kicker" data-reveal>Dịch vụ tại studio</p>
+        <h2 class="h2" id="svc-title" data-reveal>Bảo vệ xe bởi <em>kỹ thuật viên tay nghề cao</em></h2>
+      </div>
+      <p class="sec__sub" data-reveal>Phòng thi công kín bụi, đèn kiểm tra chuẩn studio. Đặt lịch online, đến đúng giờ, không chờ đợi.</p>
+    </div>
+    <div class="svc__grid">
+      <article class="svc" data-reveal>
+        <div class="svc__img"><img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&amp;fit=crop&amp;w=800&amp;h=600&amp;q=70" width="800" height="600" alt="Người lái nhìn ra đường lúc hoàng hôn qua kính lái" loading="lazy" decoding="async"></div>
+        <div class="svc__body">
+          <span class="svc__tag">Bảo hành 7 năm</span>
+          <h3>Dán phim cách nhiệt</h3>
+          <p>Cản 99% tia UV, giảm đến 60% nhiệt hấp thụ, giữ tầm nhìn ban đêm rõ ràng.</p>
+          <div class="svc__foot"><span>Từ <b>3.500.000₫</b></span><a href="#dat-lich" class="link-arrow" data-book="phim">Đặt lịch <span data-i="arrow"></span></a></div>
+        </div>
+      </article>
+      <article class="svc" data-reveal>
+        <div class="svc__img"><img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&amp;fit=crop&amp;w=800&amp;h=600&amp;q=70" width="800" height="600" alt="Xe thể thao màu xám đậu bên bến cảng" loading="lazy" decoding="async"></div>
+        <div class="svc__body">
+          <span class="svc__tag">Tự phục hồi xước</span>
+          <h3>Dán PPF bảo vệ sơn</h3>
+          <p>Màng TPU trong suốt dày 7.5 mil chống đá văng, vết xước dăm tự liền khi gặp nhiệt.</p>
+          <div class="svc__foot"><span>Từ <b>12.900.000₫</b></span><a href="#dat-lich" class="link-arrow" data-book="ppf">Đặt lịch <span data-i="arrow"></span></a></div>
+        </div>
+      </article>
+      <article class="svc" data-reveal>
+        <div class="svc__img"><img src="https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&amp;fit=crop&amp;w=800&amp;h=600&amp;q=70" width="800" height="600" alt="Rửa xe thể thao màu đen bằng vòi áp lực" loading="lazy" decoding="async"></div>
+        <div class="svc__body">
+          <span class="svc__tag">Độ cứng 9H</span>
+          <h3>Phủ ceramic chuyên nghiệp</h3>
+          <p>Hiệu chỉnh sơn nhiều bước, phủ 1–3 lớp gốm, giữ độ bóng gương và chống bám bẩn.</p>
+          <div class="svc__foot"><span>Từ <b>2.500.000₫</b></span><a href="#dat-lich" class="link-arrow" data-book="ceramic">Đặt lịch <span data-i="arrow"></span></a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PACKAGES ===== -->
+<section class="sec pkgs" id="bang-gia" aria-labelledby="pkg-title">
+  <div class="container">
+    <div class="pkgs__head">
+      <p class="kicker kicker--gold" data-reveal>Bảng giá gói dịch vụ</p>
+      <h2 class="h2 h2--light" id="pkg-title" data-reveal>So sánh gói <em>theo cỡ xe của bạn</em></h2>
+      <div class="sizer" role="radiogroup" aria-label="Chọn cỡ xe" data-sizer data-reveal>
+        <span class="sizer__thumb" aria-hidden="true"></span>
+        <button type="button" role="radio" aria-checked="true" data-size="sedan"><span data-i="sedan"></span>Sedan</button>
+        <button type="button" role="radio" aria-checked="false" data-size="suv"><span data-i="suv"></span>SUV</button>
+        <button type="button" role="radio" aria-checked="false" data-size="pickup"><span data-i="pickup"></span>Bán tải</button>
+      </div>
+      <div class="carstrip" data-reveal>
+        <div class="carstrip__imgs">
+          <img class="is-on" data-car="sedan" src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&amp;fit=crop&amp;w=700&amp;h=300&amp;q=70" width="700" height="300" alt="Xe sedan màu đen đang chạy" loading="lazy" decoding="async">
+          <img data-car="suv" src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&amp;fit=crop&amp;w=700&amp;h=300&amp;q=70" width="700" height="300" alt="Xe SUV màu đen trước cửa gara" loading="lazy" decoding="async">
+          <img data-car="pickup" src="https://images.unsplash.com/photo-1559416523-140ddc3d238c?auto=format&amp;fit=crop&amp;w=700&amp;h=300&amp;q=70" width="700" height="300" alt="Xe bán tải màu cát trên đường đất" loading="lazy" decoding="async">
+        </div>
+        <p data-size-note>Sedan · 4–5 chỗ, xe hạng B, C, D</p>
+      </div>
+    </div>
+    <div class="pkg__grid" data-pkgs></div>
+    <p class="pkgs__note">Giá đã gồm VAT và vật tư. Xe đã qua sửa chữa sơn có thể phát sinh chi phí hiệu chỉnh – kỹ thuật viên báo trước khi làm.</p>
+  </div>
+</section>
+
+<!-- ===== BEFORE / AFTER ===== -->
+<section class="sec ba" id="truoc-sau" aria-labelledby="ba-title">
+  <div class="container ba__grid">
+    <div class="ba__copy">
+      <p class="kicker" data-reveal>Trước &amp; sau</p>
+      <h2 class="h2" id="ba-title" data-reveal>Kéo để thấy <em>sự khác biệt</em></h2>
+      <p class="sec__sub" data-reveal>Một chiếc SUV đen 4 năm tuổi sau gói <b>Nâng cao</b>: tẩy bụi sắt, đánh bóng 2 bước và phủ 2 lớp ceramic 9H. Màu đen sâu trở lại, nước lăn thành giọt tròn.</p>
+      <ul class="ba__facts" data-reveal>
+        <li><b data-count="38">0</b><span>GU trước</span></li>
+        <li><b data-count="94">0</b><span>GU sau</span></li>
+        <li><b data-count="6">0</b><span>giờ thi công</span></li>
+      </ul>
+    </div>
+    <div class="compare" data-compare data-reveal>
+      <img class="compare__after" src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&amp;fit=crop&amp;w=1100&amp;h=800&amp;q=72" width="1100" height="800" alt="SUV đen sau khi đánh bóng và phủ ceramic" loading="lazy" decoding="async">
+      <div class="compare__before" data-before>
+        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&amp;fit=crop&amp;w=1100&amp;h=800&amp;q=72" width="1100" height="800" alt="" loading="lazy" decoding="async">
+        <span class="compare__grime"></span>
+      </div>
+      <span class="compare__lbl compare__lbl--l">Trước</span>
+      <span class="compare__lbl compare__lbl--r">Sau</span>
+      <div class="compare__handle" data-handle role="slider" tabindex="0" aria-label="Kéo so sánh trước và sau" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+        <span class="compare__knob"><span data-i="drag"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TIPS ===== -->
+<section class="sec tips" id="meo-hay" aria-labelledby="tips-title">
+  <div class="container">
+    <div class="sec__head">
+      <div>
+        <p class="kicker" data-reveal>Mẹo hay</p>
+        <h2 class="h2" id="tips-title" data-reveal>Chăm xe tại nhà <em>đúng cách</em></h2>
+      </div>
+      <p class="sec__sub" data-reveal>Bốn thói quen nhỏ giúp lớp sơn và ceramic bền gấp đôi – do kỹ thuật viên BÓNG STUDIO chia sẻ.</p>
+    </div>
+    <div class="tips__grid" data-tips></div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section class="sec reviews" id="danh-gia" aria-labelledby="rv-title">
+  <div class="container">
+    <div class="sec__head">
+      <div>
+        <p class="kicker" data-reveal>Khách hàng nói gì</p>
+        <h2 class="h2" id="rv-title" data-reveal><b class="big-num" data-count="4.9" data-dec="1">0</b><span class="big-of">/5</span> từ <em>2.380 đánh giá</em></h2>
+      </div>
+      <div class="slider-nav">
+        <button class="icon-btn icon-btn--line" type="button" aria-label="Đánh giá trước" data-rv-prev><span data-i="left"></span></button>
+        <button class="icon-btn icon-btn--line" type="button" aria-label="Đánh giá tiếp theo" data-rv-next><span data-i="arrow"></span></button>
+      </div>
+    </div>
+  </div>
+  <div class="rv-track" data-rv-track tabindex="0" aria-label="Danh sách đánh giá, vuốt ngang để xem thêm"></div>
+  <div class="container"><div class="rv-dots" data-rv-dots aria-hidden="true"></div></div>
+</section>
+
+<!-- ===== BOOKING ===== -->
+<section class="sec booking" id="dat-lich" aria-labelledby="bk-title">
+  <div class="container booking__grid">
+    <div class="booking__info" id="lien-he">
+      <p class="kicker kicker--gold" data-reveal>Đặt lịch dịch vụ</p>
+      <h2 class="h2 h2--light" id="bk-title" data-reveal>Giữ chỗ trong <em>30 giây</em></h2>
+      <p class="booking__lead" data-reveal>Chọn gói, cỡ xe và khung giờ. Tư vấn viên gọi xác nhận trong 15 phút (giờ làm việc). Không cần đặt cọc.</p>
+      <ul class="contact" data-reveal>
+        <li><span data-i="phone"></span><div><small>Hotline (số minh hoạ)</small><b>0900 000 515</b></div></li>
+        <li><span data-i="pin"></span><div><small>Studio</small><b>Số 515 Đường Mẫu, Ninh Kiều, Cần Thơ (địa chỉ minh hoạ)</b></div></li>
+        <li><span data-i="clock"></span><div><small>Giờ mở cửa</small><b>7:30 – 19:00, tất cả các ngày</b></div></li>
+      </ul>
+      <div class="social" data-reveal>
+        <a href="#dat-lich" class="soc soc--zalo" data-focus-form>Zalo</a>
+        <a href="#dat-lich" class="soc soc--fb" data-focus-form>Facebook</a>
+      </div>
+    </div>
+    <form class="bk-form" novalidate data-booking>
+      <div class="bk-form__body">
+        <div class="f2">
+          <label class="fld"><span>Họ và tên</span><input name="name" autocomplete="name" placeholder="Nguyễn Văn A" required></label>
+          <label class="fld"><span>Số điện thoại</span><input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xx xxx xxx" required></label>
+        </div>
+        <div class="f2">
+          <label class="fld"><span>Dịch vụ</span>
+            <select name="service" data-bk-service>
+              <option value="basic">Gói Cơ bản – Bóng Mới</option>
+              <option value="pro" selected>Gói Nâng cao – Bóng Gương</option>
+              <option value="premium">Gói Cao cấp – Giáp Toàn Diện</option>
+              <option value="phim">Dán phim cách nhiệt</option>
+              <option value="ppf">Dán PPF đầu xe</option>
+              <option value="ceramic">Phủ ceramic 1 lớp</option>
+            </select>
+          </label>
+          <label class="fld"><span>Cỡ xe</span>
+            <select name="size" data-bk-size>
+              <option value="sedan">Sedan</option>
+              <option value="suv">SUV / MPV</option>
+              <option value="pickup">Bán tải</option>
+            </select>
+          </label>
+        </div>
+        <div class="f2">
+          <label class="fld"><span>Ngày hẹn</span><input name="date" type="date" required data-bk-date></label>
+          <fieldset class="fld fld--chips"><legend>Khung giờ</legend>
+            <div class="slots">
+              <label><input type="radio" name="slot" value="08:00" checked><span>08:00</span></label>
+              <label><input type="radio" name="slot" value="10:00"><span>10:00</span></label>
+              <label><input type="radio" name="slot" value="14:00"><span>14:00</span></label>
+              <label><input type="radio" name="slot" value="16:00"><span>16:00</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <fieldset class="fld fld--chips"><legend>Hình thức</legend>
+          <div class="slots slots--wide">
+            <label><input type="radio" name="place" value="studio" checked><span>Tại studio</span></label>
+            <label><input type="radio" name="place" value="home"><span>Thi công tận nơi</span></label>
+          </div>
+        </fieldset>
+        <label class="fld"><span>Ghi chú</span><textarea name="note" rows="2" placeholder="Dòng xe, màu sơn, tình trạng hiện tại…"></textarea></label>
+        <div class="bk-est"><span>Chi phí dự kiến</span><b data-bk-est>0₫</b></div>
+        <button class="btn btn--gold btn--block" type="submit">Xác nhận đặt lịch</button>
+        <p class="fine">Biểu mẫu minh hoạ – thông tin không được gửi đi.</p>
+      </div>
+      <div class="ok" data-bk-ok hidden>
+        <span class="ok__ic" data-i="check"></span>
+        <h3>Đã giữ chỗ thành công!</h3>
+        <p data-bk-ok-msg></p>
+        <button class="btn btn--ghost btn--sm" type="button" data-bk-again>Đặt lịch khác</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="sec faq" id="hoi-dap" aria-labelledby="faq-title">
+  <div class="container faq__grid">
+    <div>
+      <p class="kicker" data-reveal>Hỏi đáp</p>
+      <h2 class="h2" id="faq-title" data-reveal>Câu hỏi <em>thường gặp</em></h2>
+    </div>
+    <div class="faq__list">
+      <details data-reveal open><summary>Ceramic DIY có khó tự làm tại nhà không?</summary><p>Không khó nếu xe đã được rửa sạch và tẩy bụi sắt. Bộ kit có sẵn găng, mút thoa và khăn – thoa từng ô 50×50 cm, đợi 1–2 phút rồi lau đều. Video hướng dẫn được gửi kèm đơn hàng.</p></details>
+      <details data-reveal><summary>Bảo hành ceramic và PPF như thế nào?</summary><p>Ceramic gói Nâng cao bảo hành 24 tháng, gói Cao cấp đến 5 năm; PPF bảo hành ố vàng, bong tróc 5 năm. Phiếu bảo hành điện tử tra cứu bằng số điện thoại.</p></details>
+      <details data-reveal><summary>Chính sách đổi trả sản phẩm?</summary><p>Đổi mới trong 7 ngày với sản phẩm lỗi do nhà sản xuất hoặc giao nhầm. Sản phẩm đã mở nắp vẫn được hỗ trợ đổi nếu có lỗi chất lượng.</p></details>
+      <details data-reveal><summary>Thi công tận nơi cần chuẩn bị gì?</summary><p>Chỉ cần chỗ đỗ có mái che và nguồn điện. Đội kỹ thuật mang theo máy, đèn kiểm tra và nước khử khoáng. Áp dụng nội ô Cần Thơ.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="ftr">
+  <div class="container ftr__grid">
+    <div class="ftr__brand">
+      <a href="#top" class="logo logo--light" aria-label="BÓNG STUDIO – về đầu trang">
+        <svg class="logo__mark" viewBox="0 0 40 48" aria-hidden="true"><path d="M20 2C20 2 5 19.5 5 29.5a15 15 0 0 0 30 0C35 19.5 20 2 20 2Z" fill="#c8a45c"/><path d="M12.5 29c0-5 3.4-10.4 6-13.6" fill="none" stroke="#0f3d32" stroke-width="2.6" stroke-linecap="round"/></svg>
+        <span class="logo__word"><b>BÓNG</b><small>STUDIO</small></span>
+      </a>
+      <p>Chăm sóc &amp; bảo vệ xe – sản phẩm chuẩn studio và dịch vụ phủ ceramic, dán PPF, phim cách nhiệt tại Cần Thơ.</p>
+    </div>
+    <div>
+      <h4>Cửa hàng</h4>
+      <a href="#cua-hang" data-cat-link="rua">Rửa xe</a>
+      <a href="#cua-hang" data-cat-link="bong">Đánh bóng &amp; sáp</a>
+      <a href="#cua-hang" data-cat-link="ceramic">Ceramic</a>
+      <a href="#cua-hang" data-cat-link="khan">Khăn &amp; phụ kiện</a>
+    </div>
+    <div>
+      <h4>Dịch vụ</h4>
+      <a href="#dich-vu">Dán phim cách nhiệt</a>
+      <a href="#dich-vu">Dán PPF</a>
+      <a href="#dich-vu">Phủ ceramic</a>
+      <a href="#bang-gia">Bảng giá gói</a>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <p>Hotline: 0900 000 515<br>Số 515 Đường Mẫu, Cần Thơ (địa chỉ minh hoạ)<br>7:30 – 19:00 hằng ngày</p>
+    </div>
+  </div>
+  <div class="container ftr__bottom">
+    <span>© 2026 BÓNG STUDIO.</span>
+    <span>Cửa hàng mẫu – thương hiệu minh hoạ, landing page do ChungAuto thực hiện.</span>
+  </div>
+</footer>
+
+<!-- ===== MOBILE BOTTOM BAR ===== -->
+<nav class="mbar" aria-label="Thao tác nhanh">
+  <a href="#lien-he"><span data-i="phone"></span>Gọi</a>
+  <a href="#dat-lich" data-focus-form><span data-i="chat"></span>Zalo</a>
+  <button type="button" data-open-cart><span class="mbar__cart"><span data-i="bag"></span><b class="cart-count" data-cart-count>0</b></span>Giỏ hàng</button>
+  <a href="#dat-lich" class="mbar__cta"><span data-i="calendar"></span>Đặt lịch</a>
+</nav>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mnav" id="mnav" aria-hidden="true" data-mnav>
+  <div class="mnav__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mnav__top">
+      <span class="logo__word"><b>BÓNG</b><small>STUDIO</small></span>
+      <button class="icon-btn" type="button" aria-label="Đóng menu" data-close-menu><span data-i="x"></span></button>
+    </div>
+    <form class="search search--m" role="search" data-search-form>
+      <span class="search__ic" data-i="search"></span>
+      <input type="search" placeholder="Tìm sản phẩm…" aria-label="Tìm sản phẩm" data-search>
+    </form>
+    <nav class="mnav__links">
+      <a href="#cua-hang">Cửa hàng</a>
+      <a href="#combo">Combo tự chọn</a>
+      <a href="#guong-do-bong">Gương độ bóng</a>
+      <a href="#dich-vu">Dịch vụ</a>
+      <a href="#bang-gia">Bảng giá gói</a>
+      <a href="#meo-hay">Mẹo hay</a>
+      <a href="#danh-gia">Đánh giá</a>
+      <a href="#dat-lich">Đặt lịch</a>
+    </nav>
+    <p class="mnav__foot">Hotline 0900 000 515 · 7:30 – 19:00</p>
+  </div>
+</div>
+
+<!-- ===== QUICK VIEW ===== -->
+<div class="modal" data-qv aria-hidden="true">
+  <div class="modal__bg" data-close-qv></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <button class="icon-btn modal__x" type="button" aria-label="Đóng" data-close-qv><span data-i="x"></span></button>
+    <div class="qv" data-qv-body></div>
+  </div>
+</div>
+
+<!-- ===== CART DRAWER ===== -->
+<div class="drawer" data-drawer aria-hidden="true">
+  <div class="drawer__bg" data-close-cart></div>
+  <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="drawer__head">
+      <h3 id="cart-title" data-drawer-title>Giỏ hàng</h3>
+      <button class="icon-btn" type="button" aria-label="Đóng giỏ hàng" data-close-cart><span data-i="x"></span></button>
+    </div>
+    <div class="drawer__view" data-view="cart">
+      <div class="gift gift--sm" data-cart-gift>
+        <div class="gift__txt"><span data-i="gift"></span><p data-cart-gift-msg></p></div>
+        <div class="gift__bar"><i data-cart-gift-bar></i></div>
+      </div>
+      <ul class="citems" data-citems></ul>
+      <div class="cempty" data-cempty>
+        <span data-i="bag"></span>
+        <p>Giỏ hàng đang trống.</p>
+        <a href="#cua-hang" class="btn btn--ghost btn--sm" data-close-cart>Khám phá sản phẩm</a>
+      </div>
+      <div class="drawer__foot" data-cfoot>
+        <div class="row"><span>Tạm tính</span><b data-subtotal>0₫</b></div>
+        <div class="row row--muted"><span>Vận chuyển</span><span data-ship>Miễn phí</span></div>
+        <button class="btn btn--green btn--block" type="button" data-checkout>Thanh toán</button>
+      </div>
+    </div>
+    <form class="drawer__view co" data-view="checkout" novalidate data-co hidden>
+      <button type="button" class="back" data-back><span data-i="left"></span>Quay lại giỏ hàng</button>
+      <label class="fld"><span>Họ và tên</span><input name="name" autocomplete="name" placeholder="Nguyễn Văn A" required></label>
+      <label class="fld"><span>Số điện thoại</span><input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xx xxx xxx" required></label>
+      <label class="fld"><span>Địa chỉ nhận hàng</span><input name="address" autocomplete="street-address" placeholder="Số nhà, đường, phường, quận" required></label>
+      <label class="fld"><span>Ghi chú</span><textarea name="note" rows="2" placeholder="Giao giờ hành chính, gọi trước khi giao…"></textarea></label>
+      <div class="co__sum"><span>Tổng thanh toán (COD)</span><b data-co-total>0₫</b></div>
+      <button class="btn btn--gold btn--block" type="submit">Đặt hàng</button>
+      <p class="fine">Đơn hàng minh hoạ – không có giao dịch thật.</p>
+    </form>
+    <div class="drawer__view ok" data-view="done" hidden>
+      <span class="ok__ic" data-i="check"></span>
+      <h3>Đặt hàng thành công!</h3>
+      <p data-done-msg></p>
+      <button class="btn btn--green btn--sm" type="button" data-close-cart>Tiếp tục mua sắm</button>
+    </div>
+  </aside>
+</div>
+
+<div class="toast" role="status" aria-live="polite" data-toast></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

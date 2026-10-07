@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/ankhang/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/ankhang/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AN KHANG AUTO – Phụ kiện ô tô chính hãng cho cả nhà</title>
+<meta name="description" content="AN KHANG AUTO – cửa hàng mẫu phụ kiện ô tô gia đình: thảm lót sàn 6D, camera hành trình, cảm biến áp suất lốp, bọc ghế da, nước hoa ô tô. Lắp đặt tận nơi, bảo hành, đổi trả 7 ngày.">
+<meta name="theme-color" content="#13233f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lexend:wght@500;600;700;800&family=Saira+Condensed:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#san-pham">Bỏ qua đến sản phẩm</a>
+
+<!-- ===== Promo top bar ===== -->
+<div class="topbar" aria-label="Khuyến mãi">
+  <div class="topbar__marquee" data-marquee>
+    <div class="topbar__track">
+      <span><i data-ic="truck"></i>Freeship đơn từ 499.000₫</span>
+      <span><i data-ic="wrench"></i>Lắp đặt tận nơi nội thành miễn phí</span>
+      <span><i data-ic="gift"></i>Mua 2 tặng 1 – combo quà tặng</span>
+      <span><i data-ic="refresh"></i>Đổi trả 7 ngày, không cần lý do</span>
+      <span><i data-ic="shield"></i>Bảo hành chính hãng đến 24 tháng</span>
+      <span><i data-ic="phone"></i>Hotline 0900 000 268 (8:00 – 21:00)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Header ===== -->
+<header class="header" id="top">
+  <div class="container header__main">
+    <button class="icon-btn header__burger" type="button" aria-label="Mở menu" data-open-menu><i data-ic="menu"></i></button>
+    <a class="logo" href="#top" aria-label="AN KHANG AUTO – về đầu trang">
+      <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 3 6 9.5v13C6 34 13.7 42.2 24 45c10.3-2.8 18-11 18-22.5v-13z" fill="#13233f"/>
+        <path d="M24 7.5 10 12.6v10.2c0 9 6 15.5 14 18 8-2.5 14-9 14-18V12.6z" fill="#1d3359"/>
+        <path d="M13 27.5l2.6-6.4c.7-1.6 2.2-2.6 3.9-2.6h9c1.7 0 3.2 1 3.9 2.6l2.6 6.4v4.2a1.3 1.3 0 0 1-1.3 1.3h-2.2a1.3 1.3 0 0 1-1.3-1.3V30H18.8v1.7a1.3 1.3 0 0 1-1.3 1.3h-2.2a1.3 1.3 0 0 1-1.3-1.3z" fill="#ff6a13"/>
+        <path d="M17.6 21.6h12.8l1.6 4.4H16z" fill="#13233f" opacity=".55"/>
+        <circle cx="17.4" cy="27.6" r="1.5" fill="#fff"/><circle cx="30.6" cy="27.6" r="1.5" fill="#fff"/>
+        <path d="M17 13.4 24 11l7 2.4" stroke="#ffc53d" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="logo__text"><b>AN KHANG<em>AUTO</em></b><small>Phụ kiện ô tô chính hãng</small></span>
+    </a>
+    <form class="search" role="search" data-search-form autocomplete="off">
+      <label class="sr-only" for="q">Tìm phụ kiện</label>
+      <input id="q" type="search" placeholder="Tìm thảm 6D, camera, gối tựa cổ…" data-search-input>
+      <button class="search__btn" type="submit" aria-label="Tìm kiếm"><i data-ic="search"></i><span>Tìm</span></button>
+      <div class="search__suggest" data-suggest role="listbox" hidden></div>
+    </form>
+    <a class="hotline" href="tel:0900000268"><i data-ic="phone"></i><span><small>Tư vấn miễn phí</small><b>0900 000 268</b></span></a>
+    <button class="cart-btn" type="button" data-open-cart aria-label="Mở giỏ hàng">
+      <span class="cart-btn__icon" data-cart-target><i data-ic="cart"></i><span class="badge" data-cart-count>0</span></span>
+      <span class="cart-btn__label"><small>Giỏ hàng</small><b data-cart-total>0₫</b></span>
+    </button>
+  </div>
+  <nav class="nav" aria-label="Điều hướng chính">
+    <div class="container nav__inner">
+      <div class="nav__cat">
+        <button class="nav__catbtn" type="button" aria-expanded="false" data-catmenu-btn><i data-ic="menu"></i>Danh mục sản phẩm<i data-ic="down"></i></button>
+        <div class="nav__dropdown" data-catmenu hidden></div>
+      </div>
+      <a href="#flash-sale" class="nav__hot"><i data-ic="bolt"></i>Flash Sale</a>
+      <a href="#theo-dong-xe">Theo dòng xe</a>
+      <a href="#san-pham">Sản phẩm</a>
+      <a href="#combo">Mua 2 tặng 1</a>
+      <a href="#danh-gia">Khách hàng nói gì</a>
+      <a href="#cam-nang">Cẩm nang</a>
+      <a href="#lien-he">Liên hệ</a>
+      <a href="#dat-lich" class="nav__cta"><i data-ic="calendar"></i>Đặt lịch lắp đặt</a>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- ===== Hero ===== -->
+  <section class="hero container" aria-label="Ưu đãi nổi bật">
+    <div class="hero__grid">
+      <div class="carousel" data-carousel aria-roledescription="carousel">
+        <div class="carousel__track" data-carousel-track>
+          <article class="slide slide--navy is-active" aria-roledescription="slide" aria-label="1 / 3">
+            <img class="slide__img" src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1100&q=70" alt="Xe sedan đang chạy trên phố" width="1100" height="733" fetchpriority="high">
+            <div class="slide__body">
+              <span class="chip chip--glow"><i data-ic="sparkle"></i>Bộ sưu tập mùa lễ hội</span>
+              <h1 class="slide__title">Phụ kiện cho cả nhà,<br><span>đi đâu cũng an tâm</span></h1>
+              <p class="slide__text">Hơn 350 mẫu thảm, camera, rèm che nắng may theo từng dòng xe. Lắp đặt tận nơi chỉ trong 30 phút.</p>
+              <div class="slide__cta"><a class="btn btn--primary" href="#san-pham">Mua ngay</a><a class="btn btn--ghost" href="#theo-dong-xe">Chọn theo xe</a></div>
+            </div>
+            <div class="sticker"><small>chỉ từ</small><b>129K</b></div>
+          </article>
+          <article class="slide slide--orange" aria-roledescription="slide" aria-label="2 / 3">
+            <img class="slide__img" src="https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=1100&q=70" alt="Túi quà khuyến mãi" width="1100" height="733" loading="lazy" decoding="async">
+            <div class="slide__body">
+              <span class="chip chip--light"><i data-ic="bolt"></i>Mỗi ngày 3 khung giờ vàng</span>
+              <h2 class="slide__title">Flash Sale<br><span>giảm đến 50%</span></h2>
+              <p class="slide__text">Săn deal camera hành trình, máy hút bụi mini, sạc nhanh – số lượng có hạn, hết là thôi!</p>
+              <div class="slide__cta"><a class="btn btn--navy" href="#flash-sale">Săn deal ngay</a><a class="btn btn--ghost" href="#combo">Combo quà tặng</a></div>
+            </div>
+            <div class="sticker sticker--navy"><small>giảm</small><b>50%</b></div>
+          </article>
+          <article class="slide slide--night" aria-roledescription="slide" aria-label="3 / 3">
+            <img class="slide__img" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1100&q=70" alt="Lái xe ban đêm nhìn qua kính lái" width="1100" height="733" loading="lazy" decoding="async">
+            <div class="slide__body">
+              <span class="chip chip--glow"><i data-ic="shield"></i>An toàn trên mọi hành trình</span>
+              <h2 class="slide__title">Camera hành trình 4K<br><span>“mắt thần” cho xe yêu</span></h2>
+              <p class="slide__text">Ghi hình sắc nét cả ban đêm, xem lại trên điện thoại. Tặng thẻ nhớ 64GB và đi dây âm trần miễn phí.</p>
+              <div class="slide__cta"><a class="btn btn--primary" href="#san-pham" data-filter-cat="camera">Xem camera</a><a class="btn btn--ghost" href="#dat-lich">Đặt lịch lắp</a></div>
+            </div>
+            <div class="sticker"><small>tặng</small><b>64GB</b></div>
+          </article>
+        </div>
+        <button class="carousel__arrow carousel__arrow--prev" type="button" aria-label="Banner trước" data-carousel-prev><i data-ic="left"></i></button>
+        <button class="carousel__arrow carousel__arrow--next" type="button" aria-label="Banner tiếp theo" data-carousel-next><i data-ic="right"></i></button>
+        <div class="carousel__dots" role="tablist" data-carousel-dots>
+          <button type="button" role="tab" aria-label="Banner 1" class="is-active"><span></span></button>
+          <button type="button" role="tab" aria-label="Banner 2"><span></span></button>
+          <button type="button" role="tab" aria-label="Banner 3"><span></span></button>
+        </div>
+      </div>
+      <div class="hero__side">
+        <a class="tile tile--mat" href="#san-pham" data-filter-cat="tham">
+          <div class="tile__text"><span class="tile__eyebrow">May theo form xe</span><b>Thảm lót sàn 6D</b><span class="tile__price">từ <strong>990.000₫</strong></span></div>
+          <div class="tile__art" data-art="mat"></div>
+        </a>
+        <a class="tile tile--gift" href="#combo">
+          <div class="tile__text"><span class="tile__eyebrow">Ưu đãi độc quyền</span><b>Mua 2 tặng 1</b><span class="tile__price">Tặng nước hoa <strong>189K</strong></span></div>
+          <div class="tile__art" data-art="gift"></div>
+        </a>
+      </div>
+    </div>
+
+    <ul class="trust" aria-label="Cam kết dịch vụ">
+      <li><span class="trust__ic"><i data-ic="shield"></i></span><div><b>Chính hãng 100%</b><small>Hoàn tiền gấp đôi nếu hàng giả</small></div></li>
+      <li><span class="trust__ic"><i data-ic="wrench"></i></span><div><b>Lắp đặt tận nơi</b><small>Miễn phí nội thành TP.HCM</small></div></li>
+      <li><span class="trust__ic"><i data-ic="clock"></i></span><div><b>Bảo hành đến 24 tháng</b><small>1 đổi 1 trong 30 ngày đầu</small></div></li>
+      <li><span class="trust__ic"><i data-ic="refresh"></i></span><div><b>Đổi trả 7 ngày</b><small>Không cần lý do</small></div></li>
+    </ul>
+  </section>
+
+  <!-- ===== Danh mục ===== -->
+  <section class="section container cats" id="danh-muc" aria-labelledby="cats-title">
+    <div class="sec-head">
+      <h2 id="cats-title" class="sec-title" data-reveal>Danh mục nổi bật</h2>
+      <a class="sec-link" href="#san-pham">Xem tất cả<i data-ic="right"></i></a>
+    </div>
+    <div class="cats__row" data-cats></div>
+  </section>
+
+  <!-- ===== Flash sale ===== -->
+  <section class="flash" id="flash-sale" aria-labelledby="flash-title">
+    <div class="container">
+      <div class="flash__box">
+        <div class="flash__head">
+          <h2 id="flash-title" class="flash__title"><span class="flash__bolt"><i data-ic="bolt"></i></span>FLASH SALE</h2>
+          <div class="flash__timer" aria-live="off">
+            <span class="flash__ends">Kết thúc sau</span>
+            <span class="cd" data-countdown><b data-h>00</b><i>:</i><b data-m>00</b><i>:</i><b data-s>00</b></span>
+          </div>
+          <div class="flash__slots" aria-hidden="true"><span>09:00</span><span class="is-on">Đang diễn ra</span><span>21:00</span></div>
+          <div class="slider-nav"><button class="round-btn" type="button" aria-label="Trước" data-prev="flash"><i data-ic="left"></i></button><button class="round-btn" type="button" aria-label="Sau" data-next="flash"><i data-ic="right"></i></button></div>
+        </div>
+        <div class="flash__track hscroll" data-slider="flash"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Theo dòng xe ===== -->
+  <section class="models" id="theo-dong-xe" aria-labelledby="models-title">
+    <div class="models__marquee" aria-hidden="true" data-marquee>
+      <div class="models__track"><span>Vios</span><span>Accent</span><span>City</span><span>CX-5</span><span>Xpander</span><span>VF 5</span><span>Seltos</span><span>Ranger</span></div>
+    </div>
+    <div class="container models__inner">
+      <div class="models__copy">
+        <span class="eyebrow eyebrow--light">Chọn đúng – lắp vừa khít</span>
+        <h2 id="models-title" class="sec-title sec-title--light" data-reveal>Phụ kiện theo dòng xe</h2>
+        <p>Chọn xe của bạn, chúng tôi lọc ngay những sản phẩm tương thích – thảm, rèm, bọc ghế đều được đo cắt theo đúng form xe.</p>
+      </div>
+      <div class="models__chips" role="radiogroup" aria-label="Chọn dòng xe" data-car-chips></div>
+      <svg class="models__car" viewBox="0 0 420 150" aria-hidden="true" data-parallax-car>
+        <path d="M24 112c0-12 6-20 18-24l46-14 40-30c10-7 20-10 32-10h96c14 0 26 5 36 14l34 30 54 10c16 3 26 12 26 26v8c0 6-4 10-10 10H34c-6 0-10-4-10-10z" fill="#ff6a13"/>
+        <path d="M140 50c8-6 14-8 24-8h40v38h-92zM216 42h56c10 0 18 4 25 10l26 28h-107z" fill="#13233f" opacity=".85"/>
+        <path d="M30 104h378" stroke="#ffc53d" stroke-width="3" opacity=".7"/>
+        <circle cx="104" cy="122" r="24" fill="#0b1628"/><circle cx="104" cy="122" r="11" fill="#c9d1de"/>
+        <circle cx="318" cy="122" r="24" fill="#0b1628"/><circle cx="318" cy="122" r="11" fill="#c9d1de"/>
+        <path d="M398 98h14M26 98h10" stroke="#fff6c2" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== Sản phẩm ===== -->
+  <section class="section container products" id="san-pham" aria-labelledby="prod-title">
+    <div class="sec-head sec-head--wrap">
+      <div>
+        <span class="eyebrow">Gợi ý hôm nay</span>
+        <h2 id="prod-title" class="sec-title" data-reveal>Sản phẩm dành cho bạn</h2>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Sắp xếp sản phẩm" data-tabs>
+        <button role="tab" type="button" class="is-active" aria-selected="true" data-tab="hot">Bán chạy</button>
+        <button role="tab" type="button" aria-selected="false" data-tab="new">Mới về</button>
+        <button role="tab" type="button" aria-selected="false" data-tab="deal">Giảm sâu</button>
+        <span class="tabs__ink" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="filterbar" data-filterbar>
+      <div class="filterbar__cats hscroll" data-cat-pills></div>
+    </div>
+    <p class="result-note" data-result-note aria-live="polite"></p>
+    <div class="grid" data-grid></div>
+    <div class="empty" data-empty hidden>
+      <svg viewBox="0 0 120 90" aria-hidden="true"><rect x="10" y="20" width="100" height="60" rx="12" fill="#fff3eb"/><circle cx="52" cy="48" r="16" fill="none" stroke="#ff6a13" stroke-width="5"/><path d="m64 60 14 14" stroke="#13233f" stroke-width="6" stroke-linecap="round"/></svg>
+      <b>Chưa tìm thấy sản phẩm phù hợp</b>
+      <p>Thử từ khoá khác hoặc xoá bộ lọc để xem toàn bộ phụ kiện.</p>
+      <button class="btn btn--primary btn--sm" type="button" data-clear-filters>Xoá bộ lọc</button>
+    </div>
+    <div class="more"><button class="btn btn--outline" type="button" data-more>Xem thêm sản phẩm<i data-ic="down"></i></button></div>
+  </section>
+
+  <!-- ===== Combo Mua 2 tặng 1 ===== -->
+  <section class="section container combo" id="combo" aria-labelledby="combo-title">
+    <div class="combo__box">
+      <div class="combo__intro">
+        <span class="eyebrow eyebrow--light">Ưu đãi độc quyền tại An Khang</span>
+        <h2 id="combo-title" class="combo__title" data-reveal>Mua 2 <em>tặng 1</em></h2>
+        <p>Chọn 2 món bất kỳ trong danh sách – chúng tôi tặng ngay <b>1 lọ nước hoa tinh dầu gỗ thông</b> (trị giá 189.000₫) gói trong hộp quà xinh xắn.</p>
+        <ul class="combo__perks"><li><i data-ic="check"></i>Áp dụng cho mọi cặp sản phẩm trong danh sách</li><li><i data-ic="check"></i>Gói quà miễn phí, kèm thiệp viết tay</li><li><i data-ic="check"></i>Cộng dồn với voucher bạn mới</li></ul>
+        <div class="combo__gift" data-art="gift" data-gift-box></div>
+      </div>
+      <div class="combo__builder">
+        <div class="combo__slots" aria-live="polite">
+          <div class="slot" data-slot="0"><span class="slot__n">1</span><span class="slot__ph">Chọn món thứ nhất</span></div>
+          <span class="slot__plus">+</span>
+          <div class="slot" data-slot="1"><span class="slot__n">2</span><span class="slot__ph">Chọn món thứ hai</span></div>
+          <span class="slot__plus">=</span>
+          <div class="slot slot--gift" data-slot-gift><span class="slot__n"><i data-ic="gift"></i></span><span class="slot__ph">Quà tặng</span></div>
+        </div>
+        <div class="combo__pool" data-combo-pool></div>
+        <div class="combo__foot">
+          <div class="combo__sum"><small>Tổng combo</small><b data-combo-total>0₫</b><span data-combo-save></span></div>
+          <button class="btn btn--primary" type="button" data-combo-add disabled><i data-ic="cart"></i>Thêm combo vào giỏ</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Con số ===== -->
+  <section class="stats container" aria-label="An Khang qua những con số">
+    <div class="stats__item"><b><span data-count="12500">0</span>+</b><small>Khách hàng gia đình</small></div>
+    <div class="stats__item"><b><span data-count="350">0</span>+</b><small>Mẫu xe đã có form</small></div>
+    <div class="stats__item"><b><span data-count="4.9" data-decimals="1">0</span>/5</b><small>Điểm đánh giá trung bình</small></div>
+    <div class="stats__item"><b><span data-count="30">0</span>′</b><small>Lắp đặt trung bình</small></div>
+  </section>
+
+  <!-- ===== Đánh giá ===== -->
+  <section class="section container reviews" id="danh-gia" aria-labelledby="rev-title">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Ảnh thật từ khách hàng</span>
+        <h2 id="rev-title" class="sec-title" data-reveal>Khách hàng khoe xe</h2>
+      </div>
+      <div class="slider-nav slider-nav--dark"><button class="round-btn" type="button" aria-label="Trước" data-prev="reviews"><i data-ic="left"></i></button><button class="round-btn" type="button" aria-label="Sau" data-next="reviews"><i data-ic="right"></i></button></div>
+    </div>
+    <div class="reviews__wrap">
+      <aside class="score" aria-label="Tổng hợp đánh giá">
+        <b class="score__big">4,9</b>
+        <div class="stars stars--lg" aria-label="4,9 trên 5 sao"></div>
+        <small>Từ 5.284 đánh giá đã mua hàng</small>
+        <ul class="score__bars">
+          <li><span>5★</span><i><em style="--w:.88"></em></i><span>88%</span></li>
+          <li><span>4★</span><i><em style="--w:.09"></em></i><span>9%</span></li>
+          <li><span>3★</span><i><em style="--w:.02"></em></i><span>2%</span></li>
+          <li><span>2★</span><i><em style="--w:.01"></em></i><span>1%</span></li>
+          <li><span>1★</span><i><em style="--w:0"></em></i><span>0%</span></li>
+        </ul>
+      </aside>
+      <div class="reviews__track hscroll" data-slider="reviews"></div>
+    </div>
+  </section>
+
+  <!-- ===== Cẩm nang ===== -->
+  <section class="section container blog" id="cam-nang" aria-labelledby="blog-title">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Mẹo hay cho xe gia đình</span>
+        <h2 id="blog-title" class="sec-title" data-reveal>Cẩm nang chăm xe</h2>
+      </div>
+    </div>
+    <div class="blog__grid">
+      <article class="post" data-card>
+        <div class="post__img"><img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=720&h=460&q=70" alt="Vệ sinh xe ô tô" width="720" height="460" loading="lazy" decoding="async"></div>
+        <div class="post__body"><span class="post__tag">Vệ sinh</span><h3>Tự vệ sinh nội thất xe tại nhà trong 30 phút</h3><p>Thứ tự làm sạch đúng: hút bụi trước, lau da sau, dưỡng nhựa cuối cùng để xe thơm tho cả tuần.</p><span class="post__meta"><i data-ic="clock"></i>5 phút đọc</span></div>
+      </article>
+      <article class="post" data-card>
+        <div class="post__img"><img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=720&h=460&q=70" alt="Chuyến đi đường dài" width="720" height="460" loading="lazy" decoding="async"></div>
+        <div class="post__body"><span class="post__tag">Đi xa</span><h3>Checklist 10 món nên có cho chuyến đi xa dịp lễ</h3><p>Gối tựa cổ cho bố, rèm che nắng cho bé, sạc nhanh cho cả nhà – chuẩn bị kỹ để hành trình thật nhẹ nhàng.</p><span class="post__meta"><i data-ic="clock"></i>7 phút đọc</span></div>
+      </article>
+      <article class="post" data-card>
+        <div class="post__img"><img src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=720&h=460&q=70" alt="Sạc xe điện" width="720" height="460" loading="lazy" decoding="async"></div>
+        <div class="post__body"><span class="post__tag">Xe điện</span><h3>Phụ kiện cần có cho chủ xe điện cỡ nhỏ</h3><p>Thảm 6D chống nước, cảm biến áp suất lốp và rèm nam châm – ba món giúp xe điện đô thị tiết kiệm và mát hơn.</p><span class="post__meta"><i data-ic="clock"></i>4 phút đọc</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter + voucher ===== -->
+  <section class="section container news" id="voucher" aria-labelledby="news-title">
+    <div class="news__box">
+      <div class="news__copy">
+        <span class="eyebrow eyebrow--light">Quà chào bạn mới</span>
+        <h2 id="news-title" class="news__title" data-reveal>Nhận ngay voucher <em>50.000₫</em></h2>
+        <p>Đăng ký nhận cẩm nang chăm xe hằng tháng – mã giảm giá hiện ra ngay, dùng cho đơn từ 299.000₫.</p>
+        <form class="news__form" data-news-form novalidate>
+          <label class="sr-only" for="news-email">Email của bạn</label>
+          <input id="news-email" type="email" inputmode="email" placeholder="Nhập email của bạn" required>
+          <button class="btn btn--navy" type="submit">Nhận mã</button>
+          <p class="field-err" data-news-err></p>
+        </form>
+      </div>
+      <div class="ticket" data-ticket>
+        <div class="ticket__inner">
+          <div class="ticket__face ticket__front">
+            <span class="ticket__label">VOUCHER</span>
+            <b>50K</b>
+            <span class="ticket__hint">Đăng ký để mở mã</span>
+            <span class="ticket__lock" aria-hidden="true">?</span>
+          </div>
+          <div class="ticket__face ticket__back" aria-hidden="true">
+            <span class="ticket__label">Mã của bạn</span>
+            <code data-voucher-code>ANKHANG50</code>
+            <button class="btn btn--primary btn--sm" type="button" data-copy-code tabindex="-1"><i data-ic="copy"></i><span>Sao chép mã</span></button>
+            <span class="ticket__hint">HSD: 31/12 · Đơn từ 299K</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Liên hệ + đặt lịch ===== -->
+  <section class="section container contact" id="lien-he" aria-labelledby="contact-title">
+    <div class="contact__grid">
+      <div class="contact__info">
+        <span class="eyebrow eyebrow--light">Ghé cửa hàng hoặc gọi ngay</span>
+        <h2 id="contact-title" class="sec-title sec-title--light" data-reveal>Liên hệ An Khang</h2>
+        <ul class="contact__list">
+          <li><i data-ic="pin"></i><span>Số 268 Đường Mẫu, TP. Hồ Chí Minh (địa chỉ minh hoạ)</span></li>
+          <li><i data-ic="phone"></i><span>Hotline: <a href="tel:0900000268">0900 000 268</a> · Kỹ thuật: <a href="tel:0900000269">0900 000 269</a></span></li>
+          <li><i data-ic="clock"></i><span>Mở cửa 8:00 – 21:00, cả Chủ nhật & ngày lễ</span></li>
+          <li><i data-ic="mail"></i><span>hotro@ankhang-auto.example</span></li>
+        </ul>
+        <div class="contact__social">
+          <a class="soc soc--zalo" href="#lien-he"><i data-ic="chat"></i>Chat Zalo</a>
+          <a class="soc soc--fb" href="#lien-he"><i data-ic="fb"></i>Facebook</a>
+          <a class="soc soc--call" href="tel:0900000268"><i data-ic="phone"></i>Gọi ngay</a>
+        </div>
+        <div class="map" aria-hidden="true">
+          <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="180" fill="#1a2e52"/>
+            <path d="M0 60h400M0 128h400M80 0v180M210 0v180M330 0v180" stroke="#24406f" stroke-width="14"/>
+            <path d="M0 96C90 80 150 140 250 110s120-40 150-30" stroke="#2f5b9a" stroke-width="10" fill="none"/>
+            <rect x="96" y="76" width="96" height="38" rx="6" fill="#203a66"/><rect x="226" y="10" width="88" height="38" rx="6" fill="#203a66"/><rect x="226" y="142" width="88" height="30" rx="6" fill="#2a4a2f"/>
+          </svg>
+          <span class="map__pin"><i data-ic="pin"></i></span>
+          <span class="map__label">An Khang Auto</span>
+        </div>
+      </div>
+      <form class="booking" id="dat-lich" data-booking novalidate aria-labelledby="book-title">
+        <h3 id="book-title"><i data-ic="calendar"></i>Đặt lịch lắp đặt tận nơi</h3>
+        <p class="booking__sub">Kỹ thuật viên gọi xác nhận trong 15 phút (giờ hành chính).</p>
+        <div class="field"><label for="b-name">Họ và tên</label><input id="b-name" name="name" type="text" autocomplete="name" placeholder="VD: Nguyễn Văn An" required></div>
+        <div class="field"><label for="b-phone">Số điện thoại</label><input id="b-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="VD: 0912 345 678" required><small class="field-err"></small></div>
+        <div class="field-row">
+          <div class="field"><label for="b-car">Dòng xe</label><select id="b-car" name="car" data-car-select></select></div>
+          <div class="field"><label for="b-date">Ngày hẹn</label><input id="b-date" name="date" type="date" required></div>
+        </div>
+        <div class="field"><label for="b-service">Hạng mục</label>
+          <select id="b-service" name="service">
+            <option>Lắp thảm lót sàn 6D</option><option>Lắp camera hành trình (đi dây âm)</option><option>Lắp cảm biến áp suất lốp</option><option>Bọc ghế da may đo</option><option>Tư vấn trọn gói</option>
+          </select>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit">Gửi yêu cầu đặt lịch</button>
+        <div class="form-success" data-booking-ok hidden><i data-ic="check"></i><div><b>Đã nhận lịch hẹn!</b><p>Cảm ơn bạn – đây là cửa hàng mẫu nên yêu cầu không được gửi đi thật.</p></div></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a class="logo logo--light" href="#top" aria-label="AN KHANG AUTO">
+        <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 3 6 9.5v13C6 34 13.7 42.2 24 45c10.3-2.8 18-11 18-22.5v-13z" fill="#ff6a13"/><path d="M13 27.5l2.6-6.4c.7-1.6 2.2-2.6 3.9-2.6h9c1.7 0 3.2 1 3.9 2.6l2.6 6.4v4.2a1.3 1.3 0 0 1-1.3 1.3h-2.2a1.3 1.3 0 0 1-1.3-1.3V30H18.8v1.7a1.3 1.3 0 0 1-1.3 1.3h-2.2a1.3 1.3 0 0 1-1.3-1.3z" fill="#fff"/><circle cx="17.4" cy="27.6" r="1.5" fill="#ff6a13"/><circle cx="30.6" cy="27.6" r="1.5" fill="#ff6a13"/></svg>
+        <span class="logo__text"><b>AN KHANG<em>AUTO</em></b><small>Phụ kiện ô tô chính hãng</small></span>
+      </a>
+      <p>Phụ kiện ô tô cho gia đình Việt – chọn đúng theo xe, lắp tận nơi, bảo hành rõ ràng.</p>
+      <div class="pay" aria-label="Phương thức thanh toán"><span>COD</span><span>Chuyển khoản</span><span>Thẻ ATM</span><span>Ví điện tử</span></div>
+    </div>
+    <div>
+      <h4>Danh mục</h4>
+      <ul class="footer__links" data-footer-cats></ul>
+    </div>
+    <div>
+      <h4>Hỗ trợ khách hàng</h4>
+      <ul class="footer__links">
+        <li><a href="#dat-lich">Đặt lịch lắp đặt</a></li>
+        <li><a href="#cam-nang">Cẩm nang chăm xe</a></li>
+        <li><a href="#voucher">Nhận voucher 50K</a></li>
+        <li><a href="#lien-he">Chính sách bảo hành</a></li>
+        <li><a href="#lien-he">Đổi trả 7 ngày</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Liên hệ</h4>
+      <ul class="footer__links footer__contact">
+        <li><i data-ic="pin"></i>Số 268 Đường Mẫu, TP. Hồ Chí Minh (địa chỉ minh hoạ)</li>
+        <li><i data-ic="phone"></i><a href="tel:0900000268">0900 000 268</a></li>
+        <li><i data-ic="clock"></i>8:00 – 21:00 hằng ngày</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom container">
+    <p>© <span data-year>2026</span> AN KHANG AUTO. Cửa hàng mẫu – thương hiệu minh hoạ, landing page do ChungAuto thực hiện.</p>
+    <a class="totop" href="#top" aria-label="Lên đầu trang"><i data-ic="left"></i></a>
+  </div>
+</footer>
+
+<!-- ===== Mobile bottom bar ===== -->
+<nav class="mbar" aria-label="Thao tác nhanh">
+  <a href="tel:0900000268"><i data-ic="phone"></i><span>Gọi</span></a>
+  <a href="#lien-he"><i data-ic="chat"></i><span>Zalo</span></a>
+  <button type="button" data-open-cart class="mbar__cart"><span class="mbar__ic" data-cart-target-m><i data-ic="cart"></i><span class="badge" data-cart-count>0</span></span><span>Giỏ hàng</span></button>
+  <a href="#dat-lich" class="mbar__book"><i data-ic="calendar"></i><span>Đặt lịch</span></a>
+</nav>
+
+<!-- ===== Mobile menu ===== -->
+<div class="drawer drawer--left" data-menu aria-hidden="true">
+  <div class="drawer__scrim" data-close></div>
+  <aside class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__head"><span class="drawer__title">Menu</span><button class="icon-btn" type="button" aria-label="Đóng menu" data-close><i data-ic="close"></i></button></div>
+    <nav class="mmenu">
+      <a href="#flash-sale"><i data-ic="bolt"></i>Flash Sale</a>
+      <a href="#theo-dong-xe"><i data-ic="car"></i>Theo dòng xe</a>
+      <a href="#san-pham"><i data-ic="tag"></i>Sản phẩm</a>
+      <a href="#combo"><i data-ic="gift"></i>Mua 2 tặng 1</a>
+      <a href="#danh-gia"><i data-ic="star"></i>Khách hàng khoe xe</a>
+      <a href="#cam-nang"><i data-ic="sparkle"></i>Cẩm nang</a>
+      <a href="#lien-he"><i data-ic="pin"></i>Liên hệ</a>
+    </nav>
+    <p class="mmenu__label">Danh mục</p>
+    <div class="mmenu__cats" data-mmenu-cats></div>
+    <a class="btn btn--primary btn--block" href="#dat-lich"><i data-ic="calendar"></i>Đặt lịch lắp đặt</a>
+  </aside>
+</div>
+
+<!-- ===== Cart drawer ===== -->
+<div class="drawer drawer--right" data-cart aria-hidden="true">
+  <div class="drawer__scrim" data-close></div>
+  <aside class="drawer__panel cart" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="drawer__head"><span class="drawer__title" id="cart-title">Giỏ hàng <small data-cart-count-text>(0)</small></span><button class="icon-btn" type="button" aria-label="Đóng giỏ hàng" data-close><i data-ic="close"></i></button></div>
+    <div class="ship" data-ship><p data-ship-text></p><i><em data-ship-bar></em></i></div>
+    <ul class="cart__list" data-cart-list></ul>
+    <div class="cart__empty" data-cart-empty>
+      <svg viewBox="0 0 120 100" aria-hidden="true"><circle cx="60" cy="50" r="44" fill="#fff3eb"/><path d="M30 34h8l7 30h32l7-22H42" fill="none" stroke="#ff6a13" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="74" r="4.5" fill="#13233f"/><circle cx="72" cy="74" r="4.5" fill="#13233f"/></svg>
+      <b>Giỏ hàng đang trống</b><p>Thêm vài món cho xe yêu nhé!</p>
+      <a class="btn btn--primary btn--sm" href="#san-pham" data-close>Mua sắm ngay</a>
+    </div>
+    <div class="cart__foot" data-cart-foot>
+      <div class="cart__row"><span>Tạm tính</span><b data-subtotal>0₫</b></div>
+      <div class="cart__row cart__row--save"><span>Tiết kiệm</span><b data-saving>0₫</b></div>
+      <button class="btn btn--primary btn--block" type="button" data-checkout>Tiến hành đặt hàng</button>
+    </div>
+  </aside>
+</div>
+
+<!-- ===== Quick view ===== -->
+<div class="modal" data-quick aria-hidden="true">
+  <div class="modal__scrim" data-close></div>
+  <div class="modal__panel qv" role="dialog" aria-modal="true" aria-labelledby="qv-title">
+    <button class="icon-btn modal__x" type="button" aria-label="Đóng" data-close><i data-ic="close"></i></button>
+    <div class="qv__media" data-qv-media></div>
+    <div class="qv__body" data-qv-body></div>
+  </div>
+</div>
+
+<!-- ===== Checkout ===== -->
+<div class="modal" data-checkout-modal aria-hidden="true">
+  <div class="modal__scrim" data-close></div>
+  <div class="modal__panel co" role="dialog" aria-modal="true" aria-labelledby="co-title">
+    <button class="icon-btn modal__x" type="button" aria-label="Đóng" data-close><i data-ic="close"></i></button>
+    <form class="co__form" data-co-form novalidate>
+      <h3 id="co-title">Thông tin đặt hàng</h3>
+      <div class="co__summary" data-co-summary></div>
+      <div class="field"><label for="c-name">Họ và tên</label><input id="c-name" name="name" type="text" autocomplete="name" required placeholder="Nguyễn Văn An"><small class="field-err"></small></div>
+      <div class="field"><label for="c-phone">Số điện thoại</label><input id="c-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required placeholder="0912 345 678"><small class="field-err"></small></div>
+      <div class="field"><label for="c-addr">Địa chỉ nhận hàng</label><input id="c-addr" name="address" type="text" autocomplete="street-address" required placeholder="Số nhà, đường, phường/xã, tỉnh/thành"><small class="field-err"></small></div>
+      <div class="field"><label for="c-note">Ghi chú</label><textarea id="c-note" name="note" rows="2" placeholder="VD: lắp đặt buổi chiều, xe Vios 2022"></textarea></div>
+      <button class="btn btn--primary btn--block" type="submit">Xác nhận đặt hàng</button>
+      <p class="co__fine">Thanh toán khi nhận hàng (COD). Đây là cửa hàng mẫu – đơn hàng không được gửi đi thật.</p>
+    </form>
+    <div class="co__ok" data-co-ok hidden>
+      <div class="co__check"><i data-ic="check"></i></div>
+      <h3>Đặt hàng thành công!</h3>
+      <p data-co-ok-text>Cảm ơn bạn đã tin chọn An Khang Auto.</p>
+      <button class="btn btn--primary" type="button" data-close>Tiếp tục mua sắm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" data-toast role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="assets/js/data.js" defer></script>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
