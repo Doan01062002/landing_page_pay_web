@@ -1,12 +1,13 @@
-// Dự án đã triển khai cho khách thật: website, landing page, phần mềm.
-// Landing page tĩnh đặt trong /public/du-an/<slug>/ và chạy độc lập tại /du-an/<slug>/
-// (gửi thẳng đường dẫn này cho cơ sở). Thêm dự án: chép thư mục vào public/du-an rồi khai báo ở đây.
+// Mẫu dựng riêng (trang tĩnh): landing page, website, trang bán hàng. Hiện đầu Kho mẫu (/mau-phan-mem), trước các mẫu phần mềm.
+// Trang đặt trong /public/du-an/<slug>/ và chạy độc lập tại /du-an/<slug>/ (gửi thẳng đường dẫn này cho khách xem).
+// Thêm mẫu: chép thư mục vào public/du-an (scripts/sync-du-an.mjs) rồi khai báo ở đây.
+// category dùng chung bộ lọc ngành với Kho mẫu (categories trong templates.js), vd 'phutung' cho trang bán phụ kiện.
 
 export const projectTypes = [
   { id: 'all', label: 'Tất cả' },
-  { id: 'website', label: 'Website' },
   { id: 'landing', label: 'Landing page' },
-  { id: 'software', label: 'Phần mềm' },
+  { id: 'website', label: 'Website' },
+  { id: 'shop', label: 'Trang bán hàng' },
 ]
 
 const dir = (slug) => `/du-an/${slug}/`
@@ -15,6 +16,7 @@ export const projects = [
   {
     slug: 'nhatduc',
     type: 'landing',
+    category: 'oto',
     name: 'Gara Nhật Đức Long Biên',
     client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
     area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
@@ -30,6 +32,7 @@ export const projects = [
   {
     slug: 'nhatduc-ladi',
     type: 'landing',
+    category: 'oto',
     name: 'Gara Nhật Đức – bản Ladi',
     client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
     area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
@@ -45,6 +48,7 @@ export const projects = [
   {
     slug: 'carcarservice',
     type: 'landing',
+    category: 'oto',
     name: 'Gara Ô Tô Đức Tùng – Cơ sở 2',
     client: 'DUCTUNG CO.,LTD · Trung tâm dịch vụ Nissan Sài Đồng',
     area: '21 Sài Đồng, Long Biên, Hà Nội',
@@ -60,6 +64,7 @@ export const projects = [
   {
     slug: 'nhatduc-motion',
     type: 'landing',
+    category: 'oto',
     name: 'Gara Nhật Đức – bản Motion',
     client: 'Công ty TNHH TM & DV Ô tô Nhật Đức',
     area: 'KĐT Sài Đồng, Long Biên, Hà Nội',
@@ -75,7 +80,7 @@ export const projects = [
   {
     slug: 'minhphat',
     type: 'landing',
-    demo: true, // thương hiệu hư cấu: thẻ hiện "Bản mẫu" thay cho "Đã triển khai"
+    category: 'oto',
     name: 'Gara Ô Tô Minh Phát',
     client: 'Gara mẫu (thương hiệu minh hoạ)',
     area: 'Hà Nội · thông tin liên hệ minh hoạ',
@@ -91,7 +96,7 @@ export const projects = [
   {
     slug: 'vinfast',
     type: 'landing',
-    demo: true, // trang demo học tập, không phải web chính thức của VinFast
+    category: 'daily', // trang demo học tập, không phải web chính thức của VinFast
     name: 'Landing page xe điện VinFast',
     client: 'Bản demo – không liên kết với VinFast',
     area: 'Đại lý ô tô điện · bản demo',

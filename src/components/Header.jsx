@@ -9,7 +9,6 @@ import { useScrolled } from './Motion.jsx'
 const links = [
   { to: '/mau-phan-mem', label: 'Kho mẫu' },
   { to: '/mau-landing-page', label: 'Landing tặng kèm' },
-  { to: '/du-an', label: 'Dự án' },
   { to: '/#quy-trinh', label: 'Quy trình' },
   { to: '/#bang-gia', label: 'Bảng giá' },
   { to: '/#hoi-dap', label: 'Hỏi đáp' },

@@ -43,18 +43,18 @@ const KINDS = {
     ctaShort: 'Chọn mẫu',
     consultName: (t) => `Landing ${t.name}`,
   },
-  // Dự án đã triển khai: trang tĩnh /du-an/<slug>/, không đổi màu, có nút mở trang thật
+  // Mẫu dựng riêng: trang tĩnh /du-an/<slug>/, không đổi màu, có nút mở trang thật
   project: {
     list: projects,
     get: getProject,
     base: '/demo-du-an',
     url: (t) => t.url,
-    back: () => '/du-an',
-    backLabel: 'Quay về dự án',
-    sub: (t) => `${typeLabel(t.type)} · ${t.demo ? 'Bản mẫu' : 'Đã triển khai'} ${t.deployed}`,
+    back: () => '/mau-phan-mem?ht=rieng',
+    backLabel: 'Quay về kho mẫu',
+    sub: (t) => `${typeLabel(t.type)} · Mẫu dựng riêng`,
     cta: 'Làm trang như thế này',
     ctaShort: 'Làm trang này',
-    consultName: (t) => `Làm giống dự án ${t.name}`,
+    consultName: (t) => `Làm giống mẫu ${t.name}`,
   },
 }
 
@@ -142,7 +142,7 @@ export default function Demo({ kind = 'template' }) {
                 kind === 'template'
                   ? `Chọn mẫu phần mềm (${K.list.length})`
                   : kind === 'project'
-                    ? `Dự án đã triển khai (${K.list.length})`
+                    ? `Mẫu dựng riêng (${K.list.length})`
                     : `Chọn mẫu landing page (${K.list.length})`
               }
               value={t.slug}

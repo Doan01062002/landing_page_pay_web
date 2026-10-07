@@ -2,9 +2,18 @@ import { useMemo, useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import TemplateCard from '../components/TemplateCard.jsx'
+import ProjectTile from '../components/ProjectTile.jsx'
 import { templates, categories, featureFilters } from '../data/templates.js'
+import { projects, typeLabel } from '../data/projects.js'
 import { site, formatVND } from '../data/site.js'
 import '../styles/gallery.css'
+
+// Hình thức: mẫu dựng riêng (trang tĩnh /du-an/<slug>/, luôn xếp trước) hoặc mẫu phần mềm
+const forms = [
+  { id: 'all', label: 'Tất cả' },
+  { id: 'rieng', label: 'Mẫu dựng riêng' },
+  { id: 'phanmem', label: 'Mẫu phần mềm' },
+]
 
 const sorts = [
   { id: 'popular', label: 'Phổ biến nhất' },
@@ -27,6 +36,7 @@ export default function Gallery() {
   const sort = params.get('sort') || 'popular'
   const price = params.get('gia') || 'all'
   const feats = params.getAll('tn')
+  const form = params.get('ht') || 'all'
   const [query, setQuery] = useState(key)
   const [filtersOpen, setFiltersOpen] = useState(false)
 
@@ -44,18 +54,28 @@ export default function Gallery() {
 
   const toggleFeat = (id) => update({ tn: feats.includes(id) ? feats.filter((f) => f !== id) : [...feats, id] })
 
-  const results = useMemo(() => {
+  const matches = (text) => {
     const q = normalize(key.trim())
+    return !q || q.split(/\s+/).every((w) => normalize(text).includes(w))
+  }
+
+  // Mẫu dựng riêng chưa gắn tính năng / giá như mẫu phần mềm: ẩn khi lọc theo tính năng hoặc "Miễn phí"
+  const projectResults = useMemo(() => {
+    if (form === 'phanmem' || feats.length || price === 'free') return []
+    const list = projects.filter(
+      (p) => (cat === 'all' || p.category === cat) && matches([p.name, typeLabel(p.type), p.summary, ...p.highlights].join(' ')),
+    )
+    return sort === 'new' ? [...list].reverse() : list
+  }, [key, cat, price, sort, form, feats.join(',')])
+
+  const results = useMemo(() => {
+    if (form === 'rieng') return []
     let list = templates.filter((t) => {
       if (cat !== 'all' && t.category !== cat) return false
       if (price === 'free' && !t.free) return false
       if (price === 'paid' && t.free) return false
       if (feats.length && !feats.every((f) => t.features.includes(f))) return false
-      if (q) {
-        const hay = normalize([t.name, t.categoryLabel, t.tagline, t.description].join(' '))
-        if (!q.split(/\s+/).every((w) => hay.includes(w))) return false
-      }
-      return true
+      return matches([t.name, t.categoryLabel, t.tagline, t.description].join(' '))
     })
     list = [...list].sort((a, b) => {
       if (sort === 'new') return b.released.localeCompare(a.released)
@@ -64,15 +84,16 @@ export default function Gallery() {
       return b.popularity - a.popularity
     })
     return list
-  }, [key, cat, price, sort, feats.join(',')])
+  }, [key, cat, price, sort, form, feats.join(',')])
+  const total = projectResults.length + results.length
 
   const counts = useMemo(() => {
-    const c = { all: templates.length }
-    templates.forEach((t) => (c[t.category] = (c[t.category] || 0) + 1))
+    const c = { all: templates.length + projects.length }
+    ;[...projects, ...templates].forEach((t) => (c[t.category] = (c[t.category] || 0) + 1))
     return c
   }, [])
 
-  const activeCount = feats.length + (price !== 'all' ? 1 : 0)
+  const activeCount = feats.length + (price !== 'all' ? 1 : 0) + (form !== 'all' ? 1 : 0)
   const clearAll = () => setParams(new URLSearchParams(), { replace: true })
 
   return (
@@ -82,12 +103,12 @@ export default function Gallery() {
           <nav className="crumbs" aria-label="Đường dẫn">
             <Link to="/">Trang chủ</Link>
             <span>/</span>
-            <span aria-current="page">Kho mẫu phần mềm</span>
+            <span aria-current="page">Kho mẫu</span>
           </nav>
-          <h1>Kho mẫu phần mềm ngành ô tô</h1>
+          <h1>Kho mẫu ngành ô tô</h1>
           <p>
-            {templates.length} mẫu cho gara ô tô, tiệm xe máy, lốp – ắc quy, detailing và phụ tùng. Mẫu nào cũng tặng kèm landing page quảng
-            cáo trị giá {formatVND(site.promo.giftValue)}.
+            {projects.length} mẫu website, landing page dựng riêng và {templates.length} mẫu phần mềm cho gara ô tô, đại lý, tiệm xe máy, lốp –
+            ắc quy, detailing và phụ tùng. Mẫu phần mềm nào cũng tặng kèm landing page quảng cáo trị giá {formatVND(site.promo.giftValue)}.
           </p>
           <form
             className="g-search"
@@ -148,6 +169,20 @@ export default function Gallery() {
           <div className="g-layout">
             <aside className={'g-filters' + (filtersOpen ? ' is-open' : '')} aria-label="Bộ lọc">
               <div className="g-filters__group">
+                <h2>Hình thức</h2>
+                {forms.map((f) => (
+                  <label key={f.id} className="check check--radio">
+                    <input id={`ht-${f.id}`} type="radio" name="ht" checked={form === f.id} onChange={() => update({ ht: f.id })} />
+                    <span>
+                      {f.label}{' '}
+                      <small className="g-filters__n">
+                        {f.id === 'all' ? projects.length + templates.length : f.id === 'rieng' ? projects.length : templates.length}
+                      </small>
+                    </span>
+                  </label>
+                ))}
+              </div>
+              <div className="g-filters__group">
                 <h2>Tính năng</h2>
                 {featureFilters.map((f) => (
                   <label key={f.id} className="check">
@@ -180,7 +215,7 @@ export default function Gallery() {
             <div className="g-main">
               <div className="g-toolbar">
                 <p className="g-count" aria-live="polite">
-                  <strong key={results.length}>{results.length}</strong> mẫu phù hợp
+                  <strong key={total}>{total}</strong> mẫu phù hợp
                   {key && (
                     <>
                       {' '}
@@ -205,8 +240,11 @@ export default function Gallery() {
                 </div>
               </div>
 
-              {results.length ? (
-                <div className="tgrid tgrid--gallery" data-stagger="up" key={[key, cat, price, sort, feats.join()].join('|')}>
+              {total ? (
+                <div className="tgrid tgrid--gallery" data-stagger="up" key={[key, cat, price, sort, form, feats.join()].join('|')}>
+                  {projectResults.map((p) => (
+                    <ProjectTile key={`du-an-${p.slug}`} p={p} />
+                  ))}
                   {results.map((t) => (
                     <TemplateCard key={t.slug} t={t} />
                   ))}

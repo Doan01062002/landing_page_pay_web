@@ -4,7 +4,7 @@ import Icon from './Icon.jsx'
 import LivePreview from './LivePreview.jsx'
 import { typeLabel } from '../data/projects.js'
 
-// Thẻ dự án đã triển khai: xem trước trang thật, mở trang, sao chép link gửi cho cơ sở.
+// Thẻ mẫu dựng riêng (trang chủ): xem trước trang, mở trang, sao chép link gửi cho khách.
 export default function ProjectCard({ p }) {
   const [copied, setCopied] = useState(false)
   const fullUrl = typeof window !== 'undefined' ? window.location.origin + p.url : p.url
@@ -26,13 +26,13 @@ export default function ProjectCard({ p }) {
         <div className="lpcard__phone">
           <LivePreview slug={p.slug} url={p.url} device="mobile" title={`${p.name} trên điện thoại`} />
         </div>
-        <span className={`lpcard__badge pjcard__badge${p.demo ? ' pjcard__badge--demo' : ''}`}>
-          <Icon name={p.demo ? 'Sparkles' : 'BadgeCheck'} size={14} /> {p.demo ? 'Bản mẫu' : 'Đã triển khai'}
+        <span className="lpcard__badge pjcard__badge pjcard__badge--demo">
+          <Icon name="Sparkles" size={14} /> Dựng riêng
         </span>
       </Link>
       <div className="lpcard__body">
         <span className="lpcard__type">
-          {typeLabel(p.type)} · {p.demo ? 'Thực hiện' : 'Bàn giao'} {p.deployed}
+          {typeLabel(p.type)} · {p.deployed}
         </span>
         <h3>
           <Link to={`/demo-du-an/${p.slug}`}>{p.name}</Link>

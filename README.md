@@ -16,16 +16,16 @@ Mở http://localhost:5180
 | Đường dẫn | Nội dung |
 | --- | --- |
 | `/` | Landing page chào hàng: tính năng, mẫu nổi bật, quà tặng landing page, quy trình 7 ngày, bảng giá, đánh giá, hỏi đáp, form tư vấn |
-| `/mau-phan-mem` | Kho mẫu: tìm kiếm (không dấu), lọc theo loại hình, tính năng, chi phí; sắp xếp. Hỗ trợ `?key=`, `?loai=` |
+| `/mau-phan-mem` | Kho mẫu: mẫu dựng riêng (`projects.js`) xếp trước, rồi mẫu phần mềm. Tìm kiếm (không dấu), lọc theo hình thức, loại hình, tính năng, chi phí; sắp xếp. Hỗ trợ `?key=`, `?loai=`, `?ht=rieng\|phanmem` |
 | `/mau-phan-mem/:slug` | Chi tiết mẫu: xem trước máy tính + điện thoại, đổi bộ màu, "Chọn mẫu này", "Xem thử" |
 | `/demo/:slug` | Xem thử toàn màn hình: đổi thiết bị (máy tính / máy tính bảng / điện thoại), đổi màu, đổi mẫu |
 | `/preview/:slug` | Website mẫu chạy độc lập (được nhúng trong iframe ở các trang trên) |
 | `/mau-landing-page` | 3 mẫu landing page quảng cáo tặng kèm |
 | `/demo-landing/:slug` | Xem thử landing page theo thiết bị |
 | `/lp/:slug` | Landing page tặng kèm chạy độc lập |
-| `/du-an` | Dự án đã triển khai cho khách thật (website, landing page, phần mềm) |
-| `/demo-du-an/:slug` | Xem thử dự án theo thiết bị |
-| `/du-an/:slug/` | Trang thật của dự án (file tĩnh), gửi link này cho cơ sở |
+| `/du-an` | Chuyển sang `/mau-phan-mem?ht=rieng` (trang dự án đã gộp vào Kho mẫu) |
+| `/demo-du-an/:slug` | Xem thử mẫu dựng riêng theo thiết bị |
+| `/du-an/:slug/` | Trang của mẫu dựng riêng (file tĩnh), gửi link này cho khách xem |
 
 ## Cấu trúc
 
@@ -50,9 +50,9 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
   `ffmpeg -i in.mp4 -t 12 -an -vf scale=-2:720 -c:v libx264 -crf 27 -movflags +faststart mk-<id>.mp4` và tạo ảnh đại diện `mk-<id>.jpg`.
 - Ảnh xưởng trong `public/images/xuong` được trích từ chính các video.
 
-## Dự án đã triển khai
+## Mẫu dựng riêng (trước đây "Dự án đã triển khai")
 
-- Dữ liệu: `src/data/projects.js` (loại: `website`, `landing`, `software`; tên, địa chỉ, ngày bàn giao, ảnh bìa, điểm nổi bật).
+- Dữ liệu: `src/data/projects.js` (loại: `landing`, `website`, `shop` = trang bán hàng; `category` dùng chung ngành với Kho mẫu, vd `phutung` cho trang bán phụ kiện; tên, ảnh bìa, điểm nổi bật). Hiện đầu Kho mẫu với nhãn "Dựng riêng", thẻ ở `src/components/ProjectTile.jsx`.
 - Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên), `nhatduc-motion` (bản Motion, xem bên dưới), `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2) và hai bản mẫu `minhphat`, `vinfast`.
 - Cập nhật sau khi sửa landing ở thư mục làm việc (`D:/Chungauto/landing_page_<x>`): chạy `node scripts/sync-du-an.mjs` (hoặc `node scripts/sync-du-an.mjs nhatduc`). Script chép `assets` + `index.html` vào `public/du-an/<slug>/` và tự chèn `<base href="/du-an/<slug>/">` để ảnh, CSS đúng cả khi link thiếu dấu `/` cuối.
 - Thêm dự án mới: khai báo thư mục trong `PROJECTS` của `scripts/sync-du-an.mjs`, chạy script, rồi thêm vào `projects.js`.

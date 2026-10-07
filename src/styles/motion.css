@@ -365,8 +365,7 @@
 }
 .motion .tcard:hover .live-preview--tall iframe,
 .motion .d-browser__link:hover .live-preview--tall iframe,
-.motion .lpcard:hover .live-preview--tall iframe,
-.motion .pjx:hover .live-preview--tall iframe {
+.motion .lpcard:hover .live-preview--tall iframe {
   transform: scale(var(--s)) translateY(var(--ty));
   transition: transform 6s linear;
 }
@@ -1275,8 +1274,7 @@
   }
   .motion .tcard:hover .live-preview--tall iframe,
   .motion .d-browser__link:hover .live-preview--tall iframe,
-  .motion .lpcard:hover .live-preview--tall iframe,
-  .motion .pjx:hover .live-preview--tall iframe {
+  .motion .lpcard:hover .live-preview--tall iframe {
     transform: scale(var(--s));
   }
   html {

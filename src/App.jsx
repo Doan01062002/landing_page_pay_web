@@ -13,7 +13,6 @@ import Preview from './pages/Preview.jsx'
 import NotFound from './pages/NotFound.jsx'
 import LpGallery from './pages/LpGallery.jsx'
 import LpPreview from './pages/LpPreview.jsx'
-import Projects from './pages/Projects.jsx'
 
 // Cuộn lên đầu khi đổi trang, hoặc tới #section nếu URL có hash.
 function ScrollManager() {
@@ -66,8 +65,8 @@ export default function App() {
           {/* Đường dẫn cũ: tự chuyển sang /mau-phan-mem */}
           <Route path="/mau-website/*" element={<RedirectOld />} />
           <Route path="/mau-landing-page" element={<LpGallery />} />
-          {/* Danh sách dự án; trang thật của từng dự án là file tĩnh /du-an/<slug>/ */}
-          <Route path="/du-an" element={<Projects />} />
+          {/* Danh sách dự án đã gộp vào Kho mẫu (mẫu dựng riêng); trang của từng mẫu vẫn là file tĩnh /du-an/<slug>/ */}
+          <Route path="/du-an" element={<Navigate to="/mau-phan-mem?ht=rieng" replace />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* Trang xem thử toàn màn hình và trang mẫu chạy trong iframe */}

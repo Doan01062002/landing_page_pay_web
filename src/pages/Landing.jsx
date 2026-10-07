@@ -453,12 +453,12 @@ function Projects() {
       <div className="wrap">
         <div className="section-head section-head--row" data-reveal="up">
           <div>
-            <p className="eyebrow">Dự án đã triển khai</p>
-            <h2>Gara thật đang dùng trang chúng tôi làm</h2>
-            <p>Không phải mẫu: đây là trang đã bàn giao cho từng cơ sở, với ảnh xưởng, hotline và địa chỉ thật.</p>
+            <p className="eyebrow">Mẫu website dựng riêng</p>
+            <h2>Trang dựng riêng cho từng loại cơ sở</h2>
+            <p>Landing page, website hoàn chỉnh để bạn xem thử trên máy tính và điện thoại, rồi thay bằng ảnh xưởng, hotline, địa chỉ của mình.</p>
           </div>
-          <Link to="/du-an" className="btn btn--primary">
-            Xem tất cả dự án <Icon name="ArrowRight" size={16} />
+          <Link to="/mau-phan-mem?ht=rieng" className="btn btn--primary">
+            Xem trong Kho mẫu <Icon name="ArrowRight" size={16} />
           </Link>
         </div>
         <div className={'lpg lpg--row' + (projects.length === 2 ? ' lpg--two' : '')} data-stagger="up">
