@@ -801,3 +801,7 @@ p { margin: 0; }
   .iv-empty { grid-template-columns: 1fr; text-align: center; justify-items: center; padding: 22px 18px; }
   .iv-empty__btns { justify-content: center; }
 }
+
+/* Ít hơn 3 video: thu gọn lưới vào giữa */
+.interviews__grid--few { grid-template-columns: repeat(auto-fit, minmax(0, 340px)); justify-content: center; }
+@media (max-width: 560px) { .interviews__grid--few { grid-template-columns: 1fr; } }

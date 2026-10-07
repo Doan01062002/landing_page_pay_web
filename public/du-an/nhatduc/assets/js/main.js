@@ -13,7 +13,10 @@ const CONFIG = {
   // Video phỏng vấn khách hàng (mục "Khách hàng nói gì", ngay dưới bảng giá). Chỉ dùng video THẬT của khách.
   // Mỗi video: link TikTok/YouTube, tiêu đề, tên khách, dòng xe, ảnh bìa (tuỳ chọn, mặc định ảnh xưởng).
   // Để trống mảng: mục này hiện khung "đang cập nhật" kèm nút tới kênh TikTok / YouTube.
+  // TẠM THỜI: đang gắn video của gara (chưa phải phỏng vấn khách) để xem thử trên web – thay bằng video phỏng vấn thật và bỏ `tag`.
   interviews: [
+    { link: 'https://www.youtube.com/watch?v=cbJ1UoQdtfU', title: 'Đánh bóng – hiệu chỉnh bề mặt sơn', customer: 'Video của gara', car: 'YouTube', poster: 'assets/img/paint-booth.webp', tag: 'Video tạm thời' },
+    { link: 'https://www.tiktok.com/@garaotonhatduc/video/7657133340587281685', title: 'Sửa điều hoà Nissan Kicks', customer: 'Video của gara', car: 'TikTok', poster: 'assets/img/mechanic.webp', tag: 'Video tạm thời' },
     // { link: 'https://www.tiktok.com/@garaotonhatduc/video/…', title: 'Sơn lại cản trước sau va quẹt', customer: 'Anh Minh', car: 'Mazda 3', poster: 'assets/img/paint-booth.webp' },
   ],
 };
@@ -363,12 +366,13 @@ const CONFIG = {
     const posters = ['assets/img/storefront-team.webp', 'assets/img/mechanic.webp', 'assets/img/paint-booth.webp'];
     const list = (CONFIG.interviews || []).filter((it) => parseVideo(it.link));
     if (list.length) {
+      if (list.length < 3) ivGrid.classList.add('interviews__grid--few');
       ivGrid.innerHTML = list.map((it, i) => `
         <button class="iv reveal" data-delay="${i % 3}" type="button" aria-label="Phát video: ${esc(it.title)}">
           <span class="iv__media">
             <img src="${esc(it.poster || posters[i % posters.length])}" alt="" loading="lazy">
             <span class="video__play"><svg class="ic"><use href="#i-play"/></svg></span>
-            <span class="iv__tag"><svg class="ic"><use href="#i-chat"/></svg> Phỏng vấn khách hàng</span>
+            <span class="iv__tag"><svg class="ic"><use href="#i-chat"/></svg> ${esc(it.tag || 'Phỏng vấn khách hàng')}</span>
           </span>
           <span class="iv__body">
             <b>${esc(it.title)}</b>
