@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/hungthinh/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/hungthinh/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Đăng nhập | Hưng Thịnh Auto</title>
+<meta name="description" content="Đăng nhập tài khoản (giao diện demo).">
+<meta name="theme-color" content="#14244f">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="auth">
+<a class="sr" href="#main">Bỏ qua đến nội dung chính</a>
+<div id="site-header"></div>
+<main id="main">
+<section class="sec"><div class="container"><div class="auth"><div class="auth__side"><img src="assets/img/cars/mazda-cx5-1.webp" alt="" loading="lazy"><h2>Chào mừng bạn trở lại</h2><ul class="ticks"><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Lưu xe yêu thích trên mọi thiết bị</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Theo dõi lịch hẹn lái thử</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Nhận thông báo xe mới về</li></ul></div>
+<div class="auth__form"><nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Trang chủ</a><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg><span aria-current="page">Đăng nhập</span></nav><h1>Đăng nhập</h1><p class="demo-note"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Giao diện minh hoạ – không có hệ thống tài khoản thật. Đừng nhập mật khẩu thật của bạn.</span></p>
+<form data-demo-form data-replace data-success="Đây là bản demo nên không có tài khoản nào được đăng nhập. Danh sách yêu thích vẫn được lưu trên trình duyệt này.">
+<label class="field"><span>Email hoặc số điện thoại *</span><input name="user" required autocomplete="username"></label>
+<label class="field pwd"><span>Mật khẩu *</span><input name="pass" type="password" required minlength="6" autocomplete="current-password"><button type="button" data-pwd aria-label="Hiện mật khẩu"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg></button></label>
+<div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap"><label class="check"><input type="checkbox" name="remember"> Ghi nhớ đăng nhập</label><a class="link" href="lien-he.html">Quên mật khẩu?</a></div>
+<button class="btn btn--y btn--block" type="submit">Đăng nhập</button></form>
+<p class="auth__alt">Chưa có tài khoản? <a href="dang-ky.html">Đăng ký ngay</a></p></div></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/credits.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

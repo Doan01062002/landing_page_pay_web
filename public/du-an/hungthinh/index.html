@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/hungthinh/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/hungthinh/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hưng Thịnh Auto – Sàn mua bán ô tô & phụ kiện (website demo)</title>
+<meta name="description" content="Hưng Thịnh Auto (thương hiệu minh hoạ): mua bán ô tô mới, xe đã qua sử dụng, ký gửi bán xe, phụ kiện ô tô, trả góp và lái thử.">
+<meta name="theme-color" content="#14244f">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+<a class="sr" href="#main">Bỏ qua đến nội dung chính</a>
+<div id="site-header"></div>
+<main id="main">
+<section class="hero" id="hero" aria-roledescription="carousel" aria-label="Banner nổi bật"></section>
+
+<section class="brands" aria-label="Hãng xe"><div class="container"><div class="brands__row" id="brands"></div></div></section>
+
+<section class="qs" aria-label="Tìm xe nhanh"><div class="container qs__grid">
+  <div class="qpanel" id="qbuy">
+    <h2 class="qpanel__t">Mua xe</h2>
+    <form class="qsearch" id="qForm" role="search"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg><input id="qText" type="search" placeholder="Nhập tên xe, ví dụ: CX-5, Ranger, VF 8…" aria-label="Từ khoá tìm xe"><button class="btn btn--navy btn--sm" type="submit">Tìm kiếm</button></form>
+    <p class="qlabel"><span>Hãng xe</span><select id="qModel" aria-label="Dòng xe"></select></p>
+    <div class="qbrands" id="qBrands"></div>
+    <p class="qlabel"><span>Kiểu dáng</span></p>
+    <div class="qtypes" id="qTypes"></div>
+    <p class="qlabel"><span>Khoảng giá</span></p>
+    <div class="chips" id="qPrices"></div>
+    <div class="qfoot"><a class="btn btn--y" id="qGo" href="mua-xe.html">Xem xe phù hợp</a><a class="link" href="mua-xe.html">Xem tất cả xe <svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+  <div class="qpanel qsell">
+    <h2 class="qpanel__t">Bán xe</h2>
+    <p class="muted" style="margin-top:-6px">Định giá miễn phí, phản hồi trong khoảng 15 phút làm việc (kịch bản demo).</p>
+    <form id="qSell" data-demo-form>
+      <label class="field"><span>Hãng xe *</span><select id="qsBrand" name="hang" required></select></label>
+      <div class="grid2"><label class="field"><span>Dòng xe *</span><input name="dong" required placeholder="Ví dụ: Vios"></label>
+      <label class="field"><span>Năm sản xuất</span><select name="nam"><option value="">Năm SX</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option><option>2013</option><option>2012</option><option>2011</option><option>2010</option><option>2009</option><option>2008</option></select></label></div>
+      <button class="btn btn--navy btn--block" type="submit"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6 9.5v5M18 9.5v5"/></svg>Tiếp tục định giá</button>
+    </form>
+    <ul class="steps4">
+      <li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>Gửi thông tin xe</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M12 7.5V12l3 2"/></svg>Hẹn lịch xem xe</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.5 5.6v5.6c0 4.8 3.1 8.6 7.5 10 4.4-1.4 7.5-5.2 7.5-10V5.6z"/><path d="m8.6 12 2.4 2.4 4.5-4.6"/></svg>Kiểm tra &amp; định giá</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.5h3l3.6-1.2a3 3 0 0 1 2 .1l3.7 1.6a1.6 1.6 0 0 1-1.2 3H10"/><path d="M6 19.5h6.8a4 4 0 0 0 2.4-.8l5.2-4a1.6 1.6 0 0 0-2-2.5L14.6 14"/><path d="M3 12v9"/></svg>Nhận tiền nhanh</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="sec sec--gray"><div class="container">
+  <div class="sec-head"><div><h2 class="sec-title">Xe <em>nổi bật</em></h2><p class="sec-sub">Những mẫu xe được quan tâm nhiều nhất tuần này – ảnh thật đúng mẫu xe, giá niêm yết minh hoạ.</p></div>
+  <ul class="trust"><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 4.5 5.6v5.6c0 4.8 3.1 8.6 7.5 10 4.4-1.4 7.5-5.2 7.5-10V5.6z"/><path d="m8.6 12 2.4 2.4 4.5-4.6"/></svg>Kiểm tra 180 hạng mục</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.6 6.2a4.2 4.2 0 0 0 5.2 5.2l-8.7 8.7a2.3 2.3 0 0 1-3.2-3.2L16.6 8.2"/><path d="M14.6 6.2 17.8 3l3.2 3.2-3.2 3.2"/></svg>Bảo hành tới 12 tháng</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5A8 8 0 0 0 5.6 6.4L4 8M4 3.8V8h4.2M4 12.5a8 8 0 0 0 14.4 5.1L20 16m0 4.2V16h-4.2"/></svg>Đổi trả trong 7 ngày</li></ul></div>
+  <div class="tabs" id="featTabs" role="tablist" aria-label="Lọc xe nổi bật"></div>
+  <div class="cgrid" id="feat"></div>
+  <div style="text-align:center;margin-top:30px"><a class="btn btn--line" href="mua-xe.html">Xem tất cả xe đang bán <svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+</div></section>
+
+<section class="show" id="show" aria-label="Danh sách xe"><div class="container">
+  <div class="sec-head sec-head--c"><span class="kicker">Khám phá nhanh</span><h2 class="sec-title">Danh sách <em>xe</em></h2></div>
+  <div class="show__tabs" id="showTabs" role="tablist"></div>
+  <div class="show__stage" id="showStage"></div>
+</div><div class="show__bar"><div class="container" id="showBar"></div></div></section>
+
+<section class="sec"><div class="container">
+  <div class="sec-head"><div><h2 class="sec-title">Phụ kiện <em>ô tô</em></h2><p class="sec-sub">Phụ tùng, đèn, ắc quy và đồ an toàn – lắp đặt tại showroom.</p></div><a class="link" href="phu-kien.html">Xem tất cả phụ kiện <svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+  <div class="agrid" id="accGrid"></div>
+</div></section>
+
+<section class="sec sec--gray"><div class="container svc" id="svc">
+  <div><span class="kicker">Một điểm đến</span><h2 class="sec-title">Dịch vụ <em>trọn gói</em></h2><p class="sec-sub">Từ chọn xe, bán xe cũ, lên đời tới trả góp – chọn nhu cầu để xem chi tiết.</p><div class="svc__tabs" id="svcTabs" role="tablist"></div></div>
+  <div class="svc__panel" id="svcPanel"></div>
+</div></section>
+
+<section class="sec"><div class="container">
+  <div class="sec-head sec-head--c"><span class="kicker">Khách hàng nói gì</span><h2 class="sec-title">Phản hồi <em>khách hàng</em></h2><p class="sec-sub">Những chia sẻ sau khi mua, bán xe và lắp phụ kiện.</p></div>
+  <div class="tslider"><div class="ttrack" id="ttrack" tabindex="0" aria-label="Danh sách phản hồi"></div>
+  <div class="tnav"><button type="button" data-tt="-1" aria-label="Phản hồi trước"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 5.5-6.5 6.5 6.5 6.5"/></svg></button><button type="button" data-tt="1" aria-label="Phản hồi tiếp"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button></div></div>
+  <p class="note">Nội dung phản hồi mang tính minh hoạ cho website demo.</p>
+</div></section>
+
+<section class="faqband" style="background-image:url('assets/img/cars/hyundai-santafe-1.webp')"><div class="container"><div class="faqcard">
+  <div><span class="kicker">Hỏi đáp</span><h2 class="sec-title" style="margin-bottom:10px">Câu hỏi <em>thường gặp</em></h2><div id="faqList"></div><p style="margin:18px 0 0"><a class="link" href="hoi-dap.html">Xem tất cả câu hỏi <svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></p></div>
+  <div class="faqcard__img"><img src="https://images.unsplash.com/photo-1595696389610-2d339d4573c7?auto=format&fit=crop&w=760&h=820&q=70" alt="Trao chìa khoá xe cho khách hàng" loading="lazy"></div>
+</div></div></section>
+
+<section class="sec"><div class="container">
+  <div class="sec-head"><div><h2 class="sec-title">Blog &amp; <em>chia sẻ</em></h2><p class="sec-sub">Kinh nghiệm chọn xe, lái xe an toàn và chăm sóc xe.</p></div><a class="link" href="tin-tuc.html">Tất cả bài viết <svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+  <div class="bgrid" id="blogGrid"></div>
+</div></section>
+<div style="height:40px"></div>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/credits.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

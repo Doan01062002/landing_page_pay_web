@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/hungthinh/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/hungthinh/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liên hệ | Hưng Thịnh Auto</title>
+<meta name="description" content="Liên hệ Hưng Thịnh Auto: hotline, email, địa chỉ showroom (minh hoạ).">
+<meta name="theme-color" content="#14244f">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="contact">
+<a class="sr" href="#main">Bỏ qua đến nội dung chính</a>
+<div id="site-header"></div>
+<main id="main">
+<section class="phead"><div class="container"><nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Trang chủ</a><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg><span aria-current="page">Liên hệ</span></nav><h1>Liên hệ</h1><p>Gửi câu hỏi hoặc đặt lịch tư vấn – chúng tôi phản hồi trong giờ làm việc (bản demo, không gửi dữ liệu).</p></div></section>
+<section class="sec" style="padding-top:36px"><div class="container contact">
+  <div><ul class="cinfo">
+    <li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s-6.8-6.2-6.8-11.6a6.8 6.8 0 0 1 13.6 0c0 5.4-6.8 11.6-6.8 11.6z"/><circle cx="12" cy="9.8" r="2.4"/></svg><div><b>Địa chỉ</b><span>Số 1 Đường Minh Hoạ, Hà Nội (minh hoạ)</span></div></li>
+    <li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3.5h3.2l1.6 4.2-2.1 1.4a11.5 11.5 0 0 0 7.2 7.2l1.4-2.1 4.2 1.6V19a1.8 1.8 0 0 1-1.9 1.8A16.6 16.6 0 0 1 3.2 5.4 1.8 1.8 0 0 1 5 3.5z"/></svg><div><b>Hotline</b><span><a href="tel:0900000686">0900 000 686</a> – 8:00 đến 20:00</span></div></li>
+    <li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg><div><b>Email</b><span><a href="mailto:lienhe@hungthinhauto.vn">lienhe@hungthinhauto.vn</a> (minh hoạ)</span></div></li>
+    <li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M12 7.5V12l3 2"/></svg><div><b>Giờ làm việc</b><span>Tất cả các ngày trong tuần</span></div></li>
+  </ul><div class="mapbox" id="map" style="margin-top:16px"></div></div>
+  <form class="card" data-demo-form data-replace data-success="Cảm ơn bạn đã liên hệ! Đây là bản demo nên tin nhắn không được gửi đi.">
+    <h2 style="font-size:24px">Gửi tin nhắn cho chúng tôi</h2>
+    <div class="grid2"><label class="field"><span>Họ và tên *</span><input name="name" required autocomplete="name"></label><label class="field"><span>Số điện thoại *</span><input name="phone" type="tel" required pattern="0[0-9]{9}" data-msg="Số điện thoại gồm 10 số, bắt đầu bằng 0" autocomplete="tel"></label></div>
+    <div class="grid2"><label class="field"><span>Email</span><input name="email" type="email" autocomplete="email"></label><label class="field"><span>Chủ đề</span><select name="topic"><option>Tư vấn mua xe</option><option>Bán / ký gửi xe</option><option>Trả góp</option><option>Phụ kiện &amp; dịch vụ</option><option>Góp ý</option></select></label></div>
+    <label class="field"><span>Showroom</span><select id="cShowroom" name="showroom"></select></label>
+    <label class="field"><span>Nội dung *</span><textarea name="msg" required minlength="10" placeholder="Bạn cần hỗ trợ gì?"></textarea></label>
+    <button class="btn btn--y btn--block" type="submit"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></svg>Gửi tin nhắn</button>
+  </form>
+</div></section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/credits.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

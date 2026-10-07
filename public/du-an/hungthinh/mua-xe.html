@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/hungthinh/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/hungthinh/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mua xe ô tô mới & đã qua sử dụng | Hưng Thịnh Auto</title>
+<meta name="description" content="Danh sách xe ô tô đang bán: lọc theo hãng, kiểu dáng, khoảng giá, nhiên liệu.">
+<meta name="theme-color" content="#14244f">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="listing">
+<a class="sr" href="#main">Bỏ qua đến nội dung chính</a>
+<div id="site-header"></div>
+<main id="main">
+<section class="phead"><div class="container"><nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Trang chủ</a><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg><span aria-current="page">Mua xe</span></nav><h1 id="lTitle">Mua xe ô tô</h1><p>Lọc theo hãng, kiểu dáng và khoảng giá. Ảnh thật đúng mẫu xe; giá và tình trạng mang tính minh hoạ.</p><div class="catcards" id="catcards"></div></div></section>
+<section class="sec" style="padding-top:36px"><div class="container" id="shopTop"><div class="shop">
+  <aside class="filters" id="filters" aria-label="Bộ lọc">
+    <div class="filters__top"><h2><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6.2 7.4V19l-3.6-1.8v-4.8z"/></svg>Bộ lọc</h2><div style="display:flex;gap:6px;align-items:center"><button class="link" type="button" id="fReset">Xoá lọc</button><button class="ibtn filters__close" type="button" data-fclose aria-label="Đóng bộ lọc"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
+    <div id="fBody"></div>
+    <div class="filters__apply"><button class="btn btn--y" type="button" data-fclose>Xem <span id="fApplyN">0</span> xe</button></div>
+  </aside>
+  <div>
+    <div class="toolbar">
+      <div class="toolbar__l"><button class="btn btn--line btn--sm fbtn" type="button" id="fOpen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6.2 7.4V19l-3.6-1.8v-4.8z"/></svg>Bộ lọc</button><p class="toolbar__count" id="count" aria-live="polite"></p></div>
+      <div class="toolbar__r"><form id="lqForm" class="qsearch" role="search" style="height:40px;padding:0 4px 0 12px;box-shadow:none;border:1.5px solid var(--line)"><input id="lq" type="search" placeholder="Tìm trong kết quả" aria-label="Tìm trong kết quả" style="height:36px;width:150px"><button type="submit" aria-label="Tìm" class="vbtn" style="border:0;width:32px;height:32px"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></button></form>
+      <select id="sort" aria-label="Sắp xếp"><option value="noi-bat">Nổi bật</option><option value="gia-tang">Giá tăng dần</option><option value="gia-giam">Giá giảm dần</option><option value="moi-nhat">Đời xe mới nhất</option><option value="km-thap">Ít km nhất</option><option value="ten">Tên A – Z</option></select>
+      <button class="vbtn" type="button" data-view="grid" aria-label="Dạng lưới"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></button><button class="vbtn" type="button" data-view="list" aria-label="Dạng danh sách"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4.5" width="5" height="5" rx="1.2"/><rect x="4" y="14.5" width="5" height="5" rx="1.2"/><path d="M12 6h8M12 9h5M12 16h8M12 19h5"/></svg></button></div>
+    </div>
+    <div class="achips" id="achips" hidden></div>
+    <div class="cgrid cgrid--3" id="grid"></div>
+    <div id="noResult"></div>
+    <nav class="pager" id="pager" aria-label="Phân trang"></nav>
+  </div>
+</div></div></section>
+<section class="sec sec--gray"><div class="container helpcta">
+  <div class="helpcta__l"><span class="kicker">Chưa tìm thấy xe ưng ý?</span><h2>Để chúng tôi <em style="font-style:normal;background:var(--y);padding:0 6px">tìm giúp bạn</em></h2><p class="muted">Cho chúng tôi biết mẫu xe và ngân sách, tư vấn viên sẽ gợi ý những xe phù hợp nhất.</p></div>
+  <div class="helpcta__r"><h3>Nhận thông báo khi có xe phù hợp</h3><ul><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Ưu tiên xem xe mới về</li><li><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Báo giá lăn bánh chi tiết</li></ul>
+  <form class="inline-form" data-demo-form data-replace data-success="Đã ghi nhận yêu cầu tìm xe (demo – không gửi dữ liệu)."><label class="field"><span class="sr">Số điện thoại</span><input name="phone" type="tel" required pattern="0[0-9]{9}" data-msg="Số điện thoại gồm 10 số, bắt đầu bằng 0" placeholder="Số điện thoại của bạn"></label><button class="btn btn--navy" type="submit">Gửi yêu cầu</button></form></div>
+</div></section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/credits.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

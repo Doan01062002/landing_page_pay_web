@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/hungthinh/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/hungthinh/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hỏi đáp thường gặp | Hưng Thịnh Auto</title>
+<meta name="description" content="Giải đáp về mua xe, bán xe, trả góp, bảo hành.">
+<meta name="theme-color" content="#14244f">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="faq">
+<a class="sr" href="#main">Bỏ qua đến nội dung chính</a>
+<div id="site-header"></div>
+<main id="main">
+<section class="phead"><div class="container"><nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Trang chủ</a><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg><span aria-current="page">Hỏi đáp</span></nav><h1>Hỏi đáp thường gặp</h1><p>Tìm nhanh câu trả lời về mua xe, bán xe, tài chính và bảo hành.</p></div></section>
+<section class="sec" style="padding-top:32px"><div class="container faqpage">
+  <div><div class="faqsearch"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg><input id="fq" type="search" placeholder="Nhập từ khoá, ví dụ: trả góp, lái thử…" aria-label="Tìm câu hỏi"></div><div class="tabs" id="fqCats"></div><div id="faqAll"></div></div>
+  <aside><form class="card" data-demo-form data-replace data-success="Câu hỏi của bạn đã được ghi nhận (demo)."><h3>Chưa tìm thấy câu trả lời?</h3><p class="muted">Gửi câu hỏi, chúng tôi sẽ phản hồi qua điện thoại hoặc email.</p>
+    <label class="field"><span>Họ tên *</span><input name="name" required></label><label class="field"><span>Số điện thoại *</span><input name="phone" type="tel" required pattern="0[0-9]{9}" data-msg="Số điện thoại gồm 10 số, bắt đầu bằng 0"></label><label class="field"><span>Câu hỏi *</span><textarea name="q" required minlength="10"></textarea></label>
+    <button class="btn btn--y btn--block" type="submit">Gửi câu hỏi</button></form></aside>
+</div></section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/credits.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

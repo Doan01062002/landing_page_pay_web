@@ -23,6 +23,7 @@ const PROJECTS = {
   bongstudio: { folder: 'landing_page_bongstudio' },
   // Website mẫu nhiều trang
   tinviet: { folder: 'landing_page_tinviet' },
+  hungthinh: { folder: 'landing_page_hungthinh' },
   // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
 }
 

@@ -125,6 +125,21 @@ export const projects = [
     highlights: ['Lọc xe đa tiêu chí', 'Trang chi tiết xe', 'So sánh 3 xe', 'Tính trả góp', 'Định giá & ký gửi', 'Đặt lịch lái thử'],
   },
   {
+    slug: 'hungthinh',
+    type: 'website',
+    category: 'daily', // mẫu website, thương hiệu minh hoạ
+    name: 'Hưng Thịnh Auto – sàn mua bán ô tô',
+    client: 'Sàn mẫu (thương hiệu minh hoạ)',
+    area: 'Hà Nội · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 686',
+    deployed: '10/2026',
+    url: dir('hungthinh'),
+    accent: '#ffc20e',
+    summary:
+      'Website sàn mua bán ô tô & phụ kiện 18 trang: lọc xe theo hãng, kiểu dáng, giá; trang chi tiết có thư viện ảnh, tuỳ chọn, tính trả góp; so sánh 3 xe, đặt cọc, giỏ hàng, ký gửi bán xe, hệ thống showroom.',
+    highlights: ['Bộ lọc xe nhiều tiêu chí', 'So sánh tối đa 3 xe', 'Tính trả góp tức thì', 'Đặt cọc & giỏ hàng', 'Ký gửi bán xe', 'Ảnh xe thật đúng mẫu'],
+  },
+  {
     slug: 'dopro',
     type: 'shop',
     category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
