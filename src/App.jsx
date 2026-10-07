@@ -3,6 +3,7 @@ import { Routes, Route, Outlet, Navigate, useLocation } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import FloatingContact from './components/FloatingContact.jsx'
+import IntroSplash from './components/IntroSplash.jsx'
 import { ConsultProvider } from './components/ConsultContext.jsx'
 import { RevealManager, ScrollProgress } from './components/Motion.jsx'
 import Landing from './pages/Landing.jsx'
@@ -40,6 +41,8 @@ function SiteLayout() {
   const { pathname } = useLocation()
   return (
     <>
+      {/* màn mở đầu: chỉ trang chủ, một lần mỗi phiên (?intro=1 để xem lại) */}
+      <IntroSplash />
       <ScrollProgress />
       <Header />
       {/* key theo đường dẫn để chạy hiệu ứng chuyển trang */}
