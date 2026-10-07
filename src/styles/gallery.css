@@ -65,52 +65,6 @@
 .g-body {
   padding-block: 28px 80px;
 }
-.g-cats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 6px;
-  margin-bottom: 24px;
-  scrollbar-width: thin;
-}
-.g-cat {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
-  border: 1.5px solid var(--line);
-  border-radius: 999px;
-  background: #fff;
-  font-weight: 600;
-  font-size: 14.5px;
-  color: var(--ink-2);
-  cursor: pointer;
-}
-.g-cat span {
-  font-family: var(--f-num);
-  font-size: 12px;
-  min-width: 22px;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: var(--mist);
-  color: var(--ink-3);
-}
-.g-cat:hover {
-  border-color: var(--brand-deep);
-  color: var(--brand-deep);
-}
-.g-cat.is-active {
-  background: var(--brand);
-  border-color: var(--brand-deep);
-  color: #fff;
-}
-.g-cat.is-active span {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
 .g-layout {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
@@ -118,10 +72,8 @@
   align-items: start;
 }
 .g-filters {
-  position: sticky;
-  top: 96px;
   display: grid;
-  gap: 24px;
+  gap: 20px;
 }
 .g-filters__group {
   display: grid;
@@ -150,6 +102,9 @@
   height: 18px;
   accent-color: var(--brand-deep);
   cursor: pointer;
+}
+.g-filters__group:last-child {
+  border-bottom: 0;
 }
 .g-filters__help {
   display: flex;
@@ -194,7 +149,7 @@
   font-weight: 500;
   cursor: pointer;
 }
-.g-filter-toggle {
+.btn.g-filter-toggle {
   display: none;
 }
 .tgrid.tgrid--gallery {
@@ -450,7 +405,7 @@
   .g-layout {
     grid-template-columns: minmax(0, 1fr);
   }
-  .g-filter-toggle {
+  .btn.g-filter-toggle {
     display: inline-flex;
   }
   .g-filters {
@@ -474,9 +429,6 @@
 @media (max-width: 640px) {
   .tgrid.tgrid--gallery {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .g-cats {
-    flex-wrap: nowrap;
   }
   .g-search {
     flex-wrap: wrap;
@@ -540,17 +492,6 @@
 .badge--custom {
   background: #6d28d9;
   color: #fff;
-}
-.tcard__tagline--clamp {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-}
-.tcard--project .tcard__price strong {
-  font-family: var(--f-body);
-  font-size: 15px;
 }
 .g-filters__n {
   margin-left: 4px;

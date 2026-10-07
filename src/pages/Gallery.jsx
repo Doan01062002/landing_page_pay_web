@@ -3,9 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import TemplateCard from '../components/TemplateCard.jsx'
 import ProjectTile from '../components/ProjectTile.jsx'
-import { templates, categories, featureFilters } from '../data/templates.js'
+import { templates, categories } from '../data/templates.js'
 import { projects, typeLabel } from '../data/projects.js'
-import { site, formatVND } from '../data/site.js'
 import '../styles/gallery.css'
 
 // Hình thức: mẫu dựng riêng (trang tĩnh /du-an/<slug>/, luôn xếp trước) hoặc mẫu phần mềm
@@ -34,8 +33,6 @@ export default function Gallery() {
   const key = params.get('key') || ''
   const cat = params.get('loai') || 'all'
   const sort = params.get('sort') || 'popular'
-  const price = params.get('gia') || 'all'
-  const feats = params.getAll('tn')
   const form = params.get('ht') || 'all'
   const [query, setQuery] = useState(key)
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -52,29 +49,23 @@ export default function Gallery() {
     setParams(next, { replace: true })
   }
 
-  const toggleFeat = (id) => update({ tn: feats.includes(id) ? feats.filter((f) => f !== id) : [...feats, id] })
-
   const matches = (text) => {
     const q = normalize(key.trim())
     return !q || q.split(/\s+/).every((w) => normalize(text).includes(w))
   }
 
-  // Mẫu dựng riêng chưa gắn tính năng / giá như mẫu phần mềm: ẩn khi lọc theo tính năng hoặc "Miễn phí"
   const projectResults = useMemo(() => {
-    if (form === 'phanmem' || feats.length || price === 'free') return []
+    if (form === 'phanmem') return []
     const list = projects.filter(
       (p) => (cat === 'all' || p.category === cat) && matches([p.name, typeLabel(p.type), p.summary, ...p.highlights].join(' ')),
     )
     return sort === 'new' ? [...list].reverse() : list
-  }, [key, cat, price, sort, form, feats.join(',')])
+  }, [key, cat, sort, form])
 
   const results = useMemo(() => {
     if (form === 'rieng') return []
     let list = templates.filter((t) => {
       if (cat !== 'all' && t.category !== cat) return false
-      if (price === 'free' && !t.free) return false
-      if (price === 'paid' && t.free) return false
-      if (feats.length && !feats.every((f) => t.features.includes(f))) return false
       return matches([t.name, t.categoryLabel, t.tagline, t.description].join(' '))
     })
     list = [...list].sort((a, b) => {
@@ -84,7 +75,7 @@ export default function Gallery() {
       return b.popularity - a.popularity
     })
     return list
-  }, [key, cat, price, sort, form, feats.join(',')])
+  }, [key, cat, sort, form])
   const total = projectResults.length + results.length
 
   const counts = useMemo(() => {
@@ -93,7 +84,7 @@ export default function Gallery() {
     return c
   }, [])
 
-  const activeCount = feats.length + (price !== 'all' ? 1 : 0) + (form !== 'all' ? 1 : 0)
+  const activeCount = (cat !== 'all' ? 1 : 0) + (form !== 'all' ? 1 : 0)
   const clearAll = () => setParams(new URLSearchParams(), { replace: true })
 
   return (
@@ -107,8 +98,7 @@ export default function Gallery() {
           </nav>
           <h1>Kho mẫu ngành ô tô</h1>
           <p>
-            {projects.length} mẫu website, landing page dựng riêng và {templates.length} mẫu phần mềm cho gara ô tô, đại lý, tiệm xe máy, lốp –
-            ắc quy, detailing và phụ tùng. Mẫu phần mềm nào cũng tặng kèm landing page quảng cáo trị giá {formatVND(site.promo.giftValue)}.
+            {projects.length + templates.length} mẫu website, landing page và phần mềm cho gara, đại lý, cửa hàng phụ kiện ô tô.
           </p>
           <form
             className="g-search"
@@ -150,24 +140,19 @@ export default function Gallery() {
 
       <section className="g-body">
         <div className="wrap">
-          <div className="g-cats" role="tablist" aria-label="Loại hình">
-            {categories.map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                role="tab"
-                aria-selected={cat === c.id}
-                className={'g-cat' + (cat === c.id ? ' is-active' : '')}
-                onClick={() => update({ loai: c.id })}
-              >
-                {c.label}
-                <span>{counts[c.id] || 0}</span>
-              </button>
-            ))}
-          </div>
-
           <div className="g-layout">
             <aside className={'g-filters' + (filtersOpen ? ' is-open' : '')} aria-label="Bộ lọc">
+              <div className="g-filters__group">
+                <h2>Danh mục</h2>
+                {categories.map((c) => (
+                  <label key={c.id} className="check check--radio">
+                    <input id={`loai-${c.id}`} type="radio" name="loai" checked={cat === c.id} onChange={() => update({ loai: c.id })} />
+                    <span>
+                      {c.label} <small className="g-filters__n">{counts[c.id] || 0}</small>
+                    </span>
+                  </label>
+                ))}
+              </div>
               <div className="g-filters__group">
                 <h2>Hình thức</h2>
                 {forms.map((f) => (
@@ -181,34 +166,6 @@ export default function Gallery() {
                     </span>
                   </label>
                 ))}
-              </div>
-              <div className="g-filters__group">
-                <h2>Tính năng</h2>
-                {featureFilters.map((f) => (
-                  <label key={f.id} className="check">
-                    <input id={`tn-${f.id}`} type="checkbox" checked={feats.includes(f.id)} onChange={() => toggleFeat(f.id)} />
-                    <span>{f.label}</span>
-                  </label>
-                ))}
-              </div>
-              <div className="g-filters__group">
-                <h2>Chi phí mẫu</h2>
-                {[
-                  { id: 'all', label: 'Tất cả' },
-                  { id: 'free', label: 'Miễn phí' },
-                  { id: 'paid', label: 'Trả phí' },
-                ].map((p) => (
-                  <label key={p.id} className="check check--radio">
-                    <input id={`gia-${p.id}`} type="radio" name="gia" checked={price === p.id} onChange={() => update({ gia: p.id })} />
-                    <span>{p.label}</span>
-                  </label>
-                ))}
-              </div>
-              <div className="g-filters__help">
-                <Icon name="MessageCircle" size={18} />
-                <p>
-                  Chưa chọn được mẫu? Gọi <strong>{site.hotline}</strong>, chúng tôi gợi ý mẫu theo loại hình của bạn.
-                </p>
               </div>
             </aside>
 
@@ -241,7 +198,7 @@ export default function Gallery() {
               </div>
 
               {total ? (
-                <div className="tgrid tgrid--gallery" data-stagger="up" key={[key, cat, price, sort, form, feats.join()].join('|')}>
+                <div className="tgrid tgrid--gallery" data-stagger="up" key={[key, cat, sort, form].join('|')}>
                   {projectResults.map((p) => (
                     <ProjectTile key={`du-an-${p.slug}`} p={p} />
                   ))}
@@ -253,7 +210,7 @@ export default function Gallery() {
                 <div className="g-empty" data-reveal="zoom">
                   <Icon name="Search" size={28} />
                   <h3>Không có mẫu nào khớp bộ lọc</h3>
-                  <p>Thử bỏ bớt tính năng đã chọn hoặc tìm bằng từ khóa khác, ví dụ “gara”, “xe máy”.</p>
+                  <p>Thử chọn danh mục khác hoặc tìm bằng từ khóa khác, ví dụ “gara”, “xe máy”.</p>
                   <button type="button" className="btn btn--primary" onClick={clearAll}>
                     Xóa tất cả bộ lọc
                   </button>

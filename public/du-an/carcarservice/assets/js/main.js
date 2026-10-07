@@ -5,8 +5,9 @@ const CONFIG = {
   // URL nhận dữ liệu form (Google Apps Script Web App, webhook CRM, Make/Zapier…).
   // Để trống: lưu tạm vào trình duyệt + hiện popup cảm ơn.
   formEndpoint: '',
-  // ID video YouTube phỏng vấn khách hàng (VD: 'dQw4w9WgXcQ'). Để trống → mở Fanpage.
-  youtubeId: '',
+  // ID video YouTube ở mục "Khách hàng nói gì" (VD: 'dQw4w9WgXcQ'). Để trống → mở Fanpage.
+  // TẠM THỜI: video giới thiệu gara của kênh CNV CDP – thay bằng video phỏng vấn khách thật.
+  youtubeId: 'j9l0puR5YrQ',
   fanpage: 'https://www.facebook.com/GaraAuLac/',
   youtubeChannel: '', // link kênh YouTube
   tiktok: '',         // link kênh TikTok
@@ -281,7 +282,8 @@ const CONFIG = {
   /* ---------- Video facade (click-to-play, không tải YouTube cho tới khi bấm) ---------- */
   const facade = $('#videoFacade');
   if (facade) {
-    if (CONFIG.youtubeId) {
+    // giữ ảnh bìa có sẵn trong HTML; chỉ lấy ảnh YouTube khi thẻ img để trống
+    if (CONFIG.youtubeId && !$('img', facade).getAttribute('src')) {
       $('img', facade).src = `https://i.ytimg.com/vi/${CONFIG.youtubeId}/hqdefault.jpg`;
     }
     facade.addEventListener('click', () => {

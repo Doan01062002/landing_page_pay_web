@@ -434,41 +434,6 @@
   transform: translateY(6px);
 }
 
-/* ---------- Thẻ mẫu ---------- */
-.tcard__overlay .btn {
-  transform: translateY(10px);
-  opacity: 0;
-  transition:
-    transform 0.3s var(--ease-out),
-    opacity 0.3s;
-}
-.tcard:hover .tcard__overlay .btn,
-.tcard:focus-within .tcard__overlay .btn {
-  transform: none;
-  opacity: 1;
-}
-.tcard:hover .tcard__overlay .btn + .btn {
-  transition-delay: 60ms;
-}
-.tcard__swatches i {
-  transition: transform 0.25s var(--ease-spring);
-}
-.tcard:hover .tcard__swatches i {
-  transform: scale(1.2);
-}
-.tcard:hover .tcard__swatches i:nth-child(2) {
-  transition-delay: 50ms;
-}
-.tcard:hover .tcard__swatches i:nth-child(3) {
-  transition-delay: 100ms;
-}
-.tcard__gift svg {
-  transition: transform 0.3s;
-}
-.tcard:hover .tcard__gift svg {
-  animation: wiggle 0.5s ease-in-out;
-}
-
 /* ---------- Quà tặng ---------- */
 .gift__ribbon {
   position: relative;

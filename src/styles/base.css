@@ -534,144 +534,55 @@ p {
 }
 .tcard__media {
   position: relative;
+  display: block;
   border-bottom: 1px solid var(--line);
-}
-.tcard__overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 10px;
-  padding: 16px;
-  background: linear-gradient(180deg, transparent 45%, rgba(22, 24, 29, 0.5));
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-/* Màn hình cảm ứng không có hover: luôn hiện nút Xem thử / Chi tiết */
-@media (hover: none) {
-  .tcard__overlay,
-  .tcard__overlay .btn {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .tcard__overlay {
-    padding: 10px;
-    background: linear-gradient(180deg, transparent 55%, rgba(22, 24, 29, 0.4));
-  }
-  .tcard .tcard__badges {
-    top: 10px;
-    bottom: auto;
-  }
-  .tcard__overlay .btn {
-    min-height: 38px;
-    padding: 8px 14px;
-    font-size: 14px;
-  }
-}
-.tcard:hover .tcard__overlay,
-.tcard:focus-within .tcard__overlay {
-  opacity: 1;
 }
 .tcard__badges {
   position: absolute;
-  bottom: 12px;
-  right: 12px;
+  top: 12px;
+  left: 12px;
   display: flex;
-  align-items: flex-start;
   gap: 6px;
-  height: max-content;
 }
 .tcard__body {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   padding: 18px 20px 20px;
   flex: 1;
 }
-.tcard__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.tcard__cat {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--brand-deep);
-}
-.tcard__swatches {
-  display: flex;
-  gap: 4px;
-}
-.tcard__swatches i {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
-}
 .tcard__name {
-  font-family: var(--f-display);
-  font-size: 26px;
+  font-family: var(--f-body);
+  font-size: 18px;
   font-weight: 700;
+  line-height: 1.35;
 }
 .tcard__name a:hover {
   color: var(--brand-deep);
 }
-.tcard__tagline {
-  font-size: 14.5px;
-  color: var(--ink-2);
-}
-.tcard__features {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.tcard__features li {
-  font-size: 12.5px;
-  padding: 3px 9px;
-  border-radius: 4px;
-  background: var(--mist);
-  color: var(--ink-2);
-}
-.tcard__foot {
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px dashed var(--line);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 8px;
-}
 .tcard__price {
-  display: grid;
-  line-height: 1.2;
-}
-.tcard__price small {
-  font-size: 12px;
-  color: var(--ink-3);
-}
-.tcard__price strong {
   font-family: var(--f-num);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--signal-deep);
   font-variant-numeric: tabular-nums;
 }
-.tcard__gift {
-  white-space: nowrap;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--signal-deep);
-  background: var(--signal-soft);
-  padding: 4px 8px;
-  border-radius: 4px;
+.tcard__price--quote {
+  font-family: var(--f-body);
+  font-size: 16px;
+  color: var(--ink-2);
+}
+.tcard__actions {
+  margin-top: auto;
+  padding-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.tcard__actions .btn {
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 999px;
 }
 
 /* ---------- Modal ---------- */
@@ -1619,4 +1530,9 @@ p {
   color: var(--brand-deep);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+.tcard__cat {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-deep);
 }

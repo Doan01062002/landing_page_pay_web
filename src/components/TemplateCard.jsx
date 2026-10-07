@@ -1,58 +1,31 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
 import LivePreview from './LivePreview.jsx'
-import { featureFilters } from '../data/templates.js'
 import { formatVND } from '../data/site.js'
 
-const featureLabel = Object.fromEntries(featureFilters.map((f) => [f.id, f.label]))
-
+// Thẻ mẫu tối giản: ảnh xem trước, tên, giá, hai nút Xem thử / Chi tiết.
 export default function TemplateCard({ t }) {
   return (
     <article className="tcard">
-      <div className="tcard__media">
+      <Link to={`/demo/${t.slug}`} className="tcard__media" aria-label={`Xem thử ${t.name}`}>
         <LivePreview slug={t.slug} url={t.url} tall />
-        <div className="tcard__overlay">
-          <Link to={`/demo/${t.slug}`} className="btn btn--signal">
-            <Icon name="Eye" size={16} /> Xem thử
-          </Link>
-          <Link to={`/mau-phan-mem/${t.slug}`} className="btn btn--light">
-            Chi tiết
-          </Link>
-        </div>
         <div className="tcard__badges">
           {t.isNew && <span className="badge badge--new">Mới</span>}
           {t.free && <span className="badge badge--free">Miễn phí</span>}
         </div>
-      </div>
+      </Link>
       <div className="tcard__body">
-        <div className="tcard__top">
-          <span className="tcard__cat">{t.categoryLabel}</span>
-          <span className="tcard__swatches" aria-label={`${t.palettes.length} bộ màu`}>
-            {t.palettes.map((p) => (
-              <i key={p.name} style={{ background: p.p }} />
-            ))}
-          </span>
-        </div>
         <h3 className="tcard__name">
           <Link to={`/mau-phan-mem/${t.slug}`}>{t.name}</Link>
         </h3>
-        <p className="tcard__tagline">{t.tagline}</p>
-        <ul className="tcard__features">
-          {t.features.slice(0, 3).map((f) => (
-            <li key={f}>{featureLabel[f]}</li>
-          ))}
-        </ul>
-        <div className="tcard__foot">
-          <span className="tcard__price">
-            {t.free ? (
-              <strong>Miễn phí</strong>
-            ) : (
-              <>
-                <small>Triển khai từ</small>
-                <strong>{formatVND(t.price)}</strong>
-              </>
-            )}
-          </span>
+        <p className="tcard__price">{t.free ? 'Miễn phí' : formatVND(t.price)}</p>
+        <div className="tcard__actions">
+          <Link to={`/demo/${t.slug}`} className="btn btn--signal">
+            <Icon name="Eye" size={16} /> Xem thử
+          </Link>
+          <Link to={`/mau-phan-mem/${t.slug}`} className="btn btn--ghost">
+            Chi tiết
+          </Link>
         </div>
       </div>
     </article>
