@@ -2,11 +2,11 @@
 // Dùng lại bộ giao diện của trang quản trị demo (src/admin) – cùng CSS, bảng danh sách, biểu mẫu.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { Bell, ExternalLink, KeyRound, LayoutDashboard, LogOut, Menu, Search, Settings as SettingsIcon, X } from 'lucide-react'
+import { Bell, ChevronDown, ExternalLink, KeyRound, LayoutDashboard, LogOut, Menu, Search, Settings as SettingsIcon, X } from 'lucide-react'
 import { AdminProvider, useAdmin, useCollection } from '../admin/store.jsx'
 import { ConfirmHost } from '../admin/ui.jsx'
 import { matchText } from '../admin/schemas.jsx'
-import { initials, isoDay } from '../admin/lib.js'
+import { isoDay } from '../admin/lib.js'
 import Resource from '../admin/pages/Resource.jsx'
 import { api, createApiStore } from './api.js'
 import { CA_MODULES, getCaSchema } from './schemas.jsx'
@@ -184,12 +184,11 @@ function Shell({ auth, onOut }) {
   return (
     <div className={`adm-shell ${navOpen ? 'nav-open' : ''}`}>
       <aside className="adm-side" aria-label="Chức năng">
-        <div className="adm-side__brand">
-          <span className="adm-logo">CA</span>
-          <div>
-            <b>ChungAuto</b>
-            <span>Trang quản trị</span>
-          </div>
+        <div className="adm-side__brand ca-brand">
+          <Link to={BASE} className="ca-brand__logo" aria-label="ChungAuto – Tổng quan">
+            <img src="/brand/logo-vector.svg" alt="ChungAuto" width="133" height="38" />
+          </Link>
+          <span className="ca-brand__tag">Quản trị</span>
           <button type="button" className="adm-iconbtn adm-side__close" onClick={() => setNavOpen(false)} aria-label="Đóng menu">
             <X size={20} />
           </button>
@@ -321,7 +320,7 @@ function Topbar({ auth, onMenu, onOut, counts }) {
     toast('Đã đăng xuất')
   }
   return (
-    <header className="adm-top" ref={ref}>
+    <header className="adm-top ca-top" ref={ref}>
       <button type="button" className="adm-iconbtn adm-top__menu" onClick={onMenu} aria-label="Mở menu">
         <Menu size={20} />
       </button>
@@ -353,55 +352,69 @@ function Topbar({ auth, onMenu, onOut, counts }) {
           </div>
         )}
       </div>
-      <a className="adm-iconbtn adm-hide-sm" href="/" target="_blank" rel="noreferrer" aria-label="Xem website" title="Xem website">
-        <ExternalLink size={18} />
-      </a>
-      <div className="adm-top__pop">
-        <button type="button" className="adm-iconbtn" onClick={() => setOpen(open === 'bell' ? null : 'bell')} aria-label={`Việc cần xử lý (${total})`} aria-expanded={open === 'bell'}>
-          <Bell size={19} />
-          {total > 0 && <i className="adm-dot">{total > 99 ? '99+' : total}</i>}
-        </button>
-        {open === 'bell' && (
-          <div className="adm-pop adm-pop--right">
-            <p className="adm-pop__title">Việc cần xử lý</p>
-            {!!counts.leads && (
-              <button type="button" onClick={() => go('yeu-cau')}>
-                <b>{counts.leads}</b>
-                <span>yêu cầu tư vấn mới / cần gọi lại</span>
+      <div className="ca-top__actions">
+        <a className="ca-top__site" href="/" target="_blank" rel="noreferrer" title="Mở website trong tab mới">
+          <ExternalLink size={16} />
+          <span>Xem website</span>
+        </a>
+        <div className="adm-top__pop">
+          <button type="button" className="adm-iconbtn" onClick={() => setOpen(open === 'bell' ? null : 'bell')} aria-label={`Việc cần xử lý (${total})`} aria-expanded={open === 'bell'}>
+            <Bell size={19} />
+            {total > 0 && <i className="adm-dot">{total > 99 ? '99+' : total}</i>}
+          </button>
+          {open === 'bell' && (
+            <div className="adm-pop adm-pop--right">
+              <p className="adm-pop__title">Việc cần xử lý</p>
+              {!!counts.leads && (
+                <button type="button" onClick={() => go('yeu-cau')}>
+                  <b>{counts.leads}</b>
+                  <span>yêu cầu tư vấn mới / cần gọi lại</span>
+                </button>
+              )}
+              {!!counts.orders && (
+                <button type="button" onClick={() => go('hop-dong')}>
+                  <b>{counts.orders}</b>
+                  <span>hợp đồng quá hạn bàn giao</span>
+                </button>
+              )}
+              {!total && <p className="adm-muted">Không có việc tồn đọng</p>}
+            </div>
+          )}
+        </div>
+        <span className="ca-top__sep" aria-hidden="true" />
+        <div className="adm-top__pop">
+          <button type="button" className="ca-user" onClick={() => setOpen(open === 'user' ? null : 'user')} aria-expanded={open === 'user'} aria-label={`Tài khoản ${auth.user.name}`}>
+            <span className="adm-avatar">{avatarOf(auth.user.name)}</span>
+            <span className="ca-user__text">
+              <b>{auth.user.name}</b>
+              <small>{auth.user.roleLabel}</small>
+            </span>
+            <ChevronDown size={16} />
+          </button>
+          {open === 'user' && (
+            <div className="adm-pop adm-pop--right">
+              <p className="adm-pop__title">
+                {auth.user.name}
+                <small>
+                  {auth.user.email} · {auth.user.roleLabel}
+                </small>
+              </p>
+              <button type="button" onClick={() => go('doi-mat-khau')}>
+                <KeyRound size={16} /> Đổi mật khẩu
               </button>
-            )}
-            {!!counts.orders && (
-              <button type="button" onClick={() => go('hop-dong')}>
-                <b>{counts.orders}</b>
-                <span>hợp đồng quá hạn bàn giao</span>
+              <button type="button" onClick={logout}>
+                <LogOut size={16} /> Đăng xuất
               </button>
-            )}
-            {!total && <p className="adm-muted">Không có việc tồn đọng</p>}
-          </div>
-        )}
-      </div>
-      <div className="adm-top__pop">
-        <button type="button" className="adm-user" onClick={() => setOpen(open === 'user' ? null : 'user')} aria-expanded={open === 'user'}>
-          <span className="adm-avatar adm-avatar--sm">{initials(auth.user.name, 1)}</span>
-          <span className="adm-hide-sm">{auth.user.name}</span>
-        </button>
-        {open === 'user' && (
-          <div className="adm-pop adm-pop--right">
-            <p className="adm-pop__title">
-              {auth.user.name}
-              <small>
-                {auth.user.email} · {auth.user.roleLabel}
-              </small>
-            </p>
-            <button type="button" onClick={() => go('doi-mat-khau')}>
-              <KeyRound size={16} /> Đổi mật khẩu
-            </button>
-            <button type="button" onClick={logout}>
-              <LogOut size={16} /> Đăng xuất
-            </button>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   )
+}
+
+// chữ trên ảnh đại diện: chữ đầu của tên gọi (từ cuối), bỏ chức danh – "Quản trị ChungAuto" → C, "Nguyễn Văn An" → A
+function avatarOf(name) {
+  const words = String(name || '?').split(/\s+/).filter((w) => w && !/^(quản|trị|nhân|viên|kinh|doanh|biên|tập)$/i.test(w))
+  return (words[words.length - 1] || name || '?')[0].toUpperCase()
 }

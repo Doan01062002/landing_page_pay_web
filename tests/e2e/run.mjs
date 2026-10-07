@@ -254,7 +254,7 @@ try {
     await p.locator('form button[type=submit]').click()
     await settle(p, 800)
     check('đổi mật khẩu: sai mật khẩu hiện tại → báo lỗi', (await p.locator('.adm-field__err').textContent()).includes('không đúng'))
-    await p.locator('.adm-user').click()
+    await p.locator('.ca-user').click()
     await p.locator('.adm-pop button', { hasText: 'Đăng xuất' }).click()
     await p.waitForURL(/dang-nhap/)
     check('đăng xuất → về trang đăng nhập', p.url().includes('/admin/dang-nhap'))
