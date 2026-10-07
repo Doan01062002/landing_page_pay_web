@@ -1,15 +1,21 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build:vercel",
+  "outputDirectory": "dist",
+  "regions": ["bom1"],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{dist/app-shell.html,dist-server/**,server/db/migrations/**}",
+      "maxDuration": 30
+    }
+  },
   "redirects": [{ "source": "/du-an", "destination": "/mau-phan-mem?ht=rieng", "permanent": true }],
   "rewrites": [
     { "source": "/du-an/:slug", "destination": "/du-an/:slug/index.html" },
     { "source": "/du-an/:slug/", "destination": "/du-an/:slug/index.html" },
     { "source": "/mau/:slug", "destination": "/mau/:slug/index.html" },
     { "source": "/mau/:slug/", "destination": "/mau/:slug/index.html" },
-    { "source": "/mau-phan-mem", "destination": "/mau-phan-mem/index.html" },
-    { "source": "/mau-phan-mem/:slug", "destination": "/mau-phan-mem/:slug/index.html" },
-    { "source": "/mau-landing-page", "destination": "/mau-landing-page/index.html" },
-    { "source": "/(admin|quan-tri|demo|demo-landing|demo-du-an|preview|lp|mau-website)(.*)", "destination": "/app-shell.html" }
+    { "source": "/(.*)", "destination": "/api/index" }
   ],
   "headers": [
     {

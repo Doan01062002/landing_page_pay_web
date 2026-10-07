@@ -29,8 +29,8 @@ export function getConfig(env = process.env) {
     databaseCaFile: env.DATABASE_CA_FILE || '',
     // số kết nối tối đa (gói miễn phí Supabase giới hạn kết nối: nên 5–10)
     dbPoolMax: int(env.DB_POOL_MAX, 10),
-    // Địa chỉ công khai (https://ten-mien.vn): dùng cho canonical, sitemap. Trống = lấy theo request.
-    publicUrl: (env.PUBLIC_URL || '').replace(/\/$/, ''),
+    // Địa chỉ công khai (https://ten-mien.vn): dùng cho canonical, sitemap. Trống = tên miền production Vercel, hoặc lấy theo request.
+    publicUrl: (env.PUBLIC_URL || (env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}` : '')).replace(/\/$/, ''),
     trustProxy: bool(env.TRUST_PROXY, true),
     cookieSecure: bool(env.COOKIE_SECURE, production),
     sessionDays: int(env.SESSION_DAYS, 7),

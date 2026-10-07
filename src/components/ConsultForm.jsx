@@ -46,7 +46,7 @@ async function sendLead(values, website) {
   }
   const data = (res.headers.get('content-type') || '').includes('application/json') ? await res.json().catch(() => null) : null
   if (res.ok && data) return { ok: true }
-  if (!data) {
+  if (!data || data.error === 'no_database') {
     saveLocal(values)
     return { ok: true }
   }

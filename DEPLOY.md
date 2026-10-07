@@ -105,6 +105,21 @@ chungauto.vn {
 
 Sao lưu: `pg_dump -U chungauto -d chungauto | gzip > backup.sql.gz`.
 
+## Cách 0 – Vercel + Supabase (không cần VPS, đang dùng)
+
+Toàn bộ website (dựng HTML từ database), API và trang quản trị chạy trong hàm serverless `api/index.js` trên Vercel; dữ liệu ở Supabase. Tệp tĩnh (`/assets`, ảnh, `/du-an/...`) do Vercel phục vụ trực tiếp. Cấu hình sẵn trong `vercel.json` (build `npm run build:vercel`, hàm đặt ở vùng **bom1 – Mumbai**, gần Supabase `ap-south-1`).
+
+1. Lấy chuỗi **Session pooler** của Supabase (xem Cách 3, bước 1–2; ký tự `@` trong mật khẩu viết thành `%40`).
+2. Vercel → dự án → **Settings → Environment Variables** → thêm cho cả *Production* và *Preview*:
+   - `DATABASE_URL` = chuỗi kết nối ở bước 1
+   - (tuỳ chọn) `ADMIN_EMAIL`, `ADMIN_PASSWORD` nếu database còn trống và muốn tự tạo tài khoản quản trị
+3. **Deployments → … → Redeploy** (biến môi trường chỉ có hiệu lực từ lần deploy sau).
+4. Kiểm tra: `https://<tên-miền>/api/health` trả `{"ok":true,...}` (không có `"database":false`), rồi đăng nhập `/admin`.
+
+Lần khởi động đầu, hàm tự tạo bảng / dữ liệu khởi tạo nếu chưa có. Chưa đặt `DATABASE_URL`: website vẫn chạy bằng dữ liệu mặc định, form tư vấn lưu tạm trên trình duyệt, `/admin` báo chưa kết nối máy chủ.
+
+Giới hạn khi chạy serverless: bộ đếm chống spam / dò mật khẩu tính riêng từng phiên bản hàm (vẫn còn khoá tài khoản sau 5 lần sai – lưu trong database); bộ nhớ đệm nội dung website tối đa 30 giây giữa các phiên bản.
+
 ## Cách 3 – Database trên Supabase (VPS chỉ chạy ứng dụng)
 
 Supabase thay cho PostgreSQL trên VPS; máy chủ Node.js vẫn chạy trên VPS (Supabase/Vercel không chạy được backend Express này).

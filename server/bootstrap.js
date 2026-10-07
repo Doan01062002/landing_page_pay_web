@@ -8,6 +8,7 @@ export function createBootstrap(pool, ttlMs = 30000) {
   async function load() {
     if (cache && Date.now() - at < ttlMs) return cache
     const def = defaultBootstrap()
+    if (!pool) return def // chưa có database: dùng dữ liệu trong mã nguồn
     const [settings, catalog, faqs] = await Promise.all([
       pool.query(`SELECT key, value FROM settings WHERE key IN ('site', 'seo')`),
       pool.query(`SELECT kind, slug, name, price, free, is_new, featured, visible, sort_order, popularity, summary FROM catalog_items`),

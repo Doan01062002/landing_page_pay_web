@@ -4,7 +4,7 @@ Website bán mẫu phần mềm cho gara ô tô, tiệm sửa xe máy, chuỗi l
 
 - **Giao diện:** React 18 + Vite 5, react-router. Trang công khai dựng HTML phía máy chủ (SSR) rồi hydrate – có title, description, canonical, Open Graph, JSON-LD, sitemap, 404 thật.
 - **Máy chủ:** Node.js 22 + Express 5 (`server/`), PostgreSQL (`server/db/migrations`), đăng nhập bằng phiên cookie, phân quyền theo vai trò.
-- **Triển khai:** VPS bằng Docker (PostgreSQL + app + Caddy HTTPS) – xem **[DEPLOY.md](DEPLOY.md)**. Vercel vẫn chạy được bản tĩnh (không có trang quản trị).
+- **Triển khai:** Vercel + Supabase (hàm serverless `api/index.js`), hoặc VPS bằng Docker (PostgreSQL + app + Caddy HTTPS) – xem **[DEPLOY.md](DEPLOY.md)**.
 
 ## Chạy dự án
 

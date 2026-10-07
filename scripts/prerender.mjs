@@ -3,7 +3,7 @@
 // - dist/index.html, dist/mau-phan-mem/index.html, dist/mau-phan-mem/<slug>/index.html, dist/mau-landing-page/index.html, dist/404.html
 // - dist/sitemap.xml, dist/robots.txt
 // Địa chỉ trang (canonical, sitemap): PUBLIC_URL, hoặc tên miền production Vercel (VERCEL_PROJECT_PRODUCTION_URL).
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { defaultBootstrap } from '../src/data/bootstrap.js'
@@ -14,6 +14,14 @@ const SHELL = join(DIST, 'app-shell.html')
 // lần build đầu: index.html do Vite tạo chính là khuôn trang; sau đó index.html bị ghi đè bằng trang chủ đã dựng
 if (!existsSync(SHELL) || readFileSync(join(DIST, 'index.html'), 'utf8').includes('<!--app-html-->')) copyFileSync(join(DIST, 'index.html'), SHELL)
 const template = readFileSync(SHELL, 'utf8')
+
+// --server: trang do máy chủ dựng mới mỗi lần (Vercel + database): chỉ giữ khung trang, bỏ index.html
+// để Vercel không trả trang tĩnh cũ thay cho máy chủ
+if (process.argv.includes('--server')) {
+  rmSync(join(DIST, 'index.html'), { force: true })
+  console.log('✓ chế độ máy chủ: chỉ tạo dist/app-shell.html (trang dựng từ database khi có yêu cầu)')
+  process.exit(0)
+}
 const { render } = await import(pathToFileURL(resolve('dist-server/entry-server.js')).href)
 
 const host = process.env.PUBLIC_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : '')

@@ -21,6 +21,14 @@ export async function loadRenderer(cfg) {
   return { template: readFileSync(shell, 'utf8'), render: mod.render }
 }
 
+function noDatabaseApi(boot) {
+  const r = express.Router()
+  r.get('/health', (_req, res) => res.json({ ok: true, database: false }))
+  r.get('/public/bootstrap', async (_req, res) => res.json(await boot.load()))
+  r.use((_req, res) => res.status(503).json({ error: 'no_database', message: 'Máy chủ chưa kết nối database (thiếu DATABASE_URL).' }))
+  return r
+}
+
 export function createApp({ pool, cfg, renderer }) {
   const app = express()
   app.disable('x-powered-by')
@@ -32,7 +40,8 @@ export function createApp({ pool, cfg, renderer }) {
 
   const boot = createBootstrap(pool)
   app.locals.boot = boot
-  app.use('/api', createApi({ pool, cfg, boot }))
+  // chưa cấu hình database (vd Vercel chưa đặt DATABASE_URL): website vẫn chạy bằng dữ liệu mặc định, API báo 503
+  app.use('/api', pool ? createApi({ pool, cfg, boot }) : noDatabaseApi(boot))
 
   const originOf = (req) => cfg.publicUrl || `${req.protocol}://${req.get('host')}`
   app.get('/robots.txt', (req, res) => res.type('text/plain').send(robotsTxt(originOf(req))))
