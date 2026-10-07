@@ -10,6 +10,12 @@ const CONFIG = {
   fanpage: 'https://www.facebook.com/garanhatduclongbien/',
   youtubeChannel: 'https://www.youtube.com/@minhhoiauto-garanhatduc',
   tiktok: 'https://www.tiktok.com/@garaotonhatduc',
+  // Video phỏng vấn khách hàng (mục "Khách hàng nói gì", ngay dưới bảng giá). Chỉ dùng video THẬT của khách.
+  // Mỗi video: link TikTok/YouTube, tiêu đề, tên khách, dòng xe, ảnh bìa (tuỳ chọn, mặc định ảnh xưởng).
+  // Để trống mảng: mục này hiện khung "đang cập nhật" kèm nút tới kênh TikTok / YouTube.
+  interviews: [
+    // { link: 'https://www.tiktok.com/@garaotonhatduc/video/…', title: 'Sơn lại cản trước sau va quẹt', customer: 'Anh Minh', car: 'Mazda 3', poster: 'assets/img/paint-booth.webp' },
+  ],
 };
 /* ============================================================== */
 
@@ -349,6 +355,46 @@ const CONFIG = {
     btn.disabled = true;
     btn.removeAttribute('aria-label');
   });
+
+  /* ---------- Video phỏng vấn khách hàng (CONFIG.interviews) ---------- */
+  const ivGrid = $('#interviews');
+  if (ivGrid) {
+    const esc = (t) => String(t || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const posters = ['assets/img/storefront-team.webp', 'assets/img/mechanic.webp', 'assets/img/paint-booth.webp'];
+    const list = (CONFIG.interviews || []).filter((it) => parseVideo(it.link));
+    if (list.length) {
+      ivGrid.innerHTML = list.map((it, i) => `
+        <button class="iv reveal" data-delay="${i % 3}" type="button" aria-label="Phát video: ${esc(it.title)}">
+          <span class="iv__media">
+            <img src="${esc(it.poster || posters[i % posters.length])}" alt="" loading="lazy">
+            <span class="video__play"><svg class="ic"><use href="#i-play"/></svg></span>
+            <span class="iv__tag"><svg class="ic"><use href="#i-chat"/></svg> Phỏng vấn khách hàng</span>
+          </span>
+          <span class="iv__body">
+            <b>${esc(it.title)}</b>
+            <small>${esc([it.customer, it.car].filter(Boolean).join(' · '))}</small>
+          </span>
+        </button>`).join('');
+      $$('.iv', ivGrid).forEach((btn, i) => bindVideo(btn, list[i].link, CONFIG.tiktok, list[i].title));
+    } else {
+      // Chưa có video thật: không dựng nội dung giả, mời xem kênh của gara
+      ivGrid.classList.add('interviews__grid--empty');
+      ivGrid.innerHTML = `
+        <div class="iv-empty reveal">
+          <span class="iv-empty__ic"><svg class="ic"><use href="#i-chat"/></svg></span>
+          <div>
+            <b>Video phỏng vấn khách hàng đang được cập nhật</b>
+            <p>Trong lúc chờ, mời bạn xem video thực tế sửa chữa tại xưởng trên kênh của Gara Nhật Đức.</p>
+          </div>
+          <div class="iv-empty__btns">
+            <a class="btn btn--primary" data-social="tiktok"><svg class="ic"><use href="#i-tiktok"/></svg> TikTok</a>
+            <a class="btn btn--outline" data-social="youtube"><svg class="ic"><use href="#i-yt"/></svg> YouTube</a>
+          </div>
+        </div>`;
+    }
+    // nội dung vừa chèn sau khi bộ hiệu ứng hiện dần đã quét trang → đăng ký thêm
+    $$('.reveal', ivGrid).forEach((el) => revealObs.observe(el));
+  }
 
   /* ---------- Social links from config ---------- */
   $$('[data-social]').forEach((a) => {
