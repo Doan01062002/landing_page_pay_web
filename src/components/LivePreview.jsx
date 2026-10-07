@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { introWillPlay, introRunning, INTRO_DONE } from './introState.js'
 
 const DEVICES = {
   desktop: { w: 1280, h: 800 },
@@ -19,6 +20,16 @@ export default function LivePreview({ slug, palette = 0, device = 'desktop', cla
   const frameRef = useRef(null)
   const paletteRef = useRef(palette)
   const [scale, setScale] = useState(0.25)
+  // đang chạy màn mở đầu logo: chưa tải iframe (nhiều iframe tải cùng lúc làm logo giật), chờ logo xong
+  const [ready, setReady] = useState(() => !introWillPlay())
+
+  useEffect(() => {
+    if (ready) return
+    if (!introRunning()) return setReady(true)
+    const go = () => setReady(true)
+    window.addEventListener(INTRO_DONE, go, { once: true })
+    return () => window.removeEventListener(INTRO_DONE, go)
+  }, [ready])
 
   // src chỉ phụ thuộc slug: đổi màu không làm iframe tải lại. url: trang tĩnh (dự án đã triển khai)
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,7 +58,7 @@ export default function LivePreview({ slug, palette = 0, device = 'desktop', cla
     <div ref={boxRef} className={cls} style={{ aspectRatio: `${w} / ${h}`, '--s': scale, '--ty': `${-(frameH - h)}px` }}>
       <iframe
         ref={frameRef}
-        src={src}
+        src={ready ? src : undefined}
         title={title || `Xem trước mẫu ${slug}`}
         loading="lazy"
         tabIndex={-1}

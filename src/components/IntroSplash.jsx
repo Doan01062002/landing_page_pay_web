@@ -1,35 +1,25 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { motionAllowed } from './Motion.jsx'
+import { introKey, introWillPlay, INTRO_DONE } from './introState.js'
 import '../styles/intro.css'
 
 /*
-  Màn mở đầu trang chủ (giống landing VinFast): logo hiện giữa màn hình — hình xe chạy vào, chữ mở ra,
+  Màn mở đầu trang chủ và Kho mẫu (giống landing VinFast): logo hiện giữa màn hình — hình xe chạy vào, chữ mở ra,
   vệt tốc độ lướt qua — rồi thu nhỏ bay đúng vào chỗ logo trên thanh menu; sau đó phần hero hiện lần lượt.
-  - Chạy một lần mỗi phiên trình duyệt; thêm ?intro=1 vào link để xem lại.
+  - Chạy một lần mỗi phiên trình duyệt cho mỗi trang (PAGES); thêm ?intro=1 vào link để xem lại.
+  - App gắn key theo đường dẫn nên chuyển sang Kho mẫu lần đầu trong phiên cũng chạy.
   - Không chạy trong ảnh thu nhỏ (embed=1). Bấm hoặc nhấn phím bất kỳ để bỏ qua.
   - Dùng Web Animations API (chỉ transform / opacity / clip-path), không cần thư viện.
 */
-const KEY = 'chungauto_intro'
 // Logo vector dò từ /brand/logo-mobile.png (cùng khung 227 × 65): hình xe, chữ CHUNGAUTO.VN, hai gạch đỏ
 const LOGO_SVG = '/brand/logo-vector.svg'
 const EASE = 'cubic-bezier(.65,0,.35,1)'
 const EASE_OUT = 'cubic-bezier(.2,.7,.2,1)'
 
-function shouldPlay() {
-  if (typeof window === 'undefined' || window.location.pathname !== '/' || !motionAllowed()) return false
-  if (new URLSearchParams(window.location.search).get('intro') === '1') return true
-  try {
-    return !sessionStorage.getItem(KEY)
-  } catch {
-    return true
-  }
-}
-
-// Báo cho hero biết logo đã vào chỗ: hero (HomeHero) tự chạy hiệu ứng hiện chữ, vòng thẻ, khung trình duyệt
-const announceDone = () => window.dispatchEvent(new Event('chungauto:intro-done'))
+// Báo logo đã vào chỗ: hero (HomeHero) chạy hiệu ứng hiện chữ, vòng thẻ; LivePreview bắt đầu tải iframe
+const announceDone = () => window.dispatchEvent(new Event(INTRO_DONE))
 
 export default function IntroSplash() {
-  const [on, setOn] = useState(shouldPlay)
+  const [on, setOn] = useState(introWillPlay)
   const rootRef = useRef(null)
 
   useLayoutEffect(() => {
@@ -38,7 +28,7 @@ export default function IntroSplash() {
     html.classList.add('intro-hold')
     window.scrollTo(0, 0)
     try {
-      sessionStorage.setItem(KEY, '1')
+      sessionStorage.setItem(introKey(), '1')
     } catch {
       /* chế độ ẩn danh: bỏ qua */
     }

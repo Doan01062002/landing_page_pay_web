@@ -41,8 +41,8 @@ function SiteLayout() {
   const { pathname } = useLocation()
   return (
     <>
-      {/* màn mở đầu: chỉ trang chủ, một lần mỗi phiên (?intro=1 để xem lại) */}
-      <IntroSplash />
+      {/* màn mở đầu: trang chủ và Kho mẫu, mỗi trang một lần mỗi phiên (?intro=1 để xem lại) */}
+      <IntroSplash key={pathname} />
       <ScrollProgress />
       <Header />
       {/* key theo đường dẫn để chạy hiệu ứng chuyển trang */}
