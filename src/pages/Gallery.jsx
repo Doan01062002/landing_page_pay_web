@@ -1,18 +1,32 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect, useRef } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import TemplateCard from '../components/TemplateCard.jsx'
 import ProjectTile from '../components/ProjectTile.jsx'
-import { templates, categories } from '../data/templates.js'
+import { templates } from '../data/templates.js'
 import { projects, typeLabel } from '../data/projects.js'
 import '../styles/gallery.css'
 
 // Hình thức: mẫu dựng riêng (trang tĩnh /du-an/<slug>/, luôn xếp trước) hoặc mẫu phần mềm
 const forms = [
   { id: 'all', label: 'Tất cả' },
-  { id: 'rieng', label: 'Mẫu dựng riêng' },
-  { id: 'phanmem', label: 'Mẫu phần mềm' },
+  { id: 'rieng', label: 'Dựng riêng' },
+  { id: 'phanmem', label: 'Phần mềm' },
 ]
+
+// Danh mục rút gọn: gộp các loại hình gần nhau (id loại hình gốc trong data vẫn lọc được qua ?loai=<id>)
+const groups = [
+  { id: 'all', label: 'Tất cả' },
+  { id: 'gara', label: 'Gara, sửa chữa', cats: ['oto', 'son'] },
+  { id: 'muaban', label: 'Mua bán xe', cats: ['daily', 'xecu', 'xedien'] },
+  { id: 'phukien', label: 'Phụ tùng, phụ kiện', cats: ['phutung', 'lop'] },
+  { id: 'detailing', label: 'Rửa xe, detailing', cats: ['detailing'] },
+  { id: 'xemay', label: 'Xe máy', cats: ['xemay'] },
+]
+const catsOf = (id) => (id === 'all' ? null : groups.find((g) => g.id === id)?.cats || [id])
+
+// 3 cột × 3 hàng mỗi trang
+const PAGE_SIZE = 9
 
 const sorts = [
   { id: 'popular', label: 'Phổ biến nhất' },
@@ -34,6 +48,10 @@ export default function Gallery() {
   const cat = params.get('loai') || 'all'
   const sort = params.get('sort') || 'popular'
   const form = params.get('ht') || 'all'
+  const page = Math.max(1, parseInt(params.get('trang'), 10) || 1)
+  const cats = catsOf(cat)
+  const inCat = (c) => !cats || cats.includes(c)
+  const mainRef = useRef(null)
   const [query, setQuery] = useState(key)
   const [filtersOpen, setFiltersOpen] = useState(false)
 
@@ -41,6 +59,7 @@ export default function Gallery() {
 
   const update = (changes) => {
     const next = new URLSearchParams(params)
+    if (!('trang' in changes)) next.delete('trang')
     Object.entries(changes).forEach(([k, v]) => {
       next.delete(k)
       if (Array.isArray(v)) v.forEach((x) => next.append(k, x))
@@ -57,7 +76,7 @@ export default function Gallery() {
   const projectResults = useMemo(() => {
     if (form === 'phanmem') return []
     const list = projects.filter(
-      (p) => (cat === 'all' || p.category === cat) && matches([p.name, typeLabel(p.type), p.summary, ...p.highlights].join(' ')),
+      (p) => inCat(p.category) && matches([p.name, typeLabel(p.type), p.summary, ...p.highlights].join(' ')),
     )
     return sort === 'new' ? [...list].reverse() : list
   }, [key, cat, sort, form])
@@ -65,7 +84,7 @@ export default function Gallery() {
   const results = useMemo(() => {
     if (form === 'rieng') return []
     let list = templates.filter((t) => {
-      if (cat !== 'all' && t.category !== cat) return false
+      if (!inCat(t.category)) return false
       return matches([t.name, t.categoryLabel, t.tagline, t.description].join(' '))
     })
     list = [...list].sort((a, b) => {
@@ -77,14 +96,25 @@ export default function Gallery() {
     return list
   }, [key, cat, sort, form])
   const total = projectResults.length + results.length
+  const pages = Math.max(1, Math.ceil(total / PAGE_SIZE))
+  const current = Math.min(page, pages)
+  // mẫu dựng riêng luôn đứng trước, rồi tới mẫu phần mềm; cắt theo trang
+  const items = [...projectResults.map((p) => ({ kind: 'p', p })), ...results.map((t) => ({ kind: 't', t }))].slice(
+    (current - 1) * PAGE_SIZE,
+    current * PAGE_SIZE,
+  )
+  const goPage = (n) => {
+    update({ trang: n > 1 ? String(n) : '' })
+    const top = mainRef.current?.getBoundingClientRect().top
+    if (top !== undefined && top < 0) window.scrollTo({ top: window.scrollY + top - 96, behavior: 'smooth' })
+  }
 
   const counts = useMemo(() => {
-    const c = { all: templates.length + projects.length }
-    ;[...projects, ...templates].forEach((t) => (c[t.category] = (c[t.category] || 0) + 1))
-    return c
+    const all = [...projects, ...templates]
+    return Object.fromEntries(groups.map((g) => [g.id, g.cats ? all.filter((t) => g.cats.includes(t.category)).length : all.length]))
   }, [])
 
-  const activeCount = (cat !== 'all' ? 1 : 0) + (form !== 'all' ? 1 : 0)
+  const activeCount = cat !== 'all' ? 1 : 0
   const clearAll = () => setParams(new URLSearchParams(), { replace: true })
 
   return (
@@ -144,34 +174,34 @@ export default function Gallery() {
             <aside className={'g-filters' + (filtersOpen ? ' is-open' : '')} aria-label="Bộ lọc">
               <div className="g-filters__group">
                 <h2>Danh mục</h2>
-                {categories.map((c) => (
-                  <label key={c.id} className="check check--radio">
-                    <input id={`loai-${c.id}`} type="radio" name="loai" checked={cat === c.id} onChange={() => update({ loai: c.id })} />
+                {groups.map((g) => (
+                  <label key={g.id} className="check check--radio">
+                    <input id={`loai-${g.id}`} type="radio" name="loai" checked={cat === g.id} onChange={() => update({ loai: g.id })} />
                     <span>
-                      {c.label} <small className="g-filters__n">{counts[c.id] || 0}</small>
-                    </span>
-                  </label>
-                ))}
-              </div>
-              <div className="g-filters__group">
-                <h2>Hình thức</h2>
-                {forms.map((f) => (
-                  <label key={f.id} className="check check--radio">
-                    <input id={`ht-${f.id}`} type="radio" name="ht" checked={form === f.id} onChange={() => update({ ht: f.id })} />
-                    <span>
-                      {f.label}{' '}
-                      <small className="g-filters__n">
-                        {f.id === 'all' ? projects.length + templates.length : f.id === 'rieng' ? projects.length : templates.length}
-                      </small>
+                      {g.label} <small className="g-filters__n">{counts[g.id]}</small>
                     </span>
                   </label>
                 ))}
               </div>
             </aside>
 
-            <div className="g-main">
+            <div className="g-main" ref={mainRef}>
               <div className="g-toolbar">
-                <p className="g-count" aria-live="polite">
+                <div className="g-forms" role="tablist" aria-label="Hình thức">
+                  {forms.map((f) => (
+                    <button
+                      key={f.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={form === f.id}
+                      className={'g-forms__btn' + (form === f.id ? ' is-active' : '')}
+                      onClick={() => update({ ht: f.id })}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+                <p className="g-count sr-only" aria-live="polite">
                   <strong key={total}>{total}</strong> mẫu phù hợp
                   {key && (
                     <>
@@ -198,14 +228,37 @@ export default function Gallery() {
               </div>
 
               {total ? (
-                <div className="tgrid tgrid--gallery" data-stagger="up" key={[key, cat, sort, form].join('|')}>
-                  {projectResults.map((p) => (
-                    <ProjectTile key={`du-an-${p.slug}`} p={p} />
-                  ))}
-                  {results.map((t) => (
-                    <TemplateCard key={t.slug} t={t} />
-                  ))}
-                </div>
+                <>
+                  <div className="tgrid tgrid--gallery" data-stagger="up" key={[key, cat, sort, form, current].join('|')}>
+                    {items.map((it) =>
+                      it.kind === 'p' ? <ProjectTile key={`du-an-${it.p.slug}`} p={it.p} /> : <TemplateCard key={it.t.slug} t={it.t} />,
+                    )}
+                  </div>
+                  {pages > 1 && (
+                    <nav className="g-pager" aria-label="Phân trang">
+                      <button type="button" className="g-pager__btn" disabled={current === 1} onClick={() => goPage(current - 1)} aria-label="Trang trước">
+                        <Icon name="ChevronLeft" size={18} />
+                      </button>
+                      {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
+                        <button
+                          key={n}
+                          type="button"
+                          className={'g-pager__btn' + (n === current ? ' is-active' : '')}
+                          aria-current={n === current ? 'page' : undefined}
+                          onClick={() => goPage(n)}
+                        >
+                          {n}
+                        </button>
+                      ))}
+                      <button type="button" className="g-pager__btn" disabled={current === pages} onClick={() => goPage(current + 1)} aria-label="Trang sau">
+                        <Icon name="ChevronRight" size={18} />
+                      </button>
+                      <span className="g-pager__info">
+                        {(current - 1) * PAGE_SIZE + 1}–{Math.min(current * PAGE_SIZE, total)} / {total} mẫu
+                      </span>
+                    </nav>
+                  )}
+                </>
               ) : (
                 <div className="g-empty" data-reveal="zoom">
                   <Icon name="Search" size={28} />

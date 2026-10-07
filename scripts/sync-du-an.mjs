@@ -4,7 +4,7 @@
 //   Nhớ chạy `npm run build` trong thư mục đó trước.
 // Chạy: node scripts/sync-du-an.mjs            (tất cả)
 //       node scripts/sync-du-an.mjs nhatduc    (một dự án)
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 const SRC_ROOT = resolve(process.cwd(), '..')
@@ -45,12 +45,16 @@ for (const [slug, { folder, dist, dir = 'du-an' }] of Object.entries(PROJECTS)) 
   rmSync(join(dest, 'assets'), { recursive: true, force: true })
   if (existsSync(join(src, 'assets'))) cpSync(join(src, 'assets'), join(dest, 'assets'), { recursive: true })
 
-  let html = readFileSync(join(src, 'index.html'), 'utf8')
-  const nl = html.includes('\r\n') ? '\r\n' : '\n'
-  // nhận cả <meta charset="utf-8"> và <meta charset="utf-8" />
-  const charset = html.match(/<meta charset="utf-8"\s*\/?>\r?\n/i)?.[0]
-  if (!charset) throw new Error(`${folder}: không thấy thẻ <meta charset>`)
-  html = html.replace(charset, `${charset}  <!-- Đặt trong /du-an/${slug}/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->${nl}  <base href="/du-an/${slug}/">${nl}`)
-  writeFileSync(join(dest, 'index.html'), html)
-  console.log(`${folder} → ${dest}`)
+  // web nhiều trang: mọi file .html ở gốc thư mục (index.html, xe.html, gio-hang.html…)
+  const pages = readdirSync(src).filter((f) => f.endsWith('.html'))
+  for (const page of pages) {
+    let html = readFileSync(join(src, page), 'utf8')
+    const nl = html.includes('\r\n') ? '\r\n' : '\n'
+    // nhận cả <meta charset="utf-8"> và <meta charset="utf-8" />
+    const charset = html.match(/<meta charset="utf-8"\s*\/?>\r?\n/i)?.[0]
+    if (!charset) throw new Error(`${folder}/${page}: không thấy thẻ <meta charset>`)
+    html = html.replace(charset, `${charset}  <!-- Đặt trong /du-an/${slug}/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->${nl}  <base href="/du-an/${slug}/">${nl}`)
+    writeFileSync(join(dest, page), html)
+  }
+  console.log(`${folder} → ${dest}${pages.length > 1 ? ` (${pages.length} trang)` : ''}`)
 }

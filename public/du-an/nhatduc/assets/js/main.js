@@ -14,9 +14,9 @@ const CONFIG = {
   // Mỗi video: link TikTok/YouTube, tiêu đề, tên khách, dòng xe, ảnh bìa (tuỳ chọn, mặc định ảnh xưởng).
   // Để trống mảng: mục này hiện khung "đang cập nhật" kèm nút tới kênh TikTok / YouTube.
   // TẠM THỜI: đang gắn video của gara (chưa phải phỏng vấn khách) để xem thử trên web – thay bằng video phỏng vấn thật và bỏ `tag`.
-  // Ảnh bìa interview-mic / handover-advice: ảnh minh hoạ miễn phí từ Unsplash – nên thay bằng ảnh chụp khách thật của gara.
+  // Ảnh bìa handover-keys / handover-advice: ảnh minh hoạ miễn phí từ Unsplash – nên thay bằng ảnh chụp khách thật của gara.
   interviews: [
-    { link: 'https://www.youtube.com/watch?v=cbJ1UoQdtfU', title: 'Đánh bóng – hiệu chỉnh bề mặt sơn', customer: 'Video của gara', car: 'YouTube', poster: 'assets/img/interview-mic.webp', tag: 'Video tạm thời' },
+    { link: 'https://www.youtube.com/watch?v=cbJ1UoQdtfU', title: 'Đánh bóng – hiệu chỉnh bề mặt sơn', customer: 'Video của gara', car: 'YouTube', poster: 'assets/img/handover-keys.webp', tag: 'Video tạm thời' },
     { link: 'https://www.tiktok.com/@garaotonhatduc/video/7657133340587281685', title: 'Sửa điều hoà Nissan Kicks', customer: 'Video của gara', car: 'TikTok', poster: 'assets/img/handover-advice.webp', tag: 'Video tạm thời' },
     // { link: 'https://www.tiktok.com/@garaotonhatduc/video/…', title: 'Sơn lại cản trước sau va quẹt', customer: 'Anh Minh', car: 'Mazda 3', poster: 'assets/img/paint-booth.webp' },
   ],
