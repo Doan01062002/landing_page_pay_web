@@ -1,0 +1,280 @@
+{
+ "categories": [
+  {
+   "id": "bong-led",
+   "name": "Bóng LED"
+  },
+  {
+   "id": "bong-halogen",
+   "name": "Halogen"
+  },
+  {
+   "id": "xenon",
+   "name": "Xenon"
+  },
+  {
+   "id": "den-pha",
+   "name": "Đèn pha"
+  },
+  {
+   "id": "den-phu",
+   "name": "Đèn phụ"
+  },
+  {
+   "id": "led-day",
+   "name": "LED dây"
+  },
+  {
+   "id": "cam-bien",
+   "name": "Cảm biến"
+  }
+ ],
+ "products": [
+  {
+   "id": "p01",
+   "name": "Bóng LED H4 tản nhiệt nhôm 6.000K (cặp)",
+   "category": "Bóng LED",
+   "brand": "Lumen",
+   "price": 1250000,
+   "oldPrice": 1650000,
+   "rating": 4.8,
+   "reviews": 312,
+   "sold": 3120,
+   "image": "/du-an/lumen/assets/img/products/bong-led-h4.webp",
+   "gift": "Lắp miễn phí tại xưởng + căn chỉnh góc chiếu",
+   "desc": "Chân H4 cắm trực tiếp, không cắt dây zin. Chip LED 2 mặt, điểm sáng gần vị trí sợi đốt. Tản nhiệt nhôm cánh tản, dây nguồn dẹt. Bảo hành 12 tháng, 1 đổi 1 trong 30 ngày"
+  },
+  {
+   "id": "p02",
+   "name": "Bóng LED T10 W5W 9 SMD – demi, biển số (cặp)",
+   "category": "Bóng LED",
+   "brand": "Lumen",
+   "price": 120000,
+   "oldPrice": 180000,
+   "rating": 4.7,
+   "reviews": 486,
+   "sold": 5240,
+   "image": "/du-an/lumen/assets/img/products/bong-led-t10-w5w.webp",
+   "gift": "Mua 2 cặp tặng 1 cặp",
+   "desc": "Chân T10 / W5W cắm thay bóng zin. 9 chip SMD, ánh sáng trắng. Dùng cho demi, biển số, đèn trần. Bảo hành 6 tháng"
+  },
+  {
+   "id": "p03",
+   "name": "Bộ bóng LED xi-nhan, phanh, demi (4 loại)",
+   "category": "Bóng LED",
+   "brand": "Lumen",
+   "price": 450000,
+   "oldPrice": 590000,
+   "rating": 4.6,
+   "reviews": 174,
+   "sold": 1380,
+   "image": "/du-an/lumen/assets/img/products/bo-bong-led-xi-nhan.webp",
+   "gift": "Tặng điện trở chống chớp nhanh",
+   "desc": "1 bóng 1156 chip cam cho xi-nhan. 1 bóng T10 trắng 9 chip, 1 bóng T10 đỏ. 1 bóng T10 4 chip cho đèn trần. Bảo hành 6 tháng"
+  },
+  {
+   "id": "p04",
+   "name": "Bóng halogen H4 60/55W tăng sáng (cặp)",
+   "category": "Halogen",
+   "brand": "Lumen",
+   "price": 390000,
+   "oldPrice": 490000,
+   "rating": 4.6,
+   "reviews": 205,
+   "sold": 2210,
+   "image": "/du-an/lumen/assets/img/products/bong-halogen-h4.webp",
+   "gift": "Lắp miễn phí trong 15 phút",
+   "desc": "Chân H4, 2 tóc pha – cos. Công suất 60/55W, đúng chuẩn zin. Ánh sáng vàng trắng 3.200K, xuyên mưa tốt. Bảo hành 6 tháng"
+  },
+  {
+   "id": "p05",
+   "name": "Bóng halogen HB4 9006 55W (cặp)",
+   "category": "Halogen",
+   "brand": "Lumen",
+   "price": 350000,
+   "oldPrice": 450000,
+   "rating": 4.5,
+   "reviews": 98,
+   "sold": 860,
+   "image": "/du-an/lumen/assets/img/products/bong-halogen-hb4.webp",
+   "gift": "Lắp miễn phí trong 15 phút",
+   "desc": "Chân HB4 / 9006, dùng cho cos hoặc gầm. Công suất 55W. Ánh sáng 3.200K. Bảo hành 6 tháng"
+  },
+  {
+   "id": "p06",
+   "name": "Bóng xenon D2S 35W 6.000K (cặp)",
+   "category": "Xenon",
+   "brand": "Lumen",
+   "price": 1450000,
+   "oldPrice": 1850000,
+   "rating": 4.8,
+   "reviews": 121,
+   "sold": 640,
+   "image": "/du-an/lumen/assets/img/products/bong-xenon-d2s.webp",
+   "gift": "Tặng kiểm tra ballast miễn phí",
+   "desc": "Chân D2S thay cho xe zin xenon. Công suất 35W, 6.000K trắng. Khởi động ổn định, không chớp. Bảo hành 12 tháng"
+  },
+  {
+   "id": "p07",
+   "name": "Phục hồi cụm đèn pha ố vàng, mờ đục (cặp)",
+   "category": "Đèn pha",
+   "brand": "Lumen",
+   "price": 890000,
+   "oldPrice": 1200000,
+   "rating": 4.9,
+   "reviews": 263,
+   "sold": 1940,
+   "image": "/du-an/lumen/assets/img/products/phuc-hoi-den-pha.webp",
+   "gift": "Phủ nano chống UV, bảo hành 12 tháng",
+   "desc": "Đánh bóng 3 cấp, tẩy lớp ố vàng. Phủ nano chống tia UV. Làm trong 60 – 90 phút. Bảo hành độ trong 12 tháng"
+  },
+  {
+   "id": "p08",
+   "name": "Đèn LED rọi tròn 9 bóng 12V",
+   "category": "Đèn phụ",
+   "brand": "Lumen",
+   "price": 690000,
+   "oldPrice": 850000,
+   "rating": 4.6,
+   "reviews": 57,
+   "sold": 410,
+   "image": "/du-an/lumen/assets/img/products/den-led-roi-9-bong.webp",
+   "gift": "Tặng relay + công tắc",
+   "desc": "9 LED, ánh sáng trắng ấm. Điện áp 12V, vỏ nhựa chịu nhiệt. Gắn thùng bán tải, khoang hành lý. Bảo hành 12 tháng"
+  },
+  {
+   "id": "p09",
+   "name": "LED dây 2835 12V trắng ấm – cuộn 5 m",
+   "category": "LED dây",
+   "brand": "Lumen",
+   "price": 260000,
+   "oldPrice": 350000,
+   "rating": 4.5,
+   "reviews": 142,
+   "sold": 1650,
+   "image": "/du-an/lumen/assets/img/products/led-day-2835.webp",
+   "gift": "Tặng 2 đầu nối nhanh",
+   "desc": "Chip 2835, 120 LED/m. Điện áp 12V, cắt được mỗi 3 LED. Băng keo 3M mặt sau. Tuỳ chọn thêm bộ nguồn 12V: +150.000₫. Bảo hành 6 tháng"
+  },
+  {
+   "id": "p11",
+   "name": "Cảm biến mưa – ánh sáng 2in1 (module)",
+   "category": "Cảm biến",
+   "brand": "Lumen",
+   "price": 1150000,
+   "oldPrice": 1450000,
+   "rating": 4.7,
+   "reviews": 47,
+   "sold": 302,
+   "image": "/du-an/lumen/assets/img/products/cam-bien-mua-anh-sang.webp",
+   "gift": "Lắp miễn phí tại xưởng",
+   "desc": "Tự gạt mưa theo cường độ. Tự bật đèn khi trời tối, vào hầm. Gắn sau gương chiếu hậu. Bảo hành 12 tháng"
+  }
+ ],
+ "branches": [
+  {
+   "name": "Lumen Hải Châu",
+   "address": "Số 368 Đường Mẫu, P. Hải Châu, Đà Nẵng",
+   "phone": "0900 000 368",
+   "hours": "8:00 – 21:00",
+   "note": "6 khoang lắp",
+   "id": "lumen-hai-chau-0"
+  },
+  {
+   "name": "Lumen Sơn Trà",
+   "address": "Số 12 Đường Mẫu B, P. An Hải, Đà Nẵng",
+   "phone": "0900 000 369",
+   "hours": "8:00 – 20:30",
+   "note": "4 khoang lắp",
+   "id": "lumen-son-tra-1"
+  },
+  {
+   "name": "Lumen Hội An",
+   "address": "Số 45 Đường Mẫu C, P. Cẩm Phô, Hội An",
+   "phone": "0900 000 370",
+   "hours": "8:00 – 20:00",
+   "note": "3 khoang lắp",
+   "id": "lumen-hoi-an-2"
+  }
+ ],
+ "posts": [
+  {
+   "title": "Chóa phản xạ có nên lên bi-LED không? So sánh nhanh với bóng LED cắm zin",
+   "category": "Kinh nghiệm",
+   "date": "2026-10-05",
+   "image": "https://images.unsplash.com/photo-1693421563400-e72761d49e5f?auto=format&fit=crop&w=640&q=70",
+   "id": "choa-phan-xa-co-nen-len-bi-led-khong-so-sanh-nhanh-voi-bong-led-cam-zin-0"
+  },
+  {
+   "title": "5 dấu hiệu đèn pha bị ố, hấp hơi và cách xử lý trước mùa mưa",
+   "category": "Bảo dưỡng",
+   "date": "2026-10-01",
+   "image": "https://images.unsplash.com/photo-1652977691699-e213b966cf34?auto=format&fit=crop&w=640&q=70",
+   "id": "5-dau-hieu-den-pha-bi-o-hap-hoi-va-cach-xu-ly-truoc-mua-mua-1"
+  },
+  {
+   "title": "Quy trình 5 bước lắp bi-LED tại xưởng: mất bao lâu, cần chuẩn bị gì?",
+   "category": "Hướng dẫn",
+   "date": "2026-09-26",
+   "image": "https://images.unsplash.com/photo-1643236084696-13306d729ff3?auto=format&fit=crop&w=640&q=70",
+   "id": "quy-trinh-5-buoc-lap-bi-led-tai-xuong-mat-bao-lau-can-chuan-bi-gi-2"
+  },
+  {
+   "title": "Lái đêm nên chọn màu ambient nào để đỡ mỏi mắt?",
+   "category": "Ambient",
+   "date": "2026-09-20",
+   "image": "https://images.unsplash.com/photo-1632655806671-a4af7ad1bcdc?auto=format&fit=crop&w=640&q=70",
+   "id": "lai-dem-nen-chon-mau-ambient-nao-de-do-moi-mat-3"
+  }
+ ],
+ "reviews": [
+  {
+   "name": "Nguyễn Hoàng",
+   "rating": 5,
+   "content": "Đi đèo Hải Vân ban đêm khác hẳn, đường cắt sáng gọn, xe ngược chiều không nháy pha nữa. Làm hơn 3 tiếng là xong, có phòng chờ máy lạnh.",
+   "date": "2026-10-03",
+   "target": "Toyota Vios 2021 · Gói độ Bi-LED trọn gói",
+   "id": "nguyen-hoang-0"
+  },
+  {
+   "name": "Trần Thị Mai",
+   "rating": 5,
+   "content": "Ambient đẹp hơn mong đợi, dây đi ẩn hoàn toàn. Mấy đứa nhỏ thích nhất chế độ nháy theo nhạc. Nhân viên chỉ cách dùng app rất kỹ.",
+   "date": "2026-09-30",
+   "target": "Kia Carnival 2022 · Gói ambient 64 màu – 18 vị trí",
+   "id": "tran-thi-mai-1"
+  },
+  {
+   "name": "Lê Quốc Bảo",
+   "rating": 5,
+   "content": "Gắn 2 đèn rọi ở thùng xe, tối dỡ hàng thấy rõ. Đi dây gọn, có công tắc riêng. Tư vấn kỹ, không ép mua đồ đắt.",
+   "date": "2026-09-28",
+   "target": "Ford Ranger 2023",
+   "id": "le-quoc-bao-2"
+  },
+  {
+   "name": "Phạm Minh Quân",
+   "rating": 4,
+   "content": "Bóng LED H4 cắm zin, sáng hơn hẳn bóng cũ, nhân viên chỉnh lại góc chiếu. Trừ 1 sao vì cuối tuần đông khách phải chờ khoảng 20 phút.",
+   "date": "2026-09-26",
+   "target": "Hyundai Grand i10",
+   "id": "pham-minh-quan-3"
+  },
+  {
+   "name": "Võ Thu Thảo",
+   "rating": 5,
+   "content": "Đèn pha ố vàng sau 6 năm, phục hồi xong trong lại như mới. Thích nhất là bảo hành điện tử, tra bằng số điện thoại, khỏi giữ phiếu.",
+   "date": "2026-09-21",
+   "target": "Mazda CX-5 2020",
+   "id": "vo-thu-thao-4"
+  },
+  {
+   "name": "Đặng Văn Đức",
+   "rating": 5,
+   "content": "Bi-laser pha xa thật sự, đường quốc lộ không đèn vẫn thấy rõ biển báo từ xa. Giá hơi cao nhưng đáng tiền.",
+   "date": "2026-09-17",
+   "target": "Toyota Fortuner 2021 · Gói độ Bi-Laser",
+   "id": "dang-van-duc-5"
+  }
+ ]
+}

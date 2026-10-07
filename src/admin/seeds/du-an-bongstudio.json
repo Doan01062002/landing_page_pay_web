@@ -1,0 +1,486 @@
+{
+ "categories": [
+  {
+   "id": "rua",
+   "name": "Rửa xe"
+  },
+  {
+   "id": "bong",
+   "name": "Sáp & ceramic"
+  },
+  {
+   "id": "khan",
+   "name": "Khăn & dụng cụ"
+  },
+  {
+   "id": "noithat",
+   "name": "Nội thất"
+  },
+  {
+   "id": "kinh",
+   "name": "Chăm sóc kính"
+  }
+ ],
+ "products": [
+  {
+   "id": "b1",
+   "name": "Dung dịch rửa xe pH trung tính Gentle Wash 1L",
+   "category": "Rửa xe",
+   "brand": "Bóng Essentials",
+   "spec": "pH 7 · pha 1:400 · an toàn ceramic",
+   "price": 189000,
+   "oldPrice": 239000,
+   "rating": 4.9,
+   "reviews": 412,
+   "sold": 3120,
+   "image": "/du-an/bongstudio/assets/img/products/rua-xe-ph-trung-tinh-1l.webp",
+   "gift": "Tặng 1 mút rửa xe",
+   "desc": "Công thức bọt dày, bôi trơn tốt giúp mút lướt nhẹ trên sơn, không tẩy sáp hay lớp ceramic. Can 1 lít có quai cầm, pha được khoảng 40 lần rửa."
+  },
+  {
+   "id": "b2",
+   "name": "Bọt tuyết Snow Foam đậm đặc 1L",
+   "category": "Rửa xe",
+   "brand": "Bóng Essentials",
+   "spec": "Bọt dày bám lâu · dùng với bình bọt",
+   "price": 229000,
+   "oldPrice": 269000,
+   "rating": 4.8,
+   "reviews": 286,
+   "sold": 2140,
+   "image": "/du-an/bongstudio/assets/img/products/bot-tuyet-snow-foam-1l.webp",
+   "gift": "",
+   "desc": "Bọt tuyết đặc như kem, bám trên thân xe 5–7 phút để làm mềm bùn đất trước khi chạm mút – giảm tối đa vết xước khi rửa."
+  },
+  {
+   "id": "b3",
+   "name": "Dung dịch tẩy nhựa đường & keo Tar Off 750ml",
+   "category": "Rửa xe",
+   "brand": "Bóng Pro",
+   "spec": "Gốc dung môi nhẹ · không hại sơn",
+   "price": 199000,
+   "oldPrice": 0,
+   "rating": 4.7,
+   "reviews": 98,
+   "sold": 640,
+   "image": "/du-an/bongstudio/assets/img/products/tay-nhua-duong-keo.webp",
+   "gift": "",
+   "desc": "Làm tan vết nhựa đường, keo dán decal, nhựa cây chỉ sau 30 giây. Thấm ra khăn rồi lau, không để lại vệt dầu."
+  },
+  {
+   "id": "b4",
+   "name": "Xịt tẩy bụi sắt đổi màu Iron Remover 1L",
+   "category": "Rửa xe",
+   "brand": "Bóng Pro",
+   "spec": "Đổi tím khi phản ứng · không axit",
+   "price": 289000,
+   "oldPrice": 0,
+   "rating": 4.8,
+   "reviews": 174,
+   "sold": 980,
+   "image": "/du-an/bongstudio/assets/img/products/tay-bui-sat-1l.webp",
+   "gift": "",
+   "desc": "Hoà tan hạt bụi sắt từ má phanh bám vào sơn và mâm. Dung dịch chuyển tím khi phản ứng để bạn thấy rõ hiệu quả. Chai 1 lít có vòi xịt."
+  },
+  {
+   "id": "b5",
+   "name": "Sáp Carnauba thượng hạng dạng hũ 200g",
+   "category": "Sáp & ceramic",
+   "brand": "Bóng Studio",
+   "spec": "Carnauba trắng · bóng ấm, sâu · bền 2–3 tháng",
+   "price": 459000,
+   "oldPrice": 590000,
+   "rating": 5,
+   "reviews": 321,
+   "sold": 1890,
+   "image": "/du-an/bongstudio/assets/img/products/sap-carnauba-hu-200g.webp",
+   "gift": "Tặng mút thoa sáp",
+   "desc": "Sáp mềm pha Carnauba trắng cho độ bóng ướt, ấm và sâu – đặc biệt đẹp trên sơn màu tối. Thoa mỏng bằng mút, đợi 5 phút rồi lau bằng khăn microfiber."
+  },
+  {
+   "id": "b7",
+   "name": "Xịt bóng nhanh Quick Detailer 1L",
+   "category": "Sáp & ceramic",
+   "brand": "Bóng Essentials",
+   "spec": "Xịt – lau trong 1 phút · an toàn ceramic, PPF",
+   "price": 249000,
+   "oldPrice": 299000,
+   "rating": 4.9,
+   "reviews": 368,
+   "sold": 2760,
+   "image": "/du-an/bongstudio/assets/img/products/quick-detailer-1l.webp",
+   "gift": "",
+   "desc": "Xoá bụi nhẹ, vân tay và vết nước giữa các lần rửa. Thêm độ trơn và bóng tức thì. Chai 1 lít dùng được khoảng 25 lần cho xe sedan."
+  },
+  {
+   "id": "b9",
+   "name": "Dung dịch phủ ceramic 9H 30ml",
+   "category": "Sáp & ceramic",
+   "brand": "Bóng Pro",
+   "spec": "Đủ cho 1 xe sedan · bền đến 2 năm",
+   "price": 1290000,
+   "oldPrice": 1590000,
+   "rating": 4.9,
+   "reviews": 264,
+   "sold": 1320,
+   "image": "/du-an/bongstudio/assets/img/products/ceramic-9h-30ml.webp",
+   "gift": "Tặng mút thoa & 2 khăn",
+   "desc": "Lọ ceramic 30ml có ống nhỏ giọt, độ cứng 9H, nước lăn thành giọt tròn. Thoa từng ô 50×50 cm, đợi 1–2 phút rồi lau đều. Có video hướng dẫn gửi kèm đơn."
+  },
+  {
+   "id": "b13",
+   "name": "Bộ 5 khăn microfiber đa năng 40×40cm",
+   "category": "Khăn & dụng cụ",
+   "brand": "Bóng Essentials",
+   "spec": "5 màu phân loại · thấm hút nhanh · giặt máy được",
+   "price": 199000,
+   "oldPrice": 249000,
+   "rating": 4.8,
+   "reviews": 307,
+   "sold": 3560,
+   "image": "/du-an/bongstudio/assets/img/products/bo-5-khan-microfiber.webp",
+   "gift": "",
+   "desc": "Năm màu để phân loại: sơn, kính, nội thất, mâm và lau sáp – tránh nhiễm chéo hoá chất. Sợi mịn, không gây xước sơn."
+  },
+  {
+   "id": "b14",
+   "name": "Bộ 2 mút rửa xe 2 lớp mềm",
+   "category": "Khăn & dụng cụ",
+   "brand": "Bóng Essentials",
+   "spec": "Mặt mút xốp giữ bọt · mặt nhám cho mâm, lốp",
+   "price": 59000,
+   "oldPrice": 79000,
+   "rating": 4.7,
+   "reviews": 188,
+   "sold": 2240,
+   "image": "/du-an/bongstudio/assets/img/products/bo-2-mut-rua-xe.webp",
+   "gift": "",
+   "desc": "Mặt mút xốp lỗ to giữ nhiều bọt, lướt êm trên sơn; mặt nhám dùng riêng cho mâm và lốp. Không dùng mặt nhám lên sơn xe."
+  },
+  {
+   "id": "b21",
+   "name": "Xô rửa xe 10L có quai xách",
+   "category": "Khăn & dụng cụ",
+   "brand": "Bóng Essentials",
+   "spec": "Nhựa PP dày · quai cầm chắc",
+   "price": 119000,
+   "oldPrice": 149000,
+   "rating": 4.7,
+   "reviews": 76,
+   "sold": 830,
+   "image": "/du-an/bongstudio/assets/img/products/xo-rua-xe-10l.webp",
+   "gift": "",
+   "desc": "Xô 10 lít vừa cho phương pháp rửa hai xô: một xô pha dung dịch, một xô nước sạch để giặt mút sau mỗi ô rửa."
+  },
+  {
+   "id": "b22",
+   "name": "Bộ 6 cọ lông mềm vệ sinh chi tiết",
+   "category": "Khăn & dụng cụ",
+   "brand": "Bóng Essentials",
+   "spec": "Lông mềm không xước · cán gỗ · 6 cỡ",
+   "price": 129000,
+   "oldPrice": 159000,
+   "rating": 4.8,
+   "reviews": 96,
+   "sold": 1040,
+   "image": "/du-an/bongstudio/assets/img/products/bo-6-co-ve-sinh-chi-tiet.webp",
+   "gift": "",
+   "desc": "Sáu cọ lông mềm từ bản rộng đến đầu nhọn, dùng chải bụi ở khe gió điều hoà, logo, viền đèn, khe ốp nhựa và quanh ốc mâm. Lông mềm không làm xước nhựa bóng."
+  },
+  {
+   "id": "b16",
+   "name": "Dung dịch vệ sinh nội thất đa năng 500ml",
+   "category": "Nội thất",
+   "brand": "Bóng Essentials",
+   "spec": "Da, nỉ, nhựa · mùi trà xanh nhẹ",
+   "price": 199000,
+   "oldPrice": 239000,
+   "rating": 4.8,
+   "reviews": 233,
+   "sold": 2050,
+   "image": "/du-an/bongstudio/assets/img/products/ve-sinh-noi-that.webp",
+   "gift": "Tặng khăn 40×40",
+   "desc": "Làm sạch vết bẩn tay, cà phê, bụi trên taplo, ghế da và nỉ. Không để lại độ bóng nhờn, mùi trà xanh dịu nhẹ."
+  },
+  {
+   "id": "b17",
+   "name": "Dưỡng da ghế pH cân bằng Leather Care 500ml",
+   "category": "Nội thất",
+   "brand": "Bóng Studio",
+   "spec": "Mềm da · chống nứt nẻ · chai có vòi nhấn",
+   "price": 279000,
+   "oldPrice": 0,
+   "rating": 4.9,
+   "reviews": 112,
+   "sold": 690,
+   "image": "/du-an/bongstudio/assets/img/products/duong-da-ghe.webp",
+   "gift": "",
+   "desc": "Dưỡng ẩm sâu cho ghế da và vô lăng, giữ độ mềm mại tự nhiên, chống nứt và phai màu do nắng nóng. Nhấn 2–3 lần ra mút, thoa đều."
+  },
+  {
+   "id": "b18",
+   "name": "Dung dịch lau kính không vệt 500ml",
+   "category": "Chăm sóc kính",
+   "brand": "Bóng Pro",
+   "spec": "Không cồn · an toàn phim cách nhiệt",
+   "price": 149000,
+   "oldPrice": 179000,
+   "rating": 4.8,
+   "reviews": 147,
+   "sold": 1180,
+   "image": "/du-an/bongstudio/assets/img/products/lau-kinh-500ml.webp",
+   "gift": "",
+   "desc": "Làm sạch màng dầu, vết côn trùng và dấu tay trên kính lái, gương. Không chứa cồn và amoniac nên an toàn cho kính đã dán phim."
+  },
+  {
+   "id": "b19",
+   "name": "Xịt chống bám nước kính lái Rain Repel 100ml",
+   "category": "Chăm sóc kính",
+   "brand": "Bóng Pro",
+   "spec": "Dạng xịt phun sương · nước tự trôi khi xe chạy · bền 2–3 tháng",
+   "price": 259000,
+   "oldPrice": 299000,
+   "rating": 4.7,
+   "reviews": 91,
+   "sold": 820,
+   "image": "/du-an/bongstudio/assets/img/products/chong-bam-nuoc-kinh.webp",
+   "gift": "",
+   "desc": "Xịt phun sương lên kính lái sạch, lau đều bằng khăn microfiber để tạo lớp kỵ nước: nước mưa tự trôi khi xe chạy, tăng tầm nhìn ban đêm. Chai 100ml dùng được khoảng 10 lần."
+  },
+  {
+   "id": "b12",
+   "name": "Khăn microfiber lau kính không xơ 40×40cm",
+   "category": "Chăm sóc kính",
+   "brand": "Bóng Essentials",
+   "spec": "Dệt mỏng · không để lại xơ vải",
+   "price": 69000,
+   "oldPrice": 89000,
+   "rating": 4.8,
+   "reviews": 204,
+   "sold": 2930,
+   "image": "/du-an/bongstudio/assets/img/products/khan-microfiber-lau-kinh.webp",
+   "gift": "",
+   "desc": "Khăn dệt mỏng chuyên lau kính và gương, không để lại xơ vải hay vệt nước. Giặt tay với nước sạch, phơi khô tự nhiên."
+  }
+ ],
+ "services": [
+  {
+   "id": "phim",
+   "name": "Dán phim cách nhiệt",
+   "group": "Dịch vụ tại xưởng",
+   "price": 3500000,
+   "priceText": "Sedan 3.500.000đ · SUV 4.200.000đ",
+   "duration": "3–4 giờ",
+   "warranty": "Bảo hành 7 năm",
+   "desc": "Cản 99% tia UV, giảm hấp thụ nhiệt, giữ tầm nhìn đêm rõ.",
+   "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "ppf",
+   "name": "Dán PPF đầu xe",
+   "group": "Dịch vụ tại xưởng",
+   "price": 12900000,
+   "priceText": "Sedan 12.900.000đ · SUV 15.500.000đ",
+   "duration": "1 ngày",
+   "warranty": "Bảo hành 5 năm",
+   "desc": "Màng TPU 7.5 mil chống đá văng, xước dăm tự liền khi gặp nhiệt.",
+   "image": "https://images.unsplash.com/photo-1646531840695-62810bcd1171?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "ceramic",
+   "name": "Phủ ceramic 1 lớp",
+   "group": "Dịch vụ tại xưởng",
+   "price": 2500000,
+   "priceText": "Sedan 2.500.000đ · SUV 3.000.000đ",
+   "duration": "6–8 giờ",
+   "warranty": "Bảo hành 12 tháng",
+   "desc": "Hiệu chỉnh sơn 1 bước, phủ 1 lớp gốm 9H, nước lăn thành giọt.",
+   "image": "https://images.unsplash.com/photo-1652898072202-5084dc85b850?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "noithat",
+   "name": "Vệ sinh nội thất chuyên sâu",
+   "group": "Dịch vụ tại xưởng",
+   "price": 890000,
+   "priceText": "Sedan 890.000đ · SUV 1.090.000đ",
+   "duration": "3–4 giờ",
+   "warranty": "Kiểm tra lại sau 7 ngày",
+   "desc": "Hút bụi, giặt ghế nỉ, dưỡng da, khử mùi bằng hơi nước nóng.",
+   "image": "https://images.unsplash.com/photo-1771491237218-cbd4a707497e?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "pkg-basic",
+   "name": "Gói Cơ bản (Bóng Mới)",
+   "group": "Gói chăm sóc",
+   "price": 2900000,
+   "priceText": "Sedan 2.900.000đ · SUV 3.500.000đ",
+   "desc": "Làm mới định kỳ 6–12 tháng"
+  },
+  {
+   "id": "pkg-pro",
+   "name": "Gói Nâng cao (Bóng Gương)",
+   "group": "Gói chăm sóc",
+   "price": 8900000,
+   "priceText": "Sedan 8.900.000đ · SUV 10.500.000đ",
+   "desc": "Khách chọn nhiều nhất"
+  },
+  {
+   "id": "pkg-premium",
+   "name": "Gói Cao cấp (Bảo vệ toàn diện)",
+   "group": "Gói chăm sóc",
+   "price": 24900000,
+   "priceText": "Sedan 24.900.000đ · SUV 29.500.000đ",
+   "desc": "Xe mới, giữ giá trị lâu dài"
+  }
+ ],
+ "branches": [
+  {
+   "name": "Bóng Studio Ninh Kiều",
+   "address": "Số 515 Đường Mẫu, P. Tân An, Q. Ninh Kiều, Cần Thơ",
+   "phone": "0900 000 515",
+   "hours": "7:30 – 19:00, tất cả các ngày",
+   "note": "6 khoang thi công kín bụi",
+   "id": "bong-studio-ninh-kieu-0"
+  },
+  {
+   "name": "Bóng Studio Cái Răng",
+   "address": "Số 88 Đường Minh Hoạ, P. Hưng Phú, Q. Cái Răng, Cần Thơ",
+   "phone": "0900 000 515",
+   "hours": "8:00 – 18:30, tất cả các ngày",
+   "note": "4 khoang · phòng rửa bọt tuyết",
+   "id": "bong-studio-cai-rang-1"
+  },
+  {
+   "name": "Bóng Studio Bình Thuỷ",
+   "address": "Số 21 Đường Ví Dụ, P. Bình Thuỷ, Q. Bình Thuỷ, Cần Thơ",
+   "phone": "0900 000 515",
+   "hours": "8:00 – 18:00, nghỉ chiều Chủ nhật",
+   "note": "3 khoang · chuyên PPF & phim",
+   "id": "bong-studio-binh-thuy-2"
+  }
+ ],
+ "posts": [
+  {
+   "title": "Rửa xe hai xô tại nhà: cách đơn giản nhất để hết vết xoáy",
+   "category": "Mẹo chăm xe",
+   "date": "2026-10-02",
+   "image": "https://images.unsplash.com/photo-1552930294-6b595f4c2974?auto=format&fit=crop&w=640&q=70",
+   "excerpt": "Xô thứ nhất pha dung dịch pH trung tính, xô thứ hai chỉ chứa nước sạch để giặt găng sau mỗi ô rửa. Rửa từ nóc xuống, mâm và gầm để sau cùng.",
+   "id": "rua-xe-hai-xo-tai-nha-cach-don-gian-nhat-de-het-vet-xoay-0"
+  },
+  {
+   "title": "Vì sao không nên rửa xe dưới nắng trưa?",
+   "category": "Mẹo chăm xe",
+   "date": "2026-09-26",
+   "image": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=640&q=70",
+   "excerpt": "Nước khô quá nhanh để lại cặn khoáng trên sơn và kính.",
+   "id": "vi-sao-khong-nen-rua-xe-duoi-nang-trua-1"
+  },
+  {
+   "title": "Chọn khăn microfiber: GSM bao nhiêu là đủ?",
+   "category": "Mẹo chăm xe",
+   "date": "2026-09-18",
+   "image": "https://images.unsplash.com/photo-1761934658112-80095148fe87?auto=format&fit=crop&w=640&q=70",
+   "excerpt": "Khăn lau khô nên từ 350 GSM, khăn lau sáp 280–320 GSM.",
+   "id": "chon-khan-microfiber-gsm-bao-nhieu-la-du-2"
+  },
+  {
+   "title": "Xe đã phủ ceramic có cần rửa bọt tuyết không?",
+   "category": "Mẹo chăm xe",
+   "date": "2026-09-09",
+   "image": "https://images.unsplash.com/photo-1608506375591-b90e1f955e4b?auto=format&fit=crop&w=640&q=70",
+   "excerpt": "Bọt tuyết làm mềm bụi bẩn trước khi chạm găng, giữ lớp phủ bền hơn.",
+   "id": "xe-da-phu-ceramic-co-can-rua-bot-tuyet-khong-3"
+  },
+  {
+   "title": "Vệ sinh mâm xe đúng thứ tự trong 10 phút",
+   "category": "Mẹo chăm xe",
+   "date": "2026-08-30",
+   "image": "https://images.unsplash.com/photo-1708805282683-50a060eba80f?auto=format&fit=crop&w=640&q=70",
+   "excerpt": "Luôn rửa mâm trước thân xe để bụi phanh không văng lên sơn sạch.",
+   "id": "ve-sinh-mam-xe-dung-thu-tu-trong-10-phut-4"
+  }
+ ],
+ "reviews": [
+  {
+   "name": "Minh Trí",
+   "rating": 5,
+   "content": "Xe đen 5 năm tuổi mà giờ soi gương được. Kỹ thuật viên chỉ từng vết xoáy trước và sau dưới đèn, giao xe đúng hẹn 17h.",
+   "date": "2026-10-05",
+   "target": "Gói Nâng cao · Sedan",
+   "id": "minh-tri-0"
+  },
+  {
+   "name": "Thu Hằng",
+   "rating": 5,
+   "content": "Lần đầu tự phủ ceramic theo video hướng dẫn, mất một buổi chiều. Mưa xong nước lăn tròn, lau rất nhàn. Đóng gói kỹ, có kèm mút thoa và khăn.",
+   "date": "2026-10-03",
+   "target": "Dung dịch phủ ceramic 9H 30ml",
+   "id": "thu-hang-1"
+  },
+  {
+   "name": "Quốc Bảo",
+   "rating": 5,
+   "content": "Chạy đường tỉnh nhiều nên dán PPF đầu xe. Mép cắt gọn, nhìn gần không thấy viền. Được hẹn kiểm tra lại sau 1 tuần.",
+   "date": "2026-10-01",
+   "target": "Dán PPF đầu xe · 7 chỗ",
+   "id": "quoc-bao-2"
+  },
+  {
+   "name": "Ngọc Diễm",
+   "rating": 5,
+   "content": "Khăn mềm, thấm nhanh, lau xong không để lại vệt. Xịt bóng nhanh thơm nhẹ, giao trong 2 tiếng.",
+   "date": "2026-09-28",
+   "target": "Bộ 5 khăn microfiber + Quick Detailer 1L",
+   "id": "ngoc-diem-3"
+  },
+  {
+   "name": "Hoàng Long",
+   "rating": 4,
+   "content": "Trưa nắng mà trong xe mát hẳn, ban đêm nhìn vẫn rõ. Trừ 1 sao vì phải chờ thêm 20 phút do xe trước làm lâu.",
+   "date": "2026-09-24",
+   "target": "Dán phim cách nhiệt · SUV 5 chỗ",
+   "id": "hoang-long-4"
+  },
+  {
+   "name": "Kim Ngân",
+   "rating": 5,
+   "content": "Đặt lịch online, đội kỹ thuật đến tận nhà, mang theo máy hơi nước. Ghế da sạch, xe hết mùi ẩm, giá đúng như báo.",
+   "date": "2026-09-20",
+   "target": "Vệ sinh nội thất · thi công tận nơi",
+   "id": "kim-ngan-5"
+  },
+  {
+   "name": "Thanh Tùng",
+   "rating": 5,
+   "content": "Sáp mềm, thoa bằng mút rất dễ, lau lên bóng ấm. Xe đen nhìn sâu hẳn, một hũ dùng được nhiều lần.",
+   "date": "2026-09-15",
+   "target": "Sáp Carnauba dạng hũ 200g",
+   "id": "thanh-tung-6"
+  },
+  {
+   "name": "Bảo Vy",
+   "rating": 5,
+   "content": "PPF, ceramic 3 lớp và phim toàn xe. Có phiếu bảo hành điện tử tra bằng số điện thoại, nhân viên tư vấn kỹ, không ép thêm dịch vụ.",
+   "date": "2026-09-10",
+   "target": "Gói Cao cấp · SUV 5 chỗ",
+   "id": "bao-vy-7"
+  },
+  {
+   "name": "Đức Anh",
+   "rating": 4,
+   "content": "Bọt nhiều, rửa không bị khô rít. Chai 1 lít dùng được khá lâu. Mong shop có thêm loại can 5 lít.",
+   "date": "2026-09-06",
+   "target": "Dung dịch rửa xe pH trung tính 1L",
+   "id": "duc-anh-8"
+  },
+  {
+   "name": "Phương Thảo",
+   "rating": 5,
+   "content": "Ghế da mềm lại, không bóng nhờn, mùi dễ chịu. Shop gọi xác nhận đơn nhanh.",
+   "date": "2026-09-02",
+   "target": "Dưỡng da ghế Leather Care",
+   "id": "phuong-thao-9"
+  }
+ ]
+}

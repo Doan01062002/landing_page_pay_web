@@ -1,0 +1,290 @@
+{
+ "categories": [
+  {
+   "id": "camera",
+   "name": "Camera hành trình"
+  },
+  {
+   "id": "lop",
+   "name": "Lốp & bơm lốp"
+  },
+  {
+   "id": "cuuho",
+   "name": "An toàn – cứu hộ"
+  },
+  {
+   "id": "vesinh",
+   "name": "Hút bụi – vệ sinh"
+  },
+  {
+   "id": "sac",
+   "name": "Sạc – pin dự phòng"
+  },
+  {
+   "id": "thom",
+   "name": "Tinh dầu – khử mùi"
+  },
+  {
+   "id": "goi",
+   "name": "Gối tựa – tiện nghi"
+  }
+ ],
+ "products": [
+  {
+   "id": "p01",
+   "name": "Camera hành trình kèm giá hít kính và tẩu nguồn 12V",
+   "category": "Camera hành trình",
+   "brand": "An Khang",
+   "spec": "Màn hình 2,7 inch · ghi hình vòng lặp",
+   "price": 1290000,
+   "oldPrice": 1690000,
+   "rating": 4.8,
+   "reviews": 412,
+   "sold": 1860,
+   "image": "/du-an/ankhang/assets/img/products/p01.webp",
+   "desc": "Camera hành trình gắn kính lái bằng giá hít chân không, cấp nguồn qua tẩu 12V. Ghi hình vòng lặp, tự khoá đoạn video khi có va chạm. An Khang có sẵn bộ dây đi âm trần cho các dòng xe trong danh sách."
+  },
+  {
+   "id": "p02",
+   "name": "Đồng hồ đo áp suất lốp cơ, mặt kim, đầu đo kim loại",
+   "category": "Lốp & bơm lốp",
+   "brand": "An Khang",
+   "spec": "Không cần pin · đọc trong 2 giây",
+   "price": 189000,
+   "oldPrice": 260000,
+   "rating": 4.7,
+   "reviews": 233,
+   "sold": 1420,
+   "image": "/du-an/ankhang/assets/img/products/p02.webp",
+   "desc": "Đồng hồ kim không cần pin, ấn đầu đo vào van là đọc được áp suất lốp. Nhỏ gọn để hộc cửa, dùng được cho ô tô và xe máy."
+  },
+  {
+   "id": "p03",
+   "name": "Bơm lốp điện mini cầm tay, màn hình số, tự ngắt khi đủ áp",
+   "category": "Lốp & bơm lốp",
+   "brand": "An Khang",
+   "spec": "Pin sạc · cài sẵn áp suất",
+   "price": 790000,
+   "oldPrice": 1090000,
+   "rating": 4.8,
+   "reviews": 318,
+   "sold": 2240,
+   "image": "/du-an/ankhang/assets/img/products/p03.webp",
+   "desc": "Bơm lốp không dây nhỏ gọn, cài áp suất mong muốn rồi bấm bơm – máy tự ngắt khi đủ. Kèm đầu chuyển cho xe máy, xe đạp và bóng."
+  },
+  {
+   "id": "p04",
+   "name": "Dây câu bình ắc quy ô tô, kẹp cách điện đỏ – đen",
+   "category": "An toàn – cứu hộ",
+   "brand": "An Khang",
+   "spec": "Dây lõi đồng · kẹp bọc nhựa",
+   "price": 290000,
+   "oldPrice": 390000,
+   "rating": 4.8,
+   "reviews": 156,
+   "sold": 980,
+   "image": "/du-an/ankhang/assets/img/products/p04.webp",
+   "desc": "Bộ dây câu bình dùng khi ắc quy yếu, không đề được máy. Kẹp bám chắc cọc bình, tay kẹp bọc nhựa cách điện, phân biệt rõ cực đỏ – đen."
+  },
+  {
+   "id": "p05",
+   "name": "Đèn pin LED vỏ nhôm, chống nước, nhỏ gọn để hộc xe",
+   "category": "An toàn – cứu hộ",
+   "brand": "An Khang",
+   "spec": "Pin sạc · 3 chế độ sáng",
+   "price": 249000,
+   "oldPrice": 350000,
+   "rating": 4.7,
+   "reviews": 204,
+   "sold": 1310,
+   "image": "/du-an/ankhang/assets/img/products/p05.webp",
+   "desc": "Đèn pin vỏ nhôm nhỏ gọn để hộc xe, chiếu sáng khi thay lốp hay kiểm tra khoang máy ban đêm. Ba chế độ sáng và chế độ nháy báo hiệu."
+  },
+  {
+   "id": "p06",
+   "name": "Bình chữa cháy bột cho ô tô, có đồng hồ áp và giá bắt",
+   "category": "An toàn – cứu hộ",
+   "brand": "An Khang",
+   "spec": "Chốt an toàn · vòi phun",
+   "price": 450000,
+   "oldPrice": 590000,
+   "rating": 4.8,
+   "reviews": 98,
+   "sold": 640,
+   "image": "/du-an/ankhang/assets/img/products/p06.webp",
+   "desc": "Bình chữa cháy bột đặt dưới ghế phụ hoặc trong cốp. An Khang có giá bắt riêng cho từng dòng xe trong danh sách, lắp chắc chắn không rung lắc khi chạy."
+  },
+  {
+   "id": "p07",
+   "name": "Túi sơ cứu ô tô nhiều ngăn, có dải phản quang",
+   "category": "An toàn – cứu hộ",
+   "brand": "An Khang",
+   "spec": "Vải dày · đủ 30 món cơ bản",
+   "price": 390000,
+   "oldPrice": 520000,
+   "rating": 4.7,
+   "reviews": 87,
+   "sold": 420,
+   "image": "/du-an/ankhang/assets/img/products/p07.webp",
+   "desc": "Túi sơ cứu nhiều ngăn, đựng sẵn băng gạc, băng dính y tế, kéo, găng tay và dung dịch sát khuẩn. Dải phản quang giúp dễ tìm trong cốp khi trời tối."
+  },
+  {
+   "id": "p08",
+   "name": "Búa thoát hiểm ô tô đầu thép, có dao cắt dây an toàn",
+   "category": "An toàn – cứu hộ",
+   "brand": "An Khang",
+   "spec": "Tay cầm chống trượt · kèm đế gắn",
+   "price": 159000,
+   "oldPrice": 220000,
+   "rating": 4.9,
+   "reviews": 265,
+   "sold": 2050,
+   "image": "/du-an/ankhang/assets/img/products/p08.webp",
+   "desc": "Búa thoát hiểm đầu thép đập vỡ kính cửa khi xe gặp sự cố, lưỡi dao trong tay cầm để cắt dây đai an toàn. Kèm đế gắn cạnh ghế lái."
+  },
+  {
+   "id": "p09",
+   "name": "Tinh dầu thơm xe 10 ml, bộ 3 lọ (sả chanh, bạc hà, gỗ thông)",
+   "category": "Tinh dầu – khử mùi",
+   "brand": "An Khang",
+   "spec": "Tinh dầu thiên nhiên · lọ thuỷ tinh",
+   "price": 189000,
+   "oldPrice": 260000,
+   "rating": 4.7,
+   "reviews": 611,
+   "sold": 3200,
+   "image": "/du-an/ankhang/assets/img/products/p09.webp",
+   "desc": "Ba lọ tinh dầu thiên nhiên để nhỏ vào sáp thơm, đá khuếch tán hoặc kẹp cửa gió. Mùi dịu, không gây say xe, hợp gia đình có trẻ nhỏ."
+  },
+  {
+   "id": "p10",
+   "name": "Máy hút bụi cầm tay không dây cho ô tô, kèm đầu hút khe",
+   "category": "Hút bụi – vệ sinh",
+   "brand": "An Khang",
+   "spec": "Pin sạc · cốc chứa bụi trong suốt",
+   "price": 690000,
+   "oldPrice": 990000,
+   "rating": 4.8,
+   "reviews": 286,
+   "sold": 1730,
+   "image": "/du-an/ankhang/assets/img/products/p10.webp",
+   "desc": "Máy hút bụi cầm tay không dây, hút sạch cát, vụn bánh dưới ghế và khe cửa. Cốc chứa bụi trong suốt tháo rửa được, kèm đầu hút khe hẹp."
+  },
+  {
+   "id": "p11",
+   "name": "Khăn microfiber lau xe, bộ 2 chiếc xanh và cam",
+   "category": "Hút bụi – vệ sinh",
+   "brand": "An Khang",
+   "spec": "Sợi siêu mịn · không xơ, không xước",
+   "price": 89000,
+   "oldPrice": 130000,
+   "rating": 4.8,
+   "reviews": 402,
+   "sold": 3850,
+   "image": "/du-an/ankhang/assets/img/products/p11.webp",
+   "desc": "Khăn sợi microfiber siêu mịn thấm hút tốt, lau khô thân xe, kính và taplo không để lại vệt, không xước sơn. Giặt máy được."
+  },
+  {
+   "id": "p12",
+   "name": "Nước rửa kính ô tô dạng xịt, chai 500 ml",
+   "category": "Hút bụi – vệ sinh",
+   "brand": "An Khang",
+   "spec": "Không vệt mờ · an toàn với phim cách nhiệt",
+   "price": 79000,
+   "oldPrice": 110000,
+   "rating": 4.6,
+   "reviews": 175,
+   "sold": 1960,
+   "image": "/du-an/ankhang/assets/img/products/p12.webp",
+   "desc": "Dung dịch rửa kính dạng xịt, lau sạch bụi, dầu và vết côn trùng trên kính lái mà không để lại vệt mờ. An toàn với phim cách nhiệt và gioăng cao su."
+  },
+  {
+   "id": "p13",
+   "name": "Tẩu sạc nhanh ô tô 30W, cổng USB-C và USB-A",
+   "category": "Sạc – pin dự phòng",
+   "brand": "An Khang",
+   "spec": "Sạc nhanh PD · vỏ nhỏ gọn",
+   "price": 259000,
+   "oldPrice": 350000,
+   "rating": 4.9,
+   "reviews": 266,
+   "sold": 1410,
+   "image": "/du-an/ankhang/assets/img/products/p13.webp",
+   "desc": "Tẩu sạc nhỏ gọn cắm sát ổ 12V, hai cổng USB-C và USB-A sạc cùng lúc cho hai điện thoại. Có bảo vệ quá nhiệt, quá áp."
+  },
+  {
+   "id": "p14",
+   "name": "Pin sạc dự phòng 20.000 mAh, nhiều cổng, sạc nhanh",
+   "category": "Sạc – pin dự phòng",
+   "brand": "An Khang",
+   "spec": "USB-C hai chiều · đèn báo pin",
+   "price": 590000,
+   "oldPrice": 790000,
+   "rating": 4.7,
+   "reviews": 143,
+   "sold": 760,
+   "image": "/du-an/ankhang/assets/img/products/p14.webp",
+   "desc": "Pin dự phòng dung lượng lớn cho chuyến đi xa, sạc đầy điện thoại nhiều lần. Nhiều cổng ra, sạc được vài thiết bị cùng lúc."
+  },
+  {
+   "id": "p15",
+   "name": "Pin sạc dự phòng 5.000 mAh dạng ống, bỏ túi được",
+   "category": "Sạc – pin dự phòng",
+   "brand": "An Khang",
+   "spec": "Vỏ nhôm · nhỏ gọn",
+   "price": 290000,
+   "oldPrice": 390000,
+   "rating": 4.6,
+   "reviews": 205,
+   "sold": 1180,
+   "image": "/du-an/ankhang/assets/img/products/p15.webp",
+   "desc": "Pin dự phòng dạng ống nhỏ gọn, bỏ túi áo hoặc hộc cửa xe. Sạc thêm khoảng một lần đầy cho điện thoại."
+  },
+  {
+   "id": "p16",
+   "name": "Gối cổ chữ U vải nhung mềm, màu hồng và xám",
+   "category": "Gối tựa – tiện nghi",
+   "brand": "An Khang",
+   "spec": "Ruột bông mềm · vỏ tháo giặt",
+   "price": 159000,
+   "oldPrice": 220000,
+   "rating": 4.8,
+   "reviews": 349,
+   "sold": 2380,
+   "image": "/du-an/ankhang/assets/img/products/p16.webp",
+   "desc": "Gối chữ U đỡ cổ khi ngồi xe đường dài, vải nhung mềm, ruột bông đàn hồi. Vỏ ngoài tháo ra giặt được. Có màu hồng và xám."
+  }
+ ],
+ "vouchers": [
+  {
+   "code": "ANKHANG50",
+   "title": "Giảm 50K",
+   "cond": "Đơn từ 299K · Bạn mới",
+   "value": 50000,
+   "min": 299000,
+   "id": "giam-50k-0"
+  },
+  {
+   "code": "CAM10",
+   "title": "Giảm 10%",
+   "cond": "Tối đa 150K · Camera hành trình",
+   "min": 1000000,
+   "id": "giam-10-1"
+  },
+  {
+   "code": "FREESHIP",
+   "title": "Freeship 30K",
+   "cond": "Mọi đơn hàng",
+   "min": 0,
+   "id": "freeship-30k-2"
+  },
+  {
+   "code": "GIAM100",
+   "title": "Giảm 100K",
+   "cond": "Đơn từ 1,5 triệu",
+   "value": 100000,
+   "min": 1500000,
+   "id": "giam-100k-3"
+  }
+ ]
+}

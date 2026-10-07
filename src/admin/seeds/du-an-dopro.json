@@ -1,0 +1,412 @@
+{
+ "categories": [
+  {
+   "id": "turbo-xa",
+   "name": "Turbo & cổ góp xả"
+  },
+  {
+   "id": "mam",
+   "name": "Mâm & ốc mâm"
+  },
+  {
+   "id": "gam",
+   "name": "Phuộc & phụ kiện gầm"
+  },
+  {
+   "id": "den-dien",
+   "name": "Đèn & đồ điện"
+  },
+  {
+   "id": "bao-duong",
+   "name": "Phụ tùng bảo dưỡng"
+  }
+ ],
+ "products": [
+  {
+   "id": "p01",
+   "name": "Turbo tăng áp có wastegate tích hợp cho máy 1.5–2.0L",
+   "category": "Turbo & cổ góp xả",
+   "brand": "Độ Pro",
+   "spec": "Van xả áp tích hợp · làm mát dầu + nước · ~45 HP",
+   "price": 14500000,
+   "oldPrice": 16900000,
+   "rating": 4.8,
+   "reviews": 74,
+   "sold": 132,
+   "image": "/du-an/dopro/assets/img/products/turbo-wastegate-tich-hop.webp",
+   "gift": "Tặng bộ ống dầu turbo",
+   "desc": "Wastegate tích hợp, không cần van xả rời. Vỏ turbine gang chịu nhiệt. Đường dầu & nước làm mát tiêu chuẩn. Lắp kèm remap ECU tại xưởng"
+  },
+  {
+   "id": "p02",
+   "name": "Turbo T3/T4 mặt bích T3 cho máy 1.8–2.5L",
+   "category": "Turbo & cổ góp xả",
+   "brand": "Độ Pro",
+   "spec": "Mặt bích T3 · cửa xả V-band · ~60 HP",
+   "price": 11800000,
+   "oldPrice": 13500000,
+   "rating": 4.7,
+   "reviews": 51,
+   "sold": 88,
+   "image": "/du-an/dopro/assets/img/products/turbo-t3-t4.webp",
+   "gift": "",
+   "desc": "Mặt bích T3 phổ biến, dễ chế cổ góp. Bánh nén nhôm đúc. Phù hợp dự án Stage 3. Bảo hành 6 tháng khi lắp tại xưởng"
+  },
+  {
+   "id": "p03",
+   "name": "Bộ turbo kèm cổ góp xả lắp sẵn (trọn gói)",
+   "category": "Turbo & cổ góp xả",
+   "brand": "Độ Pro",
+   "spec": "Turbo + cổ góp + ống dầu · ~70 HP",
+   "price": 24900000,
+   "oldPrice": 28500000,
+   "rating": 4.9,
+   "reviews": 23,
+   "sold": 31,
+   "image": "/du-an/dopro/assets/img/products/bo-turbo-co-gop-xa.webp",
+   "gift": "Tặng remap ECU + 2 lần đo dyno",
+   "desc": "Turbo và cổ góp xả lắp sẵn, giảm thời gian thi công. Kèm ống dầu, gioăng, bulông chịu nhiệt. Remap ECU & chạy dyno kèm theo. Bảo hành hệ thống 12 tháng"
+  },
+  {
+   "id": "p04",
+   "name": "Cổ góp xả (header) 4-1 thép chịu nhiệt cho máy 4 xi-lanh",
+   "category": "Turbo & cổ góp xả",
+   "brand": "Độ Pro",
+   "spec": "4 ống vào 1 · mối hàn TIG · ~6 HP",
+   "price": 6900000,
+   "oldPrice": 8200000,
+   "rating": 4.8,
+   "reviews": 96,
+   "sold": 214,
+   "image": "/du-an/dopro/assets/img/products/co-xa-header-4-1.webp",
+   "gift": "",
+   "desc": "4 ống dài bằng nhau, xả đều từng máy. Thép chịu nhiệt, hàn TIG. Kèm gioăng mặt bích & bulông. Tăng ~6 HP khi đi cùng pô thông (đo tham chiếu)"
+  },
+  {
+   "id": "p05",
+   "name": "Mâm đúc 18 inch 5 chấu kép xám phay mặt (bộ 4)",
+   "category": "Mâm & ốc mâm",
+   "brand": "Độ Pro",
+   "spec": "18×8 · PCD 5×114.3 · ET40",
+   "price": 15600000,
+   "oldPrice": 18400000,
+   "rating": 4.8,
+   "reviews": 142,
+   "sold": 318,
+   "image": "/du-an/dopro/assets/img/products/mam-18-5-chau-kep-bac.webp",
+   "gift": "Tặng ốc khoá + cân bằng động",
+   "desc": "Đúc áp suất thấp, kiểm tra đảo vành tại xưởng. Màu xám phay mặt bóng. Có PCD 5×114.3 / 5×100. Miễn phí tháo lắp & cân bằng động"
+  },
+  {
+   "id": "p06",
+   "name": "Mâm đúc 17 inch đen phay mặt 5 chấu (bộ 4)",
+   "category": "Mâm & ốc mâm",
+   "brand": "Độ Pro",
+   "spec": "17×7.5 · PCD 4×100 / 5×114.3 · ET42",
+   "price": 13200000,
+   "oldPrice": 15800000,
+   "rating": 4.7,
+   "reviews": 97,
+   "sold": 236,
+   "image": "/du-an/dopro/assets/img/products/mam-17-den-phay-mat.webp",
+   "gift": "",
+   "desc": "Thiết kế 5 chấu cong thể thao. Sơn đen bóng, mặt chấu phay sáng. Có PCD 4×100 cho xe hạng B. Tặng bộ chụp ốc"
+  },
+  {
+   "id": "p07",
+   "name": "Ốc khoá mâm chống trộm đầu cầu (bộ 4 + đầu khoá)",
+   "category": "Mâm & ốc mâm",
+   "brand": "Độ Pro",
+   "spec": "Thép mạ kẽm · ren M14×1.5 · đầu cầu",
+   "price": 650000,
+   "oldPrice": 790000,
+   "rating": 4.8,
+   "reviews": 365,
+   "sold": 2140,
+   "image": "/du-an/dopro/assets/img/products/oc-khoa-mam-chong-trom.webp",
+   "gift": "",
+   "desc": "Mỗi bánh 1 ốc khoá, mở bằng đầu khoá riêng. Thép mạ kẽm chống gỉ. Đầu cầu khớp mâm zin & mâm độ. Lắp miễn phí khi mua mâm"
+  },
+  {
+   "id": "p08",
+   "name": "Bộ ốc mâm & tắc kê thép mạ (chọn theo xe)",
+   "category": "Mâm & ốc mâm",
+   "brand": "Độ Pro",
+   "spec": "M12 / M14 · đầu côn & đầu cầu",
+   "price": 420000,
+   "oldPrice": 520000,
+   "rating": 4.6,
+   "reviews": 211,
+   "sold": 1380,
+   "image": "/du-an/dopro/assets/img/products/bo-oc-mam-tac-ke.webp",
+   "gift": "",
+   "desc": "Đủ cỡ M12×1.5 và M14×1.5. Đầu côn 60° hoặc đầu cầu theo mâm. Thép cứng 10.9, mạ chống gỉ. Siết lực đúng thông số khi lắp"
+  },
+  {
+   "id": "p09",
+   "name": "Phuộc coilover chỉnh cao thấp (bộ 4 cây)",
+   "category": "Phuộc & phụ kiện gầm",
+   "brand": "Độ Pro",
+   "spec": "Chỉnh cao thấp bằng ren · lò xo xanh · BH 12 tháng",
+   "price": 16900000,
+   "oldPrice": 19500000,
+   "rating": 4.8,
+   "reviews": 188,
+   "sold": 402,
+   "image": "/du-an/dopro/assets/img/products/coilover-bo-4.webp",
+   "gift": "Tặng căn chỉnh thước lái",
+   "desc": "Hạ gầm 30–70 mm tuỳ chỉnh. Thân phuộc nhôm, ren chỉnh cao thấp. Đi phố êm, vào cua chắc. Bảo hành rò dầu 12 tháng"
+  },
+  {
+   "id": "p10",
+   "name": "Móc kéo xe ren vặn (tow hook) thép rèn",
+   "category": "Phuộc & phụ kiện gầm",
+   "brand": "Độ Pro",
+   "spec": "Thép rèn · ren theo cản xe · tải 2 tấn",
+   "price": 250000,
+   "oldPrice": 320000,
+   "rating": 4.7,
+   "reviews": 129,
+   "sold": 760,
+   "image": "/du-an/dopro/assets/img/products/moc-keo-xe.webp",
+   "gift": "",
+   "desc": "Vặn vào lỗ móc kéo zin ở cản. Thép rèn, sơn tĩnh điện. Bắt buộc khi chạy track day. Kèm túi đựng"
+  },
+  {
+   "id": "p11",
+   "name": "Bóng đèn LED H4 tản nhiệt nhôm (cặp)",
+   "category": "Đèn & đồ điện",
+   "brand": "Độ Pro",
+   "spec": "Chân H4 cos/pha · 6000K · quạt tản nhiệt",
+   "price": 890000,
+   "oldPrice": 1190000,
+   "rating": 4.7,
+   "reviews": 512,
+   "sold": 3260,
+   "image": "/du-an/dopro/assets/img/products/bong-led-h4.webp",
+   "gift": "",
+   "desc": "Thay trực tiếp bóng halogen H4. Ánh sáng trắng 6000K, cos – pha rõ. Thân nhôm tản nhiệt + quạt. Cân chỉnh pha miễn phí tại xưởng"
+  },
+  {
+   "id": "p12",
+   "name": "Camera hành trình 2 mắt kèm tẩu sạc",
+   "category": "Đèn & đồ điện",
+   "brand": "Độ Pro",
+   "spec": "Ghi trước & trong xe · đế hít kính · tẩu 12V",
+   "price": 1450000,
+   "oldPrice": 1890000,
+   "rating": 4.6,
+   "reviews": 274,
+   "sold": 1120,
+   "image": "/du-an/dopro/assets/img/products/camera-hanh-trinh-2-mat.webp",
+   "gift": "Tặng thẻ nhớ 32GB",
+   "desc": "2 ống kính: phía trước và trong cabin. Đế hít kính chắc chắn. Tẩu sạc 12V kèm dây dài. Đi dây gọn miễn phí tại xưởng"
+  },
+  {
+   "id": "p13",
+   "name": "Bugi đánh lửa ren dài (1 cây)",
+   "category": "Phụ tùng bảo dưỡng",
+   "brand": "Độ Pro",
+   "spec": "Ren M12 · cực đồng · thay mỗi 20.000 km",
+   "price": 180000,
+   "oldPrice": 220000,
+   "rating": 4.7,
+   "reviews": 438,
+   "sold": 4120,
+   "image": "/du-an/dopro/assets/img/products/bugi-danh-lua.webp",
+   "gift": "",
+   "desc": "Đúng mã theo động cơ, tra cứu theo đời xe. Đánh lửa ổn định khi đã remap. Nên thay đồng bộ cả bộ. Thay tại xưởng 15 phút"
+  },
+  {
+   "id": "p14",
+   "name": "Lọc gió điều hoà than hoạt tính (2 tấm)",
+   "category": "Phụ tùng bảo dưỡng",
+   "brand": "Độ Pro",
+   "spec": "Lọc bụi mịn · khử mùi · thay mỗi 10.000 km",
+   "price": 290000,
+   "oldPrice": 350000,
+   "rating": 4.6,
+   "reviews": 356,
+   "sold": 2870,
+   "image": "/du-an/dopro/assets/img/products/loc-gio-dieu-hoa.webp",
+   "gift": "",
+   "desc": "Lớp than hoạt tính khử mùi. Giữ bụi mịn, phấn hoa. Đúng kích thước theo xe. Thay miễn phí khi bảo dưỡng tại xưởng"
+  }
+ ],
+ "services": [
+  {
+   "id": "body-kit",
+   "name": "Body kit & cánh gió",
+   "group": "Dịch vụ độ",
+   "price": 2450000,
+   "priceText": "từ 2.450.000đ",
+   "duration": "1–2 ngày",
+   "desc": "Lip trước, ốp sườn, widebody, cánh GT – sơn đúng mã màu xe.",
+   "image": "https://images.unsplash.com/photo-1788718600150-84f1e18a9f36?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "dan-doi-mau",
+   "name": "Dán đổi màu & tem",
+   "group": "Dịch vụ độ",
+   "price": 2200000,
+   "priceText": "từ 2.200.000đ",
+   "duration": "2 giờ – 2 ngày",
+   "desc": "Film đổi màu bền 5 năm, tem livery cắt CNC theo form xe.",
+   "image": "https://images.unsplash.com/photo-1617024094355-b886817cffc4?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "do-po",
+   "name": "Độ pô & hệ thống xả",
+   "group": "Dịch vụ độ",
+   "price": 1290000,
+   "priceText": "từ 1.290.000đ",
+   "duration": "1–3 giờ",
+   "desc": "Pô inox/titan, đầu pô, van điện – đo độ ồn trước khi bàn giao.",
+   "image": "https://images.unsplash.com/photo-1777173649680-45b71ee019d5?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "phanh",
+   "name": "Nâng cấp phanh",
+   "group": "Dịch vụ độ",
+   "price": 1350000,
+   "priceText": "từ 1.350.000đ",
+   "duration": "1–4 giờ",
+   "desc": "Đĩa khoan xẻ rãnh, heo 4–6 piston, má phanh gốm, dầu DOT 4.",
+   "image": "https://images.unsplash.com/photo-1760317890322-364a810cd4da?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "noi-that",
+   "name": "Vô lăng & ghế thể thao",
+   "group": "Dịch vụ độ",
+   "price": 3450000,
+   "priceText": "từ 3.450.000đ",
+   "duration": "1–3 giờ",
+   "desc": "Vô lăng đĩa sâu, ghế bucket, ốp carbon – tư vấn túi khí kỹ.",
+   "image": "https://images.unsplash.com/photo-1784034839931-87b163b53271?auto=format&fit=crop&w=640&q=70"
+  },
+  {
+   "id": "remap",
+   "name": "Remap ECU & đo dyno",
+   "group": "Dịch vụ độ",
+   "price": 3900000,
+   "priceText": "từ 3.900.000đ",
+   "duration": "Nửa ngày",
+   "desc": "Map an toàn theo xăng tại Việt Nam, in biên bản dyno trước & sau.",
+   "image": "https://images.unsplash.com/photo-1591879742348-13012c2963bf?auto=format&fit=crop&w=640&q=70"
+  }
+ ],
+ "branches": [
+  {
+   "name": "Xưởng chính Cầu Giấy",
+   "address": "Số 1xx Đường Mẫu, Q. Cầu Giấy, Hà Nội",
+   "phone": "0900 000 123",
+   "hours": "08:00 – 20:00 (cả CN)",
+   "note": "6 khoang lắp · phòng dyno · cầu nâng 4 trụ",
+   "id": "xuong-chinh-cau-giay-0"
+  },
+  {
+   "name": "Chi nhánh Long Biên",
+   "address": "Số 2xx Đường Mẫu, Q. Long Biên, Hà Nội",
+   "phone": "0900 000 145",
+   "hours": "08:00 – 19:30",
+   "note": "4 khoang lắp · dán đổi màu · cân chỉnh thước lái",
+   "id": "chi-nhanh-long-bien-1"
+  },
+  {
+   "name": "Chi nhánh Thủ Đức",
+   "address": "Số 3xx Đường Mẫu, TP. Thủ Đức, TP.HCM",
+   "phone": "0900 000 167",
+   "hours": "08:00 – 20:00",
+   "note": "5 khoang lắp · phòng dyno · kho phụ tùng",
+   "id": "chi-nhanh-thu-duc-2"
+  }
+ ],
+ "posts": [
+  {
+   "title": "Coilover hay lò xo hạ gầm: chọn loại nào cho xe đi phố hằng ngày?",
+   "category": "Kinh nghiệm",
+   "date": "2026-10-05",
+   "image": "https://images.unsplash.com/photo-1602107461979-5b9460f0176c?auto=format&fit=crop&w=640&q=70",
+   "excerpt": "So sánh độ êm, chi phí và mức hạ gầm của hai phương án phổ biến nhất cho sedan cỡ B, C.",
+   "id": "coilover-hay-lo-xo-ha-gam-chon-loai-nao-cho-xe-di-pho-hang-ngay-0"
+  },
+  {
+   "title": "Cách chọn offset và PCD khi thay mâm 18 inch không bị cạ hốc bánh",
+   "category": "Hướng dẫn",
+   "date": "2026-09-29",
+   "image": "https://images.unsplash.com/photo-1611633235555-45e252fe48c8?auto=format&fit=crop&w=640&q=70",
+   "id": "cach-chon-offset-va-pcd-khi-thay-mam-18-inch-khong-bi-ca-hoc-banh-1"
+  },
+  {
+   "title": "Lắp turbo cho máy hút khí tự nhiên: cần nâng cấp những gì?",
+   "category": "Dyno test",
+   "date": "2026-09-22",
+   "image": "https://images.unsplash.com/photo-1591879742348-13012c2963bf?auto=format&fit=crop&w=640&q=70",
+   "id": "lap-turbo-cho-may-hut-khi-tu-nhien-can-nang-cap-nhung-gi-2"
+  },
+  {
+   "title": "Độ pô cho ô tô: lưu ý độ ồn và thủ tục trước khi đăng kiểm",
+   "category": "Pháp lý",
+   "date": "2026-09-16",
+   "image": "https://images.unsplash.com/photo-1692309175422-b9d614f4764e?auto=format&fit=crop&w=640&q=70",
+   "id": "do-po-cho-o-to-luu-y-do-on-va-thu-tuc-truoc-khi-dang-kiem-3"
+  },
+  {
+   "title": "Rửa xe dán đổi màu thế nào để film bền màu 5 năm?",
+   "category": "Chăm sóc xe",
+   "date": "2026-09-09",
+   "image": "https://images.unsplash.com/photo-1617024094355-b886817cffc4?auto=format&fit=crop&w=640&q=70",
+   "id": "rua-xe-dan-doi-mau-the-nao-de-film-ben-mau-5-nam-4"
+  }
+ ],
+ "reviews": [
+  {
+   "name": "Minh Tuấn",
+   "rating": 5,
+   "content": "Làm Stage 2 xong chạy dyno lên 226 HP, sát số báo giá. Xe đi phố vẫn êm, đạp ga sâu là thấy khác hẳn.",
+   "date": "2026-09-12",
+   "target": "Civic 2020 · Combo Stage 2",
+   "id": "minh-tuan-0"
+  },
+  {
+   "name": "Thu Hà",
+   "rating": 5,
+   "content": "Ducktail carbon dán không khoan, 20 phút là xong. Màu carbon khớp với lip trước, xe nhìn khác hẳn.",
+   "date": "2026-09-03",
+   "target": "Mazda 3 · đuôi vịt + lip",
+   "id": "thu-ha-1"
+  },
+  {
+   "name": "Quốc Bảo",
+   "rating": 5,
+   "content": "Kỹ thuật tư vấn offset mâm rất kỹ, hạ gầm xong căn chỉnh thước lái luôn. Đi đường gồ ghề vẫn không cạ gầm.",
+   "date": "2026-08-28",
+   "target": "K3 · coilover + mâm 18\"",
+   "id": "quoc-bao-2"
+  },
+  {
+   "name": "Đức Long",
+   "rating": 4,
+   "content": "Lắp tận nhà đúng hẹn, đi dây camera gọn. Đèn LED sáng hơn hẳn, cos không loá. Trừ 1 sao vì phải chờ hàng 2 ngày.",
+   "date": "2026-08-21",
+   "target": "Ranger · LED H4 + camera",
+   "id": "duc-long-3"
+  },
+  {
+   "name": "Hoàng Nam",
+   "rating": 5,
+   "content": "Bản thiết kế tem được sửa 2 lần miễn phí. In sắc nét, phơi nắng 6 tháng vẫn chưa phai.",
+   "date": "2026-08-15",
+   "target": "Elantra · dán đổi màu",
+   "id": "hoang-nam-4"
+  },
+  {
+   "name": "Ngọc Ánh",
+   "rating": 5,
+   "content": "Vô lăng da lộn cầm sướng tay, shop giải thích kỹ chuyện túi khí trước khi lắp. Nhân viên nhiệt tình.",
+   "date": "2026-08-02",
+   "target": "City · vô lăng + ghế",
+   "id": "ngoc-anh-5"
+  }
+ ]
+}

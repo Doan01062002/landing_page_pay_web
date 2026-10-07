@@ -27,6 +27,9 @@ export default function TemplateCard({ t }) {
             Chi tiết
           </Link>
         </div>
+        <Link to={`/quan-tri/${t.slug}`} className="tcard__admin">
+          <Icon name="Settings" size={14} /> Trang quản trị demo
+        </Link>
       </div>
     </article>
   )

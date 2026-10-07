@@ -167,13 +167,14 @@ export default function TemplateDetail() {
                 </li>
               ))}
               <li className="d-pages__admin">
-                <span>
+                <Link to={`/quan-tri/${t.slug}`}>
                   <Icon name="Settings" size={18} />
                   Trang quản trị
-                </span>
+                  <Icon name="Eye" size={15} className="d-pages__eye" />
+                </Link>
               </li>
             </ul>
-            <p className="d-pages__note">Bấm vào tên trang để xem thử. Trang quản trị dùng để sửa giá, thêm chi nhánh, đăng tin và xem lịch hẹn.</p>
+            <p className="d-pages__note">Bấm vào tên trang để xem thử. Trang quản trị (bản demo, chưa có máy chủ) dùng để quản lý lịch hẹn, đơn hàng, khách hàng, giá và nội dung website.</p>
           </div>
         </div>
       </section>

@@ -28,6 +28,7 @@ const KINDS = {
     backLabel: 'Quay về chi tiết',
     sub: (t) => `${t.categoryLabel} · ${t.free ? 'Miễn phí' : `từ ${formatVND(t.price)}`}`,
     cta: 'Chọn mẫu này',
+    admin: (t) => `/quan-tri/${t.slug}`,
     ctaShort: 'Chọn mẫu',
     consultName: (t) => t.name,
   },
@@ -53,6 +54,7 @@ const KINDS = {
     backLabel: 'Quay về kho mẫu',
     sub: (t) => `${typeLabel(t.type)} · Mẫu dựng riêng`,
     cta: 'Làm trang như thế này',
+    admin: (t) => `/quan-tri/du-an-${t.slug}`,
     ctaShort: 'Làm trang này',
     consultName: (t) => `Làm giống mẫu ${t.name}`,
   },
@@ -218,6 +220,12 @@ export default function Demo({ kind = 'template' }) {
               <Icon name="ExternalLink" size={15} />
               <span className="demo-bar__btn-label">Mở trang thật</span>
             </a>
+          )}
+          {K.admin && (
+            <Link to={K.admin(t)} className="btn btn--ghost demo-bar__ext-btn" title="Trang quản trị demo của mẫu này">
+              <Icon name="Settings" size={15} />
+              <span className="demo-bar__btn-label">Trang quản trị</span>
+            </Link>
           )}
           <button
             type="button"

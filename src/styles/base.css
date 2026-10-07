@@ -1549,3 +1549,19 @@ p {
   font-weight: 600;
   color: var(--brand-deep);
 }
+.tcard__admin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 2px;
+  padding: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  border-radius: var(--r-sm);
+}
+.tcard__admin:hover {
+  color: var(--brand-deep);
+  background: var(--brand-soft);
+}

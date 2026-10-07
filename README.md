@@ -124,3 +124,15 @@ Thêm một object vào `templates` trong `src/data/templates.js`. Chọn `hero.
 - Gắn vào JSX: `data-reveal="up|left|right|zoom|fade"` cho một phần tử, hoặc `data-stagger="up"` trên phần tử cha để các con hiện lần lượt.
 - CSS nằm trong `src/styles/motion.css`. Khi hệ điều hành bật "giảm chuyển động", trang tự chuyển sang dạng mờ dần nhẹ, bỏ các chuyển động lớn và lặp liên tục.
 - Ảnh thu nhỏ của mẫu (`/preview/:slug?embed=1`) luôn tắt hiệu ứng.
+
+## Trang quản trị demo (`/quan-tri`)
+
+- Mỗi mẫu trong Kho mẫu có một trang quản trị riêng: `/quan-tri/<key>` (mẫu phần mềm: `<slug>`, mẫu dựng riêng: `du-an-<slug>`). `/quan-tri` liệt kê tất cả. Vào từ dòng "Trang quản trị demo" dưới mỗi thẻ, nút "Trang quản trị" trên thanh xem thử, hoặc trang chi tiết mẫu.
+- **Chưa có backend**: đăng nhập là bản demo (mật khẩu bất kỳ / "Vào nhanh"); dữ liệu lưu trong `localStorage` theo từng mẫu (`ca-admin:<key>:<bảng>`). Cài đặt → Dữ liệu: tải bản sao lưu JSON, nhập lại, khôi phục dữ liệu mẫu.
+- Ba loại theo ngành (`src/admin/config.js`):
+  - **Gara & dịch vụ**: lịch hẹn (danh sách + lịch tuần), phiếu sửa chữa / báo giá (in phiếu, xuất phụ tùng khỏi kho), hồ sơ xe (lịch sử theo biển số, hẹn bảo dưỡng), dịch vụ & bảng giá, phụ tùng, ảnh trước / sau.
+  - **Cửa hàng**: đơn hàng (trừ kho khi tạo, trả kho khi huỷ, in hoá đơn), lịch lắp đặt, flash sale, mã giảm giá, sản phẩm, danh mục, nhập kho, dịch vụ thi công.
+  - **Showroom & đại lý**: xe đang bán, khách quan tâm (bảng kéo thả theo giai đoạn), lịch lái thử / xem xe, đặt cọc & hợp đồng (tự đổi trạng thái xe), hồ sơ trả góp, ký gửi & thu mua (thu mua → tạo tin đăng).
+  - Chung: tổng quan, báo cáo (7 / 30 / 90 ngày, 12 tháng, CSV, in), khách hàng (lịch sử giao dịch), đánh giá, khuyến mãi, nội dung website (banner, bố cục, SEO, popup), bài viết, chi nhánh, nhân viên & phân quyền, nhật ký, cài đặt.
+- Cấu trúc: `src/admin/schemas.jsx` (cột, trường nhập, trạng thái, thao tác của từng bảng), `pages/Resource.jsx` (trang danh sách dùng chung), `seed.js` (sinh dữ liệu ban đầu), `seeds/*.json` (dữ liệu thật lấy từ trang tĩnh: `node scripts/admin-seed.mjs`), `store.jsx` (lưu trữ), `admin.css`. Phần này tải riêng (lazy) nên không làm nặng website.
+- Khi nối backend: thay `store.jsx` bằng gọi API (giữ nguyên các hàm `read / add / update / remove / setDoc`), đăng nhập thật thay cho `sessionStorage`.

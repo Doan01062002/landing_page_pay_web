@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { Routes, Route, Outlet, Navigate, useLocation } from 'react-router-dom'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
@@ -14,6 +14,9 @@ import Preview from './pages/Preview.jsx'
 import NotFound from './pages/NotFound.jsx'
 import LpGallery from './pages/LpGallery.jsx'
 import LpPreview from './pages/LpPreview.jsx'
+
+// Trang quản trị demo của từng mẫu: tải riêng khi mở /quan-tri
+const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
 
 // Cuộn lên đầu khi đổi trang, hoặc tới #section nếu URL có hash.
 function ScrollManager() {
@@ -78,6 +81,14 @@ export default function App() {
         <Route path="/demo-du-an/:slug" element={<Demo kind="project" />} />
         <Route path="/lp/:slug" element={<LpPreview />} />
         <Route path="/preview/:slug/:page?" element={<Preview />} />
+        <Route
+          path="/quan-tri/*"
+          element={
+            <Suspense fallback={<div className="adm-loading">Đang tải trang quản trị…</div>}>
+              <AdminApp />
+            </Suspense>
+          }
+        />
       </Routes>
     </ConsultProvider>
   )

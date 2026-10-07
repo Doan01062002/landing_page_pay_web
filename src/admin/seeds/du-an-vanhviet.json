@@ -1,0 +1,370 @@
+{
+ "categories": [
+  {
+   "id": "mam",
+   "name": "Mâm đúc"
+  },
+  {
+   "id": "lop",
+   "name": "Lốp ô tô"
+  },
+  {
+   "id": "pk",
+   "name": "Phụ kiện"
+  }
+ ],
+ "products": [
+  {
+   "id": "m1506",
+   "name": "Mâm đúc 15 inch 6 chấu xám khói VV-1506",
+   "category": "Mâm đúc",
+   "brand": "VV Wheels",
+   "price": 1450000,
+   "oldPrice": 1690000,
+   "rating": 4.8,
+   "reviews": 126,
+   "sold": 1240,
+   "image": "/du-an/vanhviet/assets/img/products/mam-15-6-chau-xam.webp",
+   "desc": "6 chấu bản vừa, sơn xám khói mặt phay nhẹ. Hợp Vios, City, Accent, Mazda2 đi phố hằng ngày."
+  },
+  {
+   "id": "m1505",
+   "name": "Mâm đúc 15 inch 5 chấu lòng sâu bạc TZ-1505",
+   "category": "Mâm đúc",
+   "brand": "Tenzo",
+   "price": 1590000,
+   "rating": 4.7,
+   "reviews": 88,
+   "sold": 760,
+   "image": "/du-an/vanhviet/assets/img/products/mam-15-5-chau-long-sau.webp",
+   "desc": "5 chấu bản to, lòng mâm sâu kiểu cổ điển. Bề rộng 7J, cần kiểm tra hốc bánh khi lắp cho xe hạng A."
+  },
+  {
+   "id": "m1606",
+   "name": "Mâm đúc 16 inch 6 chấu mặt phay AR-1606",
+   "category": "Mâm đúc",
+   "brand": "Arcadia",
+   "price": 1950000,
+   "oldPrice": 2290000,
+   "rating": 4.9,
+   "reviews": 212,
+   "sold": 2130,
+   "image": "/du-an/vanhviet/assets/img/products/mam-16-6-chau-mat-phay.webp",
+   "desc": "Nền đen, mặt chấu phay bóng CNC. Có 2 chuẩn lỗ, giữ độ êm của lốp thành 55 – 60."
+  },
+  {
+   "id": "m1714",
+   "name": "Mâm đúc 17 inch 14 chấu mảnh bạc VV-1714",
+   "category": "Mâm đúc",
+   "brand": "VV Wheels",
+   "price": 2450000,
+   "oldPrice": 2850000,
+   "rating": 4.9,
+   "reviews": 318,
+   "sold": 3420,
+   "image": "/du-an/vanhviet/assets/img/products/mam-17-14-chau-bac.webp",
+   "desc": "Mẫu bán chạy: 14 chấu mảnh kiểu xe đua, sơn bạc phủ clear chống trầy. Hợp sedan hạng C, crossover cỡ nhỏ."
+  },
+  {
+   "id": "m1714g",
+   "name": "Mâm đúc 17 inch 14 chấu vàng đồng VV-1714G",
+   "category": "Mâm đúc",
+   "brand": "VV Wheels",
+   "price": 2690000,
+   "oldPrice": 2990000,
+   "rating": 4.8,
+   "reviews": 77,
+   "sold": 540,
+   "image": "/du-an/vanhviet/assets/img/products/mam-17-14-chau-vang-dong.webp",
+   "desc": "Cùng kiểu 14 chấu, sơn vàng đồng mờ – điểm nhấn cho xe màu trắng, đen, xám."
+  },
+  {
+   "id": "m1766",
+   "name": "Mâm đúc 17 inch 6 chấu 6 lỗ bán tải TZ-1766",
+   "category": "Mâm đúc",
+   "brand": "Tenzo",
+   "price": 3190000,
+   "oldPrice": 3490000,
+   "rating": 4.8,
+   "reviews": 64,
+   "sold": 610,
+   "image": "/du-an/vanhviet/assets/img/products/mam-17-6-lo-ban-tai.webp",
+   "desc": "Chuẩn 6×139,7 cho Ranger, Triton, Fortuner. Tải trọng 950 kg/chiếc, mép vành tiện bóng."
+  },
+  {
+   "id": "m1912",
+   "name": "Mâm zin 19 inch nan xoáy đen phay bóng (tháo xe SUV)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 3850000,
+   "oldPrice": 4390000,
+   "rating": 4.8,
+   "reviews": 73,
+   "sold": 430,
+   "image": "/du-an/vanhviet/assets/img/products/mam-19-nan-xoay-phay.webp",
+   "desc": "Mâm zin tháo xe SUV mới chạy dưới 3.000 km, không cong vênh, đã kiểm tra độ đảo. Nan xoáy đen phay hai tông."
+  },
+  {
+   "id": "m1916",
+   "name": "Mâm zin 19 inch đa chấu đen phay bóng (tháo xe SUV)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 3690000,
+   "rating": 4.7,
+   "reviews": 41,
+   "sold": 260,
+   "image": "/du-an/vanhviet/assets/img/products/mam-19-da-chau-phay.webp",
+   "desc": "Đa chấu mảnh hai tông đen – phay bóng, tháo từ xe mới. Kèm vòng định tâm theo xe."
+  },
+  {
+   "id": "m2005",
+   "name": "Mâm zin 20 inch 5 chấu cánh quạt đen phay (tháo xe SUV)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 4290000,
+   "oldPrice": 4890000,
+   "rating": 4.9,
+   "reviews": 36,
+   "sold": 190,
+   "image": "/du-an/vanhviet/assets/img/products/mam-20-5-chau-canh-quat.webp",
+   "desc": "5 chấu cánh quạt bản lớn, mặt phay bóng. Hợp SUV 5 – 7 chỗ, lốp đề xuất 255/45R20."
+  },
+  {
+   "id": "mz1710",
+   "name": "Mâm zin Suzuki 17 inch 10 chấu bạc (tháo xe)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 2190000,
+   "rating": 4.8,
+   "reviews": 29,
+   "sold": 320,
+   "image": "/du-an/vanhviet/assets/img/products/mam-zin-17-10-chau-bac.webp",
+   "desc": "Mâm zin Suzuki tháo xe trưng bày, mới khoảng 98%. Lắp vừa xe cùng thông số PCD, ET, lỗ tâm."
+  },
+  {
+   "id": "mz1705",
+   "name": "Mâm zin Suzuki 17 inch 5 chấu xoáy bạc (tháo xe)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 2290000,
+   "rating": 4.7,
+   "reviews": 22,
+   "sold": 280,
+   "image": "/du-an/vanhviet/assets/img/products/mam-zin-17-5-chau-xoay.webp",
+   "desc": "5 chấu xoáy bạc, mới khoảng 98%. Bảo hành kết cấu 12 tháng cho hàng tháo xe."
+  },
+  {
+   "id": "mz1601",
+   "name": "Mâm zin Suzuki 16 inch đen phay bóng (tháo xe)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 1790000,
+   "oldPrice": 1990000,
+   "rating": 4.8,
+   "reviews": 47,
+   "sold": 450,
+   "image": "/du-an/vanhviet/assets/img/products/mam-zin-16-den-phay.webp",
+   "desc": "Đen phay bóng hai tông, chuẩn 4×100. Lắp được nhiều xe hạng B (kỹ thuật kiểm tra lỗ tâm trước khi lắp)."
+  },
+  {
+   "id": "mz1501",
+   "name": "Mâm zin Suzuki 15 inch chấu xoáy bạc (tháo xe)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 1190000,
+   "rating": 4.6,
+   "reviews": 31,
+   "sold": 520,
+   "image": "/du-an/vanhviet/assets/img/products/mam-zin-15-chau-xoay-bac.webp",
+   "desc": "Mâm zin 15 inch giá tốt để thay mâm cong, mâm bị móp. Bán lẻ từng chiếc."
+  },
+  {
+   "id": "cb1855",
+   "name": "Bộ 4 mâm zin 18 inch đen bóng kèm lốp Bridgestone Alenza (tháo xe)",
+   "category": "Mâm đúc",
+   "brand": "Mâm zin",
+   "price": 16900000,
+   "oldPrice": 19500000,
+   "rating": 4.8,
+   "reviews": 12,
+   "sold": 38,
+   "image": "/du-an/vanhviet/assets/img/products/combo-mam-18-den-lop.webp",
+   "desc": "Trọn bộ 4 bánh tháo xe mới: mâm 18 inch đen bóng + 4 lốp Bridgestone Alenza 235/55R18 còn khoảng 95% gai. Giá tính cho cả bộ."
+  },
+  {
+   "id": "t1655",
+   "name": "Lốp Nordak AllGrip 205/55R16 91H",
+   "category": "Lốp ô tô",
+   "brand": "Nordak",
+   "price": 1450000,
+   "oldPrice": 1650000,
+   "rating": 4.9,
+   "reviews": 341,
+   "sold": 4120,
+   "image": "/du-an/vanhviet/assets/img/products/lop-gai-khoi-da-dung.webp",
+   "desc": "Gai định hướng hình mũi tên, 4 rãnh dọc thoát nước nhanh, êm và mòn đều. Cỡ phổ biến cho sedan hạng C."
+  },
+  {
+   "id": "t1760",
+   "name": "Lốp Nordak AllGrip 215/60R17 96H",
+   "category": "Lốp ô tô",
+   "brand": "Nordak",
+   "price": 1890000,
+   "rating": 4.8,
+   "reviews": 122,
+   "sold": 1350,
+   "image": "/du-an/vanhviet/assets/img/products/lop-gai-khoi-da-dung.webp",
+   "desc": "Cùng mẫu gai AllGrip, cỡ 17 inch cho crossover hạng B – C."
+  },
+  {
+   "id": "t1565",
+   "name": "Lốp Solano Grip 185/65R15 88T",
+   "category": "Lốp ô tô",
+   "brand": "Solano",
+   "price": 1150000,
+   "oldPrice": 1290000,
+   "rating": 4.7,
+   "reviews": 205,
+   "sold": 2860,
+   "image": "/du-an/vanhviet/assets/img/products/lop-gai-zigzag-bam-duong.webp",
+   "desc": "Rãnh cắt zigzag dày, thoát nước nhanh, êm khi đi phố. Hợp sedan, MPV hạng B."
+  },
+  {
+   "id": "t1595",
+   "name": "Lốp Solano Grip 195/65R15 91T",
+   "category": "Lốp ô tô",
+   "brand": "Solano",
+   "price": 1250000,
+   "rating": 4.7,
+   "reviews": 88,
+   "sold": 970,
+   "image": "/du-an/vanhviet/assets/img/products/lop-gai-zigzag-bam-duong.webp",
+   "desc": "Cùng mẫu gai Solano Grip, cỡ 195/65R15 cho MPV 7 chỗ và sedan hạng C đời cũ."
+  },
+  {
+   "id": "a-pump",
+   "name": "Bơm chân ô tô có đồng hồ áp suất",
+   "category": "Phụ kiện",
+   "brand": "VV Care",
+   "price": 390000,
+   "oldPrice": 450000,
+   "rating": 4.7,
+   "reviews": 189,
+   "sold": 2470,
+   "image": "/du-an/vanhviet/assets/img/products/bom-chan-dong-ho.webp",
+   "desc": "Bơm chân thân thép, đồng hồ áp suất gắn liền. Để sẵn trong cốp xe, bơm bù khi lốp non hơi."
+  },
+  {
+   "id": "a-depth",
+   "name": "Thước đo độ sâu gai lốp dạng bút",
+   "category": "Phụ kiện",
+   "brand": "VV Care",
+   "price": 120000,
+   "rating": 4.6,
+   "reviews": 96,
+   "sold": 1540,
+   "image": "/du-an/vanhviet/assets/img/products/thuoc-do-gai-lop.webp",
+   "desc": "Đo độ sâu gai để biết khi nào cần thay lốp: dưới 1,6 mm là phải thay ngay."
+  }
+ ],
+ "branches": [
+  {
+   "name": "Vành Việt Hải Phòng",
+   "address": "Số 468 Đường Mẫu, Q. Lê Chân, Hải Phòng",
+   "phone": "0900 000 468",
+   "hours": "7:30 – 18:30",
+   "note": "Xưởng 6 cầu nâng",
+   "id": "vanh-viet-hai-phong-0"
+  },
+  {
+   "name": "Vành Việt Hà Nội",
+   "address": "Số 12 Phố Mẫu, Q. Cầu Giấy, Hà Nội",
+   "phone": "0900 000 469",
+   "hours": "7:30 – 19:00",
+   "note": "Có phòng chờ",
+   "id": "vanh-viet-ha-noi-1"
+  },
+  {
+   "name": "Vành Việt TP.HCM",
+   "address": "Số 88 Đường Mẫu, TP. Thủ Đức, TP.HCM",
+   "phone": "0900 000 470",
+   "hours": "7:30 – 19:00",
+   "note": "Căn chỉnh 3D",
+   "id": "vanh-viet-tp-hcm-2"
+  }
+ ],
+ "posts": [
+  {
+   "title": "5 dấu hiệu cần thay lốp ô tô ngay, đừng đợi đến khi nổ lốp",
+   "category": "Kinh nghiệm",
+   "date": "2026-10-02",
+   "image": "https://images.unsplash.com/photo-1645445522156-9ac06bc7a767?auto=format&fit=crop&w=640&q=70",
+   "id": "5-dau-hieu-can-thay-lop-o-to-ngay-dung-doi-den-khi-no-lop-0"
+  },
+  {
+   "title": "ET, PCD, lỗ tâm là gì? Cách chọn mâm độ không cạ hốc bánh",
+   "category": "Tư vấn mâm",
+   "date": "2026-09-28",
+   "image": "https://images.unsplash.com/photo-1611633235555-45e252fe48c8?auto=format&fit=crop&w=640&q=70",
+   "id": "et-pcd-lo-tam-la-gi-cach-chon-mam-do-khong-ca-hoc-banh-1"
+  },
+  {
+   "title": "Áp suất lốp chuẩn cho sedan, SUV và bán tải – bảng tra nhanh",
+   "category": "Bảo dưỡng",
+   "date": "2026-09-21",
+   "image": "https://images.unsplash.com/photo-1758739956768-169833459935?auto=format&fit=crop&w=640&q=70",
+   "id": "ap-suat-lop-chuan-cho-sedan-suv-va-ban-tai-bang-tra-nhanh-2"
+  },
+  {
+   "title": "Vệ sinh mâm đúc đúng cách để không bong lớp sơn clear",
+   "category": "Chăm sóc",
+   "date": "2026-09-14",
+   "image": "https://images.unsplash.com/photo-1782235869459-eda397b8d565?auto=format&fit=crop&w=640&q=70",
+   "id": "ve-sinh-mam-duc-dung-cach-de-khong-bong-lop-son-clear-3"
+  }
+ ],
+ "reviews": [
+  {
+   "name": "Nguyễn Văn Tuấn",
+   "rating": 5,
+   "content": "Tư vấn đúng ET nên không cạ hốc bánh. Cân bằng xong chạy 100 km/h vô-lăng đứng im. Lắp trong khoảng 40 phút.",
+   "target": "Mazda3 2022 · Mâm 17 inch nan kép VV-1703",
+   "id": "nguyen-van-tuan-0"
+  },
+  {
+   "name": "Phạm Thu Hà",
+   "rating": 5,
+   "content": "Đặt lịch online, đến là làm luôn. 4 lốp mới êm hơn hẳn lốp zin, phòng chờ sạch, có nước uống.",
+   "target": "Honda City 2021 · Lốp Nordak Comfort 205/55R16",
+   "id": "pham-thu-ha-1"
+  },
+  {
+   "name": "Lê Minh Khoa",
+   "rating": 5,
+   "content": "Thợ lắp tận nhà, trả góp 0% 6 tháng qua thẻ nên nhẹ ví. Mâm đồng + lốp A/T nhìn rất hợp xe.",
+   "target": "Ford Ranger 2023 · Mâm 20 inch AR-2011 + lốp Kenro A/T",
+   "id": "le-minh-khoa-2"
+  },
+  {
+   "name": "Vũ Đức Anh",
+   "rating": 4,
+   "content": "Màu đều, phủ bóng đẹp. Hẹn 2 ngày nhưng gần 3 ngày mới xong, cửa hàng có gọi báo trước.",
+   "target": "Hyundai Tucson 2020 · Sơn mâm đổi màu xám titan",
+   "id": "vu-duc-anh-3"
+  },
+  {
+   "name": "Trần Thị Linh",
+   "rating": 5,
+   "content": "Mâm cong do sụt ổ gà, thợ nắn và cho xem đồng hồ đo độ đảo. Báo giá trước, không phát sinh.",
+   "target": "Kia Morning 2019 · Nắn mâm cong",
+   "id": "tran-thi-linh-4"
+  },
+  {
+   "name": "Hoàng Quang Huy",
+   "rating": 5,
+   "content": "Có in báo cáo góc đặt bánh trước – sau, xe hết ăn lốp một bên. Sẽ quay lại thay lốp.",
+   "target": "Toyota Camry 2018 · Căn chỉnh thước lái 3D",
+   "id": "hoang-quang-huy-5"
+  }
+ ]
+}
