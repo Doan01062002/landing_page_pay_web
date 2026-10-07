@@ -51,7 +51,7 @@ const KINDS = {
     url: (t) => t.url,
     back: () => '/du-an',
     backLabel: 'Quay về dự án',
-    sub: (t) => `${typeLabel(t.type)} · Đã triển khai ${t.deployed}`,
+    sub: (t) => `${typeLabel(t.type)} · ${t.demo ? 'Bản mẫu' : 'Đã triển khai'} ${t.deployed}`,
     cta: 'Làm trang như thế này',
     ctaShort: 'Làm trang này',
     consultName: (t) => `Làm giống dự án ${t.name}`,

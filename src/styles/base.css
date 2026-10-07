@@ -1206,6 +1206,10 @@ p {
   right: auto;
   background: #15803d;
 }
+/* Dự án dựng mẫu (thương hiệu minh hoạ / bản demo), không phải khách thật */
+.pjcard__badge--demo {
+  background: #6d28d9;
+}
 .lpcard__body > p.pjcard__client {
   display: flex;
   align-items: center;

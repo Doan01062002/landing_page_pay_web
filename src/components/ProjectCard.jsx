@@ -26,13 +26,13 @@ export default function ProjectCard({ p }) {
         <div className="lpcard__phone">
           <LivePreview slug={p.slug} url={p.url} device="mobile" title={`${p.name} trên điện thoại`} />
         </div>
-        <span className="lpcard__badge pjcard__badge">
-          <Icon name="BadgeCheck" size={14} /> Đã triển khai
+        <span className={`lpcard__badge pjcard__badge${p.demo ? ' pjcard__badge--demo' : ''}`}>
+          <Icon name={p.demo ? 'Sparkles' : 'BadgeCheck'} size={14} /> {p.demo ? 'Bản mẫu' : 'Đã triển khai'}
         </span>
       </Link>
       <div className="lpcard__body">
         <span className="lpcard__type">
-          {typeLabel(p.type)} · Bàn giao {p.deployed}
+          {typeLabel(p.type)} · {p.demo ? 'Thực hiện' : 'Bàn giao'} {p.deployed}
         </span>
         <h3>
           <Link to={`/demo-du-an/${p.slug}`}>{p.name}</Link>

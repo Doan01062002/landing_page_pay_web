@@ -4,7 +4,7 @@
 //   Nhớ chạy `npm run build` trong thư mục đó trước.
 // Chạy: node scripts/sync-du-an.mjs            (tất cả)
 //       node scripts/sync-du-an.mjs nhatduc    (một dự án)
-import { cpSync, existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 
 const SRC_ROOT = resolve(process.cwd(), '..')
@@ -13,7 +13,8 @@ const PROJECTS = {
   nhatduc: { folder: 'landing_page_nhatduc' },
   'nhatduc-motion': { folder: 'landing_page_nhatduc_motion', dist: true },
   'nhatduc-ladi': { folder: 'landing_page_nhatduc_ladi' },
-  autohc: { folder: 'landing_page_autohc' },
+  minhphat: { folder: 'landing_page_minhphat' },
+  vinfast: { folder: 'landing_page_vinfast' },
   // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
 }
 
@@ -33,13 +34,16 @@ for (const [slug, { folder, dist, dir = 'du-an' }] of Object.entries(PROJECTS)) 
     continue
   }
 
+  // trang một file (vd vinfast) không có thư mục assets
+  mkdirSync(dest, { recursive: true })
   rmSync(join(dest, 'assets'), { recursive: true, force: true })
-  cpSync(join(src, 'assets'), join(dest, 'assets'), { recursive: true })
+  if (existsSync(join(src, 'assets'))) cpSync(join(src, 'assets'), join(dest, 'assets'), { recursive: true })
 
   let html = readFileSync(join(src, 'index.html'), 'utf8')
   const nl = html.includes('\r\n') ? '\r\n' : '\n'
-  const charset = '<meta charset="utf-8">' + nl
-  if (!html.includes(charset)) throw new Error(`${folder}: không thấy thẻ <meta charset>`)
+  // nhận cả <meta charset="utf-8"> và <meta charset="utf-8" />
+  const charset = html.match(/<meta charset="utf-8"\s*\/?>\r?\n/i)?.[0]
+  if (!charset) throw new Error(`${folder}: không thấy thẻ <meta charset>`)
   html = html.replace(charset, `${charset}  <!-- Đặt trong /du-an/${slug}/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->${nl}  <base href="/du-an/${slug}/">${nl}`)
   writeFileSync(join(dest, 'index.html'), html)
   console.log(`${folder} → ${dest}`)

@@ -53,7 +53,7 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 ## Dự án đã triển khai
 
 - Dữ liệu: `src/data/projects.js` (loại: `website`, `landing`, `software`; tên, địa chỉ, ngày bàn giao, ảnh bìa, điểm nổi bật).
-- Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên), `nhatduc-motion` (bản Motion, xem bên dưới) và `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2).
+- Trang tĩnh nằm trong `public/du-an/<slug>/` và chạy tại `/du-an/<slug>/`. Hiện có `nhatduc` (Gara Nhật Đức Long Biên), `nhatduc-motion` (bản Motion, xem bên dưới), `carcarservice` (Gara Ô Tô Đức Tùng – Cơ sở 2) và hai bản mẫu `minhphat`, `vinfast`.
 - Cập nhật sau khi sửa landing ở thư mục làm việc (`D:/Chungauto/landing_page_<x>`): chạy `node scripts/sync-du-an.mjs` (hoặc `node scripts/sync-du-an.mjs nhatduc`). Script chép `assets` + `index.html` vào `public/du-an/<slug>/` và tự chèn `<base href="/du-an/<slug>/">` để ảnh, CSS đúng cả khi link thiếu dấu `/` cuối.
 - Thêm dự án mới: khai báo thư mục trong `PROJECTS` của `scripts/sync-du-an.mjs`, chạy script, rồi thêm vào `projects.js`.
 - Giao diện: Đức Tùng dùng `assets/css/theme-ductung.css` (xanh + vàng cam), Nhật Đức dùng `assets/css/theme-nhatduc.css` (đỏ + xám than), cả hai nạp sau `styles.css` chung khung. Ảnh xưởng đã chỉnh màu/độ nét; bản gốc lưu ở `D:/Chungauto/_anh-goc`.
@@ -73,9 +73,15 @@ public/images/         Ảnh minh họa CC0 từ StockSnap
 - Luôn chạy đủ video và hiệu ứng, kể cả máy bật "giảm chuyển động" (nhiều máy Windows tắt sẵn hiệu ứng động). Thêm `?motion=0` vào link để xem bản tĩnh.
 - Thiết kế và kế hoạch: `docs/superpowers/specs/2026-10-06-nhatduc-motion-design.md`, `docs/superpowers/plans/2026-10-06-nhatduc-motion.md`.
 
-## Dự án Gara Auto HC 579 (landing page theo autohc.vn)
+## Bản mẫu: Gara Ô Tô Minh Phát (`minhphat`)
 
-- Mã nguồn: `D:/Chungauto/landing_page_autohc` (landing page tĩnh một trang, không backend). Cập nhật: `node scripts/sync-du-an.mjs autohc` → `/du-an/autohc/`.
+- Landing page gara một trang với **thương hiệu hư cấu** (logo, địa chỉ, hotline, email đều là thông tin minh hoạ; nút Zalo/Fanpage cuộn tới form). Mã nguồn: `D:/Chungauto/landing_page_minhphat`. Cập nhật: `node scripts/sync-du-an.mjs minhphat` → `/du-an/minhphat/`.
+- Thông tin liên hệ nằm ở khối `C` đầu `assets/js/main.js`, logo SVG ở hàm `logo()`. Khi giao cho gara thật: thay hai chỗ này, tạo lại 2 mã QR (`assets/img/qr-*.svg`) và bỏ `demo: true` trong `src/data/projects.js`.
+
+## Bản mẫu: Landing page xe điện VinFast (`vinfast`)
+
+- Trang demo học tập một file, **không phải web chính thức của VinFast**. Mã nguồn: `D:/Chungauto/landing_page_vinfast/index.html` (không có thư mục `assets`; ảnh xe, ảnh 360° lấy trực tiếp từ máy chủ VinFast). Cập nhật: `node scripts/sync-du-an.mjs vinfast` → `/du-an/vinfast/`.
+- Dự án có `demo: true` trong `src/data/projects.js`: thẻ hiện nhãn tím "Bản mẫu" thay cho "Đã triển khai".
 
 ## Mẫu dựng riêng (trang tĩnh)
 

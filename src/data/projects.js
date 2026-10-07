@@ -73,19 +73,36 @@ export const projects = [
     highlights: ['Hero video 3 cảnh', 'Ảnh xưởng thật', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá 3 gói', 'Đặt lịch 30 giây'],
   },
   {
-    slug: 'autohc',
+    slug: 'minhphat',
     type: 'landing',
-    name: 'Gara Auto HC 579',
-    client: 'Gara ô tô AUTO HC 579',
-    area: '579 Phúc Diễn, Nam Từ Liêm, Hà Nội',
-    hotline: '0979 427 059',
+    demo: true, // thương hiệu hư cấu: thẻ hiện "Bản mẫu" thay cho "Đã triển khai"
+    name: 'Gara Ô Tô Minh Phát',
+    client: 'Gara mẫu (thương hiệu minh hoạ)',
+    area: 'Hà Nội · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 068',
     deployed: '10/2026',
-    url: dir('autohc'),
-    cover: dir('autohc') + 'assets/img/bn-son.webp',
+    url: dir('minhphat'),
+    cover: dir('minhphat') + 'assets/img/bn-son.webp',
     accent: '#024e98',
     summary:
-      'Landing page gara theo giao diện autohc.vn, xanh – cam theo logo: banner tự chạy, mã QR Zalo và bản đồ, 10 dịch vụ nổi bật, khuyến mại tháng, bảng giá dịch vụ, video, phản hồi khách và form đặt lịch kèm bản đồ.',
+      'Landing page gara sửa chữa – bảo dưỡng một trang, xanh – cam theo logo: banner tự chạy, mã QR Zalo và bản đồ, 10 dịch vụ nổi bật, khuyến mại tháng, bảng giá dịch vụ, video, phản hồi khách và form đặt lịch kèm bản đồ.',
     highlights: ['Banner tự chạy', 'Menu dính khi cuộn', 'Bảng giá dịch vụ', 'Bấm là đặt lịch', 'Đặt lịch + bản đồ', 'Nút gọi, Zalo, Messenger'],
+  },
+  {
+    slug: 'vinfast',
+    type: 'landing',
+    demo: true, // trang demo học tập, không phải web chính thức của VinFast
+    name: 'Landing page xe điện VinFast',
+    client: 'Bản demo – không liên kết với VinFast',
+    area: 'Đại lý ô tô điện · bản demo',
+    hotline: '0900 000 000',
+    deployed: '10/2026',
+    url: dir('vinfast'),
+    cover: 'https://static-cms-prod.vinfastauto.com/statics/car/vf8-all-new/hinh-anh-vinfast-vf-8-all-new-ngoai-that-mau-do-mobile.webp',
+    accent: '#1464f4',
+    summary:
+      'Landing page bán xe điện tông sáng, nhiều chuyển động: intro logo, xe lướt vào và đổi 6 màu, thẻ lợi thế và dòng xe tự trượt, xem xe xoay 360° (kéo để xoay, đổi màu), so sánh VF 3 – VF 9, form đăng ký lái thử.',
+    highlights: ['Xe xoay 360°', 'Đổi màu xe', 'Thanh trượt tự chạy', 'Chọn mẫu xe + thông số', 'Đăng ký lái thử', 'Tối ưu điện thoại'],
   },
 ]
 

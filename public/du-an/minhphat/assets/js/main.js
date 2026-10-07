@@ -1,22 +1,24 @@
-/* AUTO HC 579 – landing page (không có backend: form đặt lịch chỉ hiện thông báo, không gửi đi đâu) */
+/* MINH PHÁT AUTO (gara mẫu hư cấu) – landing page (không có backend: form đặt lịch chỉ hiện thông báo, không gửi đi đâu) */
 ;(() => {
   'use strict'
 
   // ================= DỮ LIỆU =================
   const C = {
-    address: '579 Đường Phúc Diễn - P. Xuân Phương - Q. Nam Từ Liêm - Hà Nội',
-    tel: '0979427059',
-    hotline: '0979.427.059',
-    hotlineDots: '0979.42.70.59',
-    tel2: '0977508804',
-    hotline2: '0977.50.88.04',
-    zaloDots: '0374.57.94.70',
-    email: 'autohc579hn@gmail.com',
-    zalo: 'https://zalo.me/0979427059',
-    fb: 'https://www.facebook.com/garaotoHC579',
-    msg: 'https://www.messenger.com/t/garaotoHC579',
-    map: 'https://www.google.com/maps?ll=21.029316,105.757062&z=15&t=m&cid=12505715833210545677',
-    embed: 'https://maps.google.com/maps?q=21.029316,105.757062&z=16&hl=vi&output=embed',
+    // Thông tin mẫu (thương hiệu hư cấu). Khi giao cho gara thật: thay toàn bộ khối này.
+    address: 'Số 68 Đường Mẫu - Hà Nội (địa chỉ minh hoạ)',
+    tel: '0900000068',
+    hotline: '0900.000.068',
+    hotlineDots: '0900.00.00.68',
+    tel2: '0900000069',
+    hotline2: '0900.000.069',
+    zaloDots: '0900.00.00.70',
+    email: 'lienhe@minhphatauto.demo',
+    // Chưa có Zalo / Fanpage thật: các nút này cuộn tới form đặt lịch
+    zalo: '#dat-lich',
+    fb: '#dat-lich',
+    msg: '#dat-lich',
+    map: 'https://www.google.com/maps/place/H%C3%A0+N%E1%BB%99i',
+    embed: 'https://maps.google.com/maps?q=H%C3%A0%20N%E1%BB%99i&z=12&hl=vi&output=embed',
   }
   const now = new Date()
   C.dealMonth = `THÁNG ${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`
@@ -62,17 +64,17 @@
     ['7 yếu tố cần xem xét trước khi chọn gara sửa ô tô gần nhất tại Hà Nội', 'b-chon-gara.webp', '12/09/2026', 'Ưu tiên gara báo giá rõ trước khi sửa, phụ tùng có nguồn gốc, bảo hành bằng văn bản và xưởng đủ cầu nâng, phòng sơn.'],
   ].map(([t, img, date, ex]) => ({ t, img: IMG + img, date, ex }))
 
-  const HL = '- Hotline : 0979.42.70.59'
+  const HL = ' - Hotline : 0900.00.00.68'
   const videos = [
     ['Hướng dẫn về rửa khoang máy ô tô, vệ sinh khoang động cơ ô tô', 'v-khoang-may.webp', 'assets/video/khoang-may.mp4'],
-    ['Video giới thiệu dịch vụ Garage Auto HC 579 ', 'v-gioi-thieu.webp', 'assets/video/gioi-thieu.mp4'],
+    ['Video giới thiệu dịch vụ Gara Minh Phát Auto', 'v-gioi-thieu.webp', 'assets/video/gioi-thieu.mp4'],
     ['Quy trình sơn xe dặm xe ô tô màu trắng ngọc trai xe Huyndai Elantra ', 'v-son-dam.webp', 'assets/video/son-dam.mp4'],
   ].map(([t, img, src]) => ({ t: t + HL, img: IMG + img, src }))
 
   const feedback = [
-    ['VŨ THU HUYỀN', 'Giáo viên', 'Dịch vụ xuất sắc. Chồng tôi sửa chữa và sơn xe ô tô Toyota Fortuner không vấn đề gì, không rắc rối. Và tôi đã bảo dưỡng ô tô Huyndai Accent của tôi, một lần nữa không có vấn đề gì. Chi phí rất hợp lý', '#e57373,#c2185b'],
-    ['VŨ VIỆT HƯNG', 'Kỹ sư', 'Tôi rất ưng dịch vụ tại Auto HC, giá cả rất tốt và phù hợp. Tôi đã sơn xe ô tô tại tại đây rất đẹp và giá cả hợp lý. Nhân viên tại đây rất nhiệt tình, ân cần và chu đáo.', '#4fc3f7,#1565c0'],
-    ['TỐNG NGỌC ÁNH', 'Doanh nhân', 'Tôi đã tiết kiệm được nhiều chi phí khi sử dụng dịch vụ tại Auto HC. Tôi đã sửa chữa đèn, độ đèn xe ô tô của tôi tại đây. Các em kỹ thuật nhiệt tình, tay nghề cao mà giá lại rẻ. Sẽ ủng hộ dài dài.', '#ffb74d,#ef6c00'],
+    ['NGUYỄN THU HÀ', 'Giáo viên', 'Dịch vụ xuất sắc. Chồng tôi sửa chữa và sơn xe ô tô Toyota Fortuner không vấn đề gì, không rắc rối. Và tôi đã bảo dưỡng ô tô Huyndai Accent của tôi, một lần nữa không có vấn đề gì. Chi phí rất hợp lý', '#e57373,#c2185b'],
+    ['TRẦN MINH QUÂN', 'Kỹ sư', 'Tôi rất ưng dịch vụ tại Minh Phát, giá cả rất tốt và phù hợp. Tôi đã sơn xe ô tô tại tại đây rất đẹp và giá cả hợp lý. Nhân viên tại đây rất nhiệt tình, ân cần và chu đáo.', '#4fc3f7,#1565c0'],
+    ['LÊ HOÀNG ANH', 'Doanh nhân', 'Tôi đã tiết kiệm được nhiều chi phí khi sử dụng dịch vụ tại Minh Phát. Tôi đã sửa chữa đèn, độ đèn xe ô tô của tôi tại đây. Các em kỹ thuật nhiệt tình, tay nghề cao mà giá lại rẻ. Sẽ ủng hộ dài dài.', '#ffb74d,#ef6c00'],
   ]
   const footerSvc = ['Bảo dưỡng ô tô', 'Sơn gò ô tô', 'Sơn lazang ô tô', 'Sửa điều hòa ô tô', 'Sơn dặm ô tô', 'Đại tu gầm ô tô', 'Đại tu động cơ', 'Sửa chữa điện ô tô']
 
@@ -88,14 +90,16 @@
   let logoN = 0
   const logo = () => {
     const g = 'lg' + ++logoN
-    return `<svg class="logo-svg" viewBox="0 0 340 150" role="img" aria-label="AUTO HC 579">
+    return `<svg class="logo-svg" viewBox="0 0 340 150" role="img" aria-label="Minh Phát Auto">
       <defs><linearGradient id="${g}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd54a"/><stop offset="1" stop-color="#f7941d"/></linearGradient></defs>
-      <path d="M14 86C64 52 128 30 200 25c52-4 98 6 132 28-30-11-70-15-114-14C150 41 82 60 14 86z" fill="#1976d2"/>
-      <path d="M58 90c50-21 112-32 182-32 24 0 46 3 62 7-22-1-46-1-70 1-62 4-118 12-174 24z" fill="#0d47a1"/>
-      <text x="226" y="64" font-size="38" font-weight="900" font-style="italic" fill="url(#${g})" stroke="#0b2a6b" stroke-width="1.8" paint-order="stroke">579</text>
-      <text x="4" y="122" font-size="64" font-weight="900" font-style="italic" fill="#0d47a1" textLength="206" lengthAdjust="spacingAndGlyphs">AUTO</text>
-      <text x="214" y="122" font-size="64" font-weight="900" font-style="italic" fill="url(#${g})" stroke="#0b2a6b" stroke-width="1.4" paint-order="stroke" textLength="118" lengthAdjust="spacingAndGlyphs">HC</text>
-      <text x="172" y="143" text-anchor="middle" font-size="13" font-weight="900" fill="#1b1b1b" textLength="262" lengthAdjust="spacingAndGlyphs">CHĂM SÓC SỬA CHỮA XE ĐÚNG NGHĨA</text>
+      <path d="M8 84C70 44 150 24 236 22c38-1 72 5 98 16-32-6-68-8-104-5C156 39 84 56 8 84z" fill="#1976d2"/>
+      <circle cx="36" cy="96" r="30" fill="url(#${g})" stroke="#0b2a6b" stroke-width="3"/>
+      <circle cx="36" cy="96" r="22" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 3"/>
+      <text x="36" y="105" text-anchor="middle" font-size="25" font-weight="900" font-style="italic" fill="#0b2a6b">MP</text>
+      <text x="76" y="96" font-size="44" font-weight="900" font-style="italic" fill="#0d47a1" textLength="258" lengthAdjust="spacingAndGlyphs">MINH PHÁT</text>
+      <text x="196" y="126" font-size="30" font-weight="900" font-style="italic" fill="url(#${g})" stroke="#0b2a6b" stroke-width="1.4" paint-order="stroke" textLength="136" lengthAdjust="spacingAndGlyphs">AUTO</text>
+      <path d="M72 116h116" stroke="#f7941d" stroke-width="5" stroke-linecap="round"/>
+      <text x="172" y="145" text-anchor="middle" font-size="12.5" font-weight="900" fill="#1b1b1b" textLength="300" lengthAdjust="spacingAndGlyphs">CHĂM SÓC TẬN TÂM · SỬA CHỮA CHUẨN HÃNG</text>
     </svg>`
   }
 
@@ -108,6 +112,8 @@
   $$('[data-zalo]').forEach((a) => (a.href = C.zalo))
   $$('[data-fb]').forEach((a) => (a.href = C.fb))
   $$('[data-msg]').forEach((a) => (a.href = C.msg))
+  // nút trỏ về trong trang (chưa có Zalo/Fanpage thật) thì không mở tab mới
+  $$('a[target="_blank"]').forEach((a) => { if ((a.getAttribute('href') || '').startsWith('#')) a.removeAttribute('target') })
   $$('[data-map]').forEach((a) => (a.href = C.map))
   const select = $('[data-service-select]')
   select.innerHTML = bookServices.map((s) => `<option>${s}</option>`).join('')
@@ -254,7 +260,7 @@
     const first = name.value.trim().split(' ').pop()
     const tel = normPhone(phone.value)
     form.reset()
-    openModal(`<div class="done"><span class="done__ic">${icon('i-check')}</span><h3>Đặt lịch thành công!</h3><p>Cảm ơn ${esc(first)}, AUTO HC 579 sẽ gọi lại số ${esc(tel)} để xác nhận lịch hẹn.</p><a class="btn btn--orange" href="tel:${C.tel}">${icon('i-phone')} Gọi ngay ${C.hotlineDots}</a><button class="btn btn--line" type="button" data-close>Đóng</button></div>`, 'sm')
+    openModal(`<div class="done"><span class="done__ic">${icon('i-check')}</span><h3>Đặt lịch thành công!</h3><p>Cảm ơn ${esc(first)}, Minh Phát Auto sẽ gọi lại số ${esc(tel)} để xác nhận lịch hẹn.</p><a class="btn btn--orange" href="tel:${C.tel}">${icon('i-phone')} Gọi ngay ${C.hotlineDots}</a><button class="btn btn--line" type="button" data-close>Đóng</button></div>`, 'sm')
   })
   form.addEventListener('input', (e) => e.target.classList.remove('is-invalid'))
 
