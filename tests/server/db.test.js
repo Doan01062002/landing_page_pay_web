@@ -28,7 +28,7 @@ describe('migration', () => {
   it('đã tạo đủ bảng và view', async () => {
     const { rows } = await q(`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY 1`)
     const names = rows.map((r) => r.table_name)
-    for (const t of ['users', 'sessions', 'settings', 'catalog_items', 'faqs', 'customers', 'leads', 'orders', 'payments', 'audit_logs', 'order_totals', 'schema_migrations']) expect(names).toContain(t)
+    for (const t of ['users', 'sessions', 'settings', 'catalog_items', 'faqs', 'customers', 'leads', 'orders', 'payments', 'audit_logs', 'order_totals', 'notification_seen', 'schema_migrations']) expect(names).toContain(t)
   })
   it('chạy lại không làm gì (idempotent)', async () => {
     expect(await migrate(ctx.pool, () => {})).toBe(0)

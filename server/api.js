@@ -259,6 +259,19 @@ export function createApi({ pool, cfg, boot }) {
     res.json(v.data)
   }))
 
+  // Thông báo đã xem (riêng từng tài khoản; giữ 180 ngày)
+  admin.get('/notifications/seen', wrap(async (req, res) => {
+    const { rows } = await pool.query(`SELECT key FROM notification_seen WHERE user_id = $1 AND seen_at > now() - interval '180 days'`, [req.user.id])
+    res.json({ keys: rows.map((r) => r.key) })
+  }))
+  admin.post('/notifications/seen', wrap(async (req, res) => {
+    const keys = z.array(z.string().trim().min(1).max(120)).min(1).max(500).safeParse(req.body?.keys)
+    if (!keys.success) throw invalid({ keys: 'Danh sách không hợp lệ' })
+    await pool.query('INSERT INTO notification_seen (user_id, key) SELECT $1, unnest($2::text[]) ON CONFLICT DO NOTHING', [req.user.id, [...new Set(keys.data)]])
+    await pool.query(`DELETE FROM notification_seen WHERE user_id = $1 AND seen_at < now() - interval '180 days'`, [req.user.id])
+    res.json({ ok: true })
+  }))
+
   // Nhật ký
   admin.get('/audit', requirePerm('audit', 'r'), wrap(async (_req, res) => {
     const { rows } = await pool.query('SELECT * FROM audit_logs ORDER BY created_at DESC, id DESC LIMIT 1000')

@@ -272,3 +272,30 @@ describe('nhật ký & API khác', () => {
     expect(r.headers['strict-transport-security']).toBeTruthy()
   })
 })
+
+describe('thông báo đã xem', () => {
+  it('lưu theo từng tài khoản, không trùng, đọc lại được', async () => {
+    expect((await admin.get('/api/admin/notifications/seen')).body).toEqual({ keys: [] })
+    let r = await admin.post('/api/admin/notifications/seen', { keys: ['leads:1:new', 'orders:2:due:2026-10-01', 'leads:1:new'] })
+    expect(r.body).toEqual({ ok: true })
+    r = await admin.post('/api/admin/notifications/seen', { keys: ['leads:1:new', 'leads:3:follow:2026-10-09'] })
+    expect((await admin.get('/api/admin/notifications/seen')).body.keys.sort()).toEqual(['leads:1:new', 'leads:3:follow:2026-10-09', 'orders:2:due:2026-10-01'])
+    // tài khoản khác không bị ảnh hưởng
+    await admin.post('/api/admin/users', { email: 'thongbao@test.local', name: 'NV thông báo', role: 'sales', password: 'Matkhau123' })
+    const other = await login(ctx.app, 'thongbao@test.local', 'Matkhau123')
+    expect((await other.get('/api/admin/notifications/seen')).body.keys).toEqual([])
+  })
+  it('kiểm tra dữ liệu, bắt buộc đăng nhập + chống CSRF', async () => {
+    expect((await admin.post('/api/admin/notifications/seen', { keys: [] })).status).toBe(422)
+    expect((await admin.post('/api/admin/notifications/seen', { keys: ['x'.repeat(121)] })).status).toBe(422)
+    expect((await admin.post('/api/admin/notifications/seen', { keys: 'leads:1:new' })).status).toBe(422)
+    expect((await client(ctx.app).get('/api/admin/notifications/seen')).status).toBe(401)
+    expect((await admin.agent.post('/api/admin/notifications/seen').send({ keys: ['a'] })).status).toBe(403)
+  })
+  it('mục quá 180 ngày tự hết hạn (báo lại nếu sự việc vẫn còn)', async () => {
+    await ctx.pool.query(`UPDATE notification_seen SET seen_at = now() - interval '200 days' WHERE key = 'orders:2:due:2026-10-01'`)
+    expect((await admin.get('/api/admin/notifications/seen')).body.keys).not.toContain('orders:2:due:2026-10-01')
+    await admin.post('/api/admin/notifications/seen', { keys: ['z'] })
+    expect((await ctx.pool.query(`SELECT count(*)::int AS n FROM notification_seen WHERE key = 'orders:2:due:2026-10-01'`)).rows[0].n).toBe(0)
+  })
+})

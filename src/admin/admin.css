@@ -2910,3 +2910,133 @@
     padding: 0 10px;
   }
 }
+
+/* ---------- Danh sách thông báo (chuông) ---------- */
+.adm-notify {
+  width: min(380px, calc(100vw - 24px));
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.adm-notify__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--adm-line-2);
+}
+.adm-notify__head b {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.adm-notify__count {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--adm-accent);
+  color: var(--adm-accent-ink);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+.adm-pop .adm-notify__all,
+.adm-pop .adm-notify__list button {
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+.adm-pop .adm-notify__all {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: auto;
+  padding: 5px 8px;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--adm-accent-text);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.adm-pop .adm-notify__all:hover {
+  background: var(--adm-soft);
+}
+.adm-notify__list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  max-height: min(420px, 60vh);
+}
+.adm-pop .adm-notify__list button {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 8px;
+  text-align: left;
+}
+.adm-notify__dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+.adm-notify__list .is-new .adm-notify__dot {
+  background: var(--adm-accent);
+}
+.adm-notify__text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.adm-notify__text b {
+  overflow: hidden;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--adm-ink-2);
+}
+.adm-notify__list .is-new .adm-notify__text b {
+  font-weight: 700;
+  color: var(--adm-ink);
+}
+.adm-notify__text small {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--adm-ink-3);
+}
+.adm-notify__list time {
+  font-size: 11.5px;
+  white-space: nowrap;
+  color: var(--adm-ink-3);
+}
+.adm-pop .adm-notify__list button {
+  background: transparent;
+}
+.adm-pop .adm-notify__list .is-new {
+  background: color-mix(in srgb, var(--adm-accent) 5%, #fff);
+}
+.adm-pop .adm-notify__list button:hover {
+  background: var(--adm-bg);
+}
+
+@media (max-width: 720px) {
+  /* điện thoại: khung thông báo trải ngang màn hình, không lệch theo vị trí chuông */
+  .adm-pop.adm-notify {
+    position: fixed;
+    top: 58px;
+    left: 8px;
+    right: 8px;
+    width: auto;
+  }
+}

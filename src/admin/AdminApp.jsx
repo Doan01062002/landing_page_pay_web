@@ -2,13 +2,14 @@
 // dữ liệu lưu trong trình duyệt). Tải riêng (lazy) nên không làm nặng website chính.
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { ArrowLeft, Bell, ExternalLink, LogOut, Menu, Search, X } from 'lucide-react'
+import { ArrowLeft, ExternalLink, LogOut, Menu, Search, X } from 'lucide-react'
 import { allAdminSites, getAdminSite, PROFILE_LABEL } from './config.js'
 import { AdminProvider, authKey, isAuthed, useAdmin, useCollection } from './store.jsx'
 import { ConfirmHost } from './ui.jsx'
 import { getSchema, matchText, SEARCHABLE } from './schemas.jsx'
 import { moduleMeta } from './modules.js'
 import { initials, isoDay } from './lib.js'
+import { localSeen, NotifyBell, unseenByModule, useSeen } from './notify.jsx'
 import Thumb from '../components/Thumb.jsx'
 import Resource from './pages/Resource.jsx'
 import Dashboard from './pages/Dashboard.jsx'
@@ -76,9 +77,18 @@ function Shell() {
   const [navOpen, setNavOpen] = useState(false)
   useCollection('activity') // vẽ lại số đếm khi dữ liệu đổi
   useEffect(() => setNavOpen(false), [location.pathname])
+  // thông báo "đã xem" lưu trong trình duyệt (bản demo chưa có máy chủ)
+  const seenStore = useMemo(() => localSeen(`ca-admin-seen:${site.key}`), [site.key])
+  const [seen, mark] = useSeen(seenStore.load, seenStore.save)
+  const items = pendingItems(site, (c) => store.read(c))
+  const badges = unseenByModule(items, seen)
+  // mở chi tiết một bản ghi (?open=…) → thông báo của bản ghi đó coi như đã xem
+  useEffect(() => {
+    const id = new URLSearchParams(location.search).get('open')
+    const mod = location.pathname.split('/')[3]
+    if (id && mod) mark(items.filter((i) => i.module === mod && String(i.id) === id).map((i) => i.key))
+  })
   if (!isAuthed(site)) return <Navigate to={`/quan-tri/${site.key}/dang-nhap`} replace state={{ from: location.pathname + location.search }} />
-  const read = (c) => store.read(c)
-  const badges = pendingCounts(site, read)
   let group = null
   return (
     <div className={`adm-shell ${navOpen ? 'nav-open' : ''}`}>
@@ -100,7 +110,13 @@ function Shell() {
             return (
               <div key={m.id}>
                 {head && <p className="adm-side__group">{head}</p>}
-                <NavLink to={`/quan-tri/${site.key}/${m.id === 'dashboard' ? '' : m.id}`} end={m.id === 'dashboard'} className={({ isActive }) => `adm-side__link ${isActive ? 'is-active' : ''}`}>
+                <NavLink
+                  to={`/quan-tri/${site.key}/${m.id === 'dashboard' ? '' : m.id}`}
+                  end={m.id === 'dashboard'}
+                  className={({ isActive }) => `adm-side__link ${isActive ? 'is-active' : ''}`}
+                  // mở chức năng → các thông báo của chức năng đó coi như đã xem
+                  onClick={() => badges[m.id] && mark(items.filter((i) => i.module === m.id).map((i) => i.key))}
+                >
                   <meta.icon size={18} />
                   <span>{meta.label}</span>
                   {!!badges[m.id] && <em>{badges[m.id] > 99 ? '99+' : badges[m.id]}</em>}
@@ -120,7 +136,7 @@ function Shell() {
       </aside>
       <div className="adm-scrim" onClick={() => setNavOpen(false)} aria-hidden="true" />
       <div className="adm-main">
-        <Topbar onMenu={() => setNavOpen(true)} badges={badges} />
+        <Topbar onMenu={() => setNavOpen(true)} notify={{ items, seen, mark }} />
         <main className="adm-content">
           <Routes>
             <Route index element={<Titled id="dashboard"><Dashboard /></Titled>} />
@@ -153,39 +169,42 @@ function ModuleRoute() {
   )
 }
 
-// số việc chờ xử lý → huy hiệu trên thanh bên và chuông thông báo
-function pendingCounts(site, read) {
-  const n = (col, f) => (site.modules.some((m) => m.id === col) ? read(col).filter(f).length : 0)
+// Việc chờ xử lý → thông báo + huy hiệu thanh bên. Mỗi việc một mã theo đúng sự việc (đổi ngày hẹn → thông báo mới)
+const PENDING = [
+  ['orders', (o) => o.status === 'Chờ xác nhận', 'pending', 'Đơn hàng chờ xác nhận'],
+  ['bookings', (b) => b.status === 'Chờ xác nhận', 'pending', 'Lịch hẹn chờ xác nhận'],
+  ['installs', (b) => b.status === 'Chờ xác nhận', 'pending', 'Lịch lắp đặt chờ xác nhận'],
+  ['testDrives', (b) => b.status === 'Chờ xác nhận', 'pending', 'Lịch lái thử chờ xác nhận'],
+  ['repairOrders', (o) => o.status === 'Báo giá', 'quote', 'Báo giá chờ khách duyệt'],
+  ['reviews', (r) => r.status === 'Chờ duyệt', 'review', 'Đánh giá chờ duyệt'],
+  ['leads', (l, today) => l.status === 'Mới' || (l.nextFollow && l.nextFollow < today && !['Thất bại', 'Đặt cọc'].includes(l.status)), (l) => (l.status === 'Mới' ? 'new' : `follow:${l.nextFollow}`), (l) => (l.status === 'Mới' ? 'Khách quan tâm mới' : 'Cần liên hệ lại')],
+  ['loans', (l) => l.status === 'Mới nhận', 'new', 'Hồ sơ trả góp mới'],
+  ['consignments', (c) => c.status === 'Mới', 'new', 'Yêu cầu định giá / ký gửi mới'],
+  ['products', (p) => p.stock <= p.min && p.status !== 'Ẩn', 'low', 'Sản phẩm sắp hết hàng'],
+  ['parts', (p) => p.stock <= p.min, 'low', 'Phụ tùng sắp hết'],
+]
+const call = (v, r) => (typeof v === 'function' ? v(r) : v)
+function pendingItems(site, read) {
   const today = isoDay()
-  return {
-    orders: n('orders', (o) => o.status === 'Chờ xác nhận'),
-    bookings: n('bookings', (b) => b.status === 'Chờ xác nhận'),
-    installs: n('installs', (b) => b.status === 'Chờ xác nhận'),
-    testDrives: n('testDrives', (b) => b.status === 'Chờ xác nhận'),
-    repairOrders: n('repairOrders', (o) => o.status === 'Báo giá'),
-    reviews: n('reviews', (r) => r.status === 'Chờ duyệt'),
-    leads: n('leads', (l) => l.status === 'Mới' || (l.nextFollow && l.nextFollow < today && !['Thất bại', 'Đặt cọc'].includes(l.status))),
-    loans: n('loans', (l) => l.status === 'Mới nhận'),
-    consignments: n('consignments', (c) => c.status === 'Mới'),
-    products: n('products', (p) => p.stock <= p.min && p.status !== 'Ẩn'),
-    parts: n('parts', (p) => p.stock <= p.min),
+  const out = []
+  for (const [col, test, part, title] of PENDING) {
+    if (!site.modules.some((m) => m.id === col)) continue
+    for (const r of read(col))
+      if (test(r, today))
+        out.push({
+          key: `${col}:${r.id}:${call(part, r)}`,
+          module: col,
+          id: r.id,
+          title: call(title, r),
+          sub: [r.code || r.sku || r.plate, r.customer || r.customerName || r.name || r.product || r.title, r.phone].filter(Boolean).join(' · '),
+          time: r.createdAt || r.date || '',
+          path: `${col}?open=${r.id}`,
+        })
   }
-}
-const BADGE_TEXT = {
-  orders: ['đơn hàng chờ xác nhận', 'orders?tab=Chờ xác nhận'],
-  bookings: ['lịch hẹn chờ xác nhận', 'bookings?tab=Chờ xác nhận'],
-  installs: ['lịch lắp đặt chờ xác nhận', 'installs?tab=Chờ xác nhận'],
-  testDrives: ['lịch lái thử chờ xác nhận', 'testDrives?tab=Chờ xác nhận'],
-  repairOrders: ['báo giá chờ khách duyệt', 'repairOrders?tab=Báo giá'],
-  reviews: ['đánh giá chờ duyệt', 'reviews?tab=Chờ duyệt'],
-  leads: ['khách quan tâm cần liên hệ', 'leads'],
-  loans: ['hồ sơ trả góp mới', 'loans?tab=Mới nhận'],
-  consignments: ['yêu cầu định giá / ký gửi mới', 'consignments?tab=Mới'],
-  products: ['sản phẩm sắp hết hàng', 'products'],
-  parts: ['phụ tùng sắp hết', 'parts?tab=Sắp hết'],
+  return out
 }
 
-function Topbar({ onMenu, badges }) {
+function Topbar({ onMenu, notify }) {
   const { site, store } = useAdmin()
   const navigate = useNavigate()
   const [q, setQ] = useState('')
@@ -214,7 +233,6 @@ function Topbar({ onMenu, badges }) {
         .slice(0, 4)
         .forEach((r) => results.push({ col, label: s.label, r }))
     }
-  const total = Object.values(badges).reduce((a, b) => a + b, 0)
   const go = (path) => (setOpen(null), setQ(''), navigate(`/quan-tri/${site.key}/${path}`))
   return (
     <header className="adm-top" ref={ref}>
@@ -255,26 +273,7 @@ function Topbar({ onMenu, badges }) {
       <a className="adm-iconbtn adm-hide-sm" href={site.siteUrl} target="_blank" rel="noreferrer" aria-label="Xem website" title="Xem website">
         <ExternalLink size={18} />
       </a>
-      <div className="adm-top__pop">
-        <button type="button" className="adm-iconbtn" onClick={() => setOpen(open === 'bell' ? null : 'bell')} aria-label={`Thông báo (${total})`} aria-expanded={open === 'bell'}>
-          <Bell size={19} />
-          {total > 0 && <i className="adm-dot">{total > 99 ? '99+' : total}</i>}
-        </button>
-        {open === 'bell' && (
-          <div className="adm-pop adm-pop--right">
-            <p className="adm-pop__title">Việc cần xử lý</p>
-            {Object.entries(badges)
-              .filter(([, v]) => v)
-              .map(([k, v]) => (
-                <button key={k} type="button" onClick={() => go(BADGE_TEXT[k][1])}>
-                  <b>{v}</b>
-                  <span>{BADGE_TEXT[k][0]}</span>
-                </button>
-              ))}
-            {!total && <p className="adm-muted">Không có việc tồn đọng 🎉</p>}
-          </div>
-        )}
-      </div>
+      <NotifyBell {...notify} go={go} open={open === 'bell'} onToggle={() => setOpen(open === 'bell' ? null : 'bell')} />
       <div className="adm-top__pop">
         <button type="button" className="adm-user" onClick={() => setOpen(open === 'user' ? null : 'user')} aria-expanded={open === 'user'}>
           <span className="adm-avatar adm-avatar--sm">Q</span>

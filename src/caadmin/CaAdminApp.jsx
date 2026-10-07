@@ -2,11 +2,12 @@
 // Dùng lại bộ giao diện của trang quản trị demo (src/admin) – cùng CSS, bảng danh sách, biểu mẫu.
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, Navigate, NavLink, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { Bell, ChevronDown, ExternalLink, KeyRound, LayoutDashboard, LogOut, Menu, Search, Settings as SettingsIcon, X } from 'lucide-react'
+import { ChevronDown, ExternalLink, KeyRound, LayoutDashboard, LogOut, Menu, Search, Settings as SettingsIcon, X } from 'lucide-react'
 import { AdminProvider, useAdmin, useCollection } from '../admin/store.jsx'
 import { ConfirmHost } from '../admin/ui.jsx'
 import { matchText } from '../admin/schemas.jsx'
-import { isoDay } from '../admin/lib.js'
+import { fmtDate, isoDay } from '../admin/lib.js'
+import { NotifyBell, unseenByModule, useSeen } from '../admin/notify.jsx'
 import Resource from '../admin/pages/Resource.jsx'
 import { api, createApiStore } from './api.js'
 import { CA_MODULES, getCaSchema } from './schemas.jsx'
@@ -179,7 +180,15 @@ function Shell({ auth, onOut }) {
   useCollection('staff')
   useEffect(() => setNavOpen(false), [location.pathname])
   const mods = CA_MODULES.filter((m) => allowed(m, auth.perms))
-  const counts = pending(store, auth.perms)
+  const items = notifications(store, auth.perms)
+  const [seen, mark] = useSeen(loadSeen, saveSeen)
+  const counts = unseenByModule(items, seen)
+  // mở chi tiết một bản ghi (?open=…) → thông báo của bản ghi đó coi như đã xem
+  useEffect(() => {
+    const id = new URLSearchParams(location.search).get('open')
+    const m = CA_MODULES.find((x) => x.slug && location.pathname === `${BASE}/${x.slug}`)
+    if (id && m) mark(items.filter((i) => i.module === m.id && String(i.id) === id).map((i) => i.key))
+  })
   let group = null
   return (
     <div className={`adm-shell ${navOpen ? 'nav-open' : ''}`}>
@@ -200,7 +209,13 @@ function Shell({ auth, onOut }) {
             return (
               <div key={m.id}>
                 {head && <p className="adm-side__group">{head}</p>}
-                <NavLink to={`${BASE}/${m.slug}`} end={!m.slug} className={({ isActive }) => `adm-side__link ${isActive ? 'is-active' : ''}`}>
+                <NavLink
+                  to={`${BASE}/${m.slug}`}
+                  end={!m.slug}
+                  className={({ isActive }) => `adm-side__link ${isActive ? 'is-active' : ''}`}
+                  // mở chức năng → các thông báo của chức năng đó coi như đã xem
+                  onClick={() => counts[m.id] && mark(items.filter((i) => i.module === m.id).map((i) => i.key))}
+                >
                   <meta.icon size={18} />
                   <span>{meta.label}</span>
                   {!!counts[m.id] && <em>{counts[m.id] > 99 ? '99+' : counts[m.id]}</em>}
@@ -217,7 +232,7 @@ function Shell({ auth, onOut }) {
       </aside>
       <div className="adm-scrim" onClick={() => setNavOpen(false)} aria-hidden="true" />
       <div className="adm-main">
-        <Topbar auth={auth} onMenu={() => setNavOpen(true)} onOut={onOut} counts={counts} />
+        <Topbar auth={auth} onMenu={() => setNavOpen(true)} onOut={onOut} notify={{ items, seen, mark }} />
         <main className="adm-content">
           <Routes>
             <Route index element={<Titled label="Tổng quan"><CaDashboard /></Titled>} />
@@ -267,19 +282,29 @@ function ModuleRoute({ perms }) {
   )
 }
 
-// số việc cần xử lý → huy hiệu thanh bên + chuông
-function pending(store, perms) {
+// Việc cần xử lý → thông báo + huy hiệu thanh bên. Mã theo đúng sự việc: đổi ngày hẹn / hạn bàn giao thì thành thông báo mới
+function notifications(store, perms) {
   const has = (p) => (perms[p] || '').includes('r')
   const today = isoDay()
-  const leads = has('leads') ? store.read('leads') : []
-  const orders = has('orders') ? store.read('orders') : []
-  return {
-    leads: leads.filter((l) => l.status === 'Mới' || (l.nextFollow && l.nextFollow <= today && !['Chốt hợp đồng', 'Thất bại'].includes(l.status))).length,
-    orders: orders.filter((o) => o.dueDate && o.dueDate < today && !['Hoàn tất', 'Đã huỷ'].includes(o.status)).length,
-  }
+  const out = []
+  if (has('leads'))
+    for (const l of store.read('leads')) {
+      const base = { module: 'leads', id: l.id, path: `yeu-cau?open=${l.id}` }
+      if (l.status === 'Mới') out.push({ ...base, key: `leads:${l.id}:new`, title: `Yêu cầu tư vấn mới: ${l.name}`, sub: [l.phone, l.interest].filter(Boolean).join(' · '), time: l.createdAt })
+      else if (l.nextFollow && l.nextFollow <= today && !['Chốt hợp đồng', 'Thất bại'].includes(l.status))
+        out.push({ ...base, key: `leads:${l.id}:follow:${l.nextFollow}`, title: `Cần gọi lại: ${l.name}`, sub: `Hẹn ${fmtDate(l.nextFollow)} · ${l.phone}`, time: l.nextFollow })
+    }
+  if (has('orders'))
+    for (const o of store.read('orders'))
+      if (o.dueDate && o.dueDate < today && !['Hoàn tất', 'Đã huỷ'].includes(o.status))
+        out.push({ module: 'orders', id: o.id, path: `hop-dong?open=${o.id}`, key: `orders:${o.id}:due:${o.dueDate}`, title: `Hợp đồng ${o.code} quá hạn bàn giao`, sub: `${o.customerName} · hạn ${fmtDate(o.dueDate)}`, time: o.dueDate })
+  return out
 }
+// trạng thái "đã xem" lưu trên máy chủ theo từng tài khoản (xem ở máy này thì máy khác cũng hết báo)
+const loadSeen = () => api('GET', '/api/admin/notifications/seen').then((d) => d.keys)
+const saveSeen = (keys) => api('POST', '/api/admin/notifications/seen', { keys })
 
-function Topbar({ auth, onMenu, onOut, counts }) {
+function Topbar({ auth, onMenu, onOut, notify }) {
   const { site, store, toast } = useAdmin()
   const navigate = useNavigate()
   const [q, setQ] = useState('')
@@ -309,7 +334,6 @@ function Topbar({ auth, onMenu, onOut, counts }) {
         .forEach((r) => results.push({ slug, label: s.label, r }))
     }
   const go = (path) => (setOpen(null), setQ(''), navigate(`${BASE}/${path}`))
-  const total = (counts.leads || 0) + (counts.orders || 0)
   async function logout() {
     try {
       await api('POST', '/api/auth/logout')
@@ -357,30 +381,7 @@ function Topbar({ auth, onMenu, onOut, counts }) {
           <ExternalLink size={16} />
           <span>Xem website</span>
         </a>
-        <div className="adm-top__pop">
-          <button type="button" className="adm-iconbtn" onClick={() => setOpen(open === 'bell' ? null : 'bell')} aria-label={`Việc cần xử lý (${total})`} aria-expanded={open === 'bell'}>
-            <Bell size={19} />
-            {total > 0 && <i className="adm-dot">{total > 99 ? '99+' : total}</i>}
-          </button>
-          {open === 'bell' && (
-            <div className="adm-pop adm-pop--right">
-              <p className="adm-pop__title">Việc cần xử lý</p>
-              {!!counts.leads && (
-                <button type="button" onClick={() => go('yeu-cau')}>
-                  <b>{counts.leads}</b>
-                  <span>yêu cầu tư vấn mới / cần gọi lại</span>
-                </button>
-              )}
-              {!!counts.orders && (
-                <button type="button" onClick={() => go('hop-dong')}>
-                  <b>{counts.orders}</b>
-                  <span>hợp đồng quá hạn bàn giao</span>
-                </button>
-              )}
-              {!total && <p className="adm-muted">Không có việc tồn đọng</p>}
-            </div>
-          )}
-        </div>
+        <NotifyBell {...notify} go={go} open={open === 'bell'} onToggle={() => setOpen(open === 'bell' ? null : 'bell')} />
         <span className="ca-top__sep" aria-hidden="true" />
         <div className="adm-top__pop">
           <button type="button" className="ca-user" onClick={() => setOpen(open === 'user' ? null : 'user')} aria-expanded={open === 'user'} aria-label={`Tài khoản ${auth.user.name}`}>

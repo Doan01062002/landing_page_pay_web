@@ -111,6 +111,60 @@ try {
     check('Tổng quan: huy hiệu việc cần xử lý', (await p.locator('.adm-dot').textContent()) === '1')
   }
 
+  // ============ 2b. Thông báo: đã xem / đánh dấu tất cả / mở chức năng ============
+  {
+    const dot = () => p.locator('.adm-top .adm-dot').textContent().catch(() => '')
+    const sideBadge = () => p.locator('.adm-side__link', { hasText: 'Yêu cầu tư vấn' }).locator('em').textContent().catch(() => '')
+    const newLead = (name) => api.post('/api/admin/leads', { name, phone: '0912' + String(Date.now()).slice(-6), source: 'Hotline' })
+    await p.locator('button[aria-label^="Thông báo"]').click()
+    await p.locator('.adm-notify').waitFor()
+    check('thông báo: hiện từng việc, việc chưa xem có chấm', (await p.locator('.adm-notify__list .is-new').count()) === 1 && (await p.locator('.adm-notify').textContent()).includes('Khách E2E Website'))
+    await p.locator('.adm-notify__all').click()
+    await settle(p, 500)
+    check('thông báo: "Đánh dấu tất cả đã xem" → hết số trên chuông', (await dot()) === '')
+    check('thông báo: huy hiệu thanh bên cũng hết', (await sideBadge()) === '')
+    await p.reload()
+    await p.locator('.adm-kpis').waitFor()
+    await settle(p, 800)
+    check('thông báo: tải lại trang vẫn là đã xem (lưu trên máy chủ)', (await dot()) === '')
+
+    await newLead('Khách thông báo 2')
+    await p.reload()
+    await p.locator('.adm-kpis').waitFor()
+    await visible(p.locator('.adm-top .adm-dot'))
+    check('thông báo: yêu cầu mới → báo 1', (await dot()) === '1' && (await sideBadge()) === '1')
+    await p.locator('button[aria-label^="Thông báo"]').click()
+    await p.locator('.adm-notify__list button', { hasText: 'Khách thông báo 2' }).click()
+    await p.waitForURL(/\/admin\/yeu-cau/)
+    await p.locator('.adm-drawer', { hasText: 'Khách thông báo 2' }).waitFor()
+    await settle(p, 600)
+    check('thông báo: bấm vào một thông báo → mở đúng yêu cầu, đánh dấu đã xem', (await dot()) === '' && (await p.locator('.adm-drawer').textContent()).includes('Khách thông báo 2'))
+    await p.keyboard.press('Escape')
+
+    await newLead('Khách thông báo 3')
+    await p.goto(B + '/admin')
+    await p.locator('.adm-kpis').waitFor()
+    await visible(p.locator('.adm-top .adm-dot'))
+    await p.locator('.adm-side__link', { hasText: 'Yêu cầu tư vấn' }).click()
+    await settle(p, 600)
+    check('thông báo: mở chức năng "Yêu cầu tư vấn" → hết báo ở thanh bên và chuông', (await sideBadge()) === '' && (await dot()) === '')
+
+    const l4 = (await newLead('Khách thông báo 4')).body
+    await p.goto(`${B}/admin/yeu-cau?open=${l4.id}`)
+    await p.locator('.adm-drawer').waitFor()
+    await settle(p, 600)
+    check('thông báo: mở thẳng chi tiết yêu cầu → đánh dấu đã xem', (await dot()) === '')
+    // gọi lại hẹn hôm nay = sự việc mới → báo lại dù yêu cầu đã xem
+    await api.patch(`/api/admin/leads/${l4.id}`, { status: 'Đã liên hệ', nextFollow: new Date().toISOString().slice(0, 10) })
+    await p.goto(B + '/admin')
+    await p.locator('.adm-kpis').waitFor()
+    check('thông báo: đổi lịch gọi lại → thành thông báo mới', await visible(p.locator('.adm-top .adm-dot')))
+    await p.locator('button[aria-label^="Thông báo"]').click()
+    await p.locator('.adm-notify__all').click()
+    await settle(p, 400)
+    await p.keyboard.press('Escape')
+  }
+
   // ============ 3. Mọi chức năng mở được, không lỗi ============
   {
     const mods = [
@@ -318,6 +372,15 @@ try {
       await settle(d, 600)
     }
     check('demo quản trị mẫu: vào được', (await d.locator('.adm-side__nav a').count()) > 3)
+    // thông báo bản demo: lưu "đã xem" trên trình duyệt
+    await d.locator('button[aria-label^="Thông báo"]').click()
+    await d.locator('.adm-notify').waitFor()
+    const hadNew = await d.locator('.adm-notify__all').count()
+    if (hadNew) await d.locator('.adm-notify__all').click()
+    await settle(d, 300)
+    await d.reload()
+    await settle(d, 800)
+    check('demo quản trị mẫu: đánh dấu tất cả đã xem, tải lại vẫn giữ', hadNew > 0 && (await d.locator('.adm-top .adm-dot').count()) === 0 && (await d.locator('.adm-side__link em').count()) === 0)
     const link = d.locator('.adm-side__nav a').nth(1)
     await link.click()
     await d.locator('.adm-pagehead h1').waitFor()
