@@ -9,11 +9,11 @@ export default function TemplateCard({ t }) {
     <article className="tcard">
       <Link to={`/demo/${t.slug}`} className="tcard__media" aria-label={`Xem thử ${t.name}`}>
         <Thumb k={t.slug} alt={`Giao diện mẫu ${t.name}`} />
-        <div className="tcard__badges">
-          {t.isNew && <span className="badge badge--new">Mới</span>}
-          {t.free && <span className="badge badge--free">Miễn phí</span>}
-        </div>
       </Link>
+      <div className="tcard__badges">
+        {t.isNew && <span className="badge badge--new">Mới</span>}
+        {t.free && <span className="badge badge--free">Miễn phí</span>}
+      </div>
       <div className="tcard__body">
         <h3 className="tcard__name">
           <Link to={`/mau-phan-mem/${t.slug}`}>{t.name}</Link>

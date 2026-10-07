@@ -106,6 +106,49 @@ const stamp = (day, r) => {
   return d.toISOString()
 }
 
+// ---------- Ảnh minh hoạ cho dữ liệu mẫu (ảnh thật có sẵn trong public/) ----------
+const MP = '/du-an/minhphat/assets/img/'
+const XUONG = ['13260', '13270', '36522', '41933', '41936', '41947', '4716', '47585', '47830', '47831', '47834'].map((n) => `/images/xuong/x-${n}.jpg`)
+const MOTO = ['/images/moto-city.jpg', '/images/moto-red.jpg', '/images/scooter.jpg', '/images/sockets.jpg', '/images/wrench-piston.jpg', '/images/tools-wall.jpg']
+// từ khoá trong tên dịch vụ / bài viết → ảnh
+const TOPIC_IMG = [
+  [/sơn|dặm|quây/i, [MP + 's-son.webp', MP + 'g-son-dam.webp']],
+  [/gò|hàn|móp|tai nạn|đồng/i, [MP + 'c-dent.webp']],
+  [/đánh bóng|ceramic|phủ bóng|hiệu chỉnh sơn|detailing/i, [MP + 'c-polish.webp', MP + 'g-danh-bong.webp']],
+  [/rửa|vệ sinh|nội thất|khử mùi/i, [MP + 'g-rua-xe.webp', MP + 'g-noi-that.webp']],
+  [/điều hoà|điều hòa|máy lạnh/i, [MP + 's-dieu-hoa.webp']],
+  [/lốp|vỏ xe|cân bằng|góc lái|lazang|la-zăng|mâm|vành/i, [MP + 'g-can-bang.webp', MP + 's-lazang.webp', '/images/xuong/x-47468.jpg']],
+  [/gầm|phanh|thắng|treo|giảm xóc|phuộc/i, [MP + 'g-gam.webp', MP + 's-may-gam.webp']],
+  [/ắc quy|acquy|bình điện|điện|đề nổ/i, ['/images/battery.jpg', MP + 's-dieu-hoa.webp']],
+  [/thay dầu|nhớt|bảo dưỡng|bảo trì|mốc km|định kỳ/i, [MP + 's-bao-duong.webp', MP + 'g-thay-dau.webp']],
+  [/động cơ|máy|hộp số|đại tu|chẩn đoán|kiểm tra/i, [MP + 'g-khoang-may.webp', MP + 'b-dong-co.webp', '/images/engine.jpg']],
+  [/phim|dán/i, [MP + 's-phim.webp']],
+  [/đèn|gương|camera/i, [MP + 's-guong-den.webp', MP + 'b-den-pha.webp']],
+  [/cứu hộ|kéo xe/i, [MP + 's-cuu-ho.webp']],
+  [/phụ tùng|phụ kiện|độ |nâng cấp/i, [MP + 's-phu-tung.webp', MP + 's-do-xe.webp']],
+  [/chọn gara|gara uy tín/i, [MP + 'b-chon-gara.webp']],
+  [/ít đi|để lâu|nghỉ lễ|đường dài/i, [MP + 'b-it-di.webp']],
+  [/trẻ|con nhỏ|gia đình/i, [MP + 'b-con.webp']],
+]
+const topicImage = (text, i, fallback = XUONG) => {
+  const hit = TOPIC_IMG.find(([re]) => re.test(text || ''))
+  const list = hit ? hit[1] : fallback
+  return list[i % list.length]
+}
+// ảnh trước / sau theo cặp cùng hạng mục
+const BA_PAIRS = [
+  ['Gò hàn – phục hồi xe tai nạn', MP + 'c-dent.webp', MP + 'v-son-dam.webp'],
+  ['Sơn dặm', MP + 's-son.webp', MP + 'g-son-dam.webp'],
+  ['Đánh bóng & phủ ceramic', MP + 'g-rua-xe.webp', MP + 'c-polish.webp'],
+  ['Vệ sinh nội thất', MP + 'g-noi-that.webp', MP + 's-do-xe.webp'],
+  ['Vệ sinh khoang máy', MP + 's-dieu-hoa.webp', MP + 'g-khoang-may.webp'],
+  ['Phục hồi mâm', MP + 's-lazang.webp', MP + 'c-wheel.webp'],
+  ['Phủ gầm chống ồn', MP + 's-may-gam.webp', MP + 'g-gam.webp'],
+  ['Thay lốp & cân bằng động', '/images/xuong/x-47468.jpg', MP + 'g-can-bang.webp'],
+]
+// ảnh bài viết lưu dạng mã Unsplash (trang Hưng Thịnh) → đường dẫn ảnh đầy đủ
+const fullImage = (s) => (/^\d{10,}-[0-9a-f]{6,}$/.test(s || '') ? `https://images.unsplash.com/photo-${s}?auto=format&fit=crop&w=640&q=70` : s || '')
+
 export function buildSeed(site, data = {}) {
   const r = rng(hashStr(site.key))
   const T = site.template || {}
@@ -210,7 +253,7 @@ export function buildSeed(site, data = {}) {
     duration: s.duration || r.pick(['45 phút', '1 giờ', '2 giờ', '3–4 giờ']),
     warranty: s.warranty || r.pick(['3 tháng', '6 tháng', '12 tháng', '—']),
     desc: s.desc || '',
-    image: s.image || '',
+    image: s.image || (site.flags.moto ? MOTO[i % MOTO.length] : topicImage(s.name, i)),
     visible: true,
   }))
   const svcNames = out.services.map((s) => s.name)
@@ -495,7 +538,7 @@ export function buildSeed(site, data = {}) {
         oldPrice: c.oldPrice || 0,
         cost: c.condition === 'Mới' ? Math.round(c.price * 0.93) : Math.round(c.price * (r.int(86, 92) / 100)),
         branch: c.showroom || r.pick(branchNames),
-        image: c.image || '',
+        image: c.image || (/^VF\s?\d$/i.test(c.model || '') ? `/images/xe/vf${c.model.replace(/\D/g, '')}.jpg` : ''),
         status,
         featured: !!c.featured || r.chance(0.25),
         views: r.int(40, 2600),
@@ -636,13 +679,16 @@ export function buildSeed(site, data = {}) {
   // ---------- Thư viện trước / sau ----------
   if (site.flags.gallery) {
     const imgs = (data.products || []).map((p) => p.image).filter(Boolean)
-    const pool = [T.beforeAfter?.image, T.hero?.image, ...out.services.map((s) => s.image), ...imgs].filter(Boolean)
+    // chỉ ảnh riêng của mẫu (ảnh dịch vụ minh hoạ tự gán không tính)
+    const pool = [T.beforeAfter?.image, T.hero?.image, ...svcSrc.map((s) => s.image), ...imgs].filter(Boolean)
+    // mẫu có đủ ảnh riêng thì dùng ảnh của mẫu, còn lại dùng cặp ảnh trước / sau theo hạng mục
+    const own = pool.length >= 2
     out.gallery = Array.from({ length: 8 }, (_, i) => ({
       id: id(),
-      title: `${r.pick(svcNames)} – ${r.pick(CARS)}`,
-      service: r.pick(svcNames),
-      before: pool[i % Math.max(pool.length, 1)] || '',
-      after: pool[(i + 1) % Math.max(pool.length, 1)] || '',
+      title: `${own ? r.pick(svcNames) : BA_PAIRS[i % BA_PAIRS.length][0]} – ${r.pick(CARS)}`,
+      service: own ? r.pick(svcNames) : svcNames.find((n) => TOPIC_IMG.some(([re]) => re.test(n) && re.test(BA_PAIRS[i % BA_PAIRS.length][0]))) || BA_PAIRS[i % BA_PAIRS.length][0],
+      before: own ? pool[i % pool.length] : BA_PAIRS[i % BA_PAIRS.length][1],
+      after: own ? pool[(i + 1) % pool.length] : BA_PAIRS[i % BA_PAIRS.length][2],
       visible: r.chance(0.85),
       date: day(-r.int(1, 120)),
     }))
@@ -705,7 +751,7 @@ export function buildSeed(site, data = {}) {
   const postSrc = [...(data.posts || []), ...(T.news || []).map((n) => ({ title: n.title, date: n.date?.includes('/') ? n.date.split('/').reverse().join('-') : n.date, image: n.image, category: 'Tin tức' }))]
   if (!postSrc.length) {
     const imgs = [...(out.services || []).map((s) => s.image), ...(out.products || []).map((p) => p.image), ...(out.cars || []).map((c) => c.image)].filter(Boolean)
-    POSTS[site.profile].forEach(([title, category], i) => postSrc.push({ title, category, date: day(-(i * 9 + r.int(1, 6))), image: imgs[i % Math.max(imgs.length, 1)] || '', excerpt: '' }))
+    POSTS[site.profile].forEach(([title, category], i) => postSrc.push({ title, category, date: day(-(i * 9 + r.int(1, 6))), image: site.flags.moto ? MOTO[i % MOTO.length] : topicImage(title, i, imgs.length ? imgs : XUONG), excerpt: '' }))
   }
   out.posts = postSrc.map((p, i) => ({
     id: id(),
@@ -715,7 +761,7 @@ export function buildSeed(site, data = {}) {
     author: r.pick(out.staff.filter((s) => /Marketing|Quản trị/.test(s.role))).name,
     date: p.date || day(-r.int(3, 60)),
     views: r.int(80, 4200),
-    image: p.image || '',
+    image: fullImage(p.image) || (site.flags.moto ? MOTO[i % MOTO.length] : topicImage(p.title, i)),
     excerpt: p.excerpt || '',
     content: p.excerpt || '',
     slug: '',

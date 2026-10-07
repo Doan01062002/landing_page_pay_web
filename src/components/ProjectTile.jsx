@@ -9,10 +9,10 @@ export default function ProjectTile({ p }) {
     <article className="tcard tcard--project">
       <Link to={`/demo-du-an/${p.slug}`} className="tcard__media" aria-label={`Xem thử ${p.name}`}>
         <Thumb k={`du-an-${p.slug}`} alt={`Giao diện ${typeLabel(p.type)} ${p.name}`} />
-        <div className="tcard__badges">
-          <span className="badge badge--custom">Dựng riêng</span>
-        </div>
       </Link>
+      <div className="tcard__badges">
+        <span className="badge badge--custom">Dựng riêng</span>
+      </div>
       <div className="tcard__body">
         <h3 className="tcard__name">
           <Link to={`/demo-du-an/${p.slug}`}>{p.name}</Link>

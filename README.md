@@ -24,6 +24,7 @@ Chỉ xem giao diện (không cần database): `npm run dev` – website chạy 
 | `npm run db:migrate` | Chạy migration + dữ liệu khởi tạo |
 | `npm test` | Test máy chủ (vitest + supertest, cần PostgreSQL test) |
 | `npm run test:e2e` | Test bằng Chrome thật (cần build trước) |
+| `npm run test:ui` | Dò lỗi giao diện trang quản trị ở 4 cỡ màn hình (cần build trước) |
 
 ## Máy chủ & cơ sở dữ liệu
 

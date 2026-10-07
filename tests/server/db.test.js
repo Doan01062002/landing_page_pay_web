@@ -136,3 +136,27 @@ describe('ràng buộc toàn vẹn', () => {
     expect((await q(`SELECT user_name FROM audit_logs WHERE summary = 'x'`)).rows[0].user_name).toBe('Del')
   })
 })
+
+describe('kết nối database thuê ngoài (Supabase)', async () => {
+  const { getConfig } = await import('../../server/config.js')
+  const { createPool, poolOptions } = await import('../../server/db.js')
+  const SUPA = 'postgresql://postgres.abcxyz:MatKhau123@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres'
+  it('địa chỉ Supabase tự bật SSL mã hoá; database tự host thì không', () => {
+    expect(poolOptions(getConfig({ DATABASE_URL: SUPA })).ssl).toEqual({ rejectUnauthorized: false })
+    expect(poolOptions(getConfig({ DATABASE_URL: 'postgres://u:p@localhost:5432/db' })).ssl).toBeUndefined()
+    expect(poolOptions(getConfig({ DATABASE_URL: SUPA, DATABASE_SSL: '' })).ssl).toBeUndefined()
+    expect(poolOptions(getConfig({ DATABASE_URL: SUPA, DB_POOL_MAX: '5' })).max).toBe(5)
+  })
+  it('sslmode trong chuỗi kết nối không ghi đè cấu hình SSL', () => {
+    const p = createPool(SUPA + '?sslmode=require', { ssl: { rejectUnauthorized: false } })
+    expect(p.options.connectionString).not.toContain('sslmode')
+    expect(p.options.ssl).toEqual({ rejectUnauthorized: false })
+    return p.end()
+  })
+  it('bật SSL thật sự gửi yêu cầu mã hoá tới máy chủ', async () => {
+    // PostgreSQL test cục bộ không bật SSL → bị từ chối đúng kiểu lỗi SSL (chứng tỏ có yêu cầu mã hoá)
+    const p = createPool(ctx.cfg.databaseUrl, poolOptions({ ...ctx.cfg, databaseSsl: 'require' }))
+    await expect(p.query('SELECT 1')).rejects.toThrow(/SSL/i)
+    await p.end()
+  })
+})

@@ -47,7 +47,7 @@ describe('trang công khai dựng sẵn HTML (tốt cho SEO)', () => {
   it('Kho mẫu và trang chi tiết mẫu có title / JSON-LD riêng', async () => {
     const g = await page('/mau-phan-mem')
     expect(g.status).toBe(200)
-    expect(g.text).toMatch(/<title>Kho mẫu website &amp; phần mềm ngành ô tô \| /)
+    expect(g.text).toContain('<title>Mẫu website gara ô tô &amp; phần mềm quản lý | ')
     expect(jsonLd(g.text).map((o) => o['@type'])).toEqual(expect.arrayContaining(['BreadcrumbList', 'ItemList']))
     const d = await page(`/mau-phan-mem/${T.slug}`)
     expect(d.status).toBe(200)

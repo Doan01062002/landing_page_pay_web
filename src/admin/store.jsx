@@ -32,8 +32,21 @@ export function defaultRoles(site) {
   return { roles, perms }
 }
 
+// Tăng khi dữ liệu mẫu (seed.js) thay đổi: trình duyệt đang giữ bản cũ sẽ tự nạp lại dữ liệu mới
+const SEED_VERSION = 2
+
 function createStore(site, staticSeed) {
   const ns = PREFIX + site.key + ':'
+  try {
+    if (localStorage.getItem(ns + '__v') !== String(SEED_VERSION)) {
+      Object.keys(localStorage)
+        .filter((k) => k.startsWith(ns))
+        .forEach((k) => localStorage.removeItem(k))
+      localStorage.setItem(ns + '__v', String(SEED_VERSION))
+    }
+  } catch {
+    /* trình duyệt chặn lưu trữ: dùng dữ liệu mẫu trong bộ nhớ */
+  }
   let seed = null
   const getSeed = () => (seed ||= buildSeed(site, staticSeed || {}))
   const docs = {

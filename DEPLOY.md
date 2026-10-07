@@ -105,6 +105,29 @@ chungauto.vn {
 
 Sao lưu: `pg_dump -U chungauto -d chungauto | gzip > backup.sql.gz`.
 
+## Cách 3 – Database trên Supabase (VPS chỉ chạy ứng dụng)
+
+Supabase thay cho PostgreSQL trên VPS; máy chủ Node.js vẫn chạy trên VPS (Supabase/Vercel không chạy được backend Express này).
+
+1. Supabase → dự án → nút **Connect** → tab **Direct** (*Connection string*) → mục **Session pooler** → kiểu **URI**, sao chép chuỗi dạng
+   `postgresql://postgres.<mã-dự-án>:[YOUR-PASSWORD]@aws-0-<vùng>.pooler.supabase.com:5432/postgres`
+   - Dùng **Session pooler** (cổng 5432): chạy được trên VPS chỉ có IPv4 và hỗ trợ khoá migration. **Không** dùng *Transaction pooler* (cổng 6543).
+   - *Direct connection* (`db.<mã>.supabase.co`) chỉ dùng khi VPS có IPv6.
+2. Thay `[YOUR-PASSWORD]` bằng mật khẩu database (đặt khi tạo dự án; quên thì: Project Settings → Database → *Reset database password*). Mật khẩu có ký tự đặc biệt (`@ : / ? # %`) phải mã hoá URL, vd `@` → `%40`.
+3. `.env` trên VPS:
+   ```
+   DOMAIN=chungauto.vn
+   DATABASE_URL=postgresql://postgres.<mã>:<mật-khẩu>@aws-0-<vùng>.pooler.supabase.com:5432/postgres
+   DB_POOL_MAX=5
+   ADMIN_EMAIL=...
+   ADMIN_PASSWORD=...
+   ```
+   SSL tự bật khi địa chỉ là Supabase. Muốn kiểm chứng chỉ chặt hơn: tải *SSL certificate* ở Project Settings → Database, đặt `DATABASE_SSL=verify` và `DATABASE_CA_FILE=/đường/dẫn/prod-ca-2021.crt`.
+4. Chạy: `docker compose -f docker-compose.supabase.yml up -d --build` (hoặc PM2 như Cách 2, bỏ phần cài PostgreSQL).
+   Lần đầu khởi động tự tạo bảng + tài khoản quản trị trong Supabase (xem ở Table Editor).
+
+Lưu ý: dự án Supabase gói miễn phí bị **tạm dừng** khi không có truy cập trong một thời gian – vào trang Supabase bấm *Restore* để chạy lại. Sao lưu: `pg_dump "<DATABASE_URL>" | gzip > backup.sql.gz` hoặc dùng tính năng sao lưu của Supabase.
+
 ## Bảo mật đã có sẵn
 
 - Mật khẩu băm bcrypt; phiên đăng nhập là cookie `httpOnly`, `Secure`, `SameSite=Lax`, database chỉ lưu mã băm SHA-256 của phiên.

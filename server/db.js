@@ -1,11 +1,25 @@
 // Kết nối PostgreSQL (node-postgres) + tiện ích chuyển tên cột snake_case ↔ camelCase.
+import { readFileSync } from 'node:fs'
 import pg from 'pg'
 
 // bigint (tiền) → số JS (an toàn tới 9e15 đồng); date → chuỗi 'YYYY-MM-DD' (không lệch múi giờ)
 pg.types.setTypeParser(20, (v) => (v === null ? null : Number(v)))
 pg.types.setTypeParser(1082, (v) => v)
 
+// Tuỳ chọn kết nối từ cấu hình (config.js): số kết nối, SSL
+export function poolOptions(cfg) {
+  const ssl =
+    cfg.databaseSsl === 'verify' ? { ca: readFileSync(cfg.databaseCaFile, 'utf8'), rejectUnauthorized: true } : cfg.databaseSsl === 'require' ? { rejectUnauthorized: false } : undefined
+  return { max: cfg.dbPoolMax, ...(ssl && { ssl }) }
+}
+
 export function createPool(connectionString, opts = {}) {
+  // SSL đặt qua opts: bỏ sslmode… trong chuỗi kết nối (pg ưu tiên tham số trong chuỗi, sẽ ghi đè cấu hình ssl)
+  if (opts.ssl) {
+    const u = new URL(connectionString)
+    for (const k of ['sslmode', 'sslrootcert', 'sslcert', 'sslkey', 'uselibpqcompat']) u.searchParams.delete(k)
+    connectionString = u.toString()
+  }
   const pool = new pg.Pool({ connectionString, max: 10, idleTimeoutMillis: 30000, ...opts })
   pool.on('error', (e) => console.error('[db] lỗi kết nối nền:', e.message))
   return pool

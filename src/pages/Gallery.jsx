@@ -123,7 +123,7 @@ export default function Gallery() {
   return (
     <>
       <Seo
-        title="Kho mẫu website & phần mềm ngành ô tô"
+        title="Mẫu website gara ô tô & phần mềm quản lý"
         description={`${projects.length + templates.length} mẫu website, landing page và phần mềm dựng sẵn cho gara ô tô, đại lý, showroom xe cũ, cửa hàng phụ kiện. Xem thử trực tiếp, kèm trang quản trị.`}
         path="/mau-phan-mem"
         jsonLd={[
@@ -143,7 +143,7 @@ export default function Gallery() {
             <span>/</span>
             <span aria-current="page">Kho mẫu</span>
           </nav>
-          <h1>Kho mẫu ngành ô tô</h1>
+          <h1>Kho mẫu website ngành ô tô</h1>
           <p>
             {projects.length + templates.length} mẫu website, landing page và phần mềm cho gara, đại lý, cửa hàng phụ kiện ô tô.
           </p>
@@ -218,6 +218,7 @@ export default function Gallery() {
                     </button>
                   ))}
                 </div>
+                <h2 className="sr-only">Danh sách mẫu</h2>
                 <p className="g-count sr-only" aria-live="polite">
                   <strong key={total}>{total}</strong> mẫu phù hợp
                   {key && (

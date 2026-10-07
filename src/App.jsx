@@ -9,11 +9,14 @@ import { RevealManager, ScrollProgress } from './components/Motion.jsx'
 import Landing from './pages/Landing.jsx'
 import Gallery from './pages/Gallery.jsx'
 import TemplateDetail from './pages/TemplateDetail.jsx'
-import Demo from './pages/Demo.jsx'
-import Preview from './pages/Preview.jsx'
 import NotFound from './pages/NotFound.jsx'
 import LpGallery from './pages/LpGallery.jsx'
-import LpPreview from './pages/LpPreview.jsx'
+
+// Trang xem thử / website mẫu chạy riêng (không dựng phía máy chủ): tách gói để trang chủ, Kho mẫu tải nhẹ
+const Demo = lazy(() => import('./pages/Demo.jsx'))
+const Preview = lazy(() => import('./pages/Preview.jsx'))
+const LpPreview = lazy(() => import('./pages/LpPreview.jsx'))
+const lazyPage = (el) => <Suspense fallback={null}>{el}</Suspense>
 
 // Trang quản trị demo của từng mẫu: tải riêng khi mở /quan-tri
 const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
@@ -78,11 +81,11 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* Trang xem thử toàn màn hình và trang mẫu chạy trong iframe */}
-        <Route path="/demo/:slug" element={<Demo />} />
-        <Route path="/demo-landing/:slug" element={<Demo kind="landing" />} />
-        <Route path="/demo-du-an/:slug" element={<Demo kind="project" />} />
-        <Route path="/lp/:slug" element={<LpPreview />} />
-        <Route path="/preview/:slug/:page?" element={<Preview />} />
+        <Route path="/demo/:slug" element={lazyPage(<Demo />)} />
+        <Route path="/demo-landing/:slug" element={lazyPage(<Demo kind="landing" />)} />
+        <Route path="/demo-du-an/:slug" element={lazyPage(<Demo kind="project" />)} />
+        <Route path="/lp/:slug" element={lazyPage(<LpPreview />)} />
+        <Route path="/preview/:slug/:page?" element={lazyPage(<Preview />)} />
         <Route
           path="/quan-tri/*"
           element={

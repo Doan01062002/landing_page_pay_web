@@ -40,11 +40,11 @@ export async function migrate(pool, log = console.log) {
 // node server/migrate.js
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const { loadEnvFile, getConfig } = await import('./config.js')
-  const { createPool } = await import('./db.js')
+  const { createPool, poolOptions } = await import('./db.js')
   const { seed } = await import('./seed.js')
   loadEnvFile()
   const cfg = getConfig()
-  const pool = createPool(cfg.databaseUrl)
+  const pool = createPool(cfg.databaseUrl, poolOptions(cfg))
   try {
     const n = await migrate(pool)
     console.log(n ? `Đã chạy ${n} migration.` : 'Cơ sở dữ liệu đã ở phiên bản mới nhất.')

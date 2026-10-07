@@ -5,7 +5,7 @@ import { site } from './site.js'
 import { faqs } from './landing.js'
 
 export const defaultSeo = {
-  title: 'ChungAuto – Phần mềm cho gara, đại lý & showroom ô tô',
+  title: 'Phần mềm quản lý gara ô tô & website showroom | ChungAuto',
   description:
     'Website và phần mềm dựng sẵn cho gara ô tô, tiệm sửa xe máy, đại lý, showroom xe cũ, cửa hàng phụ kiện. Bàn giao 7 ngày, tặng landing page quảng cáo.',
   image: '/brand/og-home.jpg',

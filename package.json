@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:e2e": "node tests/e2e/run.mjs",
+    "test:ui": "node tests/e2e/ui-audit.mjs",
     "ssr:check": "node scripts/ssr-check.mjs"
   },
   "dependencies": {

@@ -14,7 +14,7 @@ export default function Footer() {
           <p>Phần mềm và landing page cho gara ô tô, tiệm sửa xe máy, đại lý ô tô, showroom xe cũ và cửa hàng phụ tùng. Một dịch vụ của hệ thống {site.showrooms} showroom {site.brand} trên toàn quốc.</p>
         </div>
         <div>
-          <h4>Kho mẫu</h4>
+          <h2 className="site-footer__h">Kho mẫu</h2>
           <ul>
             {categories.slice(1).map((c) => (
               <li key={c.id}>
@@ -24,7 +24,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4>Dịch vụ</h4>
+          <h2 className="site-footer__h">Dịch vụ</h2>
           <ul>
             <li><Link to="/#bang-gia">Bảng giá triển khai</Link></li>
             <li><Link to="/mau-landing-page">Mẫu landing page tặng kèm</Link></li>
@@ -34,7 +34,7 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h4>Liên hệ</h4>
+          <h2 className="site-footer__h">Liên hệ</h2>
           <ul className="site-footer__contact">
             <li><Icon name="Phone" size={16} /> Hotline: {site.hotline}</li>
             <li><Icon name="MessageCircle" size={16} /> <a href={site.zaloUrl} target="_blank" rel="noreferrer">{site.zalo}</a></li>

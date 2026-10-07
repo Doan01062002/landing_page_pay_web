@@ -11,6 +11,8 @@
 
   --brand: #ea212b;
   --brand-deep: #c4121b;
+  /* nền nút chữ trắng: đỏ thương hiệu sẫm hơn chút để đạt tương phản WCAG AA (4.5:1) */
+  --brand-btn: #e11d27;
   --brand-soft: #fdeeee;
 
   --signal: #ea212b;
@@ -147,14 +149,14 @@ p {
   width: 100%;
 }
 .btn--primary {
-  background: var(--brand);
+  background: var(--brand-btn);
   color: #fff;
 }
 .btn--primary:hover {
   background: var(--brand-deep);
 }
 .btn--signal {
-  background: var(--signal);
+  background: var(--brand-btn);
   color: #fff;
 }
 .btn--signal:hover {
@@ -543,6 +545,7 @@ p {
   gap: 28px;
 }
 .tcard {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: var(--paper);
@@ -563,6 +566,8 @@ p {
 }
 .tcard__badges {
   position: absolute;
+  z-index: 1;
+  pointer-events: none;
   top: 12px;
   left: 12px;
   display: flex;
@@ -751,7 +756,7 @@ p {
   color: var(--ink-2);
   max-width: 34ch;
 }
-.site-footer h4 {
+.site-footer__h {
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.06em;

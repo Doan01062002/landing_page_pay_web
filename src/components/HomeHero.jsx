@@ -37,6 +37,11 @@ const N = 37
 const STEP = 360 / N
 const CULL = 42
 const SPEED = 1.9 // độ / giây
+const PHASE0 = -2
+// góc có dấu (-180..180) của thẻ i khi vòng quay ở pha phase
+const angleOf = (i, phase) => ((((i * STEP + phase) % 360) + 540) % 360) - 180
+// tải ảnh trước khi thẻ lộ ra 2 nấc; thẻ ở xa chỉ tải khi sắp quay tới (giảm tải trang ban đầu)
+const NEAR = CULL + 2 * STEP
 
 // Khung thiết kế
 const CW = 1172
@@ -61,16 +66,22 @@ function Ring() {
     const spin = spinRef.current
     const els = [...spin.children]
     const shown = new Array(N).fill(null)
-    let phase = -2
+    let phase = PHASE0
     let last = performance.now()
     let raf = 0
     let visible = true
+    // chỉ dựng thẻ nằm trong khung nhìn thật (điện thoại hẹp: ~5 thẻ thay vì 9) – đỡ việc vẽ 3D trên máy yếu
+    const show = spin.parentElement.parentElement
+    const cull = Math.min(CULL, (Math.asin(Math.min(1, (show.clientWidth / 2 + 65) / R)) * 180) / Math.PI + 3)
+    const near = cull + 2 * STEP
 
     const place = () => {
       spin.style.transform = `translateZ(${R}px) rotateY(${(-phase).toFixed(3)}deg) translateZ(${-R}px)`
       for (let i = 0; i < N; i++) {
-        const a = ((((i * STEP + phase) % 360) + 540) % 360) - 180 // góc có dấu, -180..180
-        const on = Math.abs(a) <= CULL
+        const a = angleOf(i, phase)
+        const img = els[i].firstElementChild
+        if (!img.getAttribute('src') && Math.abs(a) <= near) img.src = img.dataset.src
+        const on = Math.abs(a) <= cull
         if (on !== shown[i]) {
           shown[i] = on
           els[i].style.visibility = on ? 'visible' : 'hidden'
@@ -86,7 +97,12 @@ function Ring() {
       place()
     }
     place()
-    if (motionAllowed()) raf = requestAnimationFrame(tick)
+    // bắt đầu quay khi trang đã tải xong và rảnh: không tranh tài nguyên với lần hiển thị đầu
+    let idle = 0
+    const start = () => motionAllowed() && (last = performance.now(), (raf = requestAnimationFrame(tick)))
+    const begin = () => (idle = window.requestIdleCallback ? requestIdleCallback(start, { timeout: 2500 }) : setTimeout(start, 800))
+    if (document.readyState === 'complete') begin()
+    else window.addEventListener('load', begin, { once: true })
     // chỉ quay khi hero còn trên màn hình
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting
@@ -97,6 +113,9 @@ function Ring() {
     document.addEventListener('visibilitychange', onVis)
     return () => {
       cancelAnimationFrame(raf)
+      window.removeEventListener('load', begin)
+      if (window.cancelIdleCallback) cancelIdleCallback(idle)
+      clearTimeout(idle)
       io.disconnect()
       document.removeEventListener('visibilitychange', onVis)
     }
@@ -107,7 +126,7 @@ function Ring() {
       <div className="hx-spin" ref={spinRef}>
         {cards.map((c, i) => (
           <div className="hx-card" key={i} style={{ transform: `translateZ(${R}px) rotateY(${(-i * STEP).toFixed(3)}deg) translateZ(${-R}px)` }}>
-            <img src={c.img} alt="" width="390" height="900" decoding="async" onError={(e) => e.currentTarget.parentElement.classList.add('is-broken')} />
+            <img src={Math.abs(angleOf(i, PHASE0)) <= NEAR ? c.img : undefined} data-src={c.img} alt="" width="390" height="900" decoding="async" onError={(e) => e.currentTarget.parentElement.classList.add('is-broken')} />
             <span className="hx-card__cap">{c.name}</span>
           </div>
         ))}

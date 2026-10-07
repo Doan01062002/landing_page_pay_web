@@ -1,14 +1,14 @@
 // Khởi động máy chủ ChungAuto (VPS): chạy migration, dữ liệu khởi tạo, rồi phục vụ API + website.
 // Chạy: npm run build && npm start   (cấu hình trong .env – xem .env.example)
 import { loadEnvFile, getConfig } from './config.js'
-import { createPool } from './db.js'
+import { createPool, poolOptions } from './db.js'
 import { migrate } from './migrate.js'
 import { seed } from './seed.js'
 import { createApp, loadRenderer } from './app.js'
 
 loadEnvFile()
 const cfg = getConfig()
-const pool = createPool(cfg.databaseUrl)
+const pool = createPool(cfg.databaseUrl, poolOptions(cfg))
 
 await migrate(pool)
 await seed(pool, cfg)

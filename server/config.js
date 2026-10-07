@@ -23,6 +23,12 @@ export function getConfig(env = process.env) {
     port: int(env.PORT, 8080),
     host: env.HOST || '0.0.0.0',
     databaseUrl: env.DATABASE_URL || 'postgres://chungauto:chungauto@localhost:5432/chungauto',
+    // SSL tới database thuê ngoài (Supabase…): '' tắt | 'require' mã hoá | 'verify' mã hoá + kiểm chứng chỉ bằng DATABASE_CA_FILE.
+    // Không đặt: tự bật 'require' khi địa chỉ là Supabase.
+    databaseSsl: env.DATABASE_SSL ?? (/\.supabase\.(co|com)\b/.test(env.DATABASE_URL || '') ? 'require' : ''),
+    databaseCaFile: env.DATABASE_CA_FILE || '',
+    // số kết nối tối đa (gói miễn phí Supabase giới hạn kết nối: nên 5–10)
+    dbPoolMax: int(env.DB_POOL_MAX, 10),
     // Địa chỉ công khai (https://ten-mien.vn): dùng cho canonical, sitemap. Trống = lấy theo request.
     publicUrl: (env.PUBLIC_URL || '').replace(/\/$/, ''),
     trustProxy: bool(env.TRUST_PROXY, true),
