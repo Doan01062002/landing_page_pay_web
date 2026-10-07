@@ -5,529 +5,445 @@
   <!-- Đặt trong /du-an/dopro/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
   <base href="/du-an/dopro/">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ĐỘ PRO GARAGE – Phụ kiện độ xe hiệu suất · Body kit · Pô · Mâm · Coilover</title>
-<meta name="description" content="ĐỘ PRO GARAGE – cửa hàng mẫu chuyên độ xe hiệu suất: body kit, cánh gió, pô độ, mâm, lọc gió, coilover, tem dán, vô lăng thể thao. Đo dyno trước & sau, lắp đặt tận nơi.">
-<meta name="theme-color" content="#0b0b0d">
-<script>document.documentElement.className += ' js';</script>
+<title>Độ Pro Garage – Phụ kiện &amp; dịch vụ độ xe ô tô: turbo, mâm, coilover, body kit, lắp tại xưởng</title>
+<meta name="description" content="Độ Pro Garage (cửa hàng mẫu) – phụ kiện độ xe ô tô: turbo, cổ góp xả, mâm đúc, coilover, đèn LED; dịch vụ body kit, cánh gió, dán đổi màu, độ pô; combo Stage 1–3 có đo dyno.">
+<meta name="theme-color" content="#ffffff">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,800;1,900&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=1600&q=70" imagesrcset="https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=800&q=70 800w, https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=1600&q=70 1600w, https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=2200&q=70 2200w" imagesizes="100vw">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1777173649680-45b71ee019d5?auto=format&fit=crop&w=900&h=420&q=70" fetchpriority="high">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%23d70018%27/%3E%3Cpath d=%27M9 9h6.5a7 7 0 0 1 0 14H9z%27 fill=%27none%27 stroke=%27%23fff%27 stroke-width=%273.2%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<a class="skip" href="#san-pham">Bỏ qua tới sản phẩm</a>
+<a class="skip" href="#san-pham">Bỏ qua tới danh sách sản phẩm</a>
 
-<!-- ============ PROMO BAR ============ -->
-<div class="promo" id="promo">
-  <div class="promo__in">
-    <span class="promo__tag">FLASH SALE</span>
-    <span class="promo__txt">Giảm đến <b>30%</b> pô độ &amp; mâm – miễn phí lắp đặt nội thành</span>
-    <span class="promo__cd" aria-live="off"><span class="promo__lbl">Kết thúc sau</span>
-      <b data-cd="d">00</b><i>:</i><b data-cd="h">00</b><i>:</i><b data-cd="m">00</b><i>:</i><b data-cd="s">00</b>
-    </span>
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="wrap topbar__in">
+    <div class="ticker" id="ticker" aria-live="off">
+      <span class="is-on">Miễn phí lắp đặt nội thành cho đơn từ <b>3.000.000₫</b></span>
+      <span>Trả góp <b>0%</b> qua thẻ tín dụng cho đơn từ 5 triệu</span>
+      <span>Đo dyno trước &amp; sau <b>miễn phí</b> khi làm combo Stage</span>
+    </div>
+    <nav class="topbar__links" aria-label="Liên kết nhanh">
+      <a href="#he-thong">Hệ thống 3 xưởng</a>
+      <a href="#dat-lich">Đặt lịch lắp đặt</a>
+      <a href="#faq">Chính sách bảo hành</a>
+      <a href="tel:0900000123" class="topbar__hot">Hotline 0900 000 123</a>
+    </nav>
   </div>
 </div>
 
 <!-- ============ HEADER ============ -->
 <header class="hdr" id="hdr">
-  <div class="hdr__in wrap">
-    <a href="#trang-chu" class="logo" aria-label="ĐỘ PRO GARAGE – về đầu trang">
-      <svg class="logo__mark" viewBox="0 0 64 44" aria-hidden="true">
-        <path d="M14 0h22L22 44H0z" fill="#e10600"/>
-        <path d="M33 0h12L31 44H19z" fill="#e10600" opacity=".7"/>
-        <path d="M48 0h9L43 44h-9z" fill="#e10600" opacity=".4"/>
-        <path d="M15 12h11l-2.6 8H12.4z" fill="#0b0b0d"/>
-      </svg>
-      <span class="logo__txt"><b>ĐỘ PRO</b><small>GARAGE · PERFORMANCE</small></span>
+  <div class="wrap hdr__in">
+    <button class="hdr__burger" id="burger" aria-label="Mở danh mục" aria-expanded="false" aria-controls="mnav"><i data-ic="menu"></i></button>
+    <a href="#trang-chu" class="logo" aria-label="Độ Pro Garage – trang chủ">
+      <span class="logo__mark" aria-hidden="true">ĐP</span>
+      <span class="logo__txt"><b>Độ Pro<em>Garage</em></b><small>Phụ kiện độ xe ô tô</small></span>
     </a>
 
-    <nav class="nav" aria-label="Điều hướng chính">
-      <a href="#danh-muc">Danh mục</a>
-      <a href="#chon-xe">Chọn xe</a>
-      <a href="#san-pham">Sản phẩm</a>
-      <a href="#combo">Combo độ</a>
-      <a href="#dyno">Dyno</a>
-      <a href="#cong-trinh">Công trình</a>
-      <a href="#dat-lich" class="nav__cta">Đặt lịch</a>
-    </nav>
-
-    <form class="search" id="searchForm" role="search" autocomplete="off">
-      <label class="sr" for="q">Tìm phụ kiện</label>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
-      <input id="q" type="search" placeholder="Tìm pô, mâm, cánh gió…" enterkeyhint="search">
-    </form>
+    <div class="search-wrap">
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <label class="sr" for="q">Tìm phụ kiện</label>
+        <input id="q" type="search" placeholder="Bạn cần tìm gì? (turbo, mâm 18, coilover, LED H4…)" enterkeyhint="search" aria-autocomplete="list" aria-controls="sugg">
+        <button type="submit" class="search__btn" aria-label="Tìm kiếm"><i data-ic="search"></i></button>
+        <div class="sugg" id="sugg" hidden></div>
+      </form>
+      <div class="hotkeys" id="hotkeys" aria-label="Từ khoá phổ biến"></div>
+    </div>
 
     <div class="hdr__act">
-      <button class="icon-btn only-m" id="searchToggle" aria-label="Mở tìm kiếm" aria-expanded="false">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
-      </button>
-      <button class="icon-btn cart-btn" id="cartBtn" aria-label="Mở giỏ hàng">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg>
-        <span class="cart-count" data-cart-count>0</span>
-      </button>
-      <button class="icon-btn burger only-m" id="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="mnav">
-        <span></span><span></span><span></span>
-      </button>
+      <a class="hact hact--hot" href="tel:0900000123"><i data-ic="phone"></i><span><small>Gọi mua hàng</small><b>0900 000 123</b></span></a>
+      <button class="hact hact--acc" type="button" data-demo="Trang mẫu – chức năng tài khoản chưa mở."><i data-ic="user"></i><span><small>Đăng nhập</small><b>Tài khoản</b></span></button>
+      <button class="hact hact--cart" id="cartBtn" type="button" aria-label="Mở giỏ hàng"><span class="hact__ic"><i data-ic="cart"></i><em class="cart-count" data-cart-count>0</em></span><span class="hact__lbl"><small>Giỏ hàng</small><b>của bạn</b></span></button>
     </div>
   </div>
 </header>
-
-<!-- mobile menu -->
-<div class="mnav" id="mnav" aria-hidden="true">
-  <div class="mnav__panel carbon">
-    <div class="mnav__top">
-      <span class="mnav__ttl">MENU</span>
-      <button class="icon-btn" id="mnavClose" aria-label="Đóng menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+<nav class="mainnav" aria-label="Điều hướng chính">
+    <div class="wrap mainnav__in">
+      <a href="#flash-sale" class="mainnav__flash"><i data-ic="bolt"></i>Flash sale</a>
+      <a href="#combo">Combo Stage 1–3</a>
+      <a href="#san-pham">Phụ kiện bán chạy</a>
+      <a href="#dich-vu">Dịch vụ độ</a>
+      <a href="#cong-trinh">Xe đã độ</a>
+      <a href="#tin-tuc">Kinh nghiệm độ xe</a>
+      <a href="#he-thong">Hệ thống xưởng</a>
+      <a href="#dat-lich" class="mainnav__book"><i data-ic="calendar"></i>Đặt lịch lắp</a>
+      <span class="mainnav__note"><i data-ic="truck"></i>Giao &amp; lắp toàn quốc qua đối tác</span>
     </div>
-    <nav class="mnav__links" aria-label="Menu di động">
-      <a href="#danh-muc"><i>01</i>Danh mục</a>
-      <a href="#chon-xe"><i>02</i>Chọn xe của bạn</a>
-      <a href="#san-pham"><i>03</i>Sản phẩm</a>
-      <a href="#combo"><i>04</i>Combo độ</a>
-      <a href="#dyno"><i>05</i>Biểu đồ dyno</a>
-      <a href="#cong-trinh"><i>06</i>Công trình</a>
-      <a href="#faq"><i>07</i>Hỏi đáp</a>
-      <a href="#dat-lich"><i>08</i>Đặt lịch lắp đặt</a>
-    </nav>
-    <a class="mnav__hot" href="tel:0900000123"><small>Hotline kỹ thuật (số mẫu)</small>0900 000 123</a>
-  </div>
-</div>
+</nav>
 
 <main id="trang-chu">
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="hero" aria-label="Giới thiệu">
-  <div class="hero__media">
-    <img class="hero__img" src="https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=1600&q=70"
-      srcset="https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=800&q=70 800w, https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=1600&q=70 1600w, https://images.unsplash.com/photo-1626621394541-b9a48e35a95d?auto=format&fit=crop&w=2200&q=70 2200w"
-      sizes="100vw" width="1600" height="1067" alt="Xe thể thao màu đen với đèn pha sáng trong hầm xe tối, ánh đỏ phía sau" fetchpriority="high">
-  </div>
-  <div class="hero__shade"></div>
-  <div class="hero__streaks" id="streaks" aria-hidden="true"></div>
-  <div class="hero__grid" aria-hidden="true"></div>
+<!-- ============ HERO: sidebar + slider + side banners ============ -->
+<section class="hero wrap" aria-label="Khuyến mãi nổi bật">
+  <aside class="catmenu" id="catmenu" aria-label="Danh mục sản phẩm">
+    <ul id="catList"></ul>
+    <div class="mega" id="mega" hidden></div>
+  </aside>
 
-  <div class="hero__in wrap">
-    <div class="hero__copy">
-      <p class="eyebrow hero__eye"><i></i>PERFORMANCE TUNING · HÀ NỘI</p>
-      <h1 class="hero__h1">
-        <span class="hl"><span>ĐÁNH THỨC</span></span>
-        <span class="hl hl--red"><span>CON QUÁI VẬT</span></span>
-        <span class="hl"><span>TRONG XE BẠN</span></span>
-      </h1>
-      <p class="hero__sub">Body kit, cánh gió, pô độ, mâm, coilover… lắp đặt chuẩn kỹ thuật, <b>đo dyno trước &amp; sau</b>, bảo hành đến 24 tháng.</p>
-      <div class="hero__cta">
-        <a href="#san-pham" class="btn btn--red"><span>Mua phụ kiện</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a href="#dat-lich" class="btn btn--ghost"><span>Đặt lịch<span class="hide-s"> lắp đặt</span></span></a>
+  <div class="bslider" id="bslider" aria-roledescription="carousel" aria-label="Chương trình khuyến mãi">
+    <div class="bslider__view">
+      <div class="bslider__track" id="bTrack">
+        <a class="slide slide--red" href="#dich-vu" data-svc="do-po" aria-label="Độ pô tại xưởng giảm 25% công lắp">
+          <img class="slide__img" src="https://images.unsplash.com/photo-1777173649680-45b71ee019d5?auto=format&fit=crop&w=900&h=420&q=70" width="900" height="420" alt="Cặp đầu pô titan khò cháy màu xanh tím trên xe thể thao" fetchpriority="high" decoding="async">
+          <div class="slide__txt">
+            <span class="slide__kick">Ưu đãi tháng 10</span>
+            <b class="slide__h">Độ pô tại xưởng<br>giảm 25% công</b>
+            <span class="slide__sub">Pô inox/titan từ <em>1.290.000₫</em> · đo độ ồn trước bàn giao</span>
+            <span class="slide__btn">Đặt lịch ngay</span>
+          </div>
+        </a>
+        <a class="slide slide--white" href="#combo" aria-label="Combo Stage 2 tặng đo dyno">
+          <img class="slide__img" src="https://images.unsplash.com/photo-1591879742348-13012c2963bf?auto=format&fit=crop&w=900&h=420&q=70" width="900" height="420" alt="Turbo tăng áp lắp trong khoang máy" loading="lazy" decoding="async">
+          <div class="slide__txt">
+            <span class="slide__kick">Combo Stage 2</span>
+            <b class="slide__h">+50 HP<br>chỉ trong 1 ngày</b>
+            <span class="slide__sub">Giá trọn gói <em>29.500.000₫</em> · tặng 2 lần đo dyno</span>
+            <span class="slide__btn">Xem combo</span>
+          </div>
+        </a>
+        <a class="slide slide--yellow" href="#san-pham" data-goto-cat="mam" aria-label="Mâm độ trả góp 0%">
+          <img class="slide__img" src="https://images.unsplash.com/photo-1590667730202-1834c1013091?auto=format&fit=crop&w=900&h=420&q=70" width="900" height="420" alt="Mâm xe đa chấu dưới nắng chiều" loading="lazy" decoding="async">
+          <div class="slide__txt">
+            <span class="slide__kick">Mâm &amp; lốp</span>
+            <b class="slide__h">Trả góp 0%<br>mâm 17–19 inch</b>
+            <span class="slide__sub">Trả trước 0₫ · tặng ốc khoá &amp; cân bằng động</span>
+            <span class="slide__btn">Chọn mâm</span>
+          </div>
+        </a>
+        <a class="slide slide--gray" href="#san-pham" data-goto-cat="tem" aria-label="Dán đổi màu giảm 3 triệu">
+          <img class="slide__img" src="https://images.unsplash.com/photo-1617024094355-b886817cffc4?auto=format&fit=crop&w=900&h=420&q=70" width="900" height="420" alt="Xe coupe dán film đổi màu chameleon" loading="lazy" decoding="async">
+          <div class="slide__txt">
+            <span class="slide__kick">Dán đổi màu trọn xe</span>
+            <b class="slide__h">Giảm 3.000.000₫<br>film chameleon</b>
+            <span class="slide__sub">Film bền màu 5 năm · thi công 2 ngày</span>
+            <span class="slide__btn">Xem mẫu</span>
+          </div>
+        </a>
       </div>
-      <ul class="hero__stats">
-        <li><b data-count="12400" data-sep>0</b><span>xe đã độ<br>từ 2015</span></li>
-        <li><b><em>+</em><span data-count="68">0</span></b><span>HP tăng thêm<br>gói Stage 3</span></li>
-        <li><b><span data-count="4.9" data-dec="1">0</span><em>/5</em></b><span>từ 2.100+<br>đánh giá</span></li>
-      </ul>
+      <button class="bslider__nav bslider__nav--prev" id="bPrev" aria-label="Banner trước"><i data-ic="left"></i></button>
+      <button class="bslider__nav bslider__nav--next" id="bNext" aria-label="Banner tiếp theo"><i data-ic="right"></i></button>
     </div>
-
-    <aside class="gauge" aria-label="Minh hoạ đồng hồ công suất">
-      <div class="gauge__hd"><span class="dot"></span>DYNO LIVE<span class="gauge__tag">STAGE 2</span></div>
-      <svg class="gauge__svg" viewBox="0 0 240 150" aria-hidden="true">
-        <defs><linearGradient id="gArc" x1="0" x2="1"><stop offset="0" stop-color="#5a5a62"/><stop offset=".65" stop-color="#ff5a1f"/><stop offset="1" stop-color="#e10600"/></linearGradient></defs>
-        <path d="M24 130a96 96 0 0 1 192 0" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14"/>
-        <path d="M24 130a96 96 0 0 1 192 0" fill="none" stroke="url(#gArc)" stroke-width="14" stroke-dasharray="4 3"/>
-        <g class="gauge__ticks" stroke="rgba(255,255,255,.5)" stroke-width="2">
-          <line x1="24" y1="130" x2="38" y2="130"/><line x1="52" y1="62" x2="62" y2="72"/><line x1="120" y1="34" x2="120" y2="48"/><line x1="188" y1="62" x2="178" y2="72"/><line x1="216" y1="130" x2="202" y2="130"/>
-        </g>
-        <g class="gauge__needle" id="needle"><path d="M120 130 L117 128 L120 52 L123 128 Z" fill="#fff"/><circle cx="120" cy="130" r="9" fill="#e10600"/><circle cx="120" cy="130" r="3.5" fill="#0b0b0d"/></g>
-      </svg>
-      <div class="gauge__read">
-        <div><small>Trước</small><b>178</b><i>HP</i></div>
-        <div class="up"><small>Sau</small><b data-gauge>228</b><i>HP</i></div>
-        <div class="gain">+50</div>
-      </div>
-    </aside>
+    <div class="bslider__tabs" id="bTabs" role="tablist">
+      <button role="tab" aria-selected="true">Độ pô<small>Giảm 25% công</small></button>
+      <button role="tab" aria-selected="false">Combo Stage 2<small>Tặng đo dyno</small></button>
+      <button role="tab" aria-selected="false">Mâm độ<small>Trả góp 0%</small></button>
+      <button role="tab" aria-selected="false">Dán đổi màu<small>Giảm 3 triệu</small></button>
+    </div>
   </div>
 
-  <a href="#danh-muc" class="hero__scroll" aria-label="Cuộn xuống"><span>CUỘN</span><i></i></a>
-</section>
-
-<!-- ============ MARQUEE ============ -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track" id="marquee">
-    <span>BODY KIT</span><b>/</b><span>CÁNH GIÓ</span><b>/</b><span>PÔ ĐỘ</span><b>/</b><span>MÂM ĐỘ</span><b>/</b><span>LỌC GIÓ HIỆU SUẤT</span><b>/</b><span>COILOVER</span><b>/</b><span>TEM DÁN</span><b>/</b><span>VÔ LĂNG THỂ THAO</span><b>/</b>
-    <span>BODY KIT</span><b>/</b><span>CÁNH GIÓ</span><b>/</b><span>PÔ ĐỘ</span><b>/</b><span>MÂM ĐỘ</span><b>/</b><span>LỌC GIÓ HIỆU SUẤT</span><b>/</b><span>COILOVER</span><b>/</b><span>TEM DÁN</span><b>/</b><span>VÔ LĂNG THỂ THAO</span><b>/</b>
-  </div>
-</div>
-
-<!-- ============ TRUST ============ -->
-<section class="trust wrap" aria-label="Cam kết dịch vụ">
-  <div class="trust__item" data-reveal>
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 5 7v8c0 7 4.7 11.7 11 14 6.3-2.3 11-7 11-14V7z"/><path d="m11 16 3.5 3.5L21 13"/></svg>
-    <div><b>Bảo hành đến 24 tháng</b><span>Đổi mới nếu lỗi kỹ thuật</span></div>
-  </div>
-  <div class="trust__item" data-reveal>
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 21V11h14v10M17 14h6l4 4v3H17"/><circle cx="9" cy="23" r="2.5"/><circle cx="23" cy="23" r="2.5"/></svg>
-    <div><b>Lắp đặt tận nơi</b><span>Nội thành Hà Nội trong 24h</span></div>
-  </div>
-  <div class="trust__item" data-reveal>
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M26 11a10 10 0 1 0 1.5 7"/><path d="M27 5v6h-6"/></svg>
-    <div><b>Đổi trả 7 ngày</b><span>Chưa lắp đặt, còn tem hộp</span></div>
-  </div>
-  <div class="trust__item" data-reveal>
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 26h24M7 26V16M13 26V9M19 26v-7M25 26V5"/></svg>
-    <div><b>Đo dyno trước &amp; sau</b><span>Có biên bản số liệu</span></div>
+  <div class="sbans">
+    <a class="sban" href="#san-pham" data-goto-cat="phuoc">
+      <img src="https://images.unsplash.com/photo-1760836395716-7dd00b71311a?auto=format&fit=crop&w=560&h=360&q=70" width="560" height="360" alt="Bộ phuộc coilover lò xo đỏ" decoding="async">
+      <span class="sban__t"><small>Coilover chỉnh cao thấp</small><b>Giảm 2.600.000₫</b><em>Tặng căn chỉnh thước lái</em></span>
+    </a>
+    <a class="sban" href="#dat-lich">
+      <img src="https://images.unsplash.com/photo-1682795735660-a789079d5623?auto=format&fit=crop&w=560&h=360&q=70" width="560" height="360" alt="Khu trưng bày xe trong xưởng sáng sủa" decoding="async">
+      <span class="sban__t"><small>Đặt lịch online</small><b>Kiểm tra xe miễn phí</b><em>Ưu tiên khoang riêng</em></span>
+    </a>
   </div>
 </section>
 
-<!-- ============ CATEGORIES ============ -->
-<section class="sec" id="danh-muc">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow"><i></i>01 · DANH MỤC</p>
-      <h2 class="h2" data-reveal>ĐỘ TỪ <em>NGOẠI THẤT</em> ĐẾN <em>HIỆU SUẤT</em></h2>
-    </div>
-    <div class="cats" id="cats"></div>
-  </div>
+<!-- ============ POLICY STRIP ============ -->
+<section class="policy wrap" aria-label="Chính sách mua hàng">
+  <div class="policy__it"><i data-ic="shield"></i><span><b>Hàng chính hãng</b><small>Hoá đơn, nguồn gốc rõ ràng</small></span></div>
+  <div class="policy__it"><i data-ic="badge"></i><span><b>Bảo hành đến 24 tháng</b><small>Bảo hành điện tử theo SĐT</small></span></div>
+  <div class="policy__it"><i data-ic="wrench"></i><span><b>Lắp tại xưởng / tận nơi</b><small>Miễn phí nội thành từ 3 triệu</small></span></div>
+  <div class="policy__it"><i data-ic="return"></i><span><b>Đổi trả trong 7 ngày</b><small>Khi chưa lắp, còn tem hộp</small></span></div>
+  <div class="policy__it"><i data-ic="card"></i><span><b>Trả góp 0%</b><small>Kỳ hạn 3–12 tháng</small></span></div>
 </section>
 
-<!-- ============ FITMENT ============ -->
-<section class="sec fit carbon" id="chon-xe">
-  <div class="wrap fit__in">
-    <div class="fit__panel">
-      <p class="eyebrow"><i></i>02 · CHỌN XE CỦA BẠN</p>
-      <h2 class="h2" data-reveal>PHỤ KIỆN <em>ĐÚNG XE</em>,<br>LẮP LÀ VỪA</h2>
-      <p class="lead">Chọn hãng và dòng xe – hệ thống lọc ngay những phụ kiện tương thích, không lo mua nhầm.</p>
-
-      <div class="fit__step">
-        <span class="fit__num">01</span><span class="fit__lbl">Hãng xe</span>
-      </div>
-      <div class="chips" id="brandChips" role="group" aria-label="Chọn hãng xe"></div>
-
-      <div class="fit__step">
-        <span class="fit__num">02</span><span class="fit__lbl">Dòng xe</span>
-      </div>
-      <div class="chips chips--model" id="modelChips" role="group" aria-label="Chọn dòng xe">
-        <p class="chips__hint">← Chọn hãng xe trước</p>
-      </div>
-
-      <div class="fit__result" id="fitResult">
-        <div class="fit__res-txt"><b id="fitCount">25</b><span id="fitLabel">phụ kiện có sẵn cho mọi dòng xe</span></div>
-        <button class="btn btn--red" id="fitApply" disabled><span>Xem phụ kiện tương thích</span></button>
-      </div>
+<!-- ============ FLASH SALE ============ -->
+<section class="box flash wrap" id="flash-sale" aria-labelledby="flashTtl">
+  <div class="flash__hd">
+    <h2 class="flash__ttl" id="flashTtl"><i data-ic="bolt"></i>FLASH SALE</h2>
+    <div class="flash__cd" aria-label="Thời gian còn lại">
+      <span>Kết thúc sau</span>
+      <b data-cd="h">00</b><i>:</i><b data-cd="m">00</b><i>:</i><b data-cd="s">00</b>
     </div>
-
-    <div class="fit__visual" aria-hidden="true">
-      <div class="fit__car">
-        <svg viewBox="0 0 640 260" class="carsvg">
-          <defs>
-            <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2a31"/><stop offset="1" stop-color="#141418"/></linearGradient>
-          </defs>
-          <ellipse cx="330" cy="222" rx="280" ry="10" fill="rgba(225,6,0,.25)"/>
-          <!-- wing -->
-          <path class="part part--wing" d="M38 92 h96 l-6 8 h-92 z" />
-          <path d="M72 100 l6 22 M108 100 l-2 22" stroke="#3a3a42" stroke-width="5"/>
-          <!-- body -->
-          <path d="M40 176 L46 136 Q52 122 80 118 L200 108 Q252 66 318 58 L398 56 Q452 58 498 100 L566 112 Q600 118 606 140 L610 170 Q610 184 596 186 L560 186 A46 46 0 0 0 468 186 L222 186 A46 46 0 0 0 130 186 L58 186 Q40 186 40 176 Z" fill="url(#bodyG)" stroke="#4a4a54" stroke-width="2"/>
-          <path d="M214 108 Q262 74 318 68 L392 66 Q432 68 466 104 Z" fill="#0b0b0d" stroke="#3a3a42" stroke-width="2"/>
-          <path d="M336 68 L330 106" stroke="#3a3a42" stroke-width="4"/>
-          <path d="M60 150 H600" stroke="rgba(225,6,0,.6)" stroke-width="3"/>
-          <!-- body kit lip / skirt -->
-          <path class="part part--kit" d="M228 188 H462 l-6 8 H234 z M560 186 h40 l-8 10 h-34 z" />
-          <!-- exhaust -->
-          <path class="part part--po" d="M30 172 h26 v12 h-26 z" />
-          <!-- headlight -->
-          <path d="M572 122 l26 6 -4 10 -26 -6 z" fill="#fff" opacity=".85"/>
-          <!-- intake grille -->
-          <path class="part part--loc" d="M548 150 h44 l-4 14 h-40 z" />
-          <!-- wheels -->
-          <g class="wheel"><circle cx="176" cy="186" r="38" fill="#0b0b0d" stroke="#2c2c33" stroke-width="8"/><circle class="part part--mam" cx="176" cy="186" r="24" fill="none" stroke-width="5" stroke-dasharray="10 5"/><circle cx="176" cy="186" r="6" fill="#e10600"/></g>
-          <g class="wheel"><circle cx="514" cy="186" r="38" fill="#0b0b0d" stroke="#2c2c33" stroke-width="8"/><circle class="part part--mam" cx="514" cy="186" r="24" fill="none" stroke-width="5" stroke-dasharray="10 5"/><circle cx="514" cy="186" r="6" fill="#e10600"/></g>
-          <!-- coilover hint -->
-          <path class="part part--phuoc" d="M500 112 l8 40 M506 116 l-10 4 M508 126 l-10 4 M510 136 l-10 4" stroke-width="4" fill="none"/>
-          <!-- decal -->
-          <path class="part part--tem" d="M250 130 L420 124 L414 140 L244 146 Z" />
-        </svg>
-        <button class="hot" style="--x:13%;--y:30%" data-cat="canh-gio"><i></i><span>Cánh gió</span></button>
-        <button class="hot" style="--x:6%;--y:70%" data-cat="po"><i></i><span>Pô độ</span></button>
-        <button class="hot" style="--x:27.5%;--y:74%" data-cat="mam"><i></i><span>Mâm độ</span></button>
-        <button class="hot" style="--x:52%;--y:76%" data-cat="body-kit"><i></i><span>Body kit</span></button>
-        <button class="hot" style="--x:79%;--y:50%" data-cat="phuoc"><i></i><span>Coilover</span></button>
-        <button class="hot" style="--x:90%;--y:60%" data-cat="loc-gio"><i></i><span>Hút gió</span></button>
-        <button class="hot" style="--x:52%;--y:52%" data-cat="tem"><i></i><span>Tem dán</span></button>
-      </div>
-      <p class="fit__note">Chạm vào điểm đỏ để xem nhóm phụ kiện</p>
-    </div>
+    <div class="flash__slots" id="flashSlots" role="tablist" aria-label="Khung giờ"></div>
+    <a href="#san-pham" class="more-link" data-clear-filters>Xem tất cả<i data-ic="right"></i></a>
   </div>
+  <div class="hrow" id="flashRow"></div>
 </section>
 
-<!-- ============ PRODUCTS ============ -->
-<section class="sec shop" id="san-pham">
-  <div class="wrap">
-    <div class="shop__head">
-      <div class="sec-head">
-        <p class="eyebrow"><i></i>03 · CỬA HÀNG</p>
-        <h2 class="h2" data-reveal>PHỤ KIỆN <em>BÁN CHẠY</em></h2>
-      </div>
-      <div class="flash" aria-label="Flash sale">
-        <span class="flash__l"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>FLASH SALE<br><small>kết thúc sau</small></span>
-        <span class="flash__b"><b data-cd="d">00</b><small>ngày</small></span>
-        <span class="flash__b"><b data-cd="h">00</b><small>giờ</small></span>
-        <span class="flash__b"><b data-cd="m">00</b><small>phút</small></span>
-        <span class="flash__b"><b data-cd="s">00</b><small>giây</small></span>
-      </div>
-    </div>
+<!-- ============ CATEGORY TILES ============ -->
+<section class="box wrap" id="danh-muc" aria-labelledby="catTtl">
+  <div class="box__hd"><h2 id="catTtl">Danh mục nổi bật</h2></div>
+  <div class="ctiles" id="ctiles"></div>
+</section>
 
-    <div class="tabs-row">
-      <div class="tabs" id="tabs" role="tablist" aria-label="Lọc theo danh mục"></div>
-      <label class="sort"><span class="sr">Sắp xếp</span>
-        <select id="sort">
-          <option value="hot">Nổi bật</option>
-          <option value="asc">Giá thấp → cao</option>
-          <option value="desc">Giá cao → thấp</option>
-          <option value="sale">Giảm nhiều nhất</option>
-        </select>
-      </label>
-    </div>
+<!-- ============ FITMENT FINDER ============ -->
+<section class="finder wrap" id="chon-xe" aria-labelledby="finderTtl">
+  <div class="finder__l">
+    <i data-ic="car"></i>
+    <div><h2 id="finderTtl">Tìm phụ kiện đúng xe của bạn</h2><p>Chọn hãng và dòng xe để chỉ hiện phụ kiện lắp vừa.</p></div>
+  </div>
+  <div class="finder__f">
+    <label class="sel"><span class="sr">Hãng xe</span><select id="fBrand"><option value="">Chọn hãng xe</option></select></label>
+    <label class="sel"><span class="sr">Dòng xe</span><select id="fModel" disabled><option value="">Chọn dòng xe</option></select></label>
+    <button class="btn btn--red" id="fApply" type="button" disabled>Tìm phụ kiện</button>
+  </div>
+  <p class="finder__res" id="fRes" aria-live="polite"><b>37</b> phụ kiện đang bán · cho 26 dòng xe phổ biến</p>
+</section>
+
+<!-- ============ PRODUCT LISTING ============ -->
+<section class="box wrap" id="san-pham" aria-labelledby="shopTtl">
+  <div class="box__hd box__hd--tabs">
+    <h2 id="shopTtl">Phụ kiện bán chạy</h2>
+    <div class="ptabs" id="ptabs" role="tablist" aria-label="Lọc theo danh mục"></div>
+  </div>
+  <div class="toolbar">
     <div class="filters" id="activeFilters" aria-live="polite"></div>
-
-    <div class="grid" id="grid"></div>
-    <div class="empty" id="empty" hidden>
-      <b>Chưa có phụ kiện phù hợp</b>
-      <span>Thử từ khoá khác hoặc bỏ bớt bộ lọc.</span>
-      <button class="btn btn--ghost" data-clear-filters><span>Xoá bộ lọc</span></button>
+    <div class="sortby" role="group" aria-label="Sắp xếp">
+      <span>Sắp xếp:</span>
+      <button data-sort="hot" class="is-on">Nổi bật</button>
+      <button data-sort="sold">Bán chạy</button>
+      <button data-sort="asc">Giá thấp</button>
+      <button data-sort="desc">Giá cao</button>
+      <button data-sort="sale">% Giảm</button>
     </div>
-    <div class="more"><button class="btn btn--ghost" id="moreBtn"><span>Xem thêm sản phẩm</span></button></div>
   </div>
+  <div class="pgrid" id="grid"></div>
+  <div class="empty" id="empty" hidden>
+    <i data-ic="search"></i>
+    <b>Không tìm thấy phụ kiện phù hợp</b>
+    <span>Thử từ khoá khác (ví dụ “pô”, “mâm”, “carbon”) hoặc bỏ bớt bộ lọc.</span>
+    <button class="btn btn--line" data-clear-filters type="button">Xoá bộ lọc</button>
+  </div>
+  <div class="more"><button class="btn btn--line" id="moreBtn" type="button">Xem thêm sản phẩm</button></div>
 </section>
 
-<!-- ============ COMBO ============ -->
-<section class="sec combo" id="combo">
-  <div class="bigtxt" aria-hidden="true"><span>STAGE 1 · STAGE 2 · STAGE 3 · </span></div>
-  <div class="wrap">
-    <div class="sec-head sec-head--c">
-      <p class="eyebrow"><i></i>04 · COMBO ĐỘ</p>
-      <h2 class="h2" data-reveal>NÂNG CẤP THEO <em>STAGE</em></h2>
-      <p class="lead">Số liệu đo trên xe tham chiếu sedan 1.5L turbo (minh hoạ). Kết quả thực tế tuỳ tình trạng xe.</p>
-    </div>
-    <div class="combos" id="combos"></div>
+<!-- ============ SERVICES ============ -->
+<section class="box wrap" id="dich-vu" aria-labelledby="svcTtl">
+  <div class="box__hd">
+    <h2 id="svcTtl">Dịch vụ độ tại xưởng</h2>
+    <span class="box__note">Báo giá sau khi kiểm tra xe · ảnh công trình minh hoạ</span>
+    <div class="arrows"><button class="arr" data-row-prev="svcRow" aria-label="Trước"><i data-ic="left"></i></button><button class="arr" data-row-next="svcRow" aria-label="Tiếp"><i data-ic="right"></i></button></div>
   </div>
+  <div class="hrow hrow--svc" id="svcRow"></div>
 </section>
 
-<!-- ============ DYNO ============ -->
-<section class="sec dyno carbon" id="dyno">
-  <div class="wrap dyno__in">
-    <div class="dyno__copy">
-      <p class="eyebrow"><i></i>05 · PHÒNG DYNO</p>
-      <h2 class="h2" data-reveal>SỐ LIỆU <em>KHÔNG NÓI DỐI</em></h2>
-      <p class="lead">Mỗi xe được chạy dyno trước và sau khi độ. Bạn nhận biên bản đường cong công suất – thấy rõ từng mã lực đã trả tiền.</p>
-      <div class="seg" id="dynoSeg" role="tablist" aria-label="Chọn gói">
-        <button role="tab" aria-selected="false" data-stage="0">Stage 1</button>
-        <button role="tab" aria-selected="true" data-stage="1">Stage 2</button>
-        <button role="tab" aria-selected="false" data-stage="2">Stage 3</button>
-      </div>
+<!-- ============ COMBO + DYNO ============ -->
+<section class="box wrap" id="combo" aria-labelledby="comboTtl">
+  <div class="box__hd">
+    <h2 id="comboTtl">Combo nâng cấp theo Stage</h2>
+    <span class="box__note">Số liệu đo trên xe tham chiếu sedan 1.5L turbo (minh hoạ)</span>
+  </div>
+  <div class="stagebar" id="stageTabs" role="tablist" aria-label="Chọn gói Stage"></div>
+  <div class="combo">
+    <figure class="dyno" id="dyno">
+      <figcaption class="dyno__hd">
+        <b>Biểu đồ dyno – công suất theo vòng tua</b>
+        <span class="dyno__lg"><i class="lg lg--stock"></i>Xe zin <i class="lg lg--tuned"></i>Sau khi độ</span>
+      </figcaption>
+      <svg id="dynoSvg" viewBox="0 0 640 360" role="img" aria-label="Biểu đồ công suất theo vòng tua: xe zin so với sau khi độ">
+        <g id="dynoGrid"></g>
+        <path id="dynoArea" fill="#d70018" fill-opacity=".08"/>
+        <path id="dynoStock" fill="none" stroke="#9aa1ab" stroke-width="2" stroke-dasharray="5 5"/>
+        <path id="dynoTuned" fill="none" stroke="#d70018" stroke-width="3" stroke-linecap="round"/>
+        <g id="dynoPeak"><circle r="5" fill="#d70018"/><circle r="10" fill="none" stroke="#d70018" stroke-opacity=".35" stroke-width="2"/></g>
+        <g id="dynoHover" opacity="0"><line id="dhLine" y1="16" y2="316" stroke="#6b7280" stroke-dasharray="3 4"/><circle id="dhDot" r="4.5" fill="#fff" stroke="#d70018" stroke-width="2"/></g>
+      </svg>
+      <div class="dyno__tip" id="dynoTip" hidden></div>
       <dl class="dyno__kpi">
         <div><dt>Công suất đỉnh</dt><dd><b id="kHp">228</b> HP</dd></div>
         <div><dt>Mô-men xoắn</dt><dd><b id="kNm">320</b> Nm</dd></div>
-        <div><dt>Tăng thêm</dt><dd class="red"><b id="kGain">+28</b> %</dd></div>
+        <div><dt>Tăng thêm</dt><dd class="up"><b id="kGain">+28</b>%</dd></div>
+        <div><dt>0–100 km/h</dt><dd><b id="kAcc">6,4</b> giây</dd></div>
       </dl>
-    </div>
-    <figure class="dyno__chart" data-reveal>
-      <div class="dyno__legend"><span class="lg lg--stock">Xe zin</span><span class="lg lg--tuned">Sau khi độ</span></div>
-      <svg id="dynoSvg" viewBox="0 0 640 380" role="img" aria-label="Biểu đồ công suất theo vòng tua: xe zin so với sau khi độ">
-        <defs>
-          <linearGradient id="areaG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e10600" stop-opacity=".45"/><stop offset="1" stop-color="#e10600" stop-opacity="0"/></linearGradient>
-        </defs>
-        <g id="dynoGrid"></g>
-        <path id="dynoArea" fill="url(#areaG)" opacity="0"/>
-        <path id="dynoStock" fill="none" stroke="#8a8a94" stroke-width="2.5" stroke-dasharray="6 6"/>
-        <path id="dynoTuned" fill="none" stroke="#ff2a1f" stroke-width="4" stroke-linecap="round"/>
-        <g id="dynoPeak" opacity="0"><circle r="7" fill="#ff2a1f"/><circle r="14" fill="none" stroke="#ff2a1f" stroke-opacity=".4" stroke-width="2"/></g>
-        <g id="dynoHover" opacity="0"><line id="dhLine" y1="20" y2="330" stroke="rgba(255,255,255,.35)" stroke-dasharray="3 4"/><circle id="dhDot" r="5" fill="#fff"/></g>
-      </svg>
-      <figcaption class="dyno__tip" id="dynoTip" hidden></figcaption>
     </figure>
+    <div class="cbox" id="cbox"></div>
   </div>
 </section>
 
-<!-- ============ PROCESS ============ -->
-<section class="sec process" id="quy-trinh">
-  <div class="wrap">
-    <div class="sec-head sec-head--c">
-      <p class="eyebrow"><i></i>06 · QUY TRÌNH</p>
-      <h2 class="h2" data-reveal>4 BƯỚC <em>RA XƯỞNG</em></h2>
-    </div>
-    <ol class="steps" id="steps">
-      <li class="step"><span class="step__n">01</span><b>Tư vấn &amp; báo giá</b><p>Kỹ thuật viên kiểm tra xe, đề xuất cấu hình theo nhu cầu: đi phố, chạy track hay trình diễn.</p></li>
-      <li class="step"><span class="step__n">02</span><b>Đo dyno lần 1</b><p>Ghi lại công suất, mô-men xoắn và tỉ lệ nhiên liệu của xe zin làm mốc so sánh.</p></li>
-      <li class="step"><span class="step__n">03</span><b>Lắp đặt chuẩn</b><p>Thi công trong khoang riêng, siết lực đúng thông số, căn chỉnh thước lái sau khi hạ gầm.</p></li>
-      <li class="step"><span class="step__n">04</span><b>Dyno lần 2 &amp; bàn giao</b><p>Chạy thử, in biên bản trước/sau, kích hoạt bảo hành điện tử đến 24 tháng.</p></li>
-    </ol>
+<!-- ============ BY CAR MODEL ============ -->
+<section class="box wrap" id="theo-xe" aria-labelledby="byCarTtl">
+  <div class="box__hd box__hd--tabs">
+    <h2 id="byCarTtl">Phụ kiện theo dòng xe</h2>
+    <div class="ptabs ptabs--car" id="carTabs" role="tablist" aria-label="Chọn dòng xe"></div>
   </div>
+  <div class="hrow" id="carRow"></div>
 </section>
 
-<!-- ============ GALLERY ============ -->
-<section class="sec gal" id="cong-trinh">
-  <div class="wrap gal__head">
-    <div class="sec-head">
-      <p class="eyebrow"><i></i>07 · CÔNG TRÌNH</p>
-      <h2 class="h2" data-reveal>XE ĐÃ <em>RA XƯỞNG</em></h2>
-    </div>
-    <div class="sl-nav">
-      <button class="sl-btn" data-sl-prev="gallery" aria-label="Công trình trước"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button class="sl-btn" data-sl-next="gallery" aria-label="Công trình tiếp theo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-    </div>
+<!-- ============ CAR MAKES ============ -->
+<section class="box wrap" aria-labelledby="brandTtl">
+  <div class="box__hd"><h2 id="brandTtl">Phụ kiện theo hãng xe</h2><span class="box__note">Chọn hãng để lọc theo dòng xe</span></div>
+  <div class="brands" id="brands"></div>
+</section>
+
+<!-- ============ BUILDS ============ -->
+<section class="box wrap" id="cong-trinh" aria-labelledby="buildTtl">
+  <div class="box__hd">
+    <h2 id="buildTtl">Xe khách đã độ tại xưởng</h2>
+    <div class="arrows"><button class="arr" data-row-prev="builds" aria-label="Trước"><i data-ic="left"></i></button><button class="arr" data-row-next="builds" aria-label="Tiếp"><i data-ic="right"></i></button></div>
   </div>
-  <div class="slider" id="gallery" tabindex="0" aria-label="Danh sách công trình, kéo ngang để xem"></div>
-  <div class="wrap"><div class="sl-prog"><i id="galProg"></i></div></div>
+  <div class="hrow hrow--builds" id="builds"></div>
 </section>
 
 <!-- ============ REVIEWS ============ -->
-<section class="sec rev carbon" id="danh-gia">
-  <div class="wrap">
-    <div class="rev__head">
-      <div class="sec-head">
-        <p class="eyebrow"><i></i>08 · ĐÁNH GIÁ</p>
-        <h2 class="h2" data-reveal>DÂN CHƠI <em>NÓI GÌ</em></h2>
-      </div>
-      <div class="rev__score">
-        <b>4.9</b>
-        <div><span class="stars stars--lg" style="--r:4.9"></span><small>Trung bình từ 2.100+ đánh giá (minh hoạ)</small></div>
-      </div>
-    </div>
-  </div>
-  <div class="slider slider--rev" id="reviews" tabindex="0" aria-label="Đánh giá khách hàng, kéo ngang để xem"></div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="sec faq" id="faq">
-  <div class="wrap faq__in">
-    <div class="sec-head">
-      <p class="eyebrow"><i></i>09 · HỎI ĐÁP</p>
-      <h2 class="h2" data-reveal>CÂU HỎI <em>THƯỜNG GẶP</em></h2>
-      <p class="lead">Không thấy câu trả lời? Gọi hotline kỹ thuật hoặc để lại lịch hẹn, chúng tôi gọi lại trong 15 phút.</p>
-    </div>
-    <div class="faq__list" id="faqList"></div>
+<section class="box wrap" id="danh-gia" aria-labelledby="revTtl">
+  <div class="box__hd"><h2 id="revTtl">Đánh giá từ khách hàng</h2><span class="box__note">Nội dung minh hoạ</span></div>
+  <div class="rev">
+    <div class="rev__sum" id="revSum"></div>
+    <div class="rev__list" id="revList"></div>
   </div>
 </section>
 
-<!-- ============ BOOKING ============ -->
-<section class="sec book" id="dat-lich">
-  <div class="book__bg" aria-hidden="true">
-    <img src="https://images.unsplash.com/photo-1786198984387-b63cdf520602?auto=format&fit=crop&w=1400&q=60" width="1400" height="933" loading="lazy" decoding="async" alt="">
-  </div>
-  <div class="wrap book__in">
-    <div class="book__info">
-      <p class="eyebrow"><i></i>10 · ĐẶT LỊCH</p>
-      <h2 class="h2" data-reveal>ĐẶT LỊCH <em>LẮP ĐẶT</em></h2>
-      <p class="lead">Chọn khung giờ phù hợp, xe của bạn được ưu tiên khoang riêng. Miễn phí kiểm tra tổng quát &amp; đo dyno lần đầu.</p>
-      <ul class="contact">
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.3 7-12a7 7 0 0 0-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Số 1xx Đường Mẫu, Hà Nội<br><small>(địa chỉ minh hoạ)</small></span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span><a href="tel:0900000123">0900 000 123</a> · <a href="tel:0900000145">0900 000 145</a><br><small>Số điện thoại mẫu</small></span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>08:00 – 20:00, Thứ 2 – Chủ nhật<br><small>Nhận xe ngoài giờ theo lịch hẹn</small></span></li>
-      </ul>
-      <div class="socials">
-        <a href="#dat-lich" class="soc soc--zalo"><b>Zalo</b><span>Chat tư vấn</span></a>
-        <a href="#dat-lich" class="soc soc--fb"><b>Facebook</b><span>Fanpage xưởng</span></a>
-      </div>
-    </div>
+<!-- ============ NEWS ============ -->
+<section class="box wrap" id="tin-tuc" aria-labelledby="newsTtl">
+  <div class="box__hd"><h2 id="newsTtl">Kinh nghiệm độ xe</h2><a href="#tin-tuc" class="more-link" data-news-all>Xem tất cả<i data-ic="right"></i></a></div>
+  <div class="news" id="news"></div>
+</section>
 
+<!-- ============ SHOWROOMS + BOOKING ============ -->
+<section class="box wrap" id="he-thong" aria-labelledby="storeTtl">
+  <div class="box__hd"><h2 id="storeTtl">Hệ thống xưởng &amp; đặt lịch lắp đặt</h2><span class="box__note">Địa chỉ, số điện thoại minh hoạ</span></div>
+  <div class="stores">
+    <ul class="slist" id="slist"></ul>
     <form class="bform" id="bookForm" novalidate>
-      <div class="bform__hd"><b>Phiếu đặt lịch</b><span>Chỉ mất 30 giây</span></div>
+      <span id="dat-lich" class="anchor"></span>
+      <div class="bform__hd"><b>Đặt lịch lắp đặt</b><span>Xưởng gọi xác nhận trong 15 phút (giờ hành chính)</span></div>
       <div class="fgrid">
         <div class="field"><label for="bName">Họ và tên *</label><input id="bName" name="name" autocomplete="name" placeholder="Nguyễn Văn A" required><small class="err"></small></div>
         <div class="field"><label for="bPhone">Số điện thoại *</label><input id="bPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xx xxx xxx" required><small class="err"></small></div>
         <div class="field"><label for="bCar">Dòng xe *</label><input id="bCar" name="car" placeholder="VD: Mazda 3 2021" required><small class="err"></small></div>
+        <div class="field"><label for="bStore">Xưởng</label><select id="bStore" name="store"></select></div>
         <div class="field"><label for="bSvc">Hạng mục</label>
           <select id="bSvc" name="service">
             <option>Tư vấn tổng thể</option>
             <option>Combo Stage 1</option><option>Combo Stage 2</option><option>Combo Stage 3</option>
-            <option>Body kit &amp; cánh gió</option><option>Pô độ</option><option>Mâm &amp; lốp</option>
-            <option>Phuộc / hạ gầm</option><option>Tem dán &amp; đổi màu</option><option>Nội thất thể thao</option>
+            <option>Pô độ</option><option>Mâm &amp; lốp</option><option>Phuộc / hạ gầm</option>
+            <option>Body kit &amp; cánh gió</option><option>Phanh hiệu suất</option><option>Tem dán &amp; đổi màu</option><option>Nội thất thể thao</option><option>Đèn độ</option>
           </select></div>
         <div class="field"><label for="bDate">Ngày mong muốn *</label><input id="bDate" name="date" type="date" required><small class="err"></small></div>
-        <div class="field"><span class="flabel" id="slotLbl">Khung giờ</span>
+        <div class="field field--full"><span class="flabel" id="slotLbl">Khung giờ</span>
           <div class="slots" role="radiogroup" aria-labelledby="slotLbl">
             <label><input type="radio" name="slot" value="08:00" checked><span>08:00</span></label>
             <label><input type="radio" name="slot" value="10:30"><span>10:30</span></label>
             <label><input type="radio" name="slot" value="14:00"><span>14:00</span></label>
             <label><input type="radio" name="slot" value="16:30"><span>16:30</span></label>
+            <label><input type="radio" name="slot" value="18:30"><span>18:30</span></label>
           </div></div>
-        <div class="field field--full"><label for="bNote">Ghi chú</label><textarea id="bNote" name="note" rows="3" placeholder="Tình trạng xe, phụ kiện quan tâm…"></textarea></div>
+        <div class="field field--full"><label for="bNote">Ghi chú</label><textarea id="bNote" name="note" rows="2" placeholder="Tình trạng xe, phụ kiện quan tâm…"></textarea></div>
       </div>
-      <button class="btn btn--red btn--block" type="submit"><span>Xác nhận đặt lịch</span></button>
-      <p class="bform__note">Đây là trang mẫu – thông tin không được gửi đi.</p>
+      <button class="btn btn--red btn--block" type="submit">Xác nhận đặt lịch</button>
+      <p class="fnote">Trang mẫu – thông tin không được gửi đi.</p>
       <div class="ok" id="bookOk" hidden>
-        <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="m15 27 7 7 15-15"/></svg>
-        <b>Đặt lịch thành công!</b>
-        <p id="bookOkTxt">Kỹ thuật viên sẽ gọi xác nhận trong 15 phút.</p>
-        <button type="button" class="btn btn--ghost" id="bookAgain"><span>Đặt lịch khác</span></button>
+        <i data-ic="check"></i>
+        <b>Đặt lịch thành công</b>
+        <p id="bookOkTxt"></p>
+        <button type="button" class="btn btn--line" id="bookAgain">Đặt lịch khác</button>
       </div>
     </form>
   </div>
 </section>
 
+<!-- ============ FAQ ============ -->
+<section class="box wrap" id="faq" aria-labelledby="faqTtl">
+  <div class="box__hd"><h2 id="faqTtl">Câu hỏi thường gặp</h2></div>
+  <div class="faq" id="faqList"></div>
+</section>
+
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="ftr carbon" id="lien-he">
+<footer class="ftr" id="lien-he">
+  <div class="ftr__sub">
+    <div class="wrap ftr__subin">
+      <div><b>Nhận ưu đãi độ xe mỗi tuần</b><span>Mã giảm giá, lịch flash sale và mẫu xe mới ra xưởng.</span></div>
+      <form class="nl" id="nlForm" novalidate><label class="sr" for="nlMail">Email</label><input id="nlMail" type="email" placeholder="Nhập email của bạn"><button class="btn btn--red" type="submit">Đăng ký</button></form>
+    </div>
+  </div>
   <div class="wrap ftr__in">
-    <div class="ftr__brand">
-      <a href="#trang-chu" class="logo" aria-label="ĐỘ PRO GARAGE">
-        <svg class="logo__mark" viewBox="0 0 64 44" aria-hidden="true"><path d="M14 0h22L22 44H0z" fill="#e10600"/><path d="M33 0h12L31 44H19z" fill="#e10600" opacity=".7"/><path d="M48 0h9L43 44h-9z" fill="#e10600" opacity=".4"/><path d="M15 12h11l-2.6 8H12.4z" fill="#0b0b0d"/></svg>
-        <span class="logo__txt"><b>ĐỘ PRO</b><small>GARAGE · PERFORMANCE</small></span>
-      </a>
-      <p>Xưởng độ hiệu suất &amp; phụ kiện thể thao. Mỗi chiếc xe là một dự án – làm đúng kỹ thuật, nói bằng số liệu dyno.</p>
-      <div class="pay" aria-label="Phương thức thanh toán"><span>COD</span><span>CHUYỂN KHOẢN</span><span>TRẢ GÓP 0%</span></div>
+    <div class="ftr__col">
+      <b>Tổng đài hỗ trợ</b>
+      <p>Gọi mua hàng <a href="tel:0900000123">0900 000 123</a> <small>(08:00 – 21:00)</small></p>
+      <p>Kỹ thuật &amp; lắp đặt <a href="tel:0900000145">0900 000 145</a> <small>(08:00 – 20:00)</small></p>
+      <p>Bảo hành <a href="tel:0900000167">0900 000 167</a> <small>(08:00 – 18:00)</small></p>
+      <p class="ftr__mini">Số điện thoại mẫu, dùng để minh hoạ.</p>
+    </div>
+    <div class="ftr__col">
+      <b>Chính sách</b>
+      <a href="#faq">Chính sách bảo hành</a><a href="#faq">Đổi trả trong 7 ngày</a><a href="#faq">Trả góp 0%</a><a href="#faq">Giao hàng &amp; lắp đặt</a><a href="#faq">Bảo mật thông tin</a>
     </div>
     <div class="ftr__col">
       <b>Danh mục</b>
-      <a href="#san-pham" data-goto-cat="body-kit">Body kit</a><a href="#san-pham" data-goto-cat="canh-gio">Cánh gió</a><a href="#san-pham" data-goto-cat="po">Pô độ</a><a href="#san-pham" data-goto-cat="mam">Mâm độ</a><a href="#san-pham" data-goto-cat="phuoc">Phuộc &amp; hạ gầm</a>
+      <a href="#san-pham" data-goto-cat="turbo-xa">Turbo &amp; cổ góp xả</a><a href="#san-pham" data-goto-cat="mam">Mâm &amp; ốc mâm</a><a href="#san-pham" data-goto-cat="gam">Phuộc &amp; phụ kiện gầm</a><a href="#san-pham" data-goto-cat="den-dien">Đèn &amp; đồ điện</a><a href="#dich-vu">Dịch vụ độ tại xưởng</a><a href="#combo">Combo Stage</a>
     </div>
     <div class="ftr__col">
-      <b>Hỗ trợ</b>
-      <a href="#faq">Chính sách bảo hành</a><a href="#faq">Đổi trả 7 ngày</a><a href="#faq">Trả góp 0%</a><a href="#dat-lich">Đặt lịch lắp đặt</a><a href="#combo">Combo độ</a>
+      <b>Về Độ Pro Garage</b>
+      <a href="#he-thong">Hệ thống xưởng</a><a href="#cong-trinh">Xe đã độ</a><a href="#tin-tuc">Kinh nghiệm độ xe</a><a href="#danh-gia">Đánh giá khách hàng</a><a href="#dat-lich">Đặt lịch lắp đặt</a>
     </div>
     <div class="ftr__col">
-      <b>Liên hệ</b>
-      <span>Số 1xx Đường Mẫu, Hà Nội (địa chỉ minh hoạ)</span>
-      <a href="tel:0900000123">Hotline: 0900 000 123</a>
-      <span>08:00 – 20:00 mỗi ngày</span>
-      <div class="ftr__soc"><a href="#dat-lich" aria-label="Zalo">Zalo</a><a href="#dat-lich" aria-label="Facebook">Facebook</a></div>
+      <b>Thanh toán</b>
+      <div class="pay"><span>Tiền mặt</span><span>Chuyển khoản</span><span>Thẻ ATM</span><span>Thẻ tín dụng</span><span>Ví điện tử</span><span>Trả góp 0%</span></div>
+      <b class="ftr__b2">Kết nối với chúng tôi</b>
+      <div class="soc"><a href="#lien-he" aria-label="Facebook" data-demo>Facebook</a><a href="#lien-he" aria-label="Zalo" data-demo>Zalo</a><a href="#lien-he" aria-label="YouTube" data-demo>YouTube</a><a href="#lien-he" aria-label="TikTok" data-demo>TikTok</a></div>
     </div>
   </div>
-  <div class="wrap ftr__bot">
-    <span>© <span id="yr">2026</span> ĐỘ PRO GARAGE</span>
-    <span>Cửa hàng mẫu – thương hiệu minh hoạ, landing page do ChungAuto thực hiện.</span>
+  <div class="ftr__bot">
+    <div class="wrap">
+      <p>© <span id="yr">2026</span> Độ Pro Garage – cửa hàng mẫu, thương hiệu và thông tin liên hệ đều là minh hoạ. Địa chỉ: Số 1xx Đường Mẫu, Q. Cầu Giấy, Hà Nội (minh hoạ).</p>
+      <p>Ảnh sản phẩm: Wikimedia Commons – tác giả &amp; giấy phép ghi ở mục “Nguồn ảnh sản phẩm”, đã tách nền và chuẩn hoá khung 800×800. Ảnh banner, dịch vụ &amp; công trình: Unsplash. Landing page do ChungAuto thực hiện.</p>
+      <details class="credits"><summary>Nguồn ảnh sản phẩm (Wikimedia Commons)</summary><ul id="credits"></ul></details>
+    </div>
   </div>
 </footer>
 
-<!-- ============ MOBILE BOTTOM BAR ============ -->
-<nav class="mbar" aria-label="Thao tác nhanh">
-  <a href="tel:0900000123"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Gọi</a>
-  <a href="#dat-lich"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>Zalo</a>
-  <button type="button" data-open-cart><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg>Giỏ hàng<span class="cart-count" data-cart-count>0</span></button>
-  <a href="#dat-lich" class="mbar__cta"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Đặt lịch</a>
+<!-- ============ FLOATING CONTACT (desktop) ============ -->
+<div class="fab" aria-label="Liên hệ nhanh">
+  <a href="tel:0900000123" class="fab__b fab__b--call" aria-label="Gọi hotline 0900 000 123"><i data-ic="phone"></i></a>
+  <a href="#dat-lich" class="fab__b fab__b--chat" aria-label="Chat tư vấn"><i data-ic="chat"></i></a>
+  <button class="fab__b fab__b--top" id="toTop" type="button" aria-label="Lên đầu trang"><i data-ic="up"></i></button>
+</div>
+
+<!-- ============ MOBILE BOTTOM NAV ============ -->
+<nav class="bnav" aria-label="Điều hướng nhanh">
+  <a href="#trang-chu" class="is-on"><i data-ic="home"></i>Trang chủ</a>
+  <button type="button" data-open-menu><i data-ic="grid"></i>Danh mục</button>
+  <a href="#flash-sale"><i data-ic="bolt"></i>Flash sale</a>
+  <a href="#dat-lich"><i data-ic="calendar"></i>Đặt lịch</a>
+  <button type="button" data-open-cart><span class="bnav__ic"><i data-ic="cart"></i><em class="cart-count" data-cart-count>0</em></span>Giỏ hàng</button>
 </nav>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mnav" id="mnav" aria-hidden="true">
+  <div class="mnav__scrim" data-close-menu></div>
+  <div class="mnav__panel" role="dialog" aria-modal="true" aria-label="Danh mục">
+    <div class="mnav__top"><b>Danh mục sản phẩm</b><button class="xbtn" data-close-menu aria-label="Đóng"><i data-ic="close"></i></button></div>
+    <ul class="mnav__cats" id="mnavCats"></ul>
+    <div class="mnav__links">
+      <a href="#dich-vu">Dịch vụ độ tại xưởng</a><a href="#combo">Combo Stage 1–3</a><a href="#chon-xe">Tìm phụ kiện theo xe</a><a href="#he-thong">Hệ thống xưởng</a><a href="#tin-tuc">Kinh nghiệm độ xe</a><a href="#faq">Câu hỏi thường gặp</a>
+    </div>
+    <a class="mnav__hot" href="tel:0900000123"><i data-ic="phone"></i><span><small>Gọi mua hàng (số mẫu)</small><b>0900 000 123</b></span></a>
+  </div>
+</div>
 
 <!-- ============ CART DRAWER ============ -->
 <div class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer__scrim" data-close-cart></div>
   <aside class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="cartTtl">
     <div class="drawer__hd">
-      <b id="cartTtl">GIỎ HÀNG <span data-cart-count>0</span></b>
-      <button class="icon-btn" data-close-cart aria-label="Đóng giỏ hàng"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <b id="cartTtl">Giỏ hàng (<span data-cart-count>0</span>)</b>
+      <button class="xbtn" data-close-cart aria-label="Đóng giỏ hàng"><i data-ic="close"></i></button>
     </div>
     <div class="ship" id="shipBar"><span id="shipTxt"></span><i><em id="shipFill"></em></i></div>
     <ul class="citems" id="citems"></ul>
     <div class="cempty" id="cempty">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/></svg>
-      <b>Giỏ hàng đang trống</b><span>Chọn vài món đồ chơi cho xe nhé!</span>
-      <a href="#san-pham" class="btn btn--red" data-close-cart><span>Xem phụ kiện</span></a>
+      <i data-ic="cart"></i>
+      <b>Giỏ hàng chưa có sản phẩm</b><span>Chọn vài món phụ kiện cho xe nhé.</span>
+      <a href="#san-pham" class="btn btn--red" data-close-cart>Xem phụ kiện bán chạy</a>
     </div>
     <div class="drawer__ft" id="cartFt">
       <div class="sum"><span>Tạm tính</span><b id="subtotal">0₫</b></div>
-      <p class="sum__note">Phí lắp đặt &amp; vận chuyển tính khi xác nhận đơn.</p>
-      <button class="btn btn--red btn--block" id="toCheckout"><span>Tiến hành đặt hàng</span></button>
+      <p class="sum__note">Phí vận chuyển &amp; lắp đặt (nếu có) báo khi xác nhận đơn.</p>
+      <button class="btn btn--red btn--block" id="toCheckout" type="button">Tiến hành đặt hàng</button>
     </div>
   </aside>
 </div>
@@ -536,18 +452,20 @@
 <div class="modal" id="qv" aria-hidden="true">
   <div class="modal__scrim" data-close-modal></div>
   <div class="modal__box qv" role="dialog" aria-modal="true" aria-labelledby="qvName">
-    <button class="icon-btn modal__x" data-close-modal aria-label="Đóng"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
-    <div class="qv__img"><img id="qvImg" alt="" width="800" height="600"><span class="badge" id="qvBadge"></span></div>
+    <button class="xbtn modal__x" data-close-modal aria-label="Đóng"><i data-ic="close"></i></button>
+    <div class="qv__img"><img id="qvImg" alt="" width="800" height="800"><span class="pc__off" id="qvOff"></span><p class="qv__credit" id="qvCredit"></p></div>
     <div class="qv__body">
-      <span class="pcat" id="qvCat"></span>
+      <p class="qv__crumb" id="qvCat"></p>
       <h3 id="qvName"></h3>
-      <div class="prate"><span class="stars" id="qvStars"></span><small id="qvRev"></small></div>
-      <div class="pprice"><b id="qvPrice"></b><s id="qvOld"></s></div>
+      <div class="qv__meta" id="qvMeta"></div>
+      <div class="qv__price"><b id="qvPrice"></b><s id="qvOld"></s><span id="qvPct"></span></div>
+      <div class="qv__promo" id="qvPromo"></div>
       <ul class="qv__spec" id="qvSpec"></ul>
       <p class="qv__fit" id="qvFit"></p>
       <div class="qv__buy">
         <div class="qty" aria-label="Số lượng"><button type="button" data-qv-qty="-1" aria-label="Giảm">−</button><output id="qvQty">1</output><button type="button" data-qv-qty="1" aria-label="Tăng">+</button></div>
-        <button class="btn btn--red" id="qvAdd"><span>Thêm vào giỏ</span></button>
+        <button class="btn btn--line" id="qvAdd" type="button"><i data-ic="cart"></i>Thêm vào giỏ</button>
+        <button class="btn btn--red" id="qvBuy" type="button">Mua ngay</button>
       </div>
     </div>
   </div>
@@ -557,30 +475,41 @@
 <div class="modal" id="co" aria-hidden="true">
   <div class="modal__scrim" data-close-modal></div>
   <div class="modal__box co" role="dialog" aria-modal="true" aria-labelledby="coTtl">
-    <button class="icon-btn modal__x" data-close-modal aria-label="Đóng"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button class="xbtn modal__x" data-close-modal aria-label="Đóng"><i data-ic="close"></i></button>
     <form id="coForm" novalidate>
-      <h3 id="coTtl">THÔNG TIN ĐẶT HÀNG</h3>
+      <h3 id="coTtl">Thông tin đặt hàng</h3>
       <div class="co__sum" id="coSum"></div>
-      <div class="field"><label for="cName">Họ và tên *</label><input id="cName" autocomplete="name" placeholder="Nguyễn Văn A"><small class="err"></small></div>
-      <div class="field"><label for="cPhone">Số điện thoại *</label><input id="cPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xx xxx xxx"><small class="err"></small></div>
-      <div class="field"><label for="cAddr">Địa chỉ nhận hàng / lắp đặt *</label><input id="cAddr" autocomplete="street-address" placeholder="Số nhà, đường, quận/huyện"><small class="err"></small></div>
+      <div class="fgrid">
+        <div class="field"><label for="cName">Họ và tên *</label><input id="cName" autocomplete="name" placeholder="Nguyễn Văn A"><small class="err"></small></div>
+        <div class="field"><label for="cPhone">Số điện thoại *</label><input id="cPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="09xx xxx xxx"><small class="err"></small></div>
+      </div>
+      <fieldset class="opt">
+        <legend>Hình thức nhận hàng</legend>
+        <label><input type="radio" name="ship" value="xuong" checked><span>Lắp tại xưởng</span></label>
+        <label><input type="radio" name="ship" value="nha"><span>Giao &amp; lắp tận nơi</span></label>
+      </fieldset>
+      <div class="field"><label for="cAddr">Địa chỉ / xưởng muốn lắp *</label><input id="cAddr" autocomplete="street-address" placeholder="Số nhà, đường, quận/huyện hoặc tên xưởng"><small class="err"></small></div>
+      <fieldset class="opt">
+        <legend>Thanh toán</legend>
+        <label><input type="radio" name="pay" value="COD" checked><span>Khi nhận hàng</span></label>
+        <label><input type="radio" name="pay" value="Chuyển khoản"><span>Chuyển khoản</span></label>
+        <label><input type="radio" name="pay" value="Trả góp 0%"><span>Trả góp 0%</span></label>
+      </fieldset>
       <div class="field"><label for="cNote">Ghi chú</label><textarea id="cNote" rows="2" placeholder="Dòng xe, thời gian thuận tiện…"></textarea></div>
-      <button class="btn btn--red btn--block" type="submit"><span>Xác nhận đặt hàng</span></button>
-      <p class="bform__note">Trang mẫu – đơn hàng không được gửi đi, không thu thanh toán.</p>
+      <button class="btn btn--red btn--block" type="submit">Xác nhận đặt hàng</button>
+      <p class="fnote">Trang mẫu – đơn hàng không được gửi đi, không thu thanh toán.</p>
     </form>
     <div class="ok" id="coOk" hidden>
-      <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="m15 27 7 7 15-15"/></svg>
-      <b>Đặt hàng thành công!</b>
+      <i data-ic="check"></i>
+      <b>Đặt hàng thành công</b>
       <p id="coOkTxt"></p>
-      <button type="button" class="btn btn--red" data-close-modal><span>Tiếp tục mua sắm</span></button>
+      <button type="button" class="btn btn--red" data-close-modal>Tiếp tục mua sắm</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/main.js"></script>
 </body>

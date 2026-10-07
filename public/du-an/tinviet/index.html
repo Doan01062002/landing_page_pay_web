@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tín Việt Auto – Showroom xe lướt, ô tô đã qua sử dụng tại Hà Nội</title>
+<meta name="description" content="Tín Việt Auto (mẫu giao diện): xe lướt đã kiểm định 176 điểm, giá niêm yết công khai, hỗ trợ trả góp, định giá và ký gửi xe cũ tại Cầu Giấy, Hà Nội.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" aria-label="Chương trình nổi bật">
+    <div class="container hero-grid">
+      <div class="slider" id="hero-slider" aria-roledescription="carousel">
+        <div class="slides" id="slides"></div>
+        <button class="sl-arrow sl-prev" type="button" aria-label="Slide trước"><svg class="ic"><use href="#i-chev-l"/></svg></button>
+        <button class="sl-arrow sl-next" type="button" aria-label="Slide sau"><svg class="ic"><use href="#i-chev-r"/></svg></button>
+        <div class="sl-dots" role="tablist" aria-label="Chọn slide"></div>
+      </div>
+      <aside class="hero-side">
+        <div class="side-card dark">
+          <h3>Bán xe cũ? Định giá trong 30 phút</h3>
+          <p>Nhập hãng và năm sản xuất, chuyên viên gọi lại báo khoảng giá thu mua hoặc ký gửi.</p>
+          <form class="mini-form" id="quick-valuation">
+            <div class="row2">
+              <label class="sr-only" for="qv-brand">Hãng xe</label>
+              <select class="sel" id="qv-brand"></select>
+              <label class="sr-only" for="qv-year">Năm sản xuất</label>
+              <select class="sel" id="qv-year"></select>
+            </div>
+            <button class="btn btn-yellow btn-block" type="submit">Tiếp tục định giá</button>
+          </form>
+        </div>
+        <div class="side-card">
+          <h3>Xem xe trực tiếp tại bãi</h3>
+          <p>Hẹn giờ trước để được chuẩn bị xe và lái thử.</p>
+          <div class="side-stats">
+            <div><b id="stat-count">24</b>xe sẵn bãi</div>
+            <div><b>8:00–20:00</b>mở cả Chủ nhật</div>
+          </div>
+          <a class="btn btn-line btn-block" href="lien-he.html">Đặt lịch xem xe</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust" aria-label="Cam kết">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item"><span class="trust-ic"><svg class="ic"><use href="#i-check-c"/></svg></span><div><b>Kiểm định 176 điểm</b><span>Phiếu kiểm tra đi kèm từng xe, xem được trước khi đặt cọc*</span></div></div>
+        <div class="trust-item"><span class="trust-ic"><svg class="ic"><use href="#i-drop"/></svg></span><div><b>Cam kết không đâm đụng, ngập nước</b><span>Phát hiện sai, hoàn lại tiền theo hợp đồng mua bán*</span></div></div>
+        <div class="trust-item"><span class="trust-ic"><svg class="ic"><use href="#i-shield"/></svg></span><div><b>Bảo hành 6 tháng / 10.000 km</b><span>Động cơ, hộp số; bảo dưỡng lần đầu tại xưởng đối tác*</span></div></div>
+        <div class="trust-item"><span class="trust-ic"><svg class="ic"><use href="#i-percent"/></svg></span><div><b>Hỗ trợ trả góp đến 70%</b><span>Làm hồ sơ với ngân hàng đối tác, báo trước lãi suất*</span></div></div>
+      </div>
+      <p class="note trust-note">*Các cam kết trên là nội dung minh hoạ cho mẫu giao diện, không phải chính sách của doanh nghiệp có thật.</p>
+    </div>
+  </section>
+
+  <!-- LISTING -->
+  <section class="section" id="danh-sach">
+    <div class="container">
+      <div class="sec-head">
+        <div><span class="eyebrow">Danh sách xe đang bán</span><h2>Xe lướt sẵn bãi, giá niêm yết</h2>
+          <p>Ảnh từng xe là ảnh thật của đúng mẫu xe. Bấm vào xe để xem thông số, tình trạng và đặt lịch lái thử.</p></div>
+      </div>
+
+      <form class="filter" id="filter" role="search" aria-label="Lọc xe">
+        <div class="filter-grid">
+          <div class="fld fld-q"><label for="f-q">Tên xe, dòng xe</label><input class="inp" id="f-q" name="q" type="search" placeholder="VD: Fortuner, CX-5, máy dầu…" autocomplete="off"></div>
+          <div class="fld"><label for="f-hang">Hãng xe</label><select class="sel" id="f-hang" name="hang"></select></div>
+          <div class="fld"><label for="f-kieu">Kiểu dáng</label><select class="sel" id="f-kieu" name="kieu"></select></div>
+          <div class="fld"><label for="f-gia">Khoảng giá</label><select class="sel" id="f-gia" name="gia"></select></div>
+          <div class="fld"><label for="f-nam">Năm sản xuất</label><select class="sel" id="f-nam" name="nam"></select></div>
+          <div class="fld"><label for="f-hop">Hộp số</label><select class="sel" id="f-hop" name="hop"></select></div>
+          <div class="fld"><label for="f-nl">Nhiên liệu</label><select class="sel" id="f-nl" name="nl"></select></div>
+        </div>
+        <div class="filter-chips" id="brand-chips" aria-label="Chọn nhanh hãng xe"></div>
+      </form>
+
+      <div class="toolbar">
+        <div>
+          <div class="result-count" id="result-count" aria-live="polite"></div>
+          <div class="active-filters" id="active-filters"></div>
+        </div>
+        <label class="sort" for="f-sort">Sắp xếp
+          <select class="sel" id="f-sort">
+            <option value="moi">Mới đăng</option>
+            <option value="gia-tang">Giá thấp đến cao</option>
+            <option value="gia-giam">Giá cao đến thấp</option>
+            <option value="nam-moi">Năm sản xuất mới nhất</option>
+            <option value="odo">Odo thấp nhất</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="car-grid" id="car-grid"></div>
+      <nav class="pager" id="pager" aria-label="Phân trang"></nav>
+      <p class="pager-info" id="pager-info"></p>
+    </div>
+  </section>
+
+  <!-- CONSIGN -->
+  <section class="section alt" id="dinh-gia">
+    <div class="container">
+      <div class="consign" data-reveal>
+        <div class="consign-info">
+          <span class="slide-kicker">Định giá & ký gửi</span>
+          <h2>Bán xe cũ nhanh, giá sát thị trường</h2>
+          <p>Gửi thông tin xe, chúng tôi đối chiếu giá giao dịch thực tế trong 30 ngày gần nhất và báo lại khoảng giá thu mua hoặc giá ký gửi đề xuất.</p>
+          <ol class="steps-mini">
+            <li><span class="n">1</span><div><b>Gửi thông tin xe</b>Hãng, dòng, năm, số km. Không cần ảnh ở bước này.</div></li>
+            <li><span class="n">2</span><div><b>Nhận khoảng giá trong 30 phút</b>Trong giờ làm việc, qua điện thoại hoặc Zalo.</div></li>
+            <li><span class="n">3</span><div><b>Kiểm tra xe tại nhà hoặc tại bãi</b>Chốt giá sau kiểm tra, thanh toán khi sang tên.</div></li>
+          </ol>
+          <div class="consign-quote"><b>0 đồng</b>Phí định giá. Ký gửi tính phí khi xe bán được (minh hoạ).</div>
+        </div>
+        <div class="form-pad">
+          <form id="consign-form" novalidate>
+            <div class="form-grid">
+              <div class="fld full"><span class="lbl">Bạn cần</span>
+                <div class="seg" role="radiogroup" aria-label="Nhu cầu">
+                  <label><input type="radio" name="need" value="Định giá – bán lại" checked><span>Định giá, bán lại</span></label>
+                  <label><input type="radio" name="need" value="Ký gửi xe"><span>Ký gửi xe</span></label>
+                  <label><input type="radio" name="need" value="Thu cũ đổi mới"><span>Thu cũ, đổi xe khác</span></label>
+                </div></div>
+              <div class="fld"><label for="c-brand">Hãng xe <span class="req">*</span></label><select class="sel" id="c-brand" name="brand"></select><span class="err"></span></div>
+              <div class="fld"><label for="c-model">Dòng xe <span class="req">*</span></label><select class="sel" id="c-model" name="model" disabled><option value="">Chọn hãng trước</option></select><span class="err"></span></div>
+              <div class="fld"><label for="c-year">Năm sản xuất <span class="req">*</span></label><select class="sel" id="c-year" name="year"></select><span class="err"></span></div>
+              <div class="fld"><label for="c-odo">Số km đã đi <span class="req">*</span></label><input class="inp" id="c-odo" name="odo" inputmode="numeric" placeholder="VD: 45000"><span class="err"></span></div>
+              <div class="fld"><label for="c-name">Họ tên <span class="req">*</span></label><input class="inp" id="c-name" name="name" autocomplete="name" placeholder="Nguyễn Văn A"><span class="err"></span></div>
+              <div class="fld"><label for="c-phone">Số điện thoại <span class="req">*</span></label><input class="inp" id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"><span class="err"></span></div>
+              <div class="fld full"><label for="c-note">Ghi chú tình trạng xe</label><textarea class="inp" id="c-note" name="note" rows="3" maxlength="500" placeholder="VD: một chủ, bảo dưỡng hãng, đã thay lốp năm 2025…"></textarea></div>
+            </div>
+            <div class="form-foot">
+              <span class="note">Thông tin chỉ dùng để liên hệ định giá. Mẫu giao diện không gửi dữ liệu đi đâu.</span>
+              <button class="btn btn-red" type="submit">Gửi yêu cầu định giá</button>
+            </div>
+          </form>
+          <div class="success" id="consign-ok" tabindex="-1">
+            <div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+            <h3>Đã nhận yêu cầu của bạn</h3>
+            <p class="muted">Chuyên viên định giá sẽ gọi lại trong khoảng 30 phút (giờ làm việc).</p>
+            <dl id="consign-sum"></dl>
+            <div><button class="btn btn-line" type="button" id="consign-again">Gửi thêm xe khác</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALLMENT -->
+  <section class="section" id="tra-gop">
+    <div class="container">
+      <div class="sec-head"><div><span class="eyebrow">Tính trả góp</span><h2>Ước tính khoản trả hằng tháng</h2>
+        <p>Chọn xe hoặc nhập giá, kéo mức trả trước và thời hạn vay. Kết quả mang tính tham khảo, lãi suất thực tế do ngân hàng duyệt.</p></div></div>
+      <div class="calc" data-reveal id="calc"></div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section alt" id="quy-trinh">
+    <div class="container">
+      <div class="sec-head"><div><span class="eyebrow">Quy trình mua xe</span><h2>Mua xe 4 bước, giấy tờ rõ ràng</h2>
+        <p>Trung bình 3–5 ngày từ lúc xem xe đến khi nhận xe đã sang tên (mua trả thẳng).</p></div></div>
+      <div class="process">
+        <div class="step" data-reveal><div class="num">Bước 01<i></i></div><div class="s-ic"><svg class="ic"><use href="#i-search"/></svg></div>
+          <h3>Chọn xe, đặt lịch xem</h3><p>Lọc theo ngân sách và nhu cầu, lưu xe ưng ý, hẹn giờ xem.</p>
+          <ul><li><svg class="ic"><use href="#i-check"/></svg>Giữ xe 24 giờ khi đã hẹn</li><li><svg class="ic"><use href="#i-check"/></svg>Gửi trước phiếu kiểm định qua Zalo</li></ul></div>
+        <div class="step" data-reveal><div class="num">Bước 02<i></i></div><div class="s-ic"><svg class="ic"><use href="#i-wrench"/></svg></div>
+          <h3>Kiểm tra và lái thử</h3><p>Xem xe trên cầu nâng, đọc lỗi OBD, lái thử đường phố.</p>
+          <ul><li><svg class="ic"><use href="#i-check"/></svg>Được mang thợ riêng đi cùng</li><li><svg class="ic"><use href="#i-check"/></svg>Kiểm tra lịch sử bảo dưỡng hãng</li></ul></div>
+        <div class="step" data-reveal><div class="num">Bước 03<i></i></div><div class="s-ic"><svg class="ic"><use href="#i-doc"/></svg></div>
+          <h3>Đặt cọc, làm hồ sơ vay</h3><p>Hợp đồng ghi rõ tình trạng xe, giá và các khoản phí.</p>
+          <ul><li><svg class="ic"><use href="#i-check"/></svg>Cọc từ 20 triệu, hoàn cọc nếu vay không duyệt</li><li><svg class="ic"><use href="#i-check"/></svg>Báo trước lãi suất, phí trả nợ trước hạn</li></ul></div>
+        <div class="step" data-reveal><div class="num">Bước 04<i></i></div><div class="s-ic"><svg class="ic"><use href="#i-key"/></svg></div>
+          <h3>Sang tên, nhận xe</h3><p>Hỗ trợ rút hồ sơ, đăng ký biển số và đăng kiểm.</p>
+          <ul><li><svg class="ic"><use href="#i-check"/></svg>Vệ sinh, thay dầu trước khi giao</li><li><svg class="ic"><use href="#i-check"/></svg>Bảo hành theo phiếu ghi trong hợp đồng</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section" id="gioi-thieu">
+    <div class="container intro">
+      <div class="intro-media" data-reveal>
+        <img id="intro-img-1" alt="" loading="lazy" width="1200" height="900">
+        <img id="intro-img-2" alt="" loading="lazy" width="1200" height="900">
+      </div>
+      <div data-reveal>
+        <span class="eyebrow-red">Về Tín Việt Auto</span>
+        <h2>Một bãi xe nhỏ, làm kỹ từng chiếc</h2>
+        <p>Tín Việt Auto chỉ nhận xe đời từ 2018, một đến hai chủ, có lịch sử bảo dưỡng. Xe không đạt kiểm tra khung gầm hoặc có dấu hiệu ngập nước sẽ bị từ chối ngay ở khâu thu mua, không đưa lên bãi.</p>
+        <p>Giá trên website là giá bán thật. Nếu chênh lệch khi bạn đến xem, chúng tôi bán theo giá thấp hơn.</p>
+        <div class="intro-stats">
+          <div><b>176</b><span>hạng mục kiểm tra mỗi xe</span></div>
+          <div><b>1–2</b><span>chủ sử dụng trước đó</span></div>
+          <div><b>30'</b><span>báo giá định giá xe cũ</span></div>
+          <div><b>3–5</b><span>ngày hoàn tất sang tên</span></div>
+        </div>
+        <p class="note">Số liệu minh hoạ cho mẫu giao diện.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="section alt" id="video">
+    <div class="container">
+      <div class="sec-head"><div><span class="eyebrow">Video</span><h2>Video tư vấn và kinh nghiệm xem xe</h2>
+        <p>Video minh hoạ từ thư viện Pexels (giấy phép Pexels, miễn phí sử dụng).</p></div></div>
+      <div class="video-grid" id="video-grid"></div>
+      <div class="shorts" id="shorts"></div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="section" id="tin-tuc">
+    <div class="container">
+      <div class="sec-head"><div><span class="eyebrow">Tin tức – Kinh nghiệm</span><h2>Đọc trước khi mua xe cũ</h2></div>
+        <a class="link-more" href="tin-tuc.html">Tất cả bài viết <svg class="ic"><use href="#i-arrow-right"/></svg></a></div>
+      <div class="news-grid" id="news-grid"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section alt" id="danh-gia">
+    <div class="container">
+      <div class="sec-head"><div><span class="eyebrow">Khách hàng nói gì</span><h2>Đánh giá sau khi nhận xe</h2></div>
+        <div class="rating-sum"><b>4,8</b><span class="stars" aria-label="4,8 trên 5 sao"></span><span>Đánh giá minh hoạ</span></div></div>
+      <div class="tgrid" id="tgrid"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="hoi-dap">
+    <div class="container faq-wrap">
+      <div>
+        <div class="sec-head"><div><span class="eyebrow">Hỏi đáp</span><h2>Câu hỏi thường gặp</h2>
+          <p>Chưa thấy câu trả lời bạn cần? Gọi hoặc nhắn Zalo, tư vấn viên trả lời trong giờ mở cửa.</p></div></div>
+        <div class="help-card"><span class="muted">Hotline tư vấn mua xe</span><b>0900 000 868</b>
+          <a class="btn btn-red" href="tel:0900000868"><svg class="ic"><use href="#i-phone"/></svg>Gọi ngay</a></div>
+      </div>
+      <div class="acc" id="faq"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<!-- video modal -->
+<div class="modal" id="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Xem video">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="Đóng video (Esc)"><svg class="ic"><use href="#i-close"/></svg></button>
+    <video id="video-el" controls playsinline preload="none"></video>
+    <div class="modal-cap"><b id="video-title"></b><span id="video-credit"></span></div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/data-news.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/calc.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chi tiết xe – Tín Việt Auto</title>
+<meta name="description" content="Thông số, tình trạng, ảnh và giá xe tại Tín Việt Auto (mẫu giao diện).">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+<main id="main"><div class="container" id="detail-root"></div></main>
+<div id="site-footer"></div>
+
+<div class="modal lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Xem ảnh lớn">
+  <div class="modal-bg" data-close></div>
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="Đóng (Esc)"><svg class="ic"><use href="#i-close"/></svg></button>
+    <img id="lb-img" alt="">
+    <button class="lb-nav lb-prev" type="button" aria-label="Ảnh trước"><svg class="ic"><use href="#i-chev-l"/></svg></button>
+    <button class="lb-nav lb-next" type="button" aria-label="Ảnh sau"><svg class="ic"><use href="#i-chev-r"/></svg></button>
+    <div class="modal-cap"><b id="lb-cap"></b><span id="lb-count"></span></div>
+  </div>
+</div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/calc.js"></script>
+<script src="assets/js/detail.js"></script>
+</body>
+</html>

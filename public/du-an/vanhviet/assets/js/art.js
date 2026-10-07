@@ -63,7 +63,7 @@
     var mid = (rr + 100) / 2;
     var id = 'tp' + (++uid);
     var txt = opts.text ? '<path id="' + id + '" d="M ' + (-mid) + ' 0 A ' + mid + ' ' + mid + ' 0 1 1 ' + mid + ' 0 A ' + mid + ' ' + mid + ' 0 1 1 ' + (-mid) + ' 0" fill="none"/>' +
-      '<text font-family="Chakra Petch, sans-serif" font-weight="600" font-size="' + (opts.fs || 7.5) + '" fill="#7d8187" letter-spacing="1.6"><textPath href="#' + id + '" startOffset="2%">' + opts.text + '</textPath></text>' : '';
+      '<text font-family="Be Vietnam Pro, sans-serif" font-weight="600" font-size="' + (opts.fs || 7.5) + '" fill="#7d8187" letter-spacing="1.6"><textPath href="#' + id + '" startOffset="2%">' + opts.text + '</textPath></text>' : '';
     return '<circle r="100" fill="url(#fTyre)"/>' +
       '<circle r="97.5" fill="none" stroke="#0a0b0c" stroke-width="4.5" stroke-dasharray="5.5 4"/>' +
       '<circle r="' + mid.toFixed(2) + '" fill="none" stroke="rgba(255,255,255,.035)" stroke-width="' + ((100 - rr) * 0.55).toFixed(2) + '"/>' +
@@ -94,7 +94,7 @@
       '<circle r="66" fill="none" stroke="' + (p.accent || '#ffcc00') + '" stroke-width="2.2"/>' +
       '<circle r="61" fill="none" stroke="#2a2c30" stroke-width="2"/>' +
       '<path id="' + id + '" d="M -78 0 A 78 78 0 1 1 78 0 A 78 78 0 1 1 -78 0" fill="none"/>' +
-      '<text font-family="Chakra Petch, sans-serif" font-weight="700" font-size="10.5" fill="#9a9ea4" letter-spacing="2.2"><textPath href="#' + id + '" startOffset="3%">' + p.line + ' · ' + p.size + ' · TUBELESS · RADIAL · </textPath></text>' +
+      '<text font-family="Be Vietnam Pro, sans-serif" font-weight="700" font-size="10.5" fill="#9a9ea4" letter-spacing="2.2"><textPath href="#' + id + '" startOffset="3%">' + p.line + ' · ' + p.size + ' · TUBELESS · RADIAL · </textPath></text>' +
       '</g><circle r="100" fill="url(#fSheen)" opacity=".5" pointer-events="none"/></svg>';
   }
 
@@ -126,11 +126,11 @@
     } else if (kind === 'tpms') {
       o += '<rect x="30" y="44" width="140" height="96" rx="12" fill="#1d1f22"/><rect x="38" y="52" width="124" height="80" rx="6" fill="#0d1014"/>' +
         '<rect x="88" y="66" width="24" height="52" rx="9" fill="none" stroke="#5b6168" stroke-width="2"/>' +
-        '<text x="62" y="76" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="12" fill="#ffcc00" text-anchor="middle">2.3</text>' +
-        '<text x="138" y="76" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="12" fill="#ffcc00" text-anchor="middle">2.3</text>' +
-        '<text x="62" y="118" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="12" fill="#ffcc00" text-anchor="middle">2.4</text>' +
-        '<text x="138" y="118" font-family="Chakra Petch,sans-serif" font-weight="700" font-size="12" fill="#e8432f" text-anchor="middle">1.9</text>' +
-        '<text x="100" y="128" font-family="Chakra Petch,sans-serif" font-size="7" fill="#7b8189" text-anchor="middle">BAR</text>' +
+        '<text x="62" y="76" font-family="Be Vietnam Pro,sans-serif" font-weight="700" font-size="12" fill="#ffcc00" text-anchor="middle">2.3</text>' +
+        '<text x="138" y="76" font-family="Be Vietnam Pro,sans-serif" font-weight="700" font-size="12" fill="#ffcc00" text-anchor="middle">2.3</text>' +
+        '<text x="62" y="118" font-family="Be Vietnam Pro,sans-serif" font-weight="700" font-size="12" fill="#ffcc00" text-anchor="middle">2.4</text>' +
+        '<text x="138" y="118" font-family="Be Vietnam Pro,sans-serif" font-weight="700" font-size="12" fill="#e8432f" text-anchor="middle">1.9</text>' +
+        '<text x="100" y="128" font-family="Be Vietnam Pro,sans-serif" font-size="7" fill="#7b8189" text-anchor="middle">BAR</text>' +
         '<rect x="84" y="140" width="32" height="10" fill="#2a2d31"/><rect x="64" y="150" width="72" height="8" rx="4" fill="#2a2d31"/>' +
         '<rect x="150" y="146" width="18" height="24" rx="4" fill="url(#fBac)"/><rect x="155" y="132" width="8" height="16" fill="url(#fTitan)"/>';
     } else {
@@ -184,25 +184,25 @@
   function wells(c) {
     return c.w.map(function (w) {
       var dy = c.Y - w[1], dx = Math.sqrt(c.A * c.A - dy * dy);
-      return '<path d="M ' + (w[0] - dx).toFixed(1) + ' ' + c.Y + ' A ' + c.A + ' ' + c.A + ' 0 1 1 ' + (w[0] + dx).toFixed(1) + ' ' + c.Y + ' Z" fill="#101113"/>';
+      return '<path d="M ' + (w[0] - dx).toFixed(1) + ' ' + c.Y + ' A ' + c.A + ' ' + c.A + ' 0 1 1 ' + (w[0] + dx).toFixed(1) + ' ' + c.Y + ' Z" fill="#26292e"/>';
     }).join('');
   }
 
   function carSVG(type, design, fin, ratio, lugs) {
     var c = CARS[type] || CARS.sedan;
     var o = '<svg class="car-svg" viewBox="0 0 800 290" role="img" aria-label="Bóng xe minh hoạ với mâm đã chọn">' +
-      '<ellipse cx="400" cy="264" rx="360" ry="10" fill="rgba(29,31,34,.16)"/>' +
+      '<ellipse cx="400" cy="264" rx="360" ry="10" fill="rgba(29,31,34,.14)"/>' +
       '<g class="car-body">' +
       wells(c) + '<path d="' + c.body + '" fill="url(#fBody)"/>' +
       '<path d="' + c.glass + '" fill="url(#fGlass)"/>';
-    c.pillars.forEach(function (x) { o += '<rect x="' + (x - 4) + '" y="' + c.py[0] + '" width="8" height="' + (c.py[1] - c.py[0]) + '" fill="#24272b"/>'; });
+    c.pillars.forEach(function (x) { o += '<rect x="' + (x - 4) + '" y="' + c.py[0] + '" width="8" height="' + (c.py[1] - c.py[0]) + '" fill="#4a5260"/>'; });
     o += '<path d="' + c.belt + '" stroke="rgba(255,255,255,.16)" stroke-width="1.5" fill="none"/>';
-    if (c.rail) o += '<path d="' + c.rail + '" stroke="#3a3e44" stroke-width="5" stroke-linecap="round"/>';
+    if (c.rail) o += '<path d="' + c.rail + '" stroke="#8b939e" stroke-width="5" stroke-linecap="round"/>';
     if (c.bed) o += '<path d="' + c.bed + '" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>';
-    o += '<path d="M ' + c.doors[0] + ' 120 L ' + c.doors[0] + ' 206" stroke="rgba(0,0,0,.45)" stroke-width="1.4"/>';
+    o += '<path d="M ' + c.doors[0] + ' 120 L ' + c.doors[0] + ' 206" stroke="rgba(0,0,0,.22)" stroke-width="1.4"/>';
     c.handle.forEach(function (h) { o += '<rect x="' + h[0] + '" y="' + h[1] + '" width="22" height="4" rx="2" fill="rgba(255,255,255,.28)"/>'; });
     o += '<path d="' + c.head + '" fill="#ffcc00"/><path d="' + c.tail + '" fill="#d8342b"/>' +
-      '<path d="M ' + c.mirror[0] + ' ' + c.mirror[1] + ' l 18 -2 l 2 10 l -16 2 z" fill="#2a2d31"/>' +
+      '<path d="M ' + c.mirror[0] + ' ' + c.mirror[1] + ' l 18 -2 l 2 10 l -16 2 z" fill="#8b939e"/>' +
       '</g>';
     c.w.forEach(function (w) {
       o += '<g transform="translate(' + w[0] + ' ' + w[1] + ') scale(' + (c.R / 100).toFixed(3) + ')"><g class="wspin">' +
@@ -237,7 +237,7 @@
       '<path class="p-r" d="' + plies + '" stroke-width="1"/>' +
       '<path class="p-ar-band" d="M ' + (cx - mid) + ' ' + cy + ' A ' + mid + ' ' + mid + ' 0 1 1 ' + (cx + mid) + ' ' + cy + ' A ' + mid + ' ' + mid + ' 0 1 1 ' + (cx - mid) + ' ' + cy + '" fill="none" stroke-width="' + (Ro - rr - 10).toFixed(1) + '"/>' +
       '<path id="dgtp" d="M ' + (cx - mid) + ' ' + cy + ' A ' + mid + ' ' + mid + ' 0 1 1 ' + (cx + mid) + ' ' + cy + '" fill="none"/>' +
-      '<text class="p-txt" font-family="Chakra Petch, sans-serif" font-weight="700" font-size="17" letter-spacing="3" text-anchor="middle"><textPath href="#dgtp" startOffset="27%">' + w + '/' + ar + 'R' + d + ' ' + li + sp + '</textPath></text>' +
+      '<text class="p-txt" font-family="Be Vietnam Pro, sans-serif" font-weight="700" font-size="17" letter-spacing="3" text-anchor="middle"><textPath href="#dgtp" startOffset="27%">' + w + '/' + ar + 'R' + d + ' ' + li + sp + '</textPath></text>' +
       '<g transform="translate(' + cx + ' ' + cy + ') scale(' + ((rr - 2) / 72).toFixed(4) + ')">' + rim('five', 'bac', 5) + '</g>' +
       /* đường kính mâm */
       '<g class="p-d dim"><line x1="' + (cx - rr + 4) + '" y1="' + cy + '" x2="' + (cx + rr - 4) + '" y2="' + cy + '" marker-start="url(#arw)" marker-end="url(#arw)"/>' +

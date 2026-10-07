@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tin tức – Kinh nghiệm mua xe cũ | Tín Việt Auto</title>
+<meta name="description" content="Kinh nghiệm kiểm tra xe cũ, thủ tục sang tên, vay mua xe – bài viết tham khảo từ Tín Việt Auto (mẫu giao diện).">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+<main id="main">
+  <div class="page-head"><div class="container">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Trang chủ</a><svg class="ic"><use href="#i-chev-r"/></svg><span>Tin tức</span></nav>
+    <h1>Tin tức – Kinh nghiệm</h1>
+    <p>Hướng dẫn thực tế để chọn, kiểm tra và làm thủ tục mua xe cũ.</p>
+  </div></div>
+  <div class="container news-layout">
+    <div>
+      <div class="chips" id="cats" style="margin-bottom:18px" role="group" aria-label="Chuyên mục"></div>
+      <div class="news-list" id="news-list"></div>
+    </div>
+    <aside>
+      <div class="aside-box"><h3>Xe mới về</h3><div id="aside-cars"></div></div>
+      <div class="aside-box" style="background:var(--ink);color:#fff;border-color:var(--ink)">
+        <h3 style="color:#fff">Cần tư vấn chọn xe?</h3>
+        <p style="color:#b9c1cc;font-size:14px">Cho chúng tôi biết ngân sách và nhu cầu, tư vấn viên gửi 3 lựa chọn phù hợp qua Zalo.</p>
+        <a class="btn btn-yellow btn-block" href="lien-he.html?chu-de=tim-xe">Nhờ tư vấn</a>
+      </div>
+    </aside>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/data-news.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  'use strict';
+  var TV = window.TV, D = window.TVDATA;
+  TV.init('news', 'news');
+  var cats = ['Tất cả'].concat(D.news.map(function (n) { return n.cat; }).filter(function (c, i, a) { return a.indexOf(c) === i; }));
+  var cur = TV.param('cat'); if (!cats.some(function (c) { return TV.slug(c) === cur; })) cur = 'tat-ca';
+  function render() {
+    TV.$('#cats').innerHTML = cats.map(function (c) {
+      var on = TV.slug(c) === cur;
+      return '<button type="button" class="chip' + (on ? ' on' : '') + '" aria-pressed="' + on + '" data-cat="' + TV.slug(c) + '">' + c + '</button>';
+    }).join('');
+    var list = D.news.filter(function (n) { return cur === 'tat-ca' || TV.slug(n.cat) === cur; });
+    TV.$('#news-list').innerHTML = list.map(function (n) {
+      var url = 'bai-viet.html?id=' + n.id;
+      return '<article class="nrow" data-reveal><a class="n-media" href="' + url + '" tabindex="-1" aria-hidden="true"><img src="' + n.img + '" alt="' + TV.esc(n.imgAlt) + '" loading="lazy"></a>' +
+        '<div class="n-body"><span class="n-cat">' + n.cat + '</span><h2><a href="' + url + '">' + TV.esc(n.title) + '</a></h2><p>' + TV.esc(n.excerpt) + '</p>' +
+        '<div class="n-meta"><span>' + TV.date(n.date) + '</span><span>' + n.read + ' phút đọc</span></div></div></article>';
+    }).join('');
+    history.replaceState(null, '', location.pathname + (cur !== 'tat-ca' ? '?cat=' + cur : ''));
+    TV.reveal();
+  }
+  TV.$('#cats').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cat]'); if (!b) return; cur = b.getAttribute('data-cat'); render();
+  });
+  TV.$('#aside-cars').innerHTML = D.cars.slice().sort(function (a, b) { return b.posted.localeCompare(a.posted); }).slice(0, 4).map(function (c) {
+    return '<a class="aside-car" href="xe.html?id=' + c.id + '"><img src="' + c.img + '" alt="" loading="lazy"><div><b>' + TV.esc(c.name) + '</b><span>' + TV.price(c.price) + '</span></div></a>';
+  }).join('');
+  render();
+})();
+</script>
+</body>
+</html>

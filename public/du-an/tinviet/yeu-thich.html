@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Xe yêu thích – Tín Việt Auto</title>
+<meta name="description" content="Danh sách xe bạn đã lưu tại Tín Việt Auto, lưu trên trình duyệt của bạn.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+<main id="main">
+  <div class="page-head"><div class="container">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Trang chủ</a><svg class="ic"><use href="#i-chev-r"/></svg><span>Xe yêu thích</span></nav>
+    <h1>Xe yêu thích</h1>
+    <p>Danh sách được lưu trên trình duyệt này, không cần đăng nhập.</p>
+  </div></div>
+  <section class="section" style="padding-top:28px">
+    <div class="container">
+      <div class="toolbar" style="margin-top:0">
+        <div class="result-count" id="fav-count" aria-live="polite"></div>
+        <div class="chips">
+          <button class="btn btn-line btn-sm" type="button" id="fav-cmp"><svg class="ic"><use href="#i-compare"/></svg>So sánh 3 xe đầu</button>
+          <button class="btn btn-line btn-sm" type="button" id="fav-clear"><svg class="ic"><use href="#i-trash"/></svg>Xoá tất cả</button>
+        </div>
+      </div>
+      <div class="car-grid" id="fav-grid"></div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  'use strict';
+  var TV = window.TV;
+  TV.init('favs', 'favs');
+  var grid = TV.$('#fav-grid');
+  function render() {
+    var f = TV.favs().map(TV.carById);
+    TV.$('#fav-count').innerHTML = f.length ? 'Bạn đã lưu <b>' + f.length + '</b> xe' : 'Chưa có xe nào được lưu';
+    TV.$('#fav-cmp').disabled = f.length < 2;
+    TV.$('#fav-clear').disabled = !f.length;
+    grid.innerHTML = f.length ? f.map(function (c) { return TV.card(c); }).join('') :
+      '<div class="empty">' + TV.icon('heart') + '<h3>Danh sách đang trống</h3><p>Bấm biểu tượng trái tim trên ảnh xe để lưu lại và xem sau.</p>' +
+      '<a class="btn btn-red" href="index.html#danh-sach">Xem xe đang bán</a></div>';
+  }
+  TV.$('#fav-clear').addEventListener('click', function () {
+    if (!window.confirm('Xoá toàn bộ xe đã lưu?')) return;
+    TV.save('tv_favs', []); TV.sync(); TV.toast('Đã xoá danh sách yêu thích');
+  });
+  TV.$('#fav-cmp').addEventListener('click', function () {
+    TV.save('tv_compare', TV.favs().slice(0, 3)); location.href = 'so-sanh.html';
+  });
+  document.addEventListener('tv:change', render);
+  render();
+})();
+</script>
+</body>
+</html>

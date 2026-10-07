@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>So sánh xe – Tín Việt Auto</title>
+<meta name="description" content="So sánh tối đa 3 xe đang bán tại Tín Việt Auto: giá, năm sản xuất, số km, động cơ, hộp số.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+<main id="main">
+  <div class="page-head"><div class="container">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Trang chủ</a><svg class="ic"><use href="#i-chev-r"/></svg><span>So sánh xe</span></nav>
+    <h1>So sánh xe</h1>
+    <p>Chọn tối đa 3 xe. Giá trị tốt nhất ở mỗi dòng được tô xanh, dòng có thông số khác nhau được tô nền vàng.</p>
+  </div></div>
+  <section class="section" style="padding-top:28px">
+    <div class="container">
+      <div class="cmp-tools">
+        <label class="switch"><input type="checkbox" id="only-diff"> Chỉ hiện điểm khác nhau</label>
+        <div class="chips">
+          <button class="btn btn-line btn-sm" type="button" id="cmp-share"><svg class="ic"><use href="#i-share"/></svg>Sao chép liên kết so sánh</button>
+          <button class="btn btn-line btn-sm" type="button" id="cmp-clear"><svg class="ic"><use href="#i-trash"/></svg>Xoá tất cả</button>
+        </div>
+      </div>
+      <p id="cmp-hint" class="muted"></p>
+      <div class="cmp-wrap"><table class="cmp-table" id="cmp-table"></table></div>
+    </div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/calc.js"></script>
+<script src="assets/js/compare.js"></script>
+</body>
+</html>

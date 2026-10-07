@@ -110,6 +110,21 @@ export const projects = [
     highlights: ['Hero video 3 cảnh', 'Ảnh xưởng thật', 'Cuộn mượt Lenis', 'Hiệu ứng GSAP', 'Bảng giá 3 gói', 'Đặt lịch 30 giây'],
   },
   {
+    slug: 'tinviet',
+    type: 'website',
+    category: 'xecu', // mẫu website, thương hiệu minh hoạ
+    name: 'Tín Việt Auto – showroom xe lướt',
+    client: 'Showroom mẫu (thương hiệu minh hoạ)',
+    area: 'Hà Nội · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 868',
+    deployed: '10/2026',
+    url: dir('tinviet'),
+    accent: '#c8102e',
+    summary:
+      'Website showroom xe lướt nhiều trang: lọc xe theo hãng, giá, năm, hộp số; trang chi tiết có thư viện ảnh và phiếu kiểm định; so sánh 3 xe, yêu thích, định giá ký gửi, tính trả góp, đặt lịch lái thử.',
+    highlights: ['Lọc xe đa tiêu chí', 'Trang chi tiết xe', 'So sánh 3 xe', 'Tính trả góp', 'Định giá & ký gửi', 'Đặt lịch lái thử'],
+  },
+  {
     slug: 'dopro',
     type: 'shop',
     category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
@@ -121,8 +136,8 @@ export const projects = [
     url: dir('dopro'),
     accent: '#e10600',
     summary:
-      'Cửa hàng độ xe nền tối, đỏ đua xe: body kit, cánh gió, pô, mâm, coilover; chọn xe lọc phụ kiện, combo Stage 1–3, biểu đồ dyno động, giỏ hàng và đặt lịch lắp đặt.',
-    highlights: ['Chọn xe lọc phụ kiện', 'Combo Stage 1-2-3', 'Biểu đồ dyno động', 'Giỏ hàng & checkout', 'Flash sale đếm ngược', 'Đặt lịch lắp đặt'],
+      'Cửa hàng phụ kiện độ xe nền sáng kiểu Thế Giới Di Động: turbo, cổ góp xả, mâm, coilover, đèn LED; flash sale theo khung giờ, tìm phụ kiện theo xe, combo Stage 1–3 kèm biểu đồ dyno, dịch vụ body kit, dán đổi màu tại xưởng.',
+    highlights: ['Flash sale theo khung giờ', 'Tìm phụ kiện theo xe', 'Combo Stage 1–3 + dyno', 'Dịch vụ độ tại xưởng', 'Trả góp 0%', 'Đặt lịch lắp đặt'],
   },
   {
     slug: 'ankhang',
@@ -136,8 +151,8 @@ export const projects = [
     url: dir('ankhang'),
     accent: '#ff6a13',
     summary:
-      'Cửa hàng phụ kiện ô tô cho gia đình kiểu sàn thương mại điện tử: flash sale đếm ngược, lọc theo dòng xe, combo mua 2 tặng 1, giỏ hàng tự lưu và đặt lịch lắp tận nơi.',
-    highlights: ['Flash sale đếm ngược', 'Lọc theo dòng xe', 'Mua 2 tặng 1', 'Giỏ hàng lưu tự động', 'Lắp đặt tận nơi', 'Voucher bạn mới'],
+      'Cửa hàng phụ kiện ô tô kiểu sàn thương mại điện tử: camera hành trình, bơm lốp, đồ cứu hộ, máy hút bụi, sạc; ảnh sản phẩm nền trắng, flash sale, mua 2 tặng 1, ví voucher tự áp mã, lắp đặt tận nơi.',
+    highlights: ['Flash Sale đếm ngược', 'Mua 2 tặng 1', 'Ví voucher tự áp mã', 'Lọc theo dòng xe', 'Lắp đặt tận nơi', 'Giỏ hàng tự lưu'],
   },
   {
     slug: 'lumen',
@@ -151,8 +166,8 @@ export const projects = [
     url: dir('lumen'),
     accent: '#2ee6ff',
     summary:
-      'Studio độ đèn nền đêm: đèn pha bật sáng khi vào trang, kéo so sánh halogen và bi-LED, ambient 64 màu đổi màu trực tiếp, lọc sản phẩm, tra bảo hành bằng số điện thoại.',
-    highlights: ['Kéo so sánh trước/sau', 'Ambient đổi màu', 'Bi-LED / Bi-Laser', 'Tra cứu bảo hành', 'Đặt lịch độ đèn', 'Giỏ hàng & checkout'],
+      'Cửa hàng đèn ô tô kiểu CellphoneS: bóng LED, xenon, halogen, LED dây, cảm biến; chọn đèn theo xe, so sánh trước / sau, thử màu ambient, tra cứu bảo hành, đặt lịch độ bi-LED.',
+    highlights: ['Chọn đèn theo xe', 'Flash sale đếm ngược', 'So sánh trước / sau', 'Thử màu ambient', 'Tra cứu bảo hành', 'Trả góp 0%'],
   },
   {
     slug: 'vanhviet',
@@ -166,8 +181,8 @@ export const projects = [
     url: dir('vanhviet'),
     accent: '#ffcc00',
     summary:
-      'Cửa hàng mâm đúc 15–20 inch và lốp: cấu hình mâm theo xe với giá trọn bộ, giải mã cỡ lốp, bảng giá cân bằng động và sơn mâm, tính trả góp 0%.',
-    highlights: ['Cấu hình mâm theo xe', 'Giải mã cỡ lốp', 'Mâm đúc 15–20 inch', 'Tính trả góp 0%', 'Bảng giá dịch vụ', 'Giỏ hàng & checkout'],
+      'Cửa hàng mâm đúc 15–20 inch, mâm zin tháo xe, lốp và phụ kiện: tìm lốp theo xe hoặc cỡ, giá trọn bộ 4 bánh, giải mã cỡ lốp, bảng giá cân bằng động, tính trả góp 0%.',
+    highlights: ['Tìm lốp theo xe & cỡ', 'Giá trọn bộ 4 mâm', 'Flash sale đếm ngược', 'Giải mã cỡ lốp', 'Bảng giá dịch vụ', 'Trả góp 0%'],
   },
   {
     slug: 'bongstudio',
@@ -181,8 +196,8 @@ export const projects = [
     url: dir('bongstudio'),
     accent: '#c8a45c',
     summary:
-      'Cửa hàng chăm sóc xe sang trọng: dung dịch, sáp, ceramic, khăn microfiber cùng gói dán phim, PPF, phủ ceramic; hiệu ứng cuộn gương độ bóng, combo tự chọn, đặt lịch online.',
-    highlights: ['Gương độ bóng cuộn', 'So sánh gói theo xe', 'Combo tự chọn', 'Kéo trước & sau', 'Đặt lịch online', 'Giỏ hàng & checkout'],
+      'Cửa hàng chăm sóc xe kiểu Hasaki: dung dịch rửa, sáp, ceramic, khăn microfiber; bảng giá dán phim, PPF, phủ ceramic theo cỡ xe, tự chọn combo −10%, đặt lịch chọn giờ.',
+    highlights: ['Flash deal mỗi ngày', 'Bảng giá theo cỡ xe', 'Tự chọn combo −10%', 'Đặt lịch chọn giờ', 'Kéo so sánh trước / sau', 'Giỏ hàng & thanh toán'],
   },
 ]
 

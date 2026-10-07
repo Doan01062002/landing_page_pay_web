@@ -1,22 +1,35 @@
-/* LUMEN – dữ liệu mẫu (thương hiệu minh hoạ) */
+/* Lumen – dữ liệu mẫu (cửa hàng minh hoạ, không phải thương hiệu thật) */
 window.LUMEN_DATA = (function () {
+  'use strict';
   var U = function (id, w, h) {
     return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + w + (h ? '&h=' + h : '') + '&q=70';
   };
 
+  var IMG = 'assets/img/products/';
+
   var CATS = [
-    { id: 'bi-led', name: 'Bi-LED', icon: 'c-biled', desc: 'Bi cầu LED cắt sáng' },
-    { id: 'bi-laser', name: 'Bi-Laser', icon: 'c-laser', desc: 'Tia laser pha xa 1 km' },
-    { id: 'bong-led', name: 'Bóng LED pha', icon: 'c-bulb', desc: 'Thay bóng cắm zin' },
-    { id: 'den-gam', name: 'Đèn gầm', icon: 'c-fog', desc: 'Xuyên mưa, sương mù' },
-    { id: 'ambient', name: 'Ambient', icon: 'c-ambient', desc: 'Nội thất 64 màu' },
-    { id: 'led-mi', name: 'LED mí', icon: 'c-strip', desc: 'Dải sáng ban ngày' },
-    { id: 'den-hau', name: 'Đèn hậu', icon: 'c-tail', desc: 'Đèn hậu độ dải liền' },
-    { id: 'tro-sang', name: 'Trợ sáng', icon: 'c-bar', desc: 'Light bar, đèn tròn' },
-    { id: 'cam-bien', name: 'Cảm biến', icon: 'c-sensor', desc: 'Tự bật đèn, cảm biến mưa' }
+    { id: 'bong-led', name: 'Bóng LED', full: 'Bóng LED ô tô', icon: 'c-bulb',
+      groups: [['Chân bóng', ['H4', 'T10', '1156']], ['Vị trí lắp', ['Đèn pha – cos', 'Xi-nhan, phanh', 'Demi, biển số']]] },
+    { id: 'bong-halogen', name: 'Halogen', full: 'Halogen tăng sáng', icon: 'c-bulb',
+      groups: [['Chân bóng', ['H4', 'HB4']], ['Công suất', ['55W', '60/55W']]] },
+    { id: 'xenon', name: 'Xenon', full: 'Bóng xenon HID', icon: 'c-laser',
+      groups: [['Chân bóng', ['D2S']], ['Nhiệt độ màu', ['6.000K']]] },
+    { id: 'den-pha', name: 'Đèn pha', full: 'Phục hồi đèn pha', icon: 'c-biled',
+      groups: [['Dịch vụ', ['Phục hồi chóa ố vàng', 'Phủ nano chống UV']]] },
+    { id: 'den-phu', name: 'Đèn phụ', full: 'Đèn phụ, đèn rọi', icon: 'c-fog',
+      groups: [['Loại đèn', ['Đèn LED rọi 12V']], ['Gắn cho', ['Bán tải', 'SUV']]] },
+    { id: 'led-day', name: 'LED dây', full: 'LED dây, ambient', icon: 'c-strip',
+      groups: [['Loại', ['LED dây 2835', 'Tuỳ chọn bộ nguồn 12V']]] },
+    { id: 'cam-bien', name: 'Cảm biến', full: 'Cảm biến đèn, mưa', icon: 'c-sensor',
+      groups: [['Loại', ['Cảm biến mưa', 'Ánh sáng 2in1']]] }
+  ];
+  /* gói dịch vụ lắp đặt (không bán lẻ – đặt lịch tư vấn) */
+  var SERVICES = [
+    { name: 'Độ Bi-LED / Bi-Laser', href: '#so-sanh', icon: 'c-biled' },
+    { name: 'Ambient 64 màu', href: '#ambient', icon: 'c-ambient' }
   ];
 
-  var CARS = [
+  var TYPES = [
     { id: 'sedan', name: 'Sedan' },
     { id: 'suv', name: 'SUV / CUV' },
     { id: 'bantai', name: 'Bán tải' },
@@ -24,101 +37,168 @@ window.LUMEN_DATA = (function () {
   ];
 
   var PRICES = [
-    { id: 'p1', name: 'Dưới 2 triệu', min: 0, max: 2000000 },
-    { id: 'p2', name: '2 – 5 triệu', min: 2000000, max: 5000000 },
-    { id: 'p3', name: '5 – 10 triệu', min: 5000000, max: 10000000 },
-    { id: 'p4', name: 'Trên 10 triệu', min: 10000000, max: Infinity }
+    { id: 'p1', name: 'Dưới 300.000₫', min: 0, max: 300000 },
+    { id: 'p2', name: 'Từ 300.000 – 1 triệu', min: 300000, max: 1000000 },
+    { id: 'p3', name: 'Trên 1 triệu', min: 1000000, max: Infinity }
   ];
+
+  /* hãng → dòng xe → đời (dùng để gợi ý, kỹ thuật viên kiểm tra thực tế khi lắp) */
+  var CARS = [
+    { brand: 'Toyota', models: [
+      { m: 'Vios', t: 'sedan', y: ['2014 – 2017', '2018 – 2022', '2023 – nay'] },
+      { m: 'Corolla Cross', t: 'suv', y: ['2020 – 2023', '2024 – nay'] },
+      { m: 'Fortuner', t: 'suv', y: ['2017 – 2020', '2021 – nay'] },
+      { m: 'Innova', t: 'hatch', y: ['2016 – 2022', '2023 – nay'] },
+      { m: 'Hilux', t: 'bantai', y: ['2015 – 2020', '2021 – nay'] }] },
+    { brand: 'Hyundai', models: [
+      { m: 'Accent', t: 'sedan', y: ['2018 – 2020', '2021 – nay'] },
+      { m: 'Grand i10', t: 'hatch', y: ['2017 – 2020', '2021 – nay'] },
+      { m: 'Creta', t: 'suv', y: ['2022 – nay'] },
+      { m: 'Tucson', t: 'suv', y: ['2019 – 2021', '2022 – nay'] },
+      { m: 'Santa Fe', t: 'suv', y: ['2019 – 2023', '2024 – nay'] }] },
+    { brand: 'Kia', models: [
+      { m: 'Morning', t: 'hatch', y: ['2015 – 2020', '2021 – nay'] },
+      { m: 'K3', t: 'sedan', y: ['2019 – 2021', '2022 – nay'] },
+      { m: 'Seltos', t: 'suv', y: ['2020 – 2023', '2024 – nay'] },
+      { m: 'Carnival', t: 'hatch', y: ['2021 – nay'] }] },
+    { brand: 'Mazda', models: [
+      { m: 'Mazda2', t: 'hatch', y: ['2015 – 2019', '2020 – nay'] },
+      { m: 'Mazda3', t: 'sedan', y: ['2015 – 2019', '2020 – nay'] },
+      { m: 'CX-5', t: 'suv', y: ['2018 – 2022', '2023 – nay'] },
+      { m: 'BT-50', t: 'bantai', y: ['2016 – 2020', '2021 – nay'] }] },
+    { brand: 'Honda', models: [
+      { m: 'City', t: 'sedan', y: ['2017 – 2020', '2021 – nay'] },
+      { m: 'Civic', t: 'sedan', y: ['2017 – 2021', '2022 – nay'] },
+      { m: 'HR-V', t: 'suv', y: ['2019 – 2021', '2022 – nay'] },
+      { m: 'CR-V', t: 'suv', y: ['2018 – 2023', '2024 – nay'] }] },
+    { brand: 'Ford', models: [
+      { m: 'Ranger', t: 'bantai', y: ['2015 – 2022', '2023 – nay'] },
+      { m: 'Everest', t: 'suv', y: ['2018 – 2022', '2023 – nay'] },
+      { m: 'Territory', t: 'suv', y: ['2023 – nay'] }] },
+    { brand: 'Mitsubishi', models: [
+      { m: 'Attrage', t: 'sedan', y: ['2016 – 2019', '2020 – nay'] },
+      { m: 'Xpander', t: 'hatch', y: ['2018 – 2021', '2022 – nay'] },
+      { m: 'Triton', t: 'bantai', y: ['2015 – 2023', '2024 – nay'] }] },
+    { brand: 'VinFast', models: [
+      { m: 'Fadil', t: 'hatch', y: ['2019 – 2022'] },
+      { m: 'Lux A2.0', t: 'sedan', y: ['2019 – 2022'] },
+      { m: 'VF 5', t: 'suv', y: ['2023 – nay'] }] }
+  ];
+  var POPULAR_CARS = [['Toyota', 'Vios'], ['Hyundai', 'Accent'], ['Mazda', 'CX-5'], ['Ford', 'Ranger'], ['Mitsubishi', 'Xpander'], ['Honda', 'City'], ['Kia', 'Seltos']];
 
   var ALL = ['sedan', 'suv', 'bantai', 'hatch'];
 
+  /* sold = số xe đã lắp; gift = quà tặng; inst = trả góp 0%; src = nguồn ảnh (giấy phép tự do) */
   var P = [
-    { id: 'l01', cat: 'bi-led', name: 'Bi-LED Aurora X3 3.0 inch', cars: ['sedan', 'suv', 'hatch'], price: 6900000, old: 8500000, rating: 4.9, reviews: 128, img: '1616761879141-f485e5fed5df', spec: '55W · 6.000K · cắt sáng sắc nét', tag: 'Bán chạy', hot: 10,
-      specs: ['Công suất 55W/bên, chip LED 3 tầng', 'Nhiệt độ màu 6.000K – trắng tinh', 'Quang thông 4.800 lm', 'Chống nước IP67, quạt tản nhiệt êm'] },
-    { id: 'l02', cat: 'bi-led', name: 'Bi-LED Matrix M5 Pro', cars: ['sedan', 'suv', 'bantai'], price: 8900000, old: 10900000, rating: 4.8, reviews: 96, img: '1631856507219-d1f3465b4884', spec: '70W · 5.500K · 3 chế độ chiếu', tag: 'Mới', hot: 9,
-      specs: ['Công suất 70W/bên', '3 chế độ: phố, cao tốc, sương mù', 'Quang thông 5.600 lm', 'Bảo hành 24 tháng'] },
-    { id: 'l03', cat: 'bi-led', name: 'Bi-LED Compact C2 2.5 inch', cars: ['sedan', 'hatch'], price: 4650000, old: 5400000, rating: 4.7, reviews: 74, img: '1549207107-2704df6b92ab', spec: '45W · 6.000K · chóa nhỏ', hot: 6,
-      specs: ['Kích thước 2.5 inch cho chóa nhỏ', 'Công suất 45W/bên', 'Quang thông 3.900 lm', 'Bảo hành 18 tháng'] },
-    { id: 'l04', cat: 'bi-laser', name: 'Bi-Laser Nova L9', cars: ['sedan', 'suv', 'bantai'], price: 12900000, old: 15500000, rating: 5.0, reviews: 52, img: '1655757488255-b701f9886e92', spec: 'Laser pha 1.200 m · 6.000K', tag: 'Cao cấp', hot: 8,
-      specs: ['Tia laser pha xa tới 1.200 m', 'Cos LED 60W, cắt sáng chuẩn', 'Quang thông 6.500 lm', 'Bảo hành 36 tháng'] },
-    { id: 'l05', cat: 'bi-laser', name: 'Bi-Laser Titan Dual Beam', cars: ['suv', 'bantai'], price: 16500000, old: 19000000, rating: 4.9, reviews: 31, img: '1787593611002-037fe0f89611', spec: '2 tia laser · vòng halo · 36 tháng', hot: 5,
-      specs: ['2 module laser độc lập', 'Vòng halo LED tích hợp', 'Quang thông 7.200 lm', 'Bảo hành 36 tháng'] },
-    { id: 'l06', cat: 'bong-led', name: 'Bóng LED H4 Polar 6500K', cars: ['sedan', 'hatch', 'bantai'], price: 1250000, old: 1650000, rating: 4.7, reviews: 310, img: '1551464484-74a2f25d01a0', spec: 'Cắm zin · 60W · 6.500K', tag: 'Bán chạy', hot: 10,
-      specs: ['Chân H4 cắm trực tiếp', 'Công suất 60W/cặp', 'Quang thông 3.200 lm/bóng', 'Bảo hành 12 tháng'] },
-    { id: 'l07', cat: 'bong-led', name: 'Bóng LED 9005 Frost 120W', cars: ['sedan', 'suv'], price: 1490000, old: 1890000, rating: 4.8, reviews: 204, img: '1594467426116-d6736feaff3b', spec: '120W/cặp · tản nhiệt đồng', hot: 7,
-      specs: ['Chân 9005/HB3', 'Tản nhiệt ống đồng + quạt', 'Quang thông 3.600 lm/bóng', 'Bảo hành 12 tháng'] },
-    { id: 'l08', cat: 'bong-led', name: 'Bóng LED H11 Mini Canbus', cars: ['sedan', 'suv', 'hatch'], price: 990000, old: 1290000, rating: 4.6, reviews: 188, img: '1730742298439-6d82f9edc3c2', spec: 'Canbus chống báo lỗi · 6.000K', hot: 6,
-      specs: ['Chân H11, thân ngắn', 'Canbus chống báo lỗi taplo', 'Quang thông 2.800 lm/bóng', 'Bảo hành 12 tháng'] },
-    { id: 'l09', cat: 'den-gam', name: 'Đèn gầm Bi-LED 2 màu 3 inch', cars: ['sedan', 'suv', 'bantai'], price: 3200000, old: 3900000, rating: 4.8, reviews: 142, img: '1607507041354-b8d23042dc51', spec: 'Trắng / vàng 3.000K · xuyên mưa', tag: 'Hot', hot: 9,
-      specs: ['2 màu: trắng 6.000K và vàng 3.000K', 'Xuyên mưa, sương mù', 'Lắp vừa hốc gầm zin', 'Bảo hành 24 tháng'] },
-    { id: 'l10', cat: 'den-gam', name: 'Đèn gầm LED Fog-X vàng', cars: ['suv', 'bantai', 'hatch'], price: 1850000, old: 2300000, rating: 4.7, reviews: 88, img: '1736714859462-c02878f2877a', spec: 'Vàng 3.000K · góc rộng 120°', hot: 5,
-      specs: ['Ánh sáng vàng 3.000K', 'Góc chiếu rộng 120°', 'Chống nước IP68', 'Bảo hành 12 tháng'] },
-    { id: 'l11', cat: 'ambient', name: 'Ambient 64 màu – gói 18 vị trí', cars: ALL, price: 5900000, old: 7200000, rating: 4.9, reviews: 167, img: '1632655806671-a4af7ad1bcdc', spec: '18 vị trí · app + nháy nhạc', tag: 'Bán chạy', hot: 10,
-      specs: ['18 vị trí: táp-lô, cửa, hốc gió, để chân', '64 màu, điều khiển app', 'Chế độ nháy theo nhạc', 'Bảo hành 24 tháng'] },
-    { id: 'l12', cat: 'ambient', name: 'Ambient cửa & loa – 6 vị trí', cars: ALL, price: 2450000, old: 2900000, rating: 4.7, reviews: 93, img: '1772555429170-be39986f4d99', spec: '6 vị trí · sợi quang mảnh', hot: 6,
-      specs: ['6 vị trí: 4 tapi cửa + 2 loa', 'Sợi quang mảnh 2 mm', 'Đồng bộ màu khi mở cửa', 'Bảo hành 18 tháng'] },
-    { id: 'l13', cat: 'ambient', name: 'Ambient hốc gió đổi màu', cars: ['sedan', 'suv'], price: 1950000, old: 2350000, rating: 4.6, reviews: 61, img: '1773696756753-af4dcfd66eda', spec: 'Hốc gió · đổi màu theo nhiệt độ', hot: 4,
-      specs: ['Vòng sáng quanh hốc gió', 'Xanh khi lạnh, đỏ khi sưởi', 'Lắp không khoan cắt', 'Bảo hành 12 tháng'] },
-    { id: 'l14', cat: 'led-mi', name: 'Dải LED mí Sequential 2 màu', cars: ALL, price: 1350000, old: 1700000, rating: 4.7, reviews: 152, img: '1542282088-fe8426682b8f', spec: 'Trắng / vàng · xi-nhan chạy', hot: 8,
-      specs: ['Trắng khi chạy, vàng khi xi-nhan', 'Hiệu ứng chạy đuổi Sequential', 'Dải silicon dẻo chống nước', 'Bảo hành 12 tháng'] },
-    { id: 'l15', cat: 'led-mi', name: 'LED mí Halo Ring trắng-vàng', cars: ['sedan', 'suv'], price: 1750000, old: 2100000, rating: 4.8, reviews: 77, img: '1556448851-9359658faa54', spec: 'Vòng halo · 2 màu', hot: 5,
-      specs: ['Vòng halo quanh bi cầu', 'Trắng / vàng 2 chế độ', 'Siêu mỏng 4 mm', 'Bảo hành 12 tháng'] },
-    { id: 'l16', cat: 'den-hau', name: 'Đèn hậu LED dải liền', cars: ['sedan', 'suv'], price: 7500000, old: 8900000, rating: 4.8, reviews: 45, img: '1642002947561-2abeae21c503', spec: 'Dải liền ngang · xi-nhan động', tag: 'Mới', hot: 7,
-      specs: ['Thanh LED nối liền 2 bên', 'Xi-nhan động, hiệu ứng chào', 'Giắc zin plug & play', 'Bảo hành 24 tháng'] },
-    { id: 'l17', cat: 'den-hau', name: 'Đèn hậu 3 vạch Dynamic', cars: ['sedan', 'hatch'], price: 5800000, old: 6900000, rating: 4.7, reviews: 39, img: '1580014317999-e9f1936787a5', spec: '3 vạch LED · hiệu ứng chào', hot: 4,
-      specs: ['Thiết kế 3 vạch LED đỏ', 'Hiệu ứng mở khoá', 'Vỏ chống nước, chống ố', 'Bảo hành 18 tháng'] },
-    { id: 'l18', cat: 'tro-sang', name: 'Light bar 32 inch Combo', cars: ['bantai', 'suv'], price: 3600000, old: 4400000, rating: 4.8, reviews: 66, img: '1636364905411-0770892248c4', spec: '180W · spot + flood', hot: 6,
-      specs: ['Công suất 180W', 'Kết hợp tia xa và toả rộng', 'Vỏ nhôm đúc IP68', 'Bảo hành 18 tháng'] },
-    { id: 'l19', cat: 'tro-sang', name: 'Đèn trợ sáng tròn 7 inch', cars: ['bantai', 'suv'], price: 2800000, old: 3300000, rating: 4.7, reviews: 58, img: '1636138103588-ae927bfe10aa', spec: '2 màu · gắn cản / nóc', hot: 5,
-      specs: ['Đèn tròn 7 inch, 2 màu', 'Gắn cản trước hoặc baga nóc', 'Kèm relay & công tắc', 'Bảo hành 12 tháng'] },
-    { id: 'l20', cat: 'cam-bien', name: 'Cảm biến bật đèn tự động', cars: ALL, price: 690000, old: 890000, rating: 4.6, reviews: 121, img: '1628541512930-cca6bcc29eef', spec: 'Tự bật khi vào hầm, trời tối', hot: 7,
-      specs: ['Tự bật đèn khi trời tối / vào hầm', 'Độ trễ tuỳ chỉnh 2–10 giây', 'Gắn kín dưới kính lái', 'Bảo hành 12 tháng'] },
-    { id: 'l21', cat: 'cam-bien', name: 'Cảm biến mưa – ánh sáng 2in1', cars: ['sedan', 'suv', 'hatch'], price: 1150000, old: 1450000, rating: 4.7, reviews: 47, img: null, spec: 'Gạt mưa + đèn tự động', hot: 4,
-      specs: ['Tự gạt mưa theo cường độ', 'Tự bật đèn khi trời tối', 'Hộp điều khiển riêng', 'Bảo hành 12 tháng'] }
+    { id: 'p01', cat: 'bong-led', brand: 'Lumen', name: 'Bóng LED H4 tản nhiệt nhôm 6.000K (cặp)', cars: ['sedan', 'hatch', 'bantai'], price: 1250000, old: 1650000, rating: 4.8, reviews: 312, sold: 3120, img: 'bong-led-h4.webp', gift: 'Lắp miễn phí tại xưởng + căn chỉnh góc chiếu', hot: 10, flash: { left: 12, total: 40 },
+      specs: ['Chân H4 cắm trực tiếp, không cắt dây zin', 'Chip LED 2 mặt, điểm sáng gần vị trí sợi đốt', 'Tản nhiệt nhôm cánh tản, dây nguồn dẹt', 'Bảo hành 12 tháng, 1 đổi 1 trong 30 ngày'] },
+    { id: 'p02', cat: 'bong-led', brand: 'Lumen', name: 'Bóng LED T10 W5W 9 SMD – demi, biển số (cặp)', cars: ['sedan', 'suv', 'bantai', 'hatch'], price: 120000, old: 180000, rating: 4.7, reviews: 486, sold: 5240, img: 'bong-led-t10-w5w.webp', gift: 'Mua 2 cặp tặng 1 cặp', hot: 8, flash: { left: 25, total: 60 },
+      specs: ['Chân T10 / W5W cắm thay bóng zin', '9 chip SMD, ánh sáng trắng', 'Dùng cho demi, biển số, đèn trần', 'Bảo hành 6 tháng'] },
+    { id: 'p03', cat: 'bong-led', brand: 'Lumen', name: 'Bộ bóng LED xi-nhan, phanh, demi (4 loại)', cars: ['sedan', 'suv', 'bantai', 'hatch'], price: 450000, old: 590000, rating: 4.6, reviews: 174, sold: 1380, img: 'bo-bong-led-xi-nhan.webp', gift: 'Tặng điện trở chống chớp nhanh', hot: 7, flash: { left: 8, total: 30 },
+      specs: ['1 bóng 1156 chip cam cho xi-nhan', '1 bóng T10 trắng 9 chip, 1 bóng T10 đỏ', '1 bóng T10 4 chip cho đèn trần', 'Bảo hành 6 tháng'] },
+    { id: 'p04', cat: 'bong-halogen', brand: 'Lumen', name: 'Bóng halogen H4 60/55W tăng sáng (cặp)', cars: ['sedan', 'hatch', 'bantai'], price: 390000, old: 490000, rating: 4.6, reviews: 205, sold: 2210, img: 'bong-halogen-h4.webp', gift: 'Lắp miễn phí trong 15 phút', hot: 6,
+      specs: ['Chân H4, 2 tóc pha – cos', 'Công suất 60/55W, đúng chuẩn zin', 'Ánh sáng vàng trắng 3.200K, xuyên mưa tốt', 'Bảo hành 6 tháng'] },
+    { id: 'p05', cat: 'bong-halogen', brand: 'Lumen', name: 'Bóng halogen HB4 9006 55W (cặp)', cars: ['sedan', 'suv'], price: 350000, old: 450000, rating: 4.5, reviews: 98, sold: 860, img: 'bong-halogen-hb4.webp', gift: 'Lắp miễn phí trong 15 phút', hot: 4,
+      specs: ['Chân HB4 / 9006, dùng cho cos hoặc gầm', 'Công suất 55W', 'Ánh sáng 3.200K', 'Bảo hành 6 tháng'] },
+    { id: 'p06', cat: 'xenon', brand: 'Lumen', name: 'Bóng xenon D2S 35W 6.000K (cặp)', cars: ['sedan', 'suv'], price: 1450000, old: 1850000, rating: 4.8, reviews: 121, sold: 640, img: 'bong-xenon-d2s.webp', gift: 'Tặng kiểm tra ballast miễn phí', inst: true, hot: 9, flash: { left: 4, total: 15 },
+      specs: ['Chân D2S thay cho xe zin xenon', 'Công suất 35W, 6.000K trắng', 'Khởi động ổn định, không chớp', 'Bảo hành 12 tháng'] },
+    { id: 'p07', cat: 'den-pha', brand: 'Lumen', name: 'Phục hồi cụm đèn pha ố vàng, mờ đục (cặp)', cars: ['sedan', 'suv', 'bantai', 'hatch'], price: 890000, old: 1200000, rating: 4.9, reviews: 263, sold: 1940, img: 'phuc-hoi-den-pha.webp', gift: 'Phủ nano chống UV, bảo hành 12 tháng', hot: 10, flash: { left: 6, total: 20 },
+      specs: ['Đánh bóng 3 cấp, tẩy lớp ố vàng', 'Phủ nano chống tia UV', 'Làm trong 60 – 90 phút', 'Bảo hành độ trong 12 tháng'] },
+    { id: 'p08', cat: 'den-phu', brand: 'Lumen', name: 'Đèn LED rọi tròn 9 bóng 12V', cars: ['bantai', 'suv'], price: 690000, old: 850000, rating: 4.6, reviews: 57, sold: 410, img: 'den-led-roi-9-bong.webp', gift: 'Tặng relay + công tắc', hot: 5,
+      specs: ['9 LED, ánh sáng trắng ấm', 'Điện áp 12V, vỏ nhựa chịu nhiệt', 'Gắn thùng bán tải, khoang hành lý', 'Bảo hành 12 tháng'] },
+    { id: 'p09', cat: 'led-day', brand: 'Lumen', name: 'LED dây 2835 12V trắng ấm – cuộn 5 m', cars: ['sedan', 'suv', 'bantai', 'hatch'], price: 260000, old: 350000, rating: 4.5, reviews: 142, sold: 1650, img: 'led-day-2835.webp', gift: 'Tặng 2 đầu nối nhanh', hot: 6,
+      opts: [{ id: 'p09', label: 'Chỉ cuộn LED 5 m' }, { id: 'p09n', label: '+ bộ nguồn 12V', add: 150000 }],
+      specs: ['Chip 2835, 120 LED/m', 'Điện áp 12V, cắt được mỗi 3 LED', 'Băng keo 3M mặt sau', 'Tuỳ chọn thêm bộ nguồn 12V: +150.000₫', 'Bảo hành 6 tháng'] },
+    { id: 'p11', cat: 'cam-bien', brand: 'Lumen', name: 'Cảm biến mưa – ánh sáng 2in1 (module)', cars: ['sedan', 'suv', 'hatch'], price: 1150000, old: 1450000, rating: 4.7, reviews: 47, sold: 302, img: 'cam-bien-mua-anh-sang.webp', gift: 'Lắp miễn phí tại xưởng', inst: true, hot: 4,
+      specs: ['Tự gạt mưa theo cường độ', 'Tự bật đèn khi trời tối, vào hầm', 'Gắn sau gương chiếu hậu', 'Bảo hành 12 tháng'] }
+  ];
+  P.forEach(function (p) { p.img = IMG + p.img; });
+  /* biến thể (không hiển thị riêng trong danh sách, chỉ chọn trong trang chi tiết) */
+  var VARIANTS = [
+    { id: 'p09n', parent: 'p09', cat: 'led-day', brand: 'Lumen', name: 'LED dây 2835 12V trắng ấm – cuộn 5 m + bộ nguồn 12V', cars: ['sedan', 'suv', 'bantai', 'hatch'], price: 410000, old: 500000, img: IMG + 'led-day-2835.webp' }
+  ];
+
+  /* nguồn ảnh sản phẩm (Wikimedia Commons, giấy phép tự do) */
+  var CREDITS = [
+    ['Bóng LED H4', 'Phiarc', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Road-legal_H4_LED_retrofit_(Philips_Ultinon_Pro6000).jpg'],
+    ['Bóng LED T10', 'Sebacalka', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Compare_of_old_and_new_w5w_light_bulb.jpg'],
+    ['Bộ bóng LED', 'Sebacalka', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Led_car_bulbs.jpg'],
+    ['Bóng H4', 'Ulfbastel', 'Public domain', 'https://commons.wikimedia.org/wiki/File:Bilux.jpg'],
+    ['Bóng HB4', 'Dantor', 'CC BY-SA 3.0', 'https://commons.wikimedia.org/wiki/File:Hb40gebr.jpg'],
+    ['Bóng xenon D2S', 'Michiglaser', 'Public domain', 'https://commons.wikimedia.org/wiki/File:Xenonlamp.jpg'],
+    ['Cụm đèn pha', 'A7N8X', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Fanali_rigenerato_e_ingiallito.jpg'],
+    ['Đèn LED rọi', 'Rhododendrites', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:LED_light_(40979).jpg'],
+    ['LED dây', 'MickelPL', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Dioda_LED_na_ta%C5%9Bmie.jpg'],
+    ['Cảm biến mưa', 'ReqEngineer', 'CC BY-SA 3.0', 'https://commons.wikimedia.org/wiki/File:Rain-Sensor-MB-2005-02-24.jpg']
   ];
 
   var SPEC = [
-    { name: 'Halogen zin', note: 'Bóng sợi đốt', lm: 1000, k: 3200, life: 500, war: 6, tone: 'amber' },
-    { name: 'Bóng LED', note: 'Thay bóng cắm zin', lm: 3200, k: 6000, life: 30000, war: 12, tone: 'cyan' },
-    { name: 'Bi-LED', note: 'Bi cầu thấu kính', lm: 4800, k: 6000, life: 50000, war: 24, tone: 'cyan', best: true },
-    { name: 'Bi-Laser', note: 'LED + module laser', lm: 6500, k: 6000, life: 60000, war: 36, tone: 'cyan' }
+    { name: 'Halogen zin', note: 'Bóng sợi đốt', lm: 1000, k: 3200, life: 500, war: 6, range: 40 },
+    { name: 'Bóng LED', note: 'Thay bóng cắm zin', lm: 3200, k: 6000, life: 30000, war: 12, range: 70 },
+    { name: 'Bi-LED', note: 'Bi cầu thấu kính', lm: 4800, k: 6000, life: 50000, war: 36, range: 120, best: true },
+    { name: 'Bi-Laser', note: 'LED + module laser', lm: 6500, k: 6000, life: 60000, war: 36, range: 600 }
+  ];
+
+  /* ảnh đường ban đêm cho widget so sánh */
+  var SCENES = [
+    { id: '1621863413762-5802c6065dfe', n: 'Đường đô thị' },
+    { id: '1637863611072-7441a3609d28', n: 'Đường cua, ít đèn' },
+    { id: '1697372028668-9a16fd16f00f', n: 'Đường hàng cây' }
+  ];
+
+  /* ambient: ảnh + màu gốc của dải sáng trong ảnh (độ hue) */
+  var AMB_VIEWS = [
+    { id: '1665491641078-1f8b275c8108', n: 'Táp-lô', hue: 275 },
+    { id: '1632655806671-a4af7ad1bcdc', n: 'Tapi cửa & loa', hue: 268 },
+    { id: '1780963991450-1a80d64d29c1', n: 'Tay nắm cửa', hue: 228 }
   ];
 
   var GALLERY = [
-    { id: '1598586958772-8bf368215c2a', t: 'Sedan hạng D', d: 'Bi-LED + vòng halo đỏ' },
-    { id: '1762077656314-a88615be0596', t: 'Crossover đô thị', d: 'Đèn hậu LED dải liền' },
-    { id: '1720929633046-f171051f30ac', t: 'Sedan hạng sang', d: 'Ambient loa & cửa xanh băng' },
-    { id: '1578245600656-e8fe67a2b5f7', t: 'Coupe 2 cửa', d: 'Bi-Laser Nova L9' },
-    { id: '1675319003337-e802a671e105', t: 'SUV off-road', d: 'Light bar 32 inch + đèn gầm' },
-    { id: '1775882117283-2b2fc891b3fb', t: 'Xe thể thao', d: 'LED bậc cửa + ambient' },
-    { id: '1608412217711-ab7d42cf7920', t: 'Sedan hạng C', d: 'LED mí Sequential' },
-    { id: '1518438223361-dde09dbeed6a', t: 'Hatchback', d: 'Đèn hậu 3 vạch Dynamic' },
-    { id: '1676288176903-a68732722cce', t: 'SUV 7 chỗ', d: 'Bi-LED Matrix M5 Pro' },
-    { id: '1774751114258-9ce8c37d9711', t: 'Xe thể thao', d: 'Dải LED mí trắng' }
+    { id: '1598586958772-8bf368215c2a', car: 'Sedan hạng D', d: 'Gói Bi-LED 2 bên + vòng halo đỏ', at: 'Chi nhánh Hải Châu', date: '02/10/2026' },
+    { id: '1774751114258-9ce8c37d9711', car: 'Coupe thể thao', d: 'Gói Bi-LED + dải LED mí trắng', at: 'Chi nhánh Sơn Trà', date: '29/09/2026' },
+    { id: '1636138103588-ae927bfe10aa', car: 'SUV off-road', d: 'Đèn phụ nóc + đèn rọi thùng xe', at: 'Chi nhánh Hải Châu', date: '27/09/2026' },
+    { id: '1762077656314-a88615be0596', car: 'Crossover đô thị', d: 'Đèn hậu LED dải liền', at: 'Chi nhánh Hội An', date: '25/09/2026' },
+    { id: '1616761879141-f485e5fed5df', car: 'Sedan hạng C', d: 'Gói Bi-LED + bóng LED gầm', at: 'Chi nhánh Sơn Trà', date: '22/09/2026' },
+    { id: '1633991452837-6a50e247fda5', car: 'Bán tải', d: 'Đèn phụ cản trước, đi dây riêng', at: 'Chi nhánh Hải Châu', date: '20/09/2026' },
+    { id: '1720929633046-f171051f30ac', car: 'Sedan hạng sang', d: 'Ambient loa & cửa xanh băng', at: 'Chi nhánh Hội An', date: '18/09/2026' },
+    { id: '1518438223361-dde09dbeed6a', car: 'Hatchback', d: 'Đèn hậu 3 vạch Dynamic', at: 'Chi nhánh Sơn Trà', date: '15/09/2026' }
   ];
 
   var REVIEWS = [
-    { n: 'Anh Hoàng', car: 'Sedan hạng C', r: 5, t: 'Đi đèo Hải Vân ban đêm khác hẳn, đường cắt sáng gọn, xe ngược chiều không nháy pha nữa. Làm 3 tiếng là xong.' },
-    { n: 'Chị Mai', car: 'SUV 7 chỗ', r: 5, t: 'Ambient 64 màu đẹp hơn mong đợi, dây đi ẩn hoàn toàn. Mấy đứa nhỏ thích nhất chế độ nháy theo nhạc.' },
-    { n: 'Anh Bảo', car: 'Bán tải', r: 5, t: 'Light bar với đèn gầm vàng chạy mưa đường rừng rất yên tâm. Tư vấn kỹ, không ép mua gói đắt.' },
-    { n: 'Anh Quân', car: 'Hatchback', r: 4, t: 'Bóng LED H4 cắm zin, sáng gấp 3 lần. Trừ 1 sao vì phải chờ 20 phút do đông khách cuối tuần.' },
-    { n: 'Chị Thảo', car: 'Crossover', r: 5, t: 'Thích nhất là bảo hành điện tử, tra bằng số điện thoại, khỏi giữ phiếu. Đèn hậu dải liền nhìn sang hẳn.' },
-    { n: 'Anh Đức', car: 'Sedan hạng D', r: 5, t: 'Bi-laser pha xa thật sự, đường quốc lộ không đèn vẫn thấy rõ biển báo từ xa. Đáng tiền.' },
-    { n: 'Anh Tuấn', car: 'MPV 7 chỗ', r: 5, t: 'Đặt lịch online rồi tới lắp luôn buổi tối, test đèn trong bóng tối thật nên rất dễ so sánh trước sau.' }
+    { n: 'Nguyễn Hoàng', city: 'Đà Nẵng', car: 'Toyota Vios 2021', svc: 'Gói độ Bi-LED trọn gói', r: 5, d: '03/10/2026', t: 'Đi đèo Hải Vân ban đêm khác hẳn, đường cắt sáng gọn, xe ngược chiều không nháy pha nữa. Làm hơn 3 tiếng là xong, có phòng chờ máy lạnh.' },
+    { n: 'Trần Thị Mai', city: 'Hội An', car: 'Kia Carnival 2022', svc: 'Gói ambient 64 màu – 18 vị trí', r: 5, d: '30/09/2026', t: 'Ambient đẹp hơn mong đợi, dây đi ẩn hoàn toàn. Mấy đứa nhỏ thích nhất chế độ nháy theo nhạc. Nhân viên chỉ cách dùng app rất kỹ.' },
+    { n: 'Lê Quốc Bảo', city: 'Tam Kỳ', car: 'Ford Ranger 2023', p: 'p08', r: 5, d: '28/09/2026', t: 'Gắn 2 đèn rọi ở thùng xe, tối dỡ hàng thấy rõ. Đi dây gọn, có công tắc riêng. Tư vấn kỹ, không ép mua đồ đắt.' },
+    { n: 'Phạm Minh Quân', city: 'Đà Nẵng', car: 'Hyundai Grand i10', p: 'p01', r: 4, d: '26/09/2026', t: 'Bóng LED H4 cắm zin, sáng hơn hẳn bóng cũ, nhân viên chỉnh lại góc chiếu. Trừ 1 sao vì cuối tuần đông khách phải chờ khoảng 20 phút.' },
+    { n: 'Võ Thu Thảo', city: 'Quảng Ngãi', car: 'Mazda CX-5 2020', p: 'p07', r: 5, d: '21/09/2026', t: 'Đèn pha ố vàng sau 6 năm, phục hồi xong trong lại như mới. Thích nhất là bảo hành điện tử, tra bằng số điện thoại, khỏi giữ phiếu.' },
+    { n: 'Đặng Văn Đức', city: 'Huế', car: 'Toyota Fortuner 2021', svc: 'Gói độ Bi-Laser', r: 5, d: '17/09/2026', t: 'Bi-laser pha xa thật sự, đường quốc lộ không đèn vẫn thấy rõ biển báo từ xa. Giá hơi cao nhưng đáng tiền.' }
+  ];
+  var RATING_DIST = [ [5, 1104], [4, 142], [3, 28], [2, 7], [1, 5] ];
+
+  var NEWS = [
+    { img: '1693421563400-e72761d49e5f', t: 'Chóa phản xạ có nên lên bi-LED không? So sánh nhanh với bóng LED cắm zin', d: '05/10/2026', tag: 'Kinh nghiệm' },
+    { img: '1652977691699-e213b966cf34', t: '5 dấu hiệu đèn pha bị ố, hấp hơi và cách xử lý trước mùa mưa', d: '01/10/2026', tag: 'Bảo dưỡng' },
+    { img: '1643236084696-13306d729ff3', t: 'Quy trình 5 bước lắp bi-LED tại xưởng: mất bao lâu, cần chuẩn bị gì?', d: '26/09/2026', tag: 'Hướng dẫn' },
+    { img: '1632655806671-a4af7ad1bcdc', t: 'Lái đêm nên chọn màu ambient nào để đỡ mỏi mắt?', d: '20/09/2026', tag: 'Ambient' }
+  ];
+
+  var BRANCHES = [
+    { n: 'Lumen Hải Châu', a: 'Số 368 Đường Mẫu, P. Hải Châu, Đà Nẵng', p: '0900 000 368', h: '8:00 – 21:00', bay: 6 },
+    { n: 'Lumen Sơn Trà', a: 'Số 12 Đường Mẫu B, P. An Hải, Đà Nẵng', p: '0900 000 369', h: '8:00 – 20:30', bay: 4 },
+    { n: 'Lumen Hội An', a: 'Số 45 Đường Mẫu C, P. Cẩm Phô, Hội An', p: '0900 000 370', h: '8:00 – 20:00', bay: 3 }
   ];
 
   var WARRANTY = {
-    '0905000301': { name: 'Nguyễn V. H***', car: 'Sedan hạng C', pack: 'Bi-LED Aurora X3 3.0 inch + LED mí Sequential', date: '12/03/2026', exp: '12/03/2028', ok: true, pct: 72 },
-    '0935000302': { name: 'Trần T. M***', car: 'SUV 7 chỗ', pack: 'Ambient 64 màu – gói 18 vị trí', date: '05/11/2025', exp: '05/11/2027', ok: true, pct: 56 },
-    '0779000303': { name: 'Lê Q. B***', car: 'Bán tải', pack: 'Light bar 32 inch Combo + Đèn gầm Fog-X', date: '20/06/2024', exp: '20/06/2026', ok: false, pct: 0 }
+    '0905000301': { name: 'Nguyễn V. H***', car: 'Toyota Vios 2021', pack: 'Gói độ Bi-LED 2 bên + bóng LED T10 demi', date: '12/03/2026', exp: '12/03/2029', ok: true, pct: 83, at: 'Lumen Hải Châu' },
+    '0935000302': { name: 'Trần T. M***', car: 'Kia Carnival 2022', pack: 'Ambient 64 màu – gói 18 vị trí', date: '05/11/2025', exp: '05/11/2027', ok: true, pct: 56, at: 'Lumen Hội An' },
+    '0779000303': { name: 'Lê Q. B***', car: 'Ford Ranger 2019', pack: 'Đèn LED rọi 12V (2 bộ) + bóng LED H4', date: '20/06/2024', exp: '20/06/2026', ok: false, pct: 0, at: 'Lumen Hải Châu' }
   };
 
   var SWATCHES = [
-    { c: '#2ee6ff', n: 'Xanh băng' }, { c: '#3d7bff', n: 'Xanh đêm' }, { c: '#8b5cff', n: 'Tím ánh trăng' },
-    { c: '#ff4fd8', n: 'Hồng neon' }, { c: '#ff3b5c', n: 'Đỏ thể thao' }, { c: '#ff8a1f', n: 'Cam hoàng hôn' },
-    { c: '#ffb020', n: 'Hổ phách' }, { c: '#f5e663', n: 'Vàng chanh' }, { c: '#3dff9a', n: 'Xanh ngọc' },
-    { c: '#00c2a8', n: 'Xanh biển' }, { c: '#ffffff', n: 'Trắng tinh' }, { c: '#ffd9b0', n: 'Trắng ấm' }
+    { c: '#22c7e8', n: 'Xanh băng' }, { c: '#2f6bff', n: 'Xanh dương' }, { c: '#8b5cf6', n: 'Tím' },
+    { c: '#ec4899', n: 'Hồng' }, { c: '#ef2b3c', n: 'Đỏ' }, { c: '#f97316', n: 'Cam' },
+    { c: '#f5a524', n: 'Hổ phách' }, { c: '#c8d62b', n: 'Vàng chanh' }, { c: '#22c55e', n: 'Xanh lá' },
+    { c: '#14b8a6', n: 'Xanh ngọc' }, { c: '#ffffff', n: 'Trắng', white: true }, { c: '#ffd9b0', n: 'Trắng ấm', white: true }
   ];
 
-  return { U: U, CATS: CATS, CARS: CARS, PRICES: PRICES, PRODUCTS: P, SPEC: SPEC, GALLERY: GALLERY, REVIEWS: REVIEWS, WARRANTY: WARRANTY, SWATCHES: SWATCHES };
+  return { VARIANTS: VARIANTS, U: U, CATS: CATS, SERVICES: SERVICES, CREDITS: CREDITS, TYPES: TYPES, PRICES: PRICES, CARS: CARS, POPULAR_CARS: POPULAR_CARS, PRODUCTS: P, SPEC: SPEC, SCENES: SCENES, AMB_VIEWS: AMB_VIEWS, GALLERY: GALLERY, REVIEWS: REVIEWS, RATING_DIST: RATING_DIST, NEWS: NEWS, BRANCHES: BRANCHES, WARRANTY: WARRANTY, SWATCHES: SWATCHES };
 })();

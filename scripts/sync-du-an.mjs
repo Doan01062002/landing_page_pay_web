@@ -21,6 +21,8 @@ const PROJECTS = {
   lumen: { folder: 'landing_page_lumen' },
   vanhviet: { folder: 'landing_page_vanhviet' },
   bongstudio: { folder: 'landing_page_bongstudio' },
+  // Website mẫu nhiều trang
+  tinviet: { folder: 'landing_page_tinviet' },
   // Mẫu website bán (không phải dự án đã triển khai) → public/mau/<slug>/
 }
 

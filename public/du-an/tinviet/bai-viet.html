@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bài viết – Tín Việt Auto</title>
+<meta name="description" content="Bài viết kinh nghiệm mua xe cũ từ Tín Việt Auto (mẫu giao diện).">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+<main id="main"><div class="container news-layout" id="post-root"></div>
+  <section class="section alt" id="related-wrap"><div class="container">
+    <div class="sec-head"><div><h2>Bài viết khác</h2></div><a class="link-more" href="tin-tuc.html">Tất cả bài viết <svg class="ic"><use href="#i-arrow-right"/></svg></a></div>
+    <div class="news-grid" id="related"></div></div></section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/data-news.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  'use strict';
+  var TV = window.TV, D = window.TVDATA;
+  TV.init('post', 'news');
+  var id = TV.param('id'), n = id ? TV.newsById(id) : null, root = TV.$('#post-root');
+  var aside = '<aside><div class="aside-box"><h3>Xe đang bán nổi bật</h3>' +
+    D.cars.filter(function (c) { return c.tags.length; }).slice(0, 4).map(function (c) {
+      return '<a class="aside-car" href="xe.html?id=' + c.id + '"><img src="' + c.img + '" alt="" loading="lazy"><div><b>' + TV.esc(c.name) + '</b><span>' + TV.price(c.price) + '</span></div></a>';
+    }).join('') + '</div><div class="aside-box"><h3>Hỏi nhanh</h3><p class="muted" style="font-size:14px">Gọi ' + TV.info.hotline + ' hoặc nhắn Zalo, tư vấn viên trả lời trong giờ mở cửa.</p>' +
+    '<a class="btn btn-red btn-block" href="tel:' + TV.info.tel + '">' + TV.icon('phone') + 'Gọi tư vấn</a></div></aside>';
+  if (!n) {
+    document.title = 'Không tìm thấy bài viết – Tín Việt Auto';
+    root.innerHTML = '<div class="not-found" style="grid-column:1/-1">' + TV.icon('doc') + '<h1>Không tìm thấy bài viết</h1><p>Bài viết có thể đã được gỡ hoặc đường dẫn chưa đúng.</p>' +
+      '<a class="btn btn-red" href="tin-tuc.html">Xem tất cả bài viết</a></div>';
+  } else {
+    document.title = n.title + ' – Tín Việt Auto';
+    var md = document.querySelector('meta[name=description]'); if (md) md.setAttribute('content', n.excerpt);
+    root.innerHTML = '<article class="article"><nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Trang chủ</a>' + TV.icon('chev-r') +
+      '<a href="tin-tuc.html">Tin tức</a>' + TV.icon('chev-r') + '<a href="tin-tuc.html?cat=' + TV.slug(n.cat) + '">' + n.cat + '</a></nav>' +
+      '<h1>' + TV.esc(n.title) + '</h1><div class="n-meta"><span>' + TV.date(n.date) + '</span><span>' + n.read + ' phút đọc</span><span>Ban biên tập Tín Việt Auto (minh hoạ)</span></div>' +
+      '<figure class="cover" style="margin-left:0;margin-right:0"><img src="' + n.img + '" alt="' + TV.esc(n.imgAlt) + '"></figure><p class="cover-cap">' + TV.esc(n.cap) + '</p>' +
+      n.body + '<p class="note" style="margin-top:28px">Nội dung mang tính tham khảo, không thay thế tư vấn pháp lý hay tài chính.</p></article>' + aside;
+  }
+  TV.$('#related').innerHTML = D.news.filter(function (x) { return x !== n; }).slice(0, 3).map(TV.newsCard).join('');
+  TV.reveal();
+})();
+</script>
+</body>
+</html>

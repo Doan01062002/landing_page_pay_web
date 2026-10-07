@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+  <!-- Đặt trong /du-an/tinviet/: giữ đường dẫn ảnh, CSS đúng kể cả khi URL thiếu dấu / cuối -->
+  <base href="/du-an/tinviet/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liên hệ – Tín Việt Auto</title>
+<meta name="description" content="Liên hệ Tín Việt Auto (mẫu giao diện): hotline, Zalo, giờ mở cửa, đặt lịch xem xe và gửi yêu cầu tư vấn.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<noscript><p style="padding:12px 16px;background:#fff6db;margin:0">Vui lòng bật JavaScript để xem đầy đủ danh sách xe và các tính năng của trang.</p></noscript>
+<main id="main">
+  <div class="page-head"><div class="container">
+    <nav class="crumbs" aria-label="Đường dẫn"><a href="index.html">Trang chủ</a><svg class="ic"><use href="#i-chev-r"/></svg><span>Liên hệ</span></nav>
+    <h1>Liên hệ, đặt lịch xem xe</h1>
+    <p>Mọi thông tin liên hệ dưới đây là nội dung minh hoạ cho mẫu giao diện.</p>
+  </div></div>
+  <div class="container contact-grid">
+    <div>
+      <div class="info-cards">
+        <div class="info-card"><svg class="ic"><use href="#i-pin"/></svg><b>Showroom</b><span>Số 1 Đường Minh Hoạ, Cầu Giấy, Hà Nội (minh hoạ)</span></div>
+        <div class="info-card"><svg class="ic"><use href="#i-phone"/></svg><b>Hotline</b><a href="tel:0900000868">0900 000 868 (minh hoạ)</a></div>
+        <div class="info-card"><svg class="ic"><use href="#i-mail"/></svg><b>Email</b><a href="mailto:lienhe@tinvietauto.vn">lienhe@tinvietauto.vn (minh hoạ)</a></div>
+        <div class="info-card"><svg class="ic"><use href="#i-chat"/></svg><b>Zalo</b><a href="https://zalo.me/0900000868" target="_blank" rel="noopener">Nhắn Zalo 0900 000 868</a></div>
+      </div>
+      <div class="aside-box"><h3>Giờ mở cửa</h3>
+        <table class="hours"><tbody>
+          <tr><td>Thứ Hai – Thứ Sáu</td><td>8:00 – 20:00</td></tr>
+          <tr><td>Thứ Bảy, Chủ nhật</td><td>8:00 – 20:00</td></tr>
+          <tr><td>Lễ, Tết</td><td>Theo lịch thông báo</td></tr>
+        </tbody></table>
+        <p class="note" style="margin:10px 0 0" id="open-now"></p>
+      </div>
+      <div id="map-slot"></div>
+    </div>
+    <div class="calc-box" style="padding:28px">
+      <h2 style="font-size:22px">Gửi yêu cầu tư vấn</h2>
+      <p class="muted">Tư vấn viên gọi lại trong 15 phút (giờ làm việc). Mẫu giao diện không gửi dữ liệu đi đâu.</p>
+      <form id="contact-form" novalidate>
+        <div class="form-grid">
+          <div class="fld"><label for="ct-name">Họ tên <span class="req">*</span></label><input class="inp" id="ct-name" name="name" autocomplete="name"><span class="err"></span></div>
+          <div class="fld"><label for="ct-phone">Số điện thoại <span class="req">*</span></label><input class="inp" id="ct-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx"><span class="err"></span></div>
+          <div class="fld"><label for="ct-email">Email</label><input class="inp" id="ct-email" name="email" type="email" autocomplete="email" placeholder="Không bắt buộc"><span class="err"></span></div>
+          <div class="fld"><label for="ct-topic">Chủ đề <span class="req">*</span></label><select class="sel" id="ct-topic" name="topic">
+            <option value="">Chọn chủ đề</option>
+            <option value="xem-xe">Đặt lịch xem xe</option>
+            <option value="tim-xe">Nhờ tìm xe theo yêu cầu</option>
+            <option value="tra-gop">Tư vấn trả góp</option>
+            <option value="dinh-gia">Định giá, ký gửi xe</option>
+            <option value="khac">Khác</option>
+          </select><span class="err"></span></div>
+          <div class="fld full"><label for="ct-car">Xe quan tâm</label><select class="sel" id="ct-car" name="car"></select></div>
+          <div class="fld full"><label for="ct-msg">Nội dung <span class="req">*</span></label><textarea class="inp" id="ct-msg" name="msg" rows="4" maxlength="800" placeholder="VD: ngân sách khoảng 700 triệu, cần xe 7 chỗ máy dầu…"></textarea><span class="err"></span></div>
+        </div>
+        <div class="form-foot"><span class="note"><span class="req">*</span> Bắt buộc</span><button class="btn btn-red" type="submit">Gửi yêu cầu</button></div>
+      </form>
+      <div class="success" id="contact-ok" tabindex="-1"><div class="ok-ic"><svg class="ic"><use href="#i-check"/></svg></div>
+        <h3>Cảm ơn bạn, chúng tôi đã nhận yêu cầu</h3><p class="muted">Tư vấn viên sẽ gọi lại trong 15 phút.</p><dl id="contact-sum"></dl>
+        <div><a class="btn btn-line" href="index.html#danh-sach">Xem xe đang bán</a></div></div>
+    </div>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+(function () {
+  'use strict';
+  var TV = window.TV, D = window.TVDATA;
+  TV.init('contact', 'contact');
+  TV.$('#ct-email').placeholder = 'Không bắt buộc';
+  TV.$('#map-slot').innerHTML = TV.mapPh(true);
+  var h = new Date().getHours();
+  TV.$('#open-now').textContent = (h >= 8 && h < 20) ? 'Showroom đang mở cửa (theo giờ máy của bạn).' : 'Showroom đang đóng cửa, bạn vẫn có thể gửi yêu cầu.';
+  var carSel = TV.$('#ct-car');
+  carSel.innerHTML = '<option value="">Chưa chọn xe cụ thể</option>' + D.cars.map(function (c) { return '<option value="' + c.id + '">' + TV.esc(c.name) + ' – ' + TV.price(c.price) + '</option>'; }).join('');
+  var topic = TV.param('chu-de'), xe = TV.param('xe');
+  if (topic && TV.$('#ct-topic option[value="' + topic.replace(/[^a-z-]/g, '') + '"]')) TV.$('#ct-topic').value = topic;
+  if (xe && TV.carById(xe)) carSel.value = xe;
+  var form = TV.$('#contact-form'), tried = false;
+  function validate() {
+    var f = form.elements, ok = true;
+    var set = function (el, m) { TV.setErr(el, m); if (m) ok = false; };
+    var nm = f.name.value.trim();
+    set(f.name, nm.length < 2 ? 'Nhập họ tên (ít nhất 2 ký tự)' : (/\d/.test(nm) ? 'Họ tên không chứa chữ số' : ''));
+    set(f.phone, !f.phone.value.trim() ? 'Nhập số điện thoại' : (TV.phoneOk(f.phone.value) ? '' : 'Số điện thoại chưa đúng (10 số, bắt đầu 03, 05, 07, 08, 09)'));
+    set(f.email, f.email.value.trim() && !TV.emailOk(f.email.value) ? 'Email chưa đúng định dạng' : '');
+    set(f.topic, f.topic.value ? '' : 'Chọn chủ đề');
+    set(f.msg, f.msg.value.trim().length < 10 ? 'Nội dung tối thiểu 10 ký tự' : '');
+    return ok;
+  }
+  form.addEventListener('input', function () { if (tried) validate(); });
+  form.addEventListener('change', function () { if (tried) validate(); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); tried = true;
+    if (!validate()) { var bad = form.querySelector('[aria-invalid="true"]'); if (bad) bad.focus(); return; }
+    var f = form.elements, car = TV.carById(f.car.value);
+    var rows = [['Mã yêu cầu', TV.refCode('TV')], ['Chủ đề', f.topic.options[f.topic.selectedIndex].text]];
+    if (car) rows.push(['Xe', car.name]);
+    rows.push(['Liên hệ', f.name.value.trim() + ' · ' + f.phone.value.trim()]);
+    TV.$('#contact-sum').innerHTML = rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + TV.esc(r[1]) + '</dd>'; }).join('');
+    form.classList.add('done'); TV.$('#contact-ok').classList.add('show'); TV.$('#contact-ok').focus();
+  });
+})();
+</script>
+</body>
+</html>

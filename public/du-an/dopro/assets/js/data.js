@@ -1,22 +1,38 @@
-/* ĐỘ PRO GARAGE – dữ liệu mẫu (thương hiệu minh hoạ) */
+/* ĐỘ PRO GARAGE – dữ liệu mẫu (cửa hàng & thương hiệu minh hoạ) */
 (function () {
   'use strict';
+  /* Ảnh minh hoạ banner / dịch vụ: Unsplash (giấy phép miễn phí) */
   var IMG = function (id, w, h) {
     return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=' + w + (h ? '&h=' + h : '') + '&q=70';
   };
+  /* Ảnh sản phẩm: ảnh thật từ Wikimedia Commons, đã tách nền trắng & chuẩn hoá 800×800 (assets/img/products) */
+  var PIMG = function (slug) { return 'assets/img/products/' + slug + '.webp'; };
 
+  /* ---------- Danh mục sản phẩm ---------- */
   var CATS = [
-    { id: 'body-kit', name: 'Body kit', short: 'Body kit', img: '1779263439678-d02c2eb7591b', desc: 'Lip, hông, khuếch tán' },
-    { id: 'canh-gio', name: 'Cánh gió', short: 'Cánh gió', img: '1775391985323-c4eb0e2a5807', desc: 'Carbon · GT wing' },
-    { id: 'po', name: 'Pô độ', short: 'Pô độ', img: '1777173649680-45b71ee019d5', desc: 'Titan · van điện' },
-    { id: 'mam', name: 'Mâm độ', short: 'Mâm độ', img: '1591158704107-8a254758d4c9', desc: '17" – 19" đúc & rèn' },
-    { id: 'loc-gio', name: 'Hút gió & Turbo', short: 'Hút gió', img: '1522598140461-ec9911e01c53', desc: 'Lọc côn · intake' },
-    { id: 'phuoc', name: 'Phuộc & hạ gầm', short: 'Phuộc', img: '1760836395763-25ea44ae8145', desc: 'Coilover · phuộc hơi' },
-    { id: 'tem', name: 'Tem dán & đổi màu', short: 'Tem dán', img: '1674898759716-d7ddd59072a5', desc: 'Livery · wrap' },
-    { id: 'noi-that', name: 'Vô lăng & nội thất', short: 'Nội thất', img: '1784034839931-87b163b53271', desc: 'Vô lăng · ghế bucket' }
+    { id: 'turbo-xa', name: 'Turbo & cổ góp xả', short: 'Turbo', img: 'turbo-wastegate-tich-hop',
+      groups: [['Tăng áp', ['Turbo có wastegate', 'Turbo T3/T4', 'Bộ turbo trọn gói']], ['Hệ thống xả', ['Cổ góp xả (header)']]] },
+    { id: 'mam', name: 'Mâm & ốc mâm', short: 'Mâm', img: 'mam-18-5-chau-kep-bac',
+      groups: [['Mâm đúc', ['Mâm 17 inch', 'Mâm 18 inch']], ['Ốc mâm', ['Ốc khoá chống trộm', 'Ốc & tắc kê']]] },
+    { id: 'gam', name: 'Phuộc & phụ kiện gầm', short: 'Phuộc', img: 'coilover-bo-4',
+      groups: [['Hệ thống treo', ['Coilover']], ['Track day', ['Móc kéo xe']]] },
+    { id: 'den-dien', name: 'Đèn & đồ điện', short: 'Đèn & điện', img: 'bong-led-h4',
+      groups: [['Chiếu sáng', ['Bóng LED H4']], ['Thiết bị', ['Camera hành trình']]] },
+    { id: 'bao-duong', name: 'Phụ tùng bảo dưỡng', short: 'Bảo dưỡng', img: 'bugi-danh-lua',
+      groups: [['Đánh lửa', ['Bugi']], ['Lọc', ['Lọc gió điều hoà']]] }
   ];
 
-  /* Fitment: brand -> models */
+  /* ---------- Dịch vụ thi công tại xưởng (ảnh công trình thực tế, không phải ảnh sản phẩm) ---------- */
+  var SERVICES = [
+    { id: 'body-kit', name: 'Body kit & cánh gió', from: 2450000, time: '1–2 ngày', img: '1788718600150-84f1e18a9f36', desc: 'Lip trước, ốp sườn, widebody, cánh GT – sơn đúng mã màu xe.', svc: 'Body kit & cánh gió' },
+    { id: 'dan-doi-mau', name: 'Dán đổi màu & tem', from: 2200000, time: '2 giờ – 2 ngày', img: '1617024094355-b886817cffc4', desc: 'Film đổi màu bền 5 năm, tem livery cắt CNC theo form xe.', svc: 'Tem dán & đổi màu' },
+    { id: 'do-po', name: 'Độ pô & hệ thống xả', from: 1290000, time: '1–3 giờ', img: '1777173649680-45b71ee019d5', desc: 'Pô inox/titan, đầu pô, van điện – đo độ ồn trước khi bàn giao.', svc: 'Pô độ' },
+    { id: 'phanh', name: 'Nâng cấp phanh', from: 1350000, time: '1–4 giờ', img: '1760317890322-364a810cd4da', desc: 'Đĩa khoan xẻ rãnh, heo 4–6 piston, má phanh gốm, dầu DOT 4.', svc: 'Phanh hiệu suất' },
+    { id: 'noi-that', name: 'Vô lăng & ghế thể thao', from: 3450000, time: '1–3 giờ', img: '1784034839931-87b163b53271', desc: 'Vô lăng đĩa sâu, ghế bucket, ốp carbon – tư vấn túi khí kỹ.', svc: 'Nội thất thể thao' },
+    { id: 'remap', name: 'Remap ECU & đo dyno', from: 3900000, time: 'Nửa ngày', img: '1591879742348-13012c2963bf', desc: 'Map an toàn theo xăng tại Việt Nam, in biên bản dyno trước & sau.', svc: 'Combo Stage 1' }
+  ];
+
+  /* ---------- Hãng xe -> dòng xe ---------- */
   var BRANDS = [
     { id: 'toyota', name: 'Toyota', models: [['vios', 'Vios'], ['corolla-cross', 'Corolla Cross'], ['camry', 'Camry'], ['fortuner', 'Fortuner']] },
     { id: 'honda', name: 'Honda', models: [['city', 'City'], ['civic', 'Civic'], ['crv', 'CR-V']] },
@@ -27,80 +43,85 @@
     { id: 'mitsubishi', name: 'Mitsubishi', models: [['xpander', 'Xpander'], ['attrage', 'Attrage']] },
     { id: 'vinfast', name: 'VinFast', models: [['vf5', 'VF 5'], ['vf8', 'VF 8'], ['fadil', 'Fadil']] }
   ];
+  var MODEL_TABS = ['vios', 'city', 'mazda3', 'civic', 'accent', 'k3', 'ranger', 'xpander'];
 
   var SEDAN = ['vios', 'camry', 'city', 'civic', 'mazda3', 'mazda6', 'accent', 'elantra', 'k3', 'attrage'];
   var SPORTY = ['civic', 'mazda3', 'elantra', 'k3', 'city', 'vios', 'camry', 'mazda6'];
   var SUV = ['corolla-cross', 'fortuner', 'crv', 'cx5', 'tucson', 'seltos', 'everest', 'territory', 'xpander', 'vf8', 'ranger'];
   var SMALL = ['morning', 'fadil', 'vf5', 'accent', 'attrage', 'vios', 'city'];
-  var TURBO = ['civic', 'crv', 'mazda3', 'elantra', 'k3', 'tucson', 'seltos', 'ranger', 'everest', 'territory', 'corolla-cross', 'cx5', 'camry'];
+  var NA4 = ['vios', 'city', 'mazda3', 'mazda6', 'accent', 'elantra', 'k3', 'attrage', 'xpander', 'morning', 'fadil', 'corolla-cross', 'cx5'];
   var ICE_ALL = ['vios', 'corolla-cross', 'camry', 'fortuner', 'city', 'civic', 'crv', 'mazda3', 'cx5', 'mazda6', 'accent', 'elantra', 'tucson', 'morning', 'k3', 'seltos', 'ranger', 'everest', 'territory', 'xpander', 'attrage', 'fadil'];
+  var ALL = ICE_ALL.concat(['vf5', 'vf8']);
+  var H4 = ['vios', 'city', 'accent', 'attrage', 'xpander', 'morning', 'fadil', 'ranger', 'fortuner', 'k3'];
 
+  /*
+   * img = tên file trong assets/img/products, src = nguồn ảnh (Wikimedia Commons)
+   * tags: g = có quà tặng, i = trả góp 0%, l = lắp tại xưởng
+   */
   var P = [
-    { id: 'p01', cat: 'canh-gio', name: 'Cánh gió GT Carbon 3D Track Wing', spec: 'Carbon twill 3K · chân nhôm CNC · chỉnh góc 5 nấc', price: 6900000, old: 8500000, rating: 4.9, reviews: 214, img: '1775391985323-c4eb0e2a5807', fit: SEDAN, hot: 98,
-      feats: ['Carbon thật 3K, phủ UV chống ố vàng', 'Chân đế nhôm CNC 6061, sơn tĩnh điện', 'Chỉnh góc tấn 5 nấc (0° – 8°)', 'Bộ ốc inox + gioăng cao su chống nước'] },
-    { id: 'p02', cat: 'canh-gio', name: 'Cánh gió đuôi vịt Carbon Ducktail', spec: 'Carbon thật · dán 3M VHB · không khoan cốp', price: 2450000, old: 2990000, rating: 4.8, reviews: 532, img: '1770172505231-2644765d984c', fit: SEDAN, hot: 96,
-      feats: ['Không khoan cốp – dán băng keo 3M VHB', 'Form ôm theo từng dòng xe', 'Carbon bóng hoặc nhám tuỳ chọn', 'Lắp đặt 20 phút'] },
-    { id: 'p03', cat: 'canh-gio', name: 'Cánh gió cổ thiên nga Swan-Neck', spec: 'Nhôm + carbon · bản rộng 1450 mm · gắn cốp', price: 7800000, old: 9200000, rating: 4.7, reviews: 88, img: '1770172505314-b36c50ba7a56', fit: SPORTY, hot: 80,
-      feats: ['Kiểu treo cổ thiên nga, luồng gió sạch phía dưới', 'Bản rộng 1450 mm, end-plate carbon', 'Tăng lực ép ở tốc độ cao', 'Kèm pát gia cố cốp'] },
-    { id: 'p04', cat: 'body-kit', name: 'Body kit thể thao Street-R (4 món)', spec: 'Lip trước · ốp hông · khuếch tán sau · ABS đen bóng', price: 12500000, old: 15900000, rating: 4.8, reviews: 176, img: '1779263439678-d02c2eb7591b', fit: SPORTY, hot: 94,
-      feats: ['Gồm lip trước, 2 ốp hông, khuếch tán sau', 'Nhựa ABS dẻo, sơn đen bóng 3 lớp', 'Bắt vít vào lỗ zin, không cắt cản', 'Bảo hành nứt vỡ 12 tháng'] },
-    { id: 'p05', cat: 'body-kit', name: 'Bộ widebody Fender Flare +50 mm', spec: '8 mảnh · sợi thủy tinh FRP · bulong đen', price: 18900000, old: 22000000, rating: 4.6, reviews: 41, img: '1788718600150-84f1e18a9f36', fit: SPORTY, hot: 70,
-      feats: ['Nới rộng 50 mm mỗi bên', '8 mảnh FRP, hoàn thiện sơn theo màu xe', 'Bulong đen kiểu riveted', 'Tư vấn mâm offset phù hợp'] },
-    { id: 'p06', cat: 'body-kit', name: 'Ốp gương carbon dạng cánh', spec: 'Carbon 3K phủ UV · thay thế nắp gương', price: 1850000, old: 2300000, rating: 4.7, reviews: 302, img: '1787130314421-ce947d45aed9', fit: ICE_ALL.concat(['vf5', 'vf8']), hot: 85,
-      feats: ['Thay thế trực tiếp nắp gương zin', 'Carbon 3K, giữ nguyên xi-nhan gương', 'Không ảnh hưởng gập điện', 'Bộ 2 chiếc trái/phải'] },
-    { id: 'p07', cat: 'po', name: 'Pô titan đôi khò cháy Burnt-Ti', spec: 'Titan grade 1 · đầu Ø89 mm · tăng ~6 HP', price: 9600000, old: 11900000, rating: 4.9, reviews: 267, img: '1777173649680-45b71ee019d5', fit: ICE_ALL, hot: 99, hp: 6,
-      feats: ['Titan grade 1, nhẹ hơn inox 40%', 'Màu khò cháy xanh tím thủ công', 'Tiếng trầm, không ù trong cabin', 'Tăng khoảng 6 HP (đo dyno tham chiếu)'] },
-    { id: 'p08', cat: 'po', name: 'Pô thể thao 2 đầu viền carbon', spec: 'Inox 304 · đầu Ø101 mm · âm trầm', price: 4850000, old: 5900000, rating: 4.8, reviews: 411, img: '1692309175422-b9d614f4764e', fit: ICE_ALL, hot: 95,
-      feats: ['Inox 304 đánh bóng gương', 'Viền đầu pô carbon thật', 'Ống tiêu âm thẳng, âm trầm ấm', 'Lắp đặt 60 phút'] },
-    { id: 'p09', cat: 'po', name: 'Pô van điện Valve-X điều khiển remote', spec: 'Đóng/mở van · 2 chế độ êm/gầm · tăng ~8 HP', price: 14500000, old: 17000000, rating: 4.9, reviews: 129, img: '1779263450175-dbd8771edc44', fit: TURBO, hot: 92, hp: 8,
-      feats: ['Van điện đóng/mở bằng remote hoặc app', 'Chế độ êm đi phố – chế độ gầm đi tour', 'Tăng khoảng 8 HP khi mở van', 'Bảo hành mô-tơ van 24 tháng'] },
-    { id: 'p10', cat: 'po', name: 'Đầu pô xanh titan Blue-Burn (cặp)', spec: 'Ø76 mm · kẹp không hàn · bộ 2 chiếc', price: 1290000, old: 1690000, rating: 4.6, reviews: 688, img: '1760449072788-8ace021a956b', fit: ICE_ALL, hot: 90,
-      feats: ['Kẹp đai, không cần hàn', 'Mạ PVD xanh titan bền màu', 'Đường kính trong Ø63 – 76 mm', 'Tự lắp tại nhà được'] },
-    { id: 'p11', cat: 'mam', name: 'Mâm đúc 18" 5 chấu kép Gunmetal', spec: '18×8.5 · ET35 · 9,2 kg/chiếc · bộ 4', price: 21900000, old: 26000000, rating: 4.8, reviews: 154, img: '1591158704107-8a254758d4c9', fit: SPORTY.concat(SUV), hot: 93,
-      feats: ['Đúc áp suất thấp, kiểm định JWL/VIA', 'Màu gunmetal sơn tĩnh điện', 'Có PCD 5×100 / 5×114.3', 'Miễn phí cân bằng động'] },
-    { id: 'p12', cat: 'mam', name: 'Mâm 10 chấu Classic Mesh 17"', spec: '17×8 · ET30 · vành bóng · bộ 4', price: 16500000, old: 19800000, rating: 4.7, reviews: 97, img: '1770750942596-be791b5d0ffe', fit: SEDAN.concat(SMALL), hot: 84,
-      feats: ['Thiết kế 10 chấu cổ điển', 'Vành step-lip đánh bóng', 'Trọng lượng 8,4 kg/chiếc', 'Tặng bộ ốc khoá chống trộm'] },
-    { id: 'p13', cat: 'mam', name: 'Mâm rèn Forged Flow 19" siêu nhẹ', spec: 'Rèn nguyên khối 6061-T6 · 8,1 kg/chiếc · bộ 4', price: 42000000, old: 49000000, rating: 5.0, reviews: 36, img: '1611633235555-45e252fe48c8', fit: SPORTY.concat(SUV), hot: 78,
-      feats: ['Rèn nguyên khối nhôm 6061-T6', 'Nhẹ hơn mâm zin ~3 kg/chiếc', 'Gia công theo offset riêng từng xe', 'Bảo hành kết cấu 5 năm'] },
-    { id: 'p14', cat: 'loc-gio', name: 'Lọc gió côn hiệu suất Cone-Flow', spec: 'Cotton 4 lớp · rửa tái sử dụng · tăng ~4 HP', price: 1150000, old: 1450000, rating: 4.7, reviews: 845, img: '1522598140461-ec9911e01c53', fit: ICE_ALL, hot: 97, hp: 4,
-      feats: ['Vải cotton 4 lớp tẩm dầu', 'Rửa và dùng lại đến 80.000 km', 'Tiếng hút gió thể thao', 'Kèm cổ nối theo họng gió'] },
-    { id: 'p15', cat: 'loc-gio', name: 'Bộ hút gió lạnh Cold Air Intake', spec: 'Ống nhôm Ø76 · hộp chắn nhiệt · tăng ~9 HP', price: 6200000, old: 7500000, rating: 4.8, reviews: 203, img: '1779263570103-e6cb9045fc54', fit: TURBO, hot: 88, hp: 9,
-      feats: ['Ống nhôm Ø76 mm sơn đỏ', 'Hộp chắn nhiệt lấy gió lạnh', 'Không báo lỗi cảm biến MAF', 'Tăng khoảng 9 HP'] },
-    { id: 'p16', cat: 'loc-gio', name: 'Bộ turbo kit Stage 2 lắp trọn gói', spec: 'Turbo bạc đạn bi · intercooler · tăng ~60 HP', price: 68000000, old: 79000000, rating: 4.9, reviews: 22, img: '1591879742348-13012c2963bf', fit: TURBO, hot: 75, hp: 60,
-      feats: ['Turbo bạc đạn bi phản hồi nhanh', 'Intercooler nhôm + đường ống silicon', 'Remap ECU & dyno tuning kèm theo', 'Bảo hành hệ thống 12 tháng'] },
-    { id: 'p17', cat: 'phuoc', name: 'Phuộc coilover 32 nấc Street-Track', spec: 'Chỉnh cao thấp & cứng mềm · bộ 4 · BH 24 tháng', price: 19500000, old: 23500000, rating: 4.9, reviews: 318, img: '1760836395763-25ea44ae8145', fit: ICE_ALL.concat(['vf5', 'vf8']), hot: 97,
-      feats: ['32 nấc chỉnh độ cứng giảm chấn', 'Hạ gầm 30 – 80 mm tuỳ chỉnh', 'Ty phuộc mạ crom cứng Ø44', 'Bảo hành rò dầu 24 tháng'] },
-    { id: 'p18', cat: 'phuoc', name: 'Lò xo hạ gầm thể thao −35 mm', spec: 'Thép crom-silic · sơn tĩnh điện đỏ · bộ 4', price: 3900000, old: 4600000, rating: 4.6, reviews: 457, img: '1760836395865-0c20fff2aefd', fit: ICE_ALL.concat(['vf5']), hot: 86,
-      feats: ['Hạ gầm 35 mm, giữ phuộc zin', 'Thép crom-silic chịu tải cao', 'Giảm nghiêng thân khi vào cua', 'Kèm căn chỉnh thước lái'] },
-    { id: 'p19', cat: 'phuoc', name: 'Bộ phuộc hơi Air-Ride điều khiển app', spec: 'Bình hơi 5L · 4 vị trí nhớ · nâng/hạ 10 cm', price: 58000000, old: 65000000, rating: 4.8, reviews: 31, img: '1760317890353-5b156b3f9769', fit: SEDAN.concat(SUV), hot: 72,
-      feats: ['Nâng/hạ 10 cm bằng app điện thoại', '4 vị trí nhớ chiều cao', 'Máy nén kép, bình hơi 5L', 'Thi công 2 ngày'] },
-    { id: 'p20', cat: 'phuoc', name: 'Đĩa phanh khoan rãnh + heo 4 piston', spec: 'Đĩa 330 mm · má phanh gốm · bộ cầu trước', price: 15900000, old: 18500000, rating: 4.9, reviews: 112, img: '1760317890322-364a810cd4da', fit: SPORTY.concat(SUV), hot: 83,
-      feats: ['Đĩa 330 mm khoan lỗ xẻ rãnh', 'Heo 4 piston nhôm đúc', 'Má phanh gốm ít bụi', 'Rút ngắn quãng phanh ~12%'] },
-    { id: 'p21', cat: 'tem', name: 'Tem livery Racing Stripes', spec: 'Decal cán bóng · cắt theo form xe', price: 2200000, old: 2800000, rating: 4.7, reviews: 389, img: '1593481639859-98e0458f3902', fit: ICE_ALL.concat(['vf5', 'vf8']), hot: 87,
-      feats: ['Decal cán phủ bóng chống UV', 'Cắt CNC theo form từng xe', 'Bóc không để lại keo', 'Dán trong 2 giờ'] },
-    { id: 'p22', cat: 'tem', name: 'Dán đổi màu Chameleon đổi sắc', spec: 'Film PVC bền 5 năm · trọn xe sedan', price: 16000000, old: 19000000, rating: 4.8, reviews: 74, img: '1617024094355-b886817cffc4', fit: ICE_ALL.concat(['vf5', 'vf8']), hot: 81,
-      feats: ['Đổi sắc theo góc nhìn', 'Film PVC bền màu 5 năm', 'Bảo vệ sơn zin bên dưới', 'Bao gồm khe cửa & tay nắm'] },
-    { id: 'p23', cat: 'tem', name: 'Tem nghệ thuật Art-Wrap theo yêu cầu', spec: 'Thiết kế riêng · in UV · cán phủ chống trầy', price: 9500000, old: 12000000, rating: 4.9, reviews: 58, img: '1558958806-d5088c90f389', fit: ICE_ALL.concat(['vf5', 'vf8']), hot: 76,
-      feats: ['Thiết kế riêng 2 bản phác thảo', 'In UV độ phân giải cao', 'Cán phủ chống trầy xước', 'Bảo hành bong tróc 24 tháng'] },
-    { id: 'p24', cat: 'noi-that', name: 'Vô lăng đĩa sâu da lộn 350 mm', spec: 'Da lộn cao cấp · chỉ đỏ · kèm hub chuyển', price: 3450000, old: 4200000, rating: 4.8, reviews: 266, img: '1784034839931-87b163b53271', fit: ICE_ALL, hot: 91,
-      feats: ['Đường kính 350 mm, độ sâu 90 mm', 'Bọc da lộn, chỉ khâu đỏ', 'Kèm hub chuyển theo dòng xe', 'Lưu ý: tư vấn túi khí trước khi lắp'] },
-    { id: 'p25', cat: 'noi-that', name: 'Ghế bucket thể thao khung thép', spec: 'Đệm da · viền đỏ · kèm ray trượt', price: 8900000, old: 10500000, rating: 4.7, reviews: 63, img: '1789457365610-ac228d667d3d', fit: SEDAN.concat(SMALL), hot: 74,
-      feats: ['Khung thép ống chịu lực', 'Đệm da, viền chỉ đỏ', 'Kèm ray trượt & pát bắt sàn', 'Hỗ trợ dây đai 4 điểm'] }
+    { id: 'p01', cat: 'turbo-xa', name: 'Turbo tăng áp có wastegate tích hợp cho máy 1.5–2.0L', spec: 'Van xả áp tích hợp · làm mát dầu + nước · ~45 HP', price: 14500000, old: 16900000, rating: 4.8, reviews: 74, sold: 132, img: 'turbo-wastegate-tich-hop', fit: NA4, hot: 96, hp: 45, tags: 'gil', gift: 'Tặng bộ ống dầu turbo',
+      feats: ['Wastegate tích hợp, không cần van xả rời', 'Vỏ turbine gang chịu nhiệt', 'Đường dầu & nước làm mát tiêu chuẩn', 'Lắp kèm remap ECU tại xưởng'],
+      src: ['Panoha', 'CC BY-SA 3.0', 'https://commons.wikimedia.org/wiki/File:Turbo_charger_with_wastegate.jpg'] },
+    { id: 'p02', cat: 'turbo-xa', name: 'Turbo T3/T4 mặt bích T3 cho máy 1.8–2.5L', spec: 'Mặt bích T3 · cửa xả V-band · ~60 HP', price: 11800000, old: 13500000, rating: 4.7, reviews: 51, sold: 88, img: 'turbo-t3-t4', fit: ['civic', 'camry', 'mazda6', 'crv', 'cx5', 'tucson', 'ranger', 'everest', 'fortuner'], hot: 88, hp: 60, tags: 'il',
+      feats: ['Mặt bích T3 phổ biến, dễ chế cổ góp', 'Bánh nén nhôm đúc', 'Phù hợp dự án Stage 3', 'Bảo hành 6 tháng khi lắp tại xưởng'],
+      src: ['Bobbobson', 'CC BY 3.0', 'https://commons.wikimedia.org/wiki/File:Turbocharger-1-.jpg'] },
+    { id: 'p03', cat: 'turbo-xa', name: 'Bộ turbo kèm cổ góp xả lắp sẵn (trọn gói)', spec: 'Turbo + cổ góp + ống dầu · ~70 HP', price: 24900000, old: 28500000, rating: 4.9, reviews: 23, sold: 31, img: 'bo-turbo-co-gop-xa', fit: ['civic', 'mazda3', 'k3', 'elantra', 'camry', 'cx5'], hot: 84, hp: 70, tags: 'gil', gift: 'Tặng remap ECU + 2 lần đo dyno',
+      feats: ['Turbo và cổ góp xả lắp sẵn, giảm thời gian thi công', 'Kèm ống dầu, gioăng, bulông chịu nhiệt', 'Remap ECU & chạy dyno kèm theo', 'Bảo hành hệ thống 12 tháng'],
+      src: ['Tiia Monto', 'CC BY 4.0', 'https://commons.wikimedia.org/wiki/File:Turbocharger_3.jpg'] },
+    { id: 'p04', cat: 'turbo-xa', name: 'Cổ góp xả (header) 4-1 thép chịu nhiệt cho máy 4 xi-lanh', spec: '4 ống vào 1 · mối hàn TIG · ~6 HP', price: 6900000, old: 8200000, rating: 4.8, reviews: 96, sold: 214, img: 'co-xa-header-4-1', fit: NA4, hot: 92, hp: 6, tags: 'il',
+      feats: ['4 ống dài bằng nhau, xả đều từng máy', 'Thép chịu nhiệt, hàn TIG', 'Kèm gioăng mặt bích & bulông', 'Tăng ~6 HP khi đi cùng pô thông (đo tham chiếu)'],
+      src: ['Auge=mit', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:TF_Kruemmer_002_noBG.jpg'] },
+
+    { id: 'p05', cat: 'mam', name: 'Mâm đúc 18 inch 5 chấu kép xám phay mặt (bộ 4)', spec: '18×8 · PCD 5×114.3 · ET40', price: 15600000, old: 18400000, rating: 4.8, reviews: 142, sold: 318, img: 'mam-18-5-chau-kep-bac', fit: SPORTY.concat(SUV), hot: 97, tags: 'gil', gift: 'Tặng ốc khoá + cân bằng động',
+      feats: ['Đúc áp suất thấp, kiểm tra đảo vành tại xưởng', 'Màu xám phay mặt bóng', 'Có PCD 5×114.3 / 5×100', 'Miễn phí tháo lắp & cân bằng động'],
+      src: ['Caylik', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Reblica-Dx-S-540-Janti-Fume-Yuzeyi-Polisaj.JPG'] },
+    { id: 'p06', cat: 'mam', name: 'Mâm đúc 17 inch đen phay mặt 5 chấu (bộ 4)', spec: '17×7.5 · PCD 4×100 / 5×114.3 · ET42', price: 13200000, old: 15800000, rating: 4.7, reviews: 97, sold: 236, img: 'mam-17-den-phay-mat', fit: SEDAN.concat(SMALL), hot: 90, tags: 'il',
+      feats: ['Thiết kế 5 chấu cong thể thao', 'Sơn đen bóng, mặt chấu phay sáng', 'Có PCD 4×100 cho xe hạng B', 'Tặng bộ chụp ốc'],
+      src: ['Duru2007', 'CC BY-SA 3.0', 'https://commons.wikimedia.org/wiki/File:Black_diamond_alloy_wheels.jpg'] },
+    { id: 'p07', cat: 'mam', name: 'Ốc khoá mâm chống trộm đầu cầu (bộ 4 + đầu khoá)', spec: 'Thép mạ kẽm · ren M14×1.5 · đầu cầu', price: 650000, old: 790000, rating: 4.8, reviews: 365, sold: 2140, img: 'oc-khoa-mam-chong-trom', fit: ALL, hot: 93, tags: 'l',
+      feats: ['Mỗi bánh 1 ốc khoá, mở bằng đầu khoá riêng', 'Thép mạ kẽm chống gỉ', 'Đầu cầu khớp mâm zin & mâm độ', 'Lắp miễn phí khi mua mâm'],
+      src: ['Raimond Spekking', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Kugelbund-Felgenschloss_und_Kugelbundschraube-92159.jpg'] },
+    { id: 'p08', cat: 'mam', name: 'Bộ ốc mâm & tắc kê thép mạ (chọn theo xe)', spec: 'M12 / M14 · đầu côn & đầu cầu', price: 420000, old: 520000, rating: 4.6, reviews: 211, sold: 1380, img: 'bo-oc-mam-tac-ke', fit: ALL, hot: 80, tags: 'l',
+      feats: ['Đủ cỡ M12×1.5 và M14×1.5', 'Đầu côn 60° hoặc đầu cầu theo mâm', 'Thép cứng 10.9, mạ chống gỉ', 'Siết lực đúng thông số khi lắp'],
+      src: ['Davidtlchow', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:Wheel_Nuts_All_Details.png'] },
+
+    { id: 'p09', cat: 'gam', name: 'Phuộc coilover chỉnh cao thấp (bộ 4 cây)', spec: 'Chỉnh cao thấp bằng ren · lò xo xanh · BH 12 tháng', price: 16900000, old: 19500000, rating: 4.8, reviews: 188, sold: 402, img: 'coilover-bo-4', fit: ICE_ALL.concat(['vf5']), hot: 95, tags: 'gil', gift: 'Tặng căn chỉnh thước lái',
+      feats: ['Hạ gầm 30–70 mm tuỳ chỉnh', 'Thân phuộc nhôm, ren chỉnh cao thấp', 'Đi phố êm, vào cua chắc', 'Bảo hành rò dầu 12 tháng'],
+      src: ['Cameron Chapman', 'CC BY 2.0', 'https://commons.wikimedia.org/wiki/File:Coilovers.jpg'] },
+    { id: 'p10', cat: 'gam', name: 'Móc kéo xe ren vặn (tow hook) thép rèn', spec: 'Thép rèn · ren theo cản xe · tải 2 tấn', price: 250000, old: 320000, rating: 4.7, reviews: 129, sold: 760, img: 'moc-keo-xe', fit: ALL, hot: 70, tags: 'l',
+      feats: ['Vặn vào lỗ móc kéo zin ở cản', 'Thép rèn, sơn tĩnh điện', 'Bắt buộc khi chạy track day', 'Kèm túi đựng'],
+      src: ['Paplauskas', 'CC BY-SA 3.0', 'https://commons.wikimedia.org/wiki/File:%D0%91%D1%83%D0%BA%D1%81%D0%B8%D1%80%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D0%B0%D1%8F_%D0%BF%D0%B5%D1%82%D0%BB%D1%8F_(%D0%B1%D1%83%D0%BA%D1%81%D0%B8%D1%80%D0%BE%D0%B2%D0%BE%D1%87%D0%BD%D1%8B%D0%B9_%D0%BA%D1%80%D1%8E%D0%BA,_%D0%BF%D1%80%D0%BE%D1%83%D1%88%D0%B8%D0%BD%D0%B0).jpg'] },
+
+    { id: 'p11', cat: 'den-dien', name: 'Bóng đèn LED H4 tản nhiệt nhôm (cặp)', spec: 'Chân H4 cos/pha · 6000K · quạt tản nhiệt', price: 890000, old: 1190000, rating: 4.7, reviews: 512, sold: 3260, img: 'bong-led-h4', fit: H4, hot: 98, tags: 'l',
+      feats: ['Thay trực tiếp bóng halogen H4', 'Ánh sáng trắng 6000K, cos – pha rõ', 'Thân nhôm tản nhiệt + quạt', 'Cân chỉnh pha miễn phí tại xưởng'],
+      src: ['Ostadhamechidon', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:%D9%87%D8%AF%D9%84%D8%A7%DB%8C%D8%AA.jpg'] },
+    { id: 'p12', cat: 'den-dien', name: 'Camera hành trình 2 mắt kèm tẩu sạc', spec: 'Ghi trước & trong xe · đế hít kính · tẩu 12V', price: 1450000, old: 1890000, rating: 4.6, reviews: 274, sold: 1120, img: 'camera-hanh-trinh-2-mat', fit: ALL, hot: 89, tags: 'gil', gift: 'Tặng thẻ nhớ 32GB',
+      feats: ['2 ống kính: phía trước và trong cabin', 'Đế hít kính chắc chắn', 'Tẩu sạc 12V kèm dây dài', 'Đi dây gọn miễn phí tại xưởng'],
+      src: ['Schekinov Alexey Victorovich', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%82%D0%BE%D1%80_%D0%B4%D0%B2%D1%83%D1%85%D0%BA%D0%B0%D0%BC%D0%B5%D1%80%D0%BD%D1%8B%D0%B9_%D0%B8_%D0%B1%D0%BB%D0%BE%D0%BA_%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D1%8F_%D0%BA_%D0%BD%D0%B5%D0%BC%D1%83._%D0%A4%D0%BE%D1%82%D0%BE_%D0%90._%D0%A9%D0%B5%D0%BA%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0.jpg'] },
+
+    { id: 'p13', cat: 'bao-duong', name: 'Bugi đánh lửa ren dài (1 cây)', spec: 'Ren M12 · cực đồng · thay mỗi 20.000 km', price: 180000, old: 220000, rating: 4.7, reviews: 438, sold: 4120, img: 'bugi-danh-lua', fit: ICE_ALL, hot: 86, tags: 'l',
+      feats: ['Đúng mã theo động cơ, tra cứu theo đời xe', 'Đánh lửa ổn định khi đã remap', 'Nên thay đồng bộ cả bộ', 'Thay tại xưởng 15 phút'],
+      src: ['Ren206', 'Public domain', 'https://commons.wikimedia.org/wiki/File:Sparkplug3.jpg'] },
+    { id: 'p14', cat: 'bao-duong', name: 'Lọc gió điều hoà than hoạt tính (2 tấm)', spec: 'Lọc bụi mịn · khử mùi · thay mỗi 10.000 km', price: 290000, old: 350000, rating: 4.6, reviews: 356, sold: 2870, img: 'loc-gio-dieu-hoa', fit: ALL, hot: 78, tags: 'l',
+      feats: ['Lớp than hoạt tính khử mùi', 'Giữ bụi mịn, phấn hoa', 'Đúng kích thước theo xe', 'Thay miễn phí khi bảo dưỡng tại xưởng'],
+      src: ['友田康治', 'CC BY-SA 4.0', 'https://commons.wikimedia.org/wiki/File:MG_9218M.jpg'] }
   ];
+
+  /* Flash sale: id, số suất, đã bán */
+  var FLASH = [['p11', 50, 41], ['p07', 60, 47], ['p12', 30, 17], ['p14', 80, 52], ['p05', 10, 6], ['p13', 100, 64], ['p09', 8, 7], ['p10', 40, 13]];
 
   var COMBOS = [
-    { id: 'c1', stage: 'STAGE 1', tag: 'STREET', name: 'Combo Đánh Thức', img: '1779263570103-e6cb9045fc54',
-      hp: [178, 201], nm: [240, 272], acc: [7.6, 7.1], price: 8900000, old: 10600000,
-      items: ['Lọc gió côn Cone-Flow', 'Đầu pô Blue-Burn', 'Remap ECU nhẹ (map an toàn)', 'Đo dyno trước & sau'] },
-    { id: 'c2', stage: 'STAGE 2', tag: 'BÁN CHẠY', name: 'Combo Bứt Phá', img: '1503221507150-dcb5a13416ca', featured: true,
-      hp: [178, 228], nm: [240, 320], acc: [7.6, 6.4], price: 29500000, old: 34900000,
-      items: ['Hút gió lạnh Cold Air Intake', 'Pô van điện Valve-X', 'Downpipe inox + remap Stage 2', 'Lò xo hạ gầm −35 mm'] },
-    { id: 'c3', stage: 'STAGE 3', tag: 'TRACK', name: 'Combo Quái Vật', img: '1591879742348-13012c2963bf',
-      hp: [178, 246], nm: [240, 365], acc: [7.6, 5.8], price: 89000000, old: 104000000,
-      items: ['Turbo kit + intercooler', 'Coilover 32 nấc Street-Track', 'Pô titan Burnt-Ti', 'Đĩa phanh khoan rãnh 4 piston'] }
+    { id: 'c1', stage: 'Stage 1', tag: 'Đi phố', name: 'Combo Stage 1 – Đánh Thức', img: '1779263570103-e6cb9045fc54',
+      hp: [178, 201], nm: [240, 272], acc: [7.6, 7.1], time: 'Nửa ngày', price: 8900000, old: 10600000,
+      items: ['Lọc gió hiệu suất', 'Bugi & vệ sinh hệ thống nạp', 'Remap ECU nhẹ (map an toàn)', 'Đo dyno trước & sau'] },
+    { id: 'c2', stage: 'Stage 2', tag: 'Bán chạy', name: 'Combo Stage 2 – Bứt Phá', img: '1591879742348-13012c2963bf',
+      hp: [178, 228], nm: [240, 320], acc: [7.6, 6.4], time: '1 ngày', price: 29500000, old: 34900000,
+      items: ['Cổ góp xả 4-1 + pô thông', 'Hút gió lạnh', 'Remap ECU Stage 2', 'Coilover chỉnh cao thấp'] },
+    { id: 'c3', stage: 'Stage 3', tag: 'Track', name: 'Combo Stage 3 – Track Day', img: '1593142927747-8c1b758967a6',
+      hp: [178, 246], nm: [240, 365], acc: [7.6, 5.8], time: '2–3 ngày', price: 89000000, old: 104000000,
+      items: ['Bộ turbo kèm cổ góp xả', 'Intercooler + đường ống', 'Nâng cấp phanh 4 piston', 'Coilover + móc kéo track'] }
   ];
 
-  /* HP theo vòng tua 1500 → 7000 rpm (bước 500) */
   var DYNO = {
     rpm: [1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500, 7000],
     stock: [52, 74, 96, 118, 136, 150, 162, 171, 177, 178, 174, 166],
@@ -112,34 +133,50 @@
   };
 
   var BUILDS = [
-    { name: 'Project TWIN SMOKE', car: 'Cặp coupe drift', img: '1536909526839-8f10e29ba80c', gain: '+112 HP', mods: ['Turbo kit', 'Coilover', 'Livery'] },
-    { name: 'Project NEON ART', car: 'Coupe trình diễn', img: '1761344529053-b64306f1c5cd', gain: '+74 HP', mods: ['Art-Wrap', 'Body kit', 'Pô titan'] },
-    { name: 'Project SNOW DRIFT', car: 'Coupe trắng drift', img: '1514046877476-ccde53bfc372', gain: '+95 HP', mods: ['Turbo', 'Cánh GT', 'Phanh 4 piston'] },
-    { name: 'Project NIGHT RUNNER', car: 'Coupe đen bóng', img: '1625762571817-b6dff1438ee4', gain: '+48 HP', mods: ['Mâm rèn', 'Pô van điện', 'Hạ gầm'] },
-    { name: 'Project WHITE GHOST', car: 'Coupe trắng', img: '1539799139339-50c5fe1e2b1b', gain: '+90 HP', mods: ['Turbo', 'Intercooler', 'Coilover'] },
-    { name: 'Project VIOLET', car: 'Drift coupe tím', img: '1598632604495-49431163fda6', gain: '+66 HP', mods: ['Body kit', 'Cánh GT', 'Coilover'] },
-    { name: 'Project ICE', car: 'Hatchback trắng', img: '1602107461979-5b9460f0176c', gain: '+26 HP', mods: ['Lò xo −35', 'Mâm đen', 'Intake'] },
-    { name: 'Project TANGERINE', car: 'Coupe cam', img: '1790396349058-7c0e89659739', gain: '+38 HP', mods: ['Lip carbon', 'Pô đôi', 'Remap'] },
-    { name: 'Project GREY FOX', car: 'Roadster xám', img: '1552615526-40e47a79f9d7', gain: '+29 HP', mods: ['Coilover', 'Mâm 15"', 'Ghế bucket'] }
+    { name: 'Coupe drift cặp đôi', car: 'Turbo kit · coilover · livery', img: '1536909526839-8f10e29ba80c', gain: '+112 HP' },
+    { name: 'Coupe trắng drift', car: 'Turbo · cánh GT · phanh 4 piston', img: '1514046877476-ccde53bfc372', gain: '+95 HP' },
+    { name: 'Hatchback trắng hạ gầm', car: 'Coilover · mâm đen · intake', img: '1602107461979-5b9460f0176c', gain: '+26 HP' },
+    { name: 'Coupe tím widebody', car: 'Body kit · cánh GT · coilover', img: '1598632604495-49431163fda6', gain: '+66 HP' },
+    { name: 'Roadster xám', car: 'Coilover · mâm 15" · ghế bucket', img: '1552615526-40e47a79f9d7', gain: '+29 HP' },
+    { name: 'Coupe dán đổi màu', car: 'Chameleon · mâm đen · pô đôi', img: '1617024094355-b886817cffc4', gain: 'Đổi màu' },
+    { name: 'Coupe trắng độ máy', car: 'Turbo · intercooler · coilover', img: '1539799139339-50c5fe1e2b1b', gain: '+90 HP' },
+    { name: 'Coupe art-wrap', car: 'Art-wrap · body kit · pô titan', img: '1761344529053-b64306f1c5cd', gain: '+74 HP' }
   ];
 
   var REVIEWS = [
-    { n: 'Anh Minh Tuấn', car: 'Civic 2020 · Stage 2', r: 5, t: 'Làm Stage 2 xong chạy dyno lên đúng 226 HP như báo giá. Tiếng pô van điện ban đêm đóng lại êm, cuối tuần mở ra là cả nhóm quay lại nhìn.' },
-    { n: 'Chị Thu Hà', car: 'Mazda 3 · cánh gió + lip', r: 5, t: 'Ducktail carbon dán không khoan, 20 phút xong. Màu carbon khớp với lip trước, nhìn xe khác hẳn mà vẫn đăng kiểm bình thường.' },
-    { n: 'Anh Quốc Bảo', car: 'K3 · coilover + mâm 18"', r: 5, t: 'Kỹ thuật viên tư vấn offset mâm rất kỹ, hạ gầm xong căn chỉnh thước lái luôn. Đi đường gồ ghề vẫn không bị cạ gầm.' },
-    { n: 'Anh Đức Long', car: 'Ranger · pô + intake', r: 4, t: 'Lắp tận nhà đúng hẹn, dọn dẹp sạch sẽ. Xe kéo khoẻ hơn rõ ở dải tua thấp. Trừ 1 sao vì phải chờ hàng mâm 2 ngày.' },
-    { n: 'Anh Hoàng Nam', car: 'Elantra · Art-Wrap', r: 5, t: 'Bản thiết kế tem riêng được sửa 2 lần miễn phí. In sắc nét, sau 6 tháng phơi nắng vẫn chưa phai. Rất đáng tiền.' },
-    { n: 'Chị Ngọc Ánh', car: 'City · vô lăng + ghế', r: 5, t: 'Vô lăng da lộn cầm sướng tay, shop tư vấn kỹ về túi khí trước khi lắp. Nhân viên nhiệt tình, giải thích dễ hiểu.' }
+    { n: 'Minh Tuấn', car: 'Civic 2020 · Combo Stage 2', r: 5, d: '12/09/2026', t: 'Làm Stage 2 xong chạy dyno lên 226 HP, sát số báo giá. Xe đi phố vẫn êm, đạp ga sâu là thấy khác hẳn.', ph: ['1779263450175-dbd8771edc44', '1591879742348-13012c2963bf'] },
+    { n: 'Thu Hà', car: 'Mazda 3 · đuôi vịt + lip', r: 5, d: '03/09/2026', t: 'Ducktail carbon dán không khoan, 20 phút là xong. Màu carbon khớp với lip trước, xe nhìn khác hẳn.', ph: ['1770172505231-2644765d984c'] },
+    { n: 'Quốc Bảo', car: 'K3 · coilover + mâm 18"', r: 5, d: '28/08/2026', t: 'Kỹ thuật tư vấn offset mâm rất kỹ, hạ gầm xong căn chỉnh thước lái luôn. Đi đường gồ ghề vẫn không cạ gầm.' },
+    { n: 'Đức Long', car: 'Ranger · LED H4 + camera', r: 4, d: '21/08/2026', t: 'Lắp tận nhà đúng hẹn, đi dây camera gọn. Đèn LED sáng hơn hẳn, cos không loá. Trừ 1 sao vì phải chờ hàng 2 ngày.' },
+    { n: 'Hoàng Nam', car: 'Elantra · dán đổi màu', r: 5, d: '15/08/2026', t: 'Bản thiết kế tem được sửa 2 lần miễn phí. In sắc nét, phơi nắng 6 tháng vẫn chưa phai.', ph: ['1558958806-d5088c90f389'] },
+    { n: 'Ngọc Ánh', car: 'City · vô lăng + ghế', r: 5, d: '02/08/2026', t: 'Vô lăng da lộn cầm sướng tay, shop giải thích kỹ chuyện túi khí trước khi lắp. Nhân viên nhiệt tình.' }
+  ];
+  var RATING_DIST = [[5, 1834], [4, 212], [3, 41], [2, 9], [1, 6]];
+
+  var NEWS = [
+    { t: 'Coilover hay lò xo hạ gầm: chọn loại nào cho xe đi phố hằng ngày?', d: '05/10/2026', tag: 'Kinh nghiệm', img: '1602107461979-5b9460f0176c', ex: 'So sánh độ êm, chi phí và mức hạ gầm của hai phương án phổ biến nhất cho sedan cỡ B, C.' },
+    { t: 'Cách chọn offset và PCD khi thay mâm 18 inch không bị cạ hốc bánh', d: '29/09/2026', tag: 'Hướng dẫn', img: '1611633235555-45e252fe48c8' },
+    { t: 'Lắp turbo cho máy hút khí tự nhiên: cần nâng cấp những gì?', d: '22/09/2026', tag: 'Dyno test', img: '1591879742348-13012c2963bf' },
+    { t: 'Độ pô cho ô tô: lưu ý độ ồn và thủ tục trước khi đăng kiểm', d: '16/09/2026', tag: 'Pháp lý', img: '1692309175422-b9d614f4764e' },
+    { t: 'Rửa xe dán đổi màu thế nào để film bền màu 5 năm?', d: '09/09/2026', tag: 'Chăm sóc xe', img: '1617024094355-b886817cffc4' }
+  ];
+
+  var SHOWROOMS = [
+    { n: 'Xưởng chính Cầu Giấy', a: 'Số 1xx Đường Mẫu, Q. Cầu Giấy, Hà Nội', p: '0900 000 123', h: '08:00 – 20:00 (cả CN)', f: '6 khoang lắp · phòng dyno · cầu nâng 4 trụ', img: '1682795735660-a789079d5623' },
+    { n: 'Chi nhánh Long Biên', a: 'Số 2xx Đường Mẫu, Q. Long Biên, Hà Nội', p: '0900 000 145', h: '08:00 – 19:30', f: '4 khoang lắp · dán đổi màu · cân chỉnh thước lái', img: '1727893304219-063d142ce6f3' },
+    { n: 'Chi nhánh Thủ Đức', a: 'Số 3xx Đường Mẫu, TP. Thủ Đức, TP.HCM', p: '0900 000 167', h: '08:00 – 20:00', f: '5 khoang lắp · phòng dyno · kho phụ tùng', img: '1786198984387-b63cdf520602' }
   ];
 
   var FAQ = [
-    { q: 'Độ xe có làm mất bảo hành chính hãng không?', a: 'Phần lớn phụ kiện ngoại thất (cánh gió, tem, mâm, ốp carbon) không ảnh hưởng bảo hành hãng. Với các hạng mục can thiệp động cơ như remap, turbo, chúng tôi tư vấn rõ phạm vi ảnh hưởng và cung cấp gói bảo hành riêng đến 24 tháng.' },
-    { q: 'Xe sau khi độ có đăng kiểm được không?', a: 'Chúng tôi ưu tiên các hạng mục nằm trong quy định. Với hạng mục thay đổi kích thước, kết cấu hoặc màu sơn, kỹ thuật viên sẽ hướng dẫn thủ tục cải tạo/khai báo cần thiết trước khi thi công để bạn yên tâm lưu hành.' },
-    { q: 'Thời gian lắp đặt mất bao lâu?', a: 'Phụ kiện đơn giản (lọc gió, đầu pô, ducktail) khoảng 20–60 phút. Combo Stage 1 khoảng nửa ngày, Stage 2 một ngày, Stage 3 và phuộc hơi 2–3 ngày kèm chạy thử và đo dyno.' },
-    { q: 'Có lắp đặt tận nơi không?', a: 'Có. Nội thành Hà Nội lắp tận nơi miễn phí với đơn từ 3.000.000₫ cho các hạng mục không cần cầu nâng. Hạng mục lớn sẽ thực hiện tại xưởng để đảm bảo kỹ thuật.' },
-    { q: 'Có hỗ trợ trả góp không?', a: 'Hỗ trợ trả góp 0% qua thẻ tín dụng kỳ hạn 3–12 tháng cho đơn từ 5.000.000₫ (minh hoạ). Ngoài ra có thể thanh toán COD hoặc chuyển khoản.' },
+    { q: 'Độ xe có làm mất bảo hành chính hãng không?', a: 'Phần lớn phụ kiện ngoại thất (mâm, đèn, camera, dán đổi màu) không can thiệp hệ thống của xe. Với hạng mục liên quan động cơ như remap, turbo, kỹ thuật viên sẽ nói rõ phạm vi ảnh hưởng và áp dụng gói bảo hành riêng của xưởng.' },
+    { q: 'Xe sau khi độ có đăng kiểm được không?', a: 'Xưởng ưu tiên các hạng mục không thay đổi kết cấu. Với hạng mục thay đổi kích thước, kết cấu hoặc màu sơn, chúng tôi hướng dẫn thủ tục cải tạo/khai báo cần thiết trước khi thi công.' },
+    { q: 'Thời gian lắp đặt mất bao lâu?', a: 'Phụ kiện đơn giản (bóng LED, camera, ốc khoá mâm) khoảng 15–60 phút. Combo Stage 1 khoảng nửa ngày, Stage 2 một ngày, Stage 3 và turbo 2–3 ngày kèm chạy thử và đo dyno.' },
+    { q: 'Có lắp đặt tận nơi không?', a: 'Có. Nội thành Hà Nội lắp tận nơi miễn phí với đơn từ 3.000.000₫ cho hạng mục không cần cầu nâng. Hạng mục lớn thực hiện tại xưởng để đảm bảo kỹ thuật.' },
+    { q: 'Trả góp 0% áp dụng thế nào?', a: 'Trả góp 0% qua thẻ tín dụng kỳ hạn 3–12 tháng cho đơn từ 5.000.000₫ (minh hoạ). Ngoài ra có thể thanh toán khi nhận hàng hoặc chuyển khoản.' },
     { q: 'Chính sách đổi trả như thế nào?', a: 'Đổi trả trong 7 ngày nếu sản phẩm chưa lắp đặt, còn nguyên tem hộp. Sản phẩm lỗi kỹ thuật được đổi mới trong thời gian bảo hành.' }
   ];
 
-  window.DOPRO = { IMG: IMG, CATS: CATS, BRANDS: BRANDS, P: P, COMBOS: COMBOS, DYNO: DYNO, BUILDS: BUILDS, REVIEWS: REVIEWS, FAQ: FAQ };
+  var HOT_KEYS = ['turbo', 'mâm 18', 'coilover', 'ốc khoá mâm', 'LED H4', 'camera hành trình', 'header', 'bugi'];
+
+  window.DOPRO = { IMG: IMG, PIMG: PIMG, CATS: CATS, SERVICES: SERVICES, BRANDS: BRANDS, MODEL_TABS: MODEL_TABS, P: P, FLASH: FLASH, COMBOS: COMBOS, DYNO: DYNO, BUILDS: BUILDS, REVIEWS: REVIEWS, RATING_DIST: RATING_DIST, NEWS: NEWS, SHOWROOMS: SHOWROOMS, FAQ: FAQ, HOT_KEYS: HOT_KEYS };
 })();

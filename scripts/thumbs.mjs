@@ -5,6 +5,7 @@
 // Chạy (cần Chrome và ffmpeg trong PATH; trang phải đang chạy, vd `npm run build && npm run preview`):
 //   node scripts/thumbs.mjs                       (tất cả, mặc định http://localhost:4173)
 //   node scripts/thumbs.mjs --base=http://localhost:4180 dopro lumen
+//   node scripts/thumbs.mjs --hero dopro         (ảnh vòng xoay trang chủ, public/images/hero)
 // Chụp lại mỗi khi sửa giao diện một mẫu.
 import { chromium } from 'playwright-core'
 import { execFileSync } from 'node:child_process'
@@ -28,8 +29,29 @@ const jobs = [
   ...templates.map((t) => ({ key: t.slug, slug: t.slug, url: `${base}/preview/${t.slug}?embed=1` })),
 ].filter((j) => !only.length || only.includes(j.slug) || only.includes(j.key))
 
-mkdirSync(OUT, { recursive: true })
 const browser = await chromium.launch({ executablePath: CHROME })
+
+// --hero: ảnh thẻ trên vòng xoay trang chủ → public/images/hero/<key>.webp (khung điện thoại 390 × 900, DPR 2)
+if (args.includes('--hero')) {
+  const HERO = 'public/images/hero'
+  mkdirSync(HERO, { recursive: true })
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 900 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
+  for (const job of jobs) {
+    const page = await ctx.newPage()
+    await page.goto(job.url, { waitUntil: 'load', timeout: 60000 })
+    await page.waitForTimeout(job.key.startsWith('du-an-') ? 7000 : 2500) // chờ intro của landing chạy xong
+    const png = join(tmpdir(), `hero-${job.key}.png`)
+    await page.screenshot({ path: png })
+    await page.close()
+    execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', png, '-vf', 'scale=390:900:flags=lanczos', '-c:v', 'libwebp', '-quality', '70', join(HERO, `${job.key}.webp`)])
+    rmSync(png)
+    console.log('✓ hero', job.key)
+  }
+  await browser.close()
+  process.exit(0)
+}
+
+mkdirSync(OUT, { recursive: true })
 for (const job of jobs) {
   const page = await browser.newPage({ viewport: { width: W, height: H } })
   await page.goto(job.url, { waitUntil: 'load', timeout: 60000 })

@@ -1,4 +1,4 @@
-/* ĐỘ PRO GARAGE – main script (static demo, không gửi dữ liệu) */
+/* Độ Pro Garage – main script (cửa hàng mẫu, không gửi dữ liệu) */
 (function () {
   'use strict';
 
@@ -6,36 +6,66 @@
   var doc = document, root = doc.documentElement;
   var $ = function (s, c) { return (c || doc).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
-  var hasGsap = !!(window.gsap && window.ScrollTrigger);
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = function () { return window.innerWidth < 761; };
-  if (!hasGsap) root.classList.add('no-gsap');
-  else gsap.registerPlugin(ScrollTrigger);
+  var isMobile = function () { return window.innerWidth < 768; };
+  root.classList.add('js');
+
+  /* ---------------- icons (inline SVG, không dùng <use> để an toàn với <base href>) ---------------- */
+  var P_ = function (d) { return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + d + '</svg>'; };
+  var ICON = {
+    menu: P_('<path d="M4 7h16M4 12h16M4 17h16"/>'),
+    search: P_('<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>'),
+    phone: P_('<path d="M6.6 3.5h3l1.6 4.3-2.1 1.4a10.5 10.5 0 0 0 5.7 5.7l1.4-2.1 4.3 1.6v3a2 2 0 0 1-2.1 2A16.5 16.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/>'),
+    calendar: P_('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
+    cart: P_('<path d="M3 4h2.3l2.2 10.6a1.6 1.6 0 0 0 1.6 1.3h8.4a1.6 1.6 0 0 0 1.5-1.2L21 8H6.1"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17.5" cy="19.5" r="1.4"/>'),
+    user: P_('<circle cx="12" cy="8.5" r="4"/><path d="M4.5 20c1.2-3.6 4-5.3 7.5-5.3s6.3 1.7 7.5 5.3"/>'),
+    bolt: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="fill"><path d="M13.5 2 5 13.5h6L10 22l9-12h-6.2z"/></svg>',
+    truck: P_('<path d="M2.5 6.5h11v9h-11zM13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>'),
+    left: P_('<path d="m14.5 5.5-6.5 6.5 6.5 6.5"/>'),
+    right: P_('<path d="m9.5 5.5 6.5 6.5-6.5 6.5"/>'),
+    up: P_('<path d="m5.5 14.5 6.5-6.5 6.5 6.5"/>'),
+    shield: P_('<path d="M12 3 4.5 6v5.5c0 4.6 3.1 8 7.5 9.5 4.4-1.5 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.3 2.3 4.3-4.6"/>'),
+    badge: P_('<circle cx="12" cy="9.5" r="5.5"/><path d="m8.8 14 -1.6 7 4.8-2.4 4.8 2.4-1.6-7"/>'),
+    wrench: P_('<path d="M14.5 4.2a4.6 4.6 0 0 0-5.7 5.9L3.6 15.3a1.9 1.9 0 0 0 2.7 2.7l5.2-5.2a4.6 4.6 0 0 0 5.9-5.7l-2.7 2.7-2.3-.6-.6-2.3z"/>'),
+    'return': P_('<path d="M4.5 9.5h11a4.5 4.5 0 0 1 0 9H9"/><path d="m8 5.5-3.5 4 3.5 4"/>'),
+    card: P_('<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M6.5 15h4"/>'),
+    car: P_('<path d="M3.5 15.5v-3l2-5a2 2 0 0 1 1.9-1.3h9.2a2 2 0 0 1 1.9 1.3l2 5v3z"/><path d="M3.5 12.5h17"/><circle cx="7.5" cy="15.5" r="2"/><circle cx="16.5" cy="15.5" r="2"/>'),
+    check: P_('<circle cx="12" cy="12" r="9"/><path d="m7.8 12.3 2.8 2.8 5.6-5.8"/>'),
+    tick: P_('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
+    close: P_('<path d="M6 6l12 12M18 6 6 18"/>'),
+    chat: P_('<path d="M4 5.5h16v10.5H9.5L5 19.5V16H4z"/><path d="M8 9.5h8M8 12.5h5"/>'),
+    home: P_('<path d="M3.5 11 12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>'),
+    grid: P_('<rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/>'),
+    gift: P_('<rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-1-3-5-4-5-1.5S11 8 12 8zm0 0c1-3 5-4 5-1.5S13 8 12 8z"/>'),
+    pin: P_('<path d="M12 21s6.5-5.8 6.5-11.2a6.5 6.5 0 0 0-13 0C5.5 15.2 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/>'),
+    clock: P_('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'),
+    trash: P_('<path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13"/>'),
+    star: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="fill"><path d="m12 2.8 2.8 5.8 6.3.8-4.6 4.4 1.2 6.3L12 17l-5.7 3.1 1.2-6.3L2.9 9.4l6.3-.8z"/></svg>'
+  };
+  function fillIcons(scope) { $$('[data-ic]', scope).forEach(function (el) { if (!el.firstChild) el.innerHTML = ICON[el.getAttribute('data-ic')] || ''; el.classList.add('ic'); }); }
+  fillIcons();
 
   /* ---------------- helpers ---------------- */
   function fmt(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '₫'; }
   function norm(s) { return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase(); }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function pct(p) { return Math.round((1 - p.price / p.old) * 100); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function soldTxt(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace('.0', '').replace('.', ',') + 'k' : String(n); }
   function store(key, val) {
     try {
       if (val === undefined) return JSON.parse(localStorage.getItem(key) || 'null');
       localStorage.setItem(key, JSON.stringify(val));
     } catch (e) { return null; }
   }
-  var IMG = D.IMG;
+  var IMG = D.IMG, PIMG = D.PIMG;
   var catById = {}; D.CATS.forEach(function (c) { catById[c.id] = c; });
   var prodById = {}; D.P.forEach(function (p) { prodById[p.id] = p; });
   var comboById = {}; D.COMBOS.forEach(function (c) { comboById[c.id] = c; });
-  var modelName = {}; var modelBrand = {};
+  var modelName = {}, modelBrand = {};
   D.BRANDS.forEach(function (b) { b.models.forEach(function (m) { modelName[m[0]] = m[1]; modelBrand[m[0]] = b.name; }); });
-
-  var ICON = {
-    cart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.2l2.3 11.2a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"/><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/></svg>',
-    eye: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
-    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-    trash: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>'
-  };
+  function hay(p) { return norm(p.name + ' ' + p.spec + ' ' + catById[p.cat].name); }
+  function match(p, q) { var h = hay(p); return norm(q).trim().split(/\s+/).every(function (w) { return h.indexOf(w) >= 0; }); }
 
   /* ---------------- toast ---------------- */
   var toastEl = $('#toast'), toastT;
@@ -43,83 +73,133 @@
     toastEl.innerHTML = msg;
     toastEl.classList.add('is-show');
     clearTimeout(toastT);
-    toastT = setTimeout(function () { toastEl.classList.remove('is-show'); }, 2400);
+    toastT = setTimeout(function () { toastEl.classList.remove('is-show'); }, 2600);
   }
+  doc.addEventListener('click', function (e) {
+    var d = e.target.closest('[data-demo]');
+    if (!d) return;
+    e.preventDefault(); e.stopPropagation();
+    toast(d.getAttribute('data-demo') || 'Liên kết minh hoạ – trang mẫu.');
+  }, true);
 
-  /* ---------------- smooth in-page links ---------------- */
+  /* ---------------- in-page links ---------------- */
+  var hdr = $('#hdr');
   function goTo(id) {
     var el = id ? doc.getElementById(id) : null;
     if (!el || id === 'trang-chu') { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
-    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    var off = hdr.getBoundingClientRect().height + 10;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - off;
+    window.scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
   }
   doc.addEventListener('click', function (e) {
     var a = e.target.closest('a[href^="#"]');
-    if (!a) return;
+    if (!a || a.hasAttribute('data-qv')) return;
     var id = a.getAttribute('href').slice(1);
     e.preventDefault();
     var gc = a.getAttribute('data-goto-cat');
-    if (gc) setCat(gc);
-    closeMenu(); closeCart(); closeSugg();
+    if (gc) { state.q = ''; qInput.value = ''; setCat(gc); }
+    closeMenu(); closeCart(); closeSugg(); hideMega();
+    if (openModalEl) closeModal();
     goTo(id);
   });
 
-  /* ---------------- countdown ---------------- */
-  function weekEnd() {
-    var d = new Date();
-    var add = (7 - d.getDay()) % 7; // to Sunday
-    var e = new Date(d.getFullYear(), d.getMonth(), d.getDate() + add, 23, 59, 59);
-    if (e - d < 3600e3) e = new Date(e.getTime() + 7 * 864e5);
-    return e;
+  /* ---------------- top bar ticker ---------------- */
+  (function () {
+    var items = $$('#ticker span'), i = 0;
+    if (items.length < 2 || reduce) return;
+    setInterval(function () {
+      if (doc.hidden) return;
+      items[i].classList.remove('is-on'); i = (i + 1) % items.length; items[i].classList.add('is-on');
+    }, 4000);
+  })();
+
+  /* ---------------- flash sale countdown & slots ---------------- */
+  var SLOT_START = [0, 9, 12, 15, 20];
+  function slotInfo(now) {
+    var h = now.getHours(), cur = 0;
+    SLOT_START.forEach(function (s, i) { if (h >= s) cur = i; });
+    var endH = SLOT_START[cur + 1] || 24;
+    var end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), endH, 0, 0);
+    return { cur: cur, end: end };
   }
-  var cdEnd = weekEnd();
+  var slot = slotInfo(new Date());
   var cdEls = $$('[data-cd]');
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
   function tick() {
-    var ms = cdEnd - new Date();
-    if (ms <= 0) { cdEnd = weekEnd(); ms = cdEnd - new Date(); }
-    var s = Math.floor(ms / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60;
-    cdEls.forEach(function (el) {
-      var k = el.getAttribute('data-cd'), v;
-      if (k === 'd') v = d; else if (k === 'h') v = h; else if (k === 'm') v = m; else v = sec;
-      var t = pad(v); if (el.textContent !== t) el.textContent = t;
-    });
+    var now = new Date();
+    var ms = slot.end - now;
+    if (ms <= 0) { slot = slotInfo(now); renderSlots(); ms = slot.end - now; }
+    var s = Math.max(0, Math.floor(ms / 1000));
+    var v = { h: Math.floor(s / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 };
+    cdEls.forEach(function (el) { var t = pad(v[el.getAttribute('data-cd')]); if (el.textContent !== t) el.textContent = t; });
   }
+  var slotView = 0; // 0 = khung đang diễn ra
+  function slotLabel(i) { return pad(SLOT_START[i % SLOT_START.length]) + ':00'; }
+  function renderSlots() {
+    var html = '';
+    for (var k = 0; k < 3; k++) {
+      var i = slot.cur + k;
+      html += '<button role="tab" aria-selected="' + (k === slotView) + '" data-slot="' + k + '"><b>' + slotLabel(i) + '</b><small>' + (k === 0 ? 'Đang diễn ra' : (i >= SLOT_START.length ? 'Ngày mai' : 'Sắp diễn ra')) + '</small></button>';
+    }
+    $('#flashSlots').innerHTML = html;
+  }
+  renderSlots();
   tick(); setInterval(tick, 1000);
-
-  /* ---------------- header / menu / search ---------------- */
-  var hdr = $('#hdr'), mnav = $('#mnav'), burger = $('#burger');
-  var lastFocus = null;
-  function lockScroll(on) { root.style.overflow = on ? 'hidden' : ''; }
-  function openMenu() { mnav.classList.add('is-open'); mnav.setAttribute('aria-hidden', 'false'); burger.setAttribute('aria-expanded', 'true'); lockScroll(true); lastFocus = doc.activeElement; setTimeout(function () { $('#mnavClose').focus(); }, 50);
-    if (hasGsap && !reduce) gsap.fromTo($$('.mnav__links a'), { x: 40, opacity: 0 }, { x: 0, opacity: 1, stagger: .05, duration: .5, delay: .15, ease: 'power3.out' }); }
-  function closeMenu() { if (!mnav.classList.contains('is-open')) return; mnav.classList.remove('is-open'); mnav.setAttribute('aria-hidden', 'true'); burger.setAttribute('aria-expanded', 'false'); lockScroll(false); if (lastFocus) lastFocus.focus({ preventScroll: true }); }
-  burger.addEventListener('click', openMenu);
-  $('#mnavClose').addEventListener('click', closeMenu);
-  mnav.addEventListener('click', function (e) { if (e.target === mnav) closeMenu(); });
-
-  var searchForm = $('#searchForm'), qInput = $('#q');
-  $('#searchToggle').addEventListener('click', function () {
-    var open = searchForm.classList.toggle('is-open');
-    this.setAttribute('aria-expanded', open);
-    if (open) qInput.focus();
+  $('#flashSlots').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-slot]'); if (!b) return;
+    slotView = +b.getAttribute('data-slot'); renderSlots(); renderFlash();
   });
 
-  /* ---------------- state & product grid ---------------- */
-  var state = { cat: 'all', q: '', sort: 'hot', fit: null, limit: 12 };
-  var grid = $('#grid'), tabsEl = $('#tabs'), moreBtn = $('#moreBtn'), emptyEl = $('#empty'), filtersEl = $('#activeFilters');
+  /* ---------------- product card ---------------- */
+  function starsHTML(r) { return '<span class="stars" style="--r:' + r + '" role="img" aria-label="' + r + ' trên 5 sao"></span>'; }
+  function tagHTML(p) {
+    var t = [];
+    if (p.tags.indexOf('i') >= 0) t.push('<span class="tg tg--i">Trả góp 0%</span>');
+    if (p.tags.indexOf('l') >= 0) t.push('<span class="tg">Lắp tại xưởng</span>');
+    return t.slice(0, 2).join('');
+  }
+  function cardHTML(p, opt) {
+    opt = opt || {};
+    var off = pct(p), html = '<article class="pc' + (opt.flash ? ' pc--flash' : '') + '" data-id="' + p.id + '">' +
+      '<div class="pc__img"><a href="#san-pham" data-qv="' + p.id + '" tabindex="-1" aria-hidden="true">' +
+        '<img src="' + PIMG(p.img) + '" alt="' + esc(p.name) + '" width="800" height="800" loading="lazy" decoding="async"></a>' +
+        '<span class="pc__off">-' + off + '%</span>' +
+        (p.tags.indexOf('g') >= 0 && !opt.flash ? '<span class="pc__gift">' + ICON.gift + 'Quà tặng</span>' : '');
+    if (opt.locked) html += '<span class="pc__add pc__add--lock">Mở bán lúc ' + opt.locked + '</span>';
+    else html += '<button class="pc__add" type="button" data-add="' + p.id + '" aria-label="Thêm ' + esc(p.name) + ' vào giỏ">' + ICON.cart + '<span>Thêm vào giỏ</span></button>';
+    html += '</div><div class="pc__b">' +
+      (opt.flash ? '' : '<div class="pc__tags">' + tagHTML(p) + '</div>') +
+      '<h3 class="pc__n"><a href="#san-pham" data-qv="' + p.id + '">' + esc(p.name) + '</a></h3>' +
+      '<div class="pc__price"><b>' + (opt.locked ? fmt(p.price).replace(/^\d+/, function (m) { return m.replace(/\d/g, '?'); }) : fmt(p.price)) + '</b></div>' +
+      '<div class="pc__old"><s>' + fmt(p.old) + '</s><span>-' + off + '%</span></div>';
+    if (opt.flash) {
+      var tot = opt.flash[0], sold = opt.flash[1], r = sold / tot;
+      html += '<div class="fbar' + (opt.locked ? ' fbar--lock' : '') + '"><i style="transform:scaleX(' + (opt.locked ? 0 : r).toFixed(3) + ')"></i><span>' + (opt.locked ? 'Số lượng có hạn: ' + tot : (r >= .8 ? 'Sắp cháy hàng · còn ' + (tot - sold) : 'Đã bán ' + sold + '/' + tot)) + '</span></div>';
+    } else {
+      if (p.gift) html += '<p class="pc__gl">' + esc(p.gift) + '</p>';
+      html += '<div class="pc__meta"><span class="pc__rt">' + ICON.star + p.rating.toFixed(1) + '</span><span>Đã bán ' + soldTxt(p.sold) + '</span></div>';
+    }
+    return html + '</div></article>';
+  }
 
-  function stars(r) { return '<span class="stars" style="--r:' + r + '" role="img" aria-label="' + r + ' trên 5 sao"></span>'; }
+  /* ---------------- flash sale row ---------------- */
+  function renderFlash() {
+    var list = D.FLASH.slice();
+    if (slotView > 0) list = list.slice(slotView * 3).concat(list.slice(0, slotView * 3));
+    var lockLabel = slotView > 0 ? $$('#flashSlots b')[slotView].textContent : null;
+    $('#flashRow').innerHTML = list.map(function (f) { return cardHTML(prodById[f[0]], { flash: [f[1], f[2]], locked: lockLabel }); }).join('');
+    $('#flashRow').scrollLeft = 0;
+  }
+  renderFlash();
+
+  /* ---------------- state & product grid ---------------- */
+  var state = { cat: 'all', q: '', sort: 'hot', fit: null, limit: 10 };
+  var grid = $('#grid'), ptabs = $('#ptabs'), moreBtn = $('#moreBtn'), emptyEl = $('#empty'), filtersEl = $('#activeFilters');
 
   function filtered() {
-    var q = norm(state.q.trim());
     var list = D.P.filter(function (p) {
       if (state.cat !== 'all' && p.cat !== state.cat) return false;
       if (state.fit && p.fit.indexOf(state.fit) < 0) return false;
-      if (q) {
-        var hay = norm(p.name + ' ' + p.spec + ' ' + catById[p.cat].name);
-        var words = q.split(/\s+/);
-        for (var i = 0; i < words.length; i++) if (hay.indexOf(words[i]) < 0) return false;
-      }
+      if (state.q.trim() && !match(p, state.q)) return false;
       return true;
     });
     var s = state.sort;
@@ -127,260 +207,320 @@
       if (s === 'asc') return a.price - b.price;
       if (s === 'desc') return b.price - a.price;
       if (s === 'sale') return pct(b) - pct(a);
+      if (s === 'sold') return b.sold - a.sold;
       return b.hot - a.hot;
     });
     return list;
   }
-
-  function cardHTML(p, i) {
-    var c = catById[p.cat];
-    return '<article class="card" data-id="' + p.id + '">' +
-      '<div class="card__img" data-qv="' + p.id + '">' +
-        '<img src="' + IMG(p.img, 600, 450) + '" alt="' + esc(p.name) + '" width="600" height="450" loading="lazy" decoding="async">' +
-        '<span class="badge">-' + pct(p) + '%</span>' + (p.hot >= 95 ? '<span class="card__hot">HOT</span>' : '') +
-      '</div>' +
-      '<button class="qv-btn" data-qv="' + p.id + '" aria-label="Xem nhanh ' + esc(p.name) + '">' + ICON.eye + '</button>' +
-      '<div class="card__b">' +
-        '<span class="pcat">' + esc(c.name) + '</span>' +
-        '<h3>' + esc(p.name) + '</h3>' +
-        '<p class="card__spec">' + esc(p.spec) + '</p>' +
-        '<div class="prate">' + stars(p.rating) + '<small>' + p.rating.toFixed(1) + ' (' + p.reviews + ')</small></div>' +
-        '<div class="pprice"><b>' + fmt(p.price) + '</b><s>' + fmt(p.old) + '</s></div>' +
-        '<button class="add" data-add="' + p.id + '">' + ICON.cart + '<span>Thêm vào giỏ</span></button>' +
-      '</div></article>';
-  }
-
   function renderTabs() {
     var counts = { all: 0 };
     D.P.forEach(function (p) {
       if (state.fit && p.fit.indexOf(state.fit) < 0) return;
+      if (state.q.trim() && !match(p, state.q)) return;
       counts.all++; counts[p.cat] = (counts[p.cat] || 0) + 1;
     });
-    var html = '<button class="tab' + (state.cat === 'all' ? ' is-on' : '') + '" role="tab" aria-selected="' + (state.cat === 'all') + '" data-cat="all">Tất cả<sup>' + counts.all + '</sup></button>';
+    var html = '<button class="ptab' + (state.cat === 'all' ? ' is-on' : '') + '" role="tab" aria-selected="' + (state.cat === 'all') + '" data-cat="all">Tất cả <small>' + counts.all + '</small></button>';
     D.CATS.forEach(function (c) {
       var on = state.cat === c.id;
-      html += '<button class="tab' + (on ? ' is-on' : '') + '" role="tab" aria-selected="' + on + '" data-cat="' + c.id + '">' + esc(c.short) + '<sup>' + (counts[c.id] || 0) + '</sup></button>';
+      html += '<button class="ptab' + (on ? ' is-on' : '') + '" role="tab" aria-selected="' + on + '" data-cat="' + c.id + '">' + esc(c.short) + ' <small>' + (counts[c.id] || 0) + '</small></button>';
     });
-    tabsEl.innerHTML = html;
-    var on = $('.tab.is-on', tabsEl);
-    if (on) tabsEl.scrollTo({ left: on.offsetLeft - 20, behavior: 'smooth' });
+    ptabs.innerHTML = html;
+    var on = $('.ptab.is-on', ptabs);
+    if (on && ptabs.scrollWidth > ptabs.clientWidth) ptabs.scrollTo({ left: on.offsetLeft - 16, behavior: 'smooth' });
   }
-
   function renderFilters() {
     var h = '';
-    if (state.fit) h += '<span class="fchip">Xe: <b>' + esc(modelBrand[state.fit] + ' ' + modelName[state.fit]) + '</b><button data-unfilter="fit" aria-label="Bỏ lọc dòng xe">×</button></span>';
-    if (state.q.trim()) h += '<span class="fchip">Từ khoá: <b>“' + esc(state.q.trim()) + '”</b><button data-unfilter="q" aria-label="Bỏ từ khoá">×</button></span>';
-    if (h) h += '<button class="fchip fchip--clear" data-clear-filters>Xoá tất cả</button>';
+    if (state.fit) h += '<span class="fchip">Xe: <b>' + esc(modelBrand[state.fit] + ' ' + modelName[state.fit]) + '</b><button type="button" data-unfilter="fit" aria-label="Bỏ lọc dòng xe">' + ICON.close + '</button></span>';
+    if (state.q.trim()) h += '<span class="fchip">Từ khoá: <b>“' + esc(state.q.trim()) + '”</b><button type="button" data-unfilter="q" aria-label="Bỏ từ khoá">' + ICON.close + '</button></span>';
+    if (h) h += '<button type="button" class="fclear" data-clear-filters>Xoá tất cả</button>';
+    else h = '<span class="toolbar__count">' + filtered().length + ' sản phẩm</span>';
     filtersEl.innerHTML = h;
   }
-
-  var firstRender = true;
   function renderGrid(animate) {
     var list = filtered();
-    var shown = list.slice(0, state.limit);
-    grid.innerHTML = shown.map(cardHTML).join('');
+    grid.innerHTML = list.slice(0, state.limit).map(function (p) { return cardHTML(p); }).join('');
     emptyEl.hidden = list.length > 0;
     moreBtn.parentNode.hidden = list.length <= state.limit;
-    moreBtn.querySelector('span').textContent = 'Xem thêm ' + (list.length - state.limit) + ' sản phẩm';
+    moreBtn.textContent = 'Xem thêm ' + (list.length - state.limit) + ' sản phẩm';
     renderFilters();
-    var cards = $$('.card', grid);
-    if (!hasGsap || reduce) return;
-    if (firstRender) { firstRender = false; batchReveal(cards); }
-    else if (animate !== false) gsap.fromTo(cards, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .5, stagger: .035, ease: 'power3.out', overwrite: true, clearProps: 'transform' });
+    if (animate && !reduce) $$('.pc', grid).forEach(function (c, i) { c.style.animationDelay = Math.min(i, 10) * 30 + 'ms'; c.classList.add('pop'); });
   }
-  function refresh(animate) { state.limit = isMobile() ? 8 : 12; renderTabs(); renderGrid(animate); }
-  function setCat(cat) { state.cat = cat; refresh(); }
+  function refresh(animate) { state.limit = isMobile() ? 8 : 10; renderTabs(); renderGrid(animate); }
+  function setCat(cat) { state.cat = cat; refresh(true); }
 
-  tabsEl.addEventListener('click', function (e) { var b = e.target.closest('.tab'); if (b) setCat(b.getAttribute('data-cat')); });
-  $('#sort').addEventListener('change', function () { state.sort = this.value; renderGrid(); });
+  ptabs.addEventListener('click', function (e) { var b = e.target.closest('.ptab'); if (b) setCat(b.getAttribute('data-cat')); });
+  $('.sortby').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-sort]'); if (!b) return;
+    state.sort = b.getAttribute('data-sort');
+    $$('[data-sort]', this).forEach(function (x) { x.classList.toggle('is-on', x === b); });
+    renderGrid(true);
+  });
   moreBtn.addEventListener('click', function () {
-    var prev = state.limit; state.limit += 12; renderGrid(false);
-    var cards = $$('.card', grid).slice(prev);
-    if (hasGsap && !reduce) gsap.fromTo(cards, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .5, stagger: .04, ease: 'power3.out', clearProps: 'transform' });
-    if (hasGsap) ScrollTrigger.refresh();
+    var prev = state.limit; state.limit += 10; renderGrid(false);
+    if (!reduce) $$('.pc', grid).slice(prev).forEach(function (c, i) { c.style.animationDelay = i * 30 + 'ms'; c.classList.add('pop'); });
   });
   doc.addEventListener('click', function (e) {
     var u = e.target.closest('[data-unfilter]');
-    if (u) { var k = u.getAttribute('data-unfilter'); if (k === 'fit') { state.fit = null; resetFitUI(); } else { state.q = ''; qInput.value = ''; } refresh(); }
-    if (e.target.closest('[data-clear-filters]')) { state.fit = null; state.q = ''; qInput.value = ''; state.cat = 'all'; resetFitUI(); refresh(); }
+    if (u) { if (u.getAttribute('data-unfilter') === 'fit') { state.fit = null; resetFinder(); } else { state.q = ''; qInput.value = ''; } refresh(true); return; }
+    if (e.target.closest('[data-clear-filters]')) { state.fit = null; state.q = ''; qInput.value = ''; state.cat = 'all'; resetFinder(); refresh(true); }
   });
 
-  /* search + suggestions */
-  var sugg = doc.createElement('div'); sugg.className = 'sugg'; sugg.hidden = true; sugg.setAttribute('role', 'listbox'); searchForm.appendChild(sugg);
-  var sT;
-  function closeSugg() { sugg.hidden = true; }
+  /* ---------------- search + suggestions ---------------- */
+  var searchForm = $('#searchForm'), qInput = $('#q'), sugg = $('#sugg');
+  $('#hotkeys').innerHTML = D.HOT_KEYS.slice(0, 6).map(function (k) { return '<button type="button" data-key="' + esc(k) + '">' + esc(k) + '</button>'; }).join('');
+  function closeSugg() { sugg.hidden = true; qInput.setAttribute('aria-expanded', 'false'); }
   function renderSugg() {
-    var q = qInput.value.trim();
-    if (!q) { closeSugg(); return; }
-    var nq = norm(q).split(/\s+/);
-    var res = D.P.filter(function (p) { var h = norm(p.name + ' ' + p.spec + ' ' + catById[p.cat].name); return nq.every(function (w) { return h.indexOf(w) >= 0; }); }).slice(0, 5);
-    sugg.innerHTML = res.length ? res.map(function (p) {
-      return '<button type="button" class="sg" data-qv="' + p.id + '"><img src="' + IMG(p.img, 120, 90) + '" alt="" width="60" height="45"><span><b>' + esc(p.name) + '</b><small>' + fmt(p.price) + '</small></span></button>';
-    }).join('') + '<button type="submit" class="sg sg--all">Xem tất cả kết quả cho “' + esc(q) + '” →</button>' : '<p class="sg-none">Không tìm thấy “' + esc(q) + '”. Thử “pô”, “mâm”, “carbon”…</p>';
-    sugg.hidden = false;
+    var q = qInput.value.trim(), html;
+    if (!q) {
+      html = '<p class="sg-h">Xu hướng tìm kiếm</p><div class="sg-keys">' + D.HOT_KEYS.map(function (k) { return '<button type="button" data-key="' + esc(k) + '">' + ICON.search + esc(k) + '</button>'; }).join('') + '</div>' +
+        '<p class="sg-h">Danh mục nổi bật</p><div class="sg-cats">' + D.CATS.slice(0, 6).map(function (c) { return '<a href="#san-pham" data-goto-cat="' + c.id + '"><img src="' + PIMG(c.img) + '" alt="" width="40" height="40" loading="lazy">' + esc(c.short) + '</a>'; }).join('') + '</div>';
+    } else {
+      var res = D.P.filter(function (p) { return match(p, q); });
+      var cats = D.CATS.filter(function (c) { return norm(c.name).indexOf(norm(q)) >= 0; });
+      html = cats.length ? '<p class="sg-h">Danh mục</p>' + cats.map(function (c) { return '<a class="sg-cat" href="#san-pham" data-goto-cat="' + c.id + '">' + ICON.grid + esc(c.name) + '</a>'; }).join('') : '';
+      html += res.length ? '<p class="sg-h">Sản phẩm gợi ý</p>' + res.slice(0, 5).map(function (p) {
+        return '<button type="button" class="sg" data-qv="' + p.id + '"><img src="' + PIMG(p.img) + '" alt="" width="48" height="48"><span><b>' + esc(p.name) + '</b><small><em>' + fmt(p.price) + '</em><s>' + fmt(p.old) + '</s></small></span></button>';
+      }).join('') + '<button type="submit" class="sg-all">Xem tất cả ' + res.length + ' kết quả cho “' + esc(q) + '”</button>'
+        : '<p class="sg-none">Không tìm thấy “' + esc(q) + '”. Thử “pô”, “mâm”, “carbon”…</p>';
+    }
+    sugg.innerHTML = html;
+    sugg.hidden = false; qInput.setAttribute('aria-expanded', 'true');
   }
-  qInput.addEventListener('input', function () {
-    clearTimeout(sT);
-    sT = setTimeout(function () { state.q = qInput.value; refresh(false); renderSugg(); }, 160);
-  });
-  qInput.addEventListener('focus', function () { if (qInput.value.trim()) renderSugg(); });
-  searchForm.addEventListener('submit', function (e) {
-    e.preventDefault(); state.q = qInput.value; state.cat = 'all'; refresh(); closeSugg(); qInput.blur();
-    searchForm.classList.remove('is-open');
+  var sT;
+  qInput.addEventListener('input', function () { clearTimeout(sT); sT = setTimeout(renderSugg, 120); });
+  qInput.addEventListener('focus', renderSugg);
+  function runSearch(q) {
+    qInput.value = q; state.q = q; state.cat = 'all'; refresh(true); closeSugg(); qInput.blur();
     goTo('san-pham');
+  }
+  searchForm.addEventListener('submit', function (e) { e.preventDefault(); runSearch(qInput.value.trim()); });
+  doc.addEventListener('click', function (e) {
+    var k = e.target.closest('[data-key]');
+    if (k) { runSearch(k.getAttribute('data-key')); return; }
+    if (!e.target.closest('.search')) closeSugg();
   });
-  doc.addEventListener('click', function (e) { if (!e.target.closest('.search')) closeSugg(); });
 
-  /* ---------------- categories ---------------- */
-  $('#cats').innerHTML = D.CATS.map(function (c, i) {
-    var n = D.P.filter(function (p) { return p.cat === c.id; }).length;
-    return '<a class="cat" href="#san-pham" data-goto-cat="' + c.id + '" data-reveal>' +
-      '<img src="' + IMG(c.img, 640, 500) + '" alt="' + esc(c.name) + '" width="640" height="500" loading="lazy" decoding="async">' +
-      '<span class="cat__i">' + pad(i + 1) + ' · ' + n + ' SP</span>' +
-      '<span class="cat__arrow">' + ICON.arrow + '</span>' +
-      '<span class="cat__t"><span class="cat__n">' + esc(c.name) + '</span><span class="cat__d">' + esc(c.desc) + '</span></span></a>';
+  /* ---------------- category sidebar + mega menu ---------------- */
+  function countCat(id) { return D.P.filter(function (p) { return p.cat === id; }).length; }
+  $('#catList').innerHTML = D.CATS.map(function (c) {
+    return '<li data-cat="' + c.id + '"><a href="#san-pham" data-goto-cat="' + c.id + '"><img src="' + PIMG(c.img) + '" alt="" width="28" height="28" decoding="async">' + esc(c.name) + ICON.right + '</a></li>';
+  }).join('') + '<li class="catmenu__lbl" aria-hidden="true">Dịch vụ tại xưởng</li>' + D.SERVICES.map(function (sv) {
+    return '<li class="catmenu__svc"><a href="#dich-vu" data-svc="' + sv.id + '"><img src="' + IMG(sv.img, 64, 64) + '" alt="" width="28" height="28" decoding="async">' + esc(sv.name) + ICON.right + '</a></li>';
+  }).join('');
+  var mega = $('#mega'), megaT, catmenu = $('#catmenu');
+  function megaHTML(c) {
+    var best = D.P.filter(function (p) { return p.cat === c.id; }).sort(function (a, b) { return b.sold - a.sold; }).slice(0, 3);
+    return '<div class="mega__cols">' + c.groups.map(function (g) {
+      return '<div class="mega__col"><b>' + esc(g[0]) + '</b>' + g[1].map(function (l) { return '<a href="#san-pham" data-mega="' + c.id + '|' + esc(l) + '">' + esc(l) + '</a>'; }).join('') + '</div>';
+    }).join('') + '<div class="mega__col"><b>Theo xe phổ biến</b>' + D.MODEL_TABS.slice(0, 6).map(function (m) { return '<a href="#san-pham" data-mega-fit="' + c.id + '|' + m + '">' + esc(modelBrand[m] + ' ' + modelName[m]) + '</a>'; }).join('') + '</div></div>' +
+      '<div class="mega__best"><b>Bán chạy nhất</b>' + best.map(function (p) {
+        return '<button type="button" class="mega__p" data-qv="' + p.id + '"><img src="' + PIMG(p.img) + '" alt="" width="60" height="60"><span><em>' + esc(p.name) + '</em><strong>' + fmt(p.price) + '</strong></span></button>';
+      }).join('') + '<a class="mega__all" href="#san-pham" data-goto-cat="' + c.id + '">Xem tất cả ' + countCat(c.id) + ' sản phẩm ' + esc(c.short.toLowerCase()) + '</a></div>';
+  }
+  function showMega(li) {
+    clearTimeout(megaT);
+    if (window.innerWidth < 1024) return;
+    var c = catById[li.getAttribute('data-cat')];
+    if (mega.getAttribute('data-for') !== c.id) { mega.innerHTML = megaHTML(c); mega.setAttribute('data-for', c.id); }
+    $$('#catList li').forEach(function (x) { x.classList.toggle('is-on', x === li); });
+    mega.hidden = false;
+  }
+  function hideMega() { mega.hidden = true; $$('#catList li').forEach(function (x) { x.classList.remove('is-on'); }); }
+  $$('#catList li[data-cat]').forEach(function (li) {
+    li.addEventListener('mouseenter', function () { clearTimeout(megaT); megaT = setTimeout(function () { showMega(li); }, mega.hidden ? 120 : 0); });
+    $('a', li).addEventListener('focus', function () { showMega(li); });
+  });
+  catmenu.addEventListener('mouseleave', function () { clearTimeout(megaT); megaT = setTimeout(hideMega, 160); });
+  mega.addEventListener('mouseenter', function () { clearTimeout(megaT); });
+  catmenu.addEventListener('focusout', function (e) { if (!catmenu.contains(e.relatedTarget)) hideMega(); });
+  doc.addEventListener('click', function (e) {
+    var m = e.target.closest('[data-mega]'), mf = e.target.closest('[data-mega-fit]');
+    if (m) {
+      var parts = m.getAttribute('data-mega').split('|'), cat = parts[0], kw = parts[1];
+      var words = norm(kw).replace(/[()]/g, ' ').split(/\s+/).filter(function (w) { return w.length >= 2 && !/^(co|cho|va|theo|inch|bo)$/.test(w); });
+      var inCat = D.P.filter(function (p) { return p.cat === cat; });
+      var best = null, bestN = Infinity;
+      words.forEach(function (w) {
+        var nHit = inCat.filter(function (p) { return norm(p.name + ' ' + p.spec).indexOf(w) >= 0; }).length;
+        if (nHit > 0 && nHit < bestN) { best = w; bestN = nHit; }
+      });
+      state.cat = cat; state.q = ''; qInput.value = '';
+      if (best && bestN < inCat.length) { state.q = best; qInput.value = best; }
+      refresh(true); hideMega();
+    }
+    if (mf) {
+      var pp = mf.getAttribute('data-mega-fit').split('|');
+      state.cat = pp[0]; state.fit = pp[1]; syncFinder(); refresh(true); hideMega();
+    }
+  });
+
+  /* ---------------- category tiles ---------------- */
+  $('#ctiles').innerHTML = D.CATS.map(function (c) {
+    return '<a class="ctile" href="#san-pham" data-goto-cat="' + c.id + '"><span class="ctile__img"><img src="' + PIMG(c.img) + '" alt="" width="200" height="200" loading="lazy" decoding="async"></span><span class="ctile__t"><b>' + esc(c.name) + '</b><small>' + countCat(c.id) + ' sản phẩm · ' + esc(c.groups.map(function (g) { return g[1].join(', '); }).join(', ')) + '</small></span></a>';
   }).join('');
 
-  /* ---------------- fitment ---------------- */
-  var brandChips = $('#brandChips'), modelChips = $('#modelChips'), fitApply = $('#fitApply');
-  var fitSel = { brand: null, model: null };
-  brandChips.innerHTML = D.BRANDS.map(function (b) { return '<button class="chip" data-brand="' + b.id + '" aria-pressed="false">' + esc(b.name) + '</button>'; }).join('');
-  function updateFitCount() {
-    var cnt, label;
-    if (fitSel.model) {
-      cnt = D.P.filter(function (p) { return p.fit.indexOf(fitSel.model) >= 0; }).length;
-      label = 'phụ kiện tương thích với ' + modelBrand[fitSel.model] + ' ' + modelName[fitSel.model];
-    } else { cnt = D.P.length; label = fitSel.brand ? 'phụ kiện – chọn dòng xe để lọc chính xác' : 'phụ kiện có sẵn cho mọi dòng xe'; }
-    var b = $('#fitCount');
-    if (hasGsap && !reduce) { var o = { v: +b.textContent || 0 }; gsap.to(o, { v: cnt, duration: .6, ease: 'power2.out', onUpdate: function () { b.textContent = Math.round(o.v); } }); }
-    else b.textContent = cnt;
-    $('#fitLabel').textContent = label;
-    fitApply.disabled = !fitSel.model;
+  /* ---------------- fitment finder ---------------- */
+  var fBrand = $('#fBrand'), fModel = $('#fModel'), fApply = $('#fApply'), fRes = $('#fRes');
+  var nModels = 0; D.BRANDS.forEach(function (b) { nModels += b.models.length; });
+  var defaultRes = '<b>' + D.P.length + '</b> phụ kiện đang bán · hỗ trợ ' + nModels + ' dòng xe phổ biến';
+  fBrand.innerHTML += D.BRANDS.map(function (b) { return '<option value="' + b.id + '">' + esc(b.name) + '</option>'; }).join('');
+  function fillModels(bid) {
+    var br = D.BRANDS.filter(function (x) { return x.id === bid; })[0];
+    fModel.innerHTML = '<option value="">Chọn dòng xe</option>' + (br ? br.models.map(function (m) { return '<option value="' + m[0] + '">' + esc(m[1]) + '</option>'; }).join('') : '');
+    fModel.disabled = !br;
   }
-  function resetFitUI() { fitSel.brand = fitSel.model = null; $$('.chip', brandChips).forEach(function (c) { c.classList.remove('is-on'); c.setAttribute('aria-pressed', 'false'); }); modelChips.innerHTML = '<p class="chips__hint">← Chọn hãng xe trước</p>'; updateFitCount(); }
-  brandChips.addEventListener('click', function (e) {
-    var b = e.target.closest('.chip'); if (!b) return;
-    fitSel.brand = b.getAttribute('data-brand'); fitSel.model = null;
-    $$('.chip', brandChips).forEach(function (c) { var on = c === b; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', on); });
-    var br = D.BRANDS.filter(function (x) { return x.id === fitSel.brand; })[0];
-    modelChips.innerHTML = br.models.map(function (m) { return '<button class="chip" data-model="' + m[0] + '" aria-pressed="false">' + esc(m[1]) + '</button>'; }).join('');
-    if (hasGsap && !reduce) gsap.fromTo($$('.chip', modelChips), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: .05, duration: .35, ease: 'power2.out' });
-    updateFitCount();
-  });
-  modelChips.addEventListener('click', function (e) {
-    var b = e.target.closest('.chip'); if (!b) return;
-    fitSel.model = b.getAttribute('data-model');
-    $$('.chip', modelChips).forEach(function (c) { var on = c === b; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', on); });
-    updateFitCount();
-  });
-  fitApply.addEventListener('click', function () {
-    if (!fitSel.model) return;
-    state.fit = fitSel.model; state.cat = 'all'; refresh();
-    toast('Đang hiển thị phụ kiện cho <b>' + esc(modelBrand[state.fit] + ' ' + modelName[state.fit]) + '</b>');
+  function updateFinder() {
+    var m = fModel.value;
+    fApply.disabled = !m;
+    if (m) {
+      var n = D.P.filter(function (p) { return p.fit.indexOf(m) >= 0; }).length;
+      fRes.innerHTML = '<b>' + n + '</b> phụ kiện lắp vừa ' + esc(modelBrand[m] + ' ' + modelName[m]);
+    } else fRes.innerHTML = defaultRes;
+  }
+  function resetFinder() { fBrand.value = ''; fillModels(''); updateFinder(); }
+  function syncFinder() {
+    if (!state.fit) { resetFinder(); return; }
+    var b = D.BRANDS.filter(function (x) { return x.models.some(function (m) { return m[0] === state.fit; }); })[0];
+    fBrand.value = b.id; fillModels(b.id); fModel.value = state.fit; updateFinder();
+  }
+  fBrand.addEventListener('change', function () { fillModels(this.value); updateFinder(); });
+  fModel.addEventListener('change', updateFinder);
+  fApply.addEventListener('click', function () {
+    if (!fModel.value) return;
+    state.fit = fModel.value; state.cat = 'all'; refresh(true);
+    toast('Đang hiện phụ kiện cho <b>' + esc(modelBrand[state.fit] + ' ' + modelName[state.fit]) + '</b>');
     goTo('san-pham');
   });
-  /* hotspots */
-  var partMap = { 'body-kit': 'kit', 'canh-gio': 'wing', po: 'po', mam: 'mam', phuoc: 'phuoc', 'loc-gio': 'loc', tem: 'tem' };
-  var carSvg = $('.carsvg');
-  function focusPart(cat) {
-    carSvg.classList.toggle('has-focus', !!cat);
-    $$('.part', carSvg).forEach(function (p) { p.classList.toggle('is-focus', !!cat && p.classList.contains('part--' + partMap[cat])); });
+  fRes.innerHTML = defaultRes;
+
+  /* ---------------- by car model tabs ---------------- */
+  var carModel = D.MODEL_TABS[0];
+  function renderCarTabs() {
+    $('#carTabs').innerHTML = D.MODEL_TABS.map(function (m) {
+      return '<button class="ptab' + (m === carModel ? ' is-on' : '') + '" role="tab" aria-selected="' + (m === carModel) + '" data-car="' + m + '">' + esc(modelName[m]) + '</button>';
+    }).join('');
   }
-  $$('.hot').forEach(function (h) {
-    var cat = h.getAttribute('data-cat');
-    h.setAttribute('aria-label', 'Xem nhóm ' + catById[cat].name);
-    h.addEventListener('mouseenter', function () { focusPart(cat); });
-    h.addEventListener('focus', function () { focusPart(cat); });
-    h.addEventListener('mouseleave', function () { focusPart(null); });
-    h.addEventListener('blur', function () { focusPart(null); });
-    h.addEventListener('click', function () { setCat(cat); goTo('san-pham'); });
+  function renderCarRow() {
+    var list = D.P.filter(function (p) { return p.fit.indexOf(carModel) >= 0; }).sort(function (a, b) { return b.hot - a.hot; });
+    $('#carRow').innerHTML = list.slice(0, 9).map(function (p) { return cardHTML(p); }).join('') +
+      '<a class="pc pc--all" href="#san-pham" data-fit-all="' + carModel + '"><span>' + ICON.car + '</span><b>Xem tất cả ' + list.length + ' phụ kiện</b><small>cho ' + esc(modelBrand[carModel] + ' ' + modelName[carModel]) + '</small></a>';
+    $('#carRow').scrollLeft = 0;
+  }
+  renderCarTabs(); renderCarRow();
+  $('#carTabs').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-car]'); if (!b) return;
+    carModel = b.getAttribute('data-car'); renderCarTabs(); renderCarRow();
+  });
+  doc.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-fit-all]'); if (!a) return;
+    state.fit = a.getAttribute('data-fit-all'); state.cat = 'all'; syncFinder(); refresh(true);
+  }, true);
+
+  /* ---------------- car makes row ---------------- */
+  $('#brands').innerHTML = D.BRANDS.map(function (b) {
+    var ms = b.models.map(function (m) { return m[0]; });
+    var n = D.P.filter(function (p) { return p.fit.some(function (m) { return ms.indexOf(m) >= 0; }); }).length;
+    return '<button type="button" class="brand" data-make="' + b.id + '"><b>' + esc(b.name) + '</b><small>' + b.models.length + ' dòng xe · ' + n + ' phụ kiện</small></button>';
+  }).join('');
+  $('#brands').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-make]'); if (!b) return;
+    fBrand.value = b.getAttribute('data-make'); fillModels(fBrand.value); updateFinder();
+    goTo('chon-xe'); setTimeout(function () { fModel.focus({ preventScroll: true }); }, 500);
+  });
+
+  /* ---------------- services ---------------- */
+  $('#svcRow').innerHTML = D.SERVICES.map(function (sv) {
+    return '<article class="svc" id="svc-' + sv.id + '"><span class="svc__img"><img src="' + IMG(sv.img, 480, 360) + '" alt="' + esc(sv.name) + ' – ảnh công trình minh hoạ" width="480" height="360" loading="lazy" decoding="async"></span>' +
+      '<div class="svc__b"><h3>' + esc(sv.name) + '</h3><p>' + esc(sv.desc) + '</p><div class="svc__m"><span>Từ <b>' + fmt(sv.from) + '</b></span><span>' + ICON.clock + esc(sv.time) + '</span></div>' +
+      '<a class="btn btn--line btn--sm" href="#dat-lich" data-book-svc="' + esc(sv.svc) + '">Đặt lịch thi công</a></div></article>';
+  }).join('');
+  doc.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-svc]'); if (!a) return;
+    setTimeout(function () { var el = doc.getElementById('svc-' + a.getAttribute('data-svc')); if (el) { el.classList.remove('flash-hl'); void el.offsetWidth; el.classList.add('flash-hl'); var row = $('#svcRow'); row.scrollTo({ left: el.offsetLeft - row.offsetLeft - 8, behavior: 'smooth' }); } }, 350);
   });
 
   /* ---------------- cart ---------------- */
-  var CART_KEY = 'dopro_cart_v1';
+  var CART_KEY = 'dopro_cart_v2';
   var cart = (store(CART_KEY) || []).filter(function (it) { return it && (prodById[it.id] || comboById[it.id]) && it.qty > 0; });
   var FREE = 3000000;
   var drawer = $('#drawer');
+  var lastFocus = null;
+  function lockScroll(on) { root.classList.toggle('is-locked', on); }
   function itemInfo(id) {
     var p = prodById[id];
-    if (p) return { name: p.name, price: p.price, img: IMG(p.img, 160, 130) };
+    if (p) return { name: p.name, price: p.price, old: p.old, img: PIMG(p.img) };
     var c = comboById[id];
-    return { name: c.name + ' (' + c.stage + ')', price: c.price, img: IMG(c.img, 160, 130) };
+    return { name: c.name, price: c.price, old: c.old, img: IMG(c.img, 120, 120) };
   }
   function cartTotal() { return cart.reduce(function (s, it) { return s + itemInfo(it.id).price * it.qty; }, 0); }
   function cartCount() { return cart.reduce(function (s, it) { return s + it.qty; }, 0); }
   function saveCart() { store(CART_KEY, cart); }
   function renderCart() {
     var n = cartCount();
-    $$('[data-cart-count]').forEach(function (el) { el.textContent = n; if (n) el.removeAttribute('data-zero'); else el.setAttribute('data-zero', ''); });
-    $('#cartTtl span').removeAttribute('data-zero');
+    $$('[data-cart-count]').forEach(function (el) { el.textContent = n; el.toggleAttribute('data-zero', !n); });
     drawer.classList.toggle('is-empty', !n);
     $('#citems').innerHTML = cart.map(function (it) {
       var info = itemInfo(it.id);
-      return '<li class="ci" data-ci="' + it.id + '"><img src="' + info.img + '" alt="" width="76" height="64" loading="lazy">' +
-        '<div><p class="ci__n">' + esc(info.name) + '</p><span class="ci__p">' + fmt(info.price) + '</span>' +
-        '<div class="qty"><button type="button" data-q="-1" aria-label="Giảm số lượng">−</button><output>' + it.qty + '</output><button type="button" data-q="1" aria-label="Tăng số lượng">+</button></div></div>' +
-        '<button class="ci__rm" data-rm aria-label="Xoá ' + esc(info.name) + '">' + ICON.trash + '</button></li>';
+      return '<li class="ci" data-ci="' + it.id + '"><img src="' + info.img + '" alt="" width="64" height="64" loading="lazy">' +
+        '<div class="ci__b"><p class="ci__n">' + esc(info.name) + '</p><p class="ci__p"><b>' + fmt(info.price) + '</b><s>' + fmt(info.old) + '</s></p>' +
+        '<div class="qty qty--sm"><button type="button" data-q="-1" aria-label="Giảm số lượng">−</button><output>' + it.qty + '</output><button type="button" data-q="1" aria-label="Tăng số lượng">+</button></div></div>' +
+        '<button class="ci__rm" type="button" data-rm aria-label="Xoá ' + esc(info.name) + '">' + ICON.trash + '</button></li>';
     }).join('');
     var t = cartTotal();
     $('#subtotal').textContent = fmt(t);
     var left = FREE - t;
-    $('#shipTxt').innerHTML = left > 0 ? 'Mua thêm <b>' + fmt(left) + '</b> để được <b>miễn phí lắp đặt</b> nội thành' : '<b>Bạn được miễn phí lắp đặt</b> nội thành Hà Nội!';
-    $('#shipFill').style.transform = 'scaleX(' + Math.min(1, t / FREE) + ')';
+    $('#shipTxt').innerHTML = left > 0 ? 'Mua thêm <b>' + fmt(left) + '</b> để được miễn phí lắp đặt nội thành' : '<b>Đơn hàng được miễn phí lắp đặt nội thành</b>';
+    $('#shipFill').style.transform = 'scaleX(' + Math.min(1, t / FREE).toFixed(3) + ')';
   }
-  function bounceBadge() {
-    if (!hasGsap || reduce) return;
-    $$('[data-cart-count]').forEach(function (b) { gsap.fromTo(b, { scale: 1.8 }, { scale: 1, duration: .7, ease: 'elastic.out(1, .35)' }); });
-    gsap.fromTo('#cartBtn svg', { rotate: -14 }, { rotate: 0, duration: .6, ease: 'elastic.out(1, .3)' });
+  function cartTarget() {
+    var cands = [$('#cartBtn .hact__ic'), $('.bnav [data-open-cart] .bnav__ic')];
+    for (var i = 0; i < cands.length; i++) { var r = cands[i] && cands[i].getBoundingClientRect(); if (r && r.width && r.bottom > 0 && r.top < window.innerHeight) return cands[i]; }
+    return null;
+  }
+  function bump() { $$('[data-cart-count]').forEach(function (b) { b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }); }
+  function flyToCart(img, cb) {
+    var tgt = cartTarget();
+    if (!img || !tgt || reduce || !img.animate) { cb(); return; }
+    var r = img.getBoundingClientRect(), t = tgt.getBoundingClientRect();
+    if (!r.width) { cb(); return; }
+    var size = Math.min(110, r.width);
+    var clone = img.cloneNode(); clone.removeAttribute('srcset'); clone.src = img.currentSrc || img.src; clone.className = 'fly'; clone.alt = '';
+    clone.style.cssText = 'left:' + (r.left + r.width / 2 - size / 2) + 'px;top:' + (r.top + r.height / 2 - size / 2) + 'px;width:' + size + 'px;height:' + size + 'px';
+    doc.body.appendChild(clone);
+    var dx = t.left + t.width / 2 - (r.left + r.width / 2), dy = t.top + t.height / 2 - (r.top + r.height / 2);
+    var anim = clone.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: 'translate(' + dx * .5 + 'px,' + (dy * .5 - 60) + 'px) scale(.6)', opacity: .95, offset: .5 },
+      { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.12)', opacity: .3 }
+    ], { duration: 650, easing: 'cubic-bezier(.45,0,.3,1)' });
+    anim.onfinish = function () { clone.remove(); cb(); };
   }
   function addToCart(id, qty, srcImg) {
     qty = qty || 1;
     var ex = cart.filter(function (it) { return it.id === id; })[0];
     if (ex) ex.qty = Math.min(99, ex.qty + qty); else cart.push({ id: id, qty: qty });
     saveCart();
-    var done = function () { renderCart(); bounceBadge(); };
-    if (srcImg && hasGsap && !reduce) flyToCart(srcImg, done); else done();
-    toast('✓ Đã thêm <b>' + esc(itemInfo(id).name) + '</b> vào giỏ');
+    flyToCart(srcImg, function () { renderCart(); bump(); });
+    toast(ICON.check + '<span>Đã thêm <b>' + esc(itemInfo(id).name) + '</b> vào giỏ hàng</span><button type="button" data-open-cart>Xem giỏ</button>');
   }
-  function flyToCart(img, cb) {
-    var r = img.getBoundingClientRect();
-    var target = $('#cartBtn').getBoundingClientRect();
-    if (!r.width) { cb(); return; }
-    var size = Math.min(130, r.width);
-    var clone = doc.createElement('img');
-    clone.src = img.currentSrc || img.src; clone.alt = ''; clone.className = 'fly';
-    clone.style.cssText = 'left:' + (r.left + r.width / 2 - size / 2) + 'px;top:' + (r.top + r.height / 2 - size * .375) + 'px;width:' + size + 'px;height:' + size * .75 + 'px';
-    doc.body.appendChild(clone);
-    var dx = target.left + target.width / 2 - (r.left + r.width / 2);
-    var dy = target.top + target.height / 2 - (r.top + r.height / 2);
-    var tl = gsap.timeline({ onComplete: function () { clone.remove(); cb(); } });
-    tl.fromTo(clone, { scale: .6, opacity: 0 }, { scale: 1, opacity: 1, duration: .18, ease: 'power2.out' })
-      .to(clone, { x: dx, duration: .7, ease: 'power1.inOut' }, '>-0.02')
-      .to(clone, { y: dy, duration: .7, ease: 'back.in(1.4)' }, '<')
-      .to(clone, { scale: .12, rotate: 25, opacity: .4, duration: .7, ease: 'power2.in' }, '<');
-  }
-  function openCart() { drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false'); lockScroll(true); lastFocus = doc.activeElement; setTimeout(function () { $('.drawer__hd [data-close-cart]').focus(); }, 60); }
-  function closeCart() { if (!drawer.classList.contains('is-open')) return; drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true'); lockScroll(false); if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
+  function openCart() { closeMenu(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false'); lockScroll(true); lastFocus = doc.activeElement; setTimeout(function () { $('.drawer__hd .xbtn').focus(); }, 60); }
+  function closeCart() { if (!drawer.classList.contains('is-open')) return; drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true'); if (!openModalEl) lockScroll(false); if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }
   $('#cartBtn').addEventListener('click', openCart);
   doc.addEventListener('click', function (e) {
-    if (e.target.closest('[data-open-cart]')) { openCart(); return; }
+    if (e.target.closest('[data-open-cart]')) { e.preventDefault(); toastEl.classList.remove('is-show'); openCart(); return; }
     if (e.target.closest('[data-close-cart]') && !e.target.closest('a[href^="#"]')) { closeCart(); return; }
     var add = e.target.closest('[data-add]');
     if (add) {
       var id = add.getAttribute('data-add');
-      var card = add.closest('.card, .cb');
-      var img = card ? $('img', card) : null;
-      addToCart(id, 1, img);
+      var card = add.closest('.pc, .cbox');
+      addToCart(id, 1, card ? $('img', card) : null);
       add.classList.add('is-added');
-      var sp = $('span', add), old = sp ? sp.textContent : '';
-      if (sp) sp.textContent = 'Đã thêm ✓';
-      setTimeout(function () { add.classList.remove('is-added'); if (sp) sp.textContent = old; }, 1400);
+      setTimeout(function () { add.classList.remove('is-added'); }, 1200);
       return;
     }
     var ci = e.target.closest('.ci');
     if (ci) {
-      var cid = ci.getAttribute('data-ci');
-      var it = cart.filter(function (x) { return x.id === cid; })[0];
+      var it = cart.filter(function (x) { return x.id === ci.getAttribute('data-ci'); })[0];
       if (!it) return;
       var q = e.target.closest('[data-q]');
       if (q) { it.qty += +q.getAttribute('data-q'); if (it.qty < 1) cart.splice(cart.indexOf(it), 1); else it.qty = Math.min(99, it.qty); }
@@ -394,16 +534,16 @@
   /* ---------------- modals: quick view & checkout ---------------- */
   var openModalEl = null;
   function openModal(m) {
-    if (openModalEl) closeModal();
+    if (openModalEl) closeModal(true);
     openModalEl = m; lastFocus = doc.activeElement;
     m.classList.add('is-open'); m.setAttribute('aria-hidden', 'false'); lockScroll(true);
     setTimeout(function () { var x = $('.modal__x', m); if (x) x.focus(); }, 60);
   }
-  function closeModal() {
+  function closeModal(keepLock) {
     if (!openModalEl) return;
     var m = openModalEl; openModalEl = null;
     m.classList.remove('is-open'); m.setAttribute('aria-hidden', 'true');
-    if (!drawer.classList.contains('is-open')) lockScroll(false);
+    if (keepLock !== true && !drawer.classList.contains('is-open')) lockScroll(false);
     if (lastFocus && lastFocus.focus && doc.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
   }
   doc.addEventListener('click', function (e) { if (e.target.closest('[data-close-modal]')) closeModal(); });
@@ -412,49 +552,68 @@
   function openQV(id) {
     var p = prodById[id]; if (!p) return;
     qvId = id; qvQty = 1; $('#qvQty').textContent = 1;
-    var im = $('#qvImg'); im.src = IMG(p.img, 900, 760); im.alt = p.name;
-    $('#qvBadge').textContent = '-' + pct(p) + '%';
-    $('#qvCat').textContent = catById[p.cat].name;
+    var im = $('#qvImg'); im.src = PIMG(p.img); im.alt = p.name;
+    $('#qvCredit').innerHTML = 'Ảnh: <a href="' + esc(p.src[2]) + '" target="_blank" rel="noopener">' + esc(p.src[0]) + '</a> · ' + esc(p.src[1]) + ' · Wikimedia Commons (đã tách nền)';
+    $('#qvOff').textContent = '-' + pct(p) + '%';
+    $('#qvCat').innerHTML = 'Trang chủ <span>›</span> ' + esc(catById[p.cat].name);
     $('#qvName').textContent = p.name;
-    $('#qvStars').style.setProperty('--r', p.rating);
-    $('#qvRev').textContent = p.rating.toFixed(1) + ' · ' + p.reviews + ' đánh giá';
+    $('#qvMeta').innerHTML = starsHTML(p.rating) + '<b>' + p.rating.toFixed(1) + '</b><span>' + p.reviews + ' đánh giá</span><span>Đã bán ' + soldTxt(p.sold) + '</span><span>Mã SP: <b>DP-' + p.id.slice(1) + '</b></span>';
     $('#qvPrice').textContent = fmt(p.price);
     $('#qvOld').textContent = fmt(p.old);
-    $('#qvSpec').innerHTML = p.feats.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('');
+    $('#qvPct').textContent = '-' + pct(p) + '%';
+    var promo = ['Miễn phí lắp đặt nội thành cho đơn từ 3.000.000₫'];
+    if (p.gift) promo.unshift(p.gift);
+    if (p.tags.indexOf('i') >= 0) promo.push('Trả góp 0% kỳ hạn 3–12 tháng qua thẻ tín dụng');
+    $('#qvPromo').innerHTML = '<b>' + ICON.gift + 'Khuyến mãi</b><ol>' + promo.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>';
+    $('#qvSpec').innerHTML = p.feats.map(function (f) { return '<li>' + ICON.tick + esc(f) + '</li>'; }).join('');
     var fits = p.fit.slice(0, 6).map(function (m) { return modelName[m]; }).join(', ');
-    $('#qvFit').innerHTML = '<b>Tương thích:</b> ' + esc(fits) + (p.fit.length > 6 ? ' và ' + (p.fit.length - 6) + ' dòng xe khác' : '') + (p.hp ? ' · <b>tăng ~' + p.hp + ' HP</b>' : '');
-    closeSugg(); closeCart();
+    $('#qvFit').innerHTML = '<b>Lắp vừa:</b> ' + esc(fits) + (p.fit.length > 6 ? ' và ' + (p.fit.length - 6) + ' dòng xe khác' : '') + (p.hp ? ' · <b class="up">tăng ~' + p.hp + ' HP</b>' : '');
+    closeSugg(); closeCart(); hideMega();
     openModal(qv);
   }
-  doc.addEventListener('click', function (e) { var t = e.target.closest('[data-qv]'); if (t) openQV(t.getAttribute('data-qv')); });
+  doc.addEventListener('click', function (e) { var t = e.target.closest('[data-qv]'); if (t) { e.preventDefault(); openQV(t.getAttribute('data-qv')); } });
   doc.addEventListener('click', function (e) { var b = e.target.closest('[data-qv-qty]'); if (b) { qvQty = Math.max(1, Math.min(99, qvQty + +b.getAttribute('data-qv-qty'))); $('#qvQty').textContent = qvQty; } });
-  $('#qvAdd').addEventListener('click', function () { var id = qvId, q = qvQty; closeModal(); addToCart(id, q, null); bounceBadge(); });
+  $('#qvAdd').addEventListener('click', function () { var id = qvId, q = qvQty; closeModal(); addToCart(id, q, null); });
+  $('#qvBuy').addEventListener('click', function () { var id = qvId, q = qvQty; closeModal(true); addToCart(id, q, null); openCheckout(); });
 
   /* checkout */
   var co = $('#co'), coForm = $('#coForm'), coOk = $('#coOk');
   var PHONE = /^0(3|5|7|8|9)\d{8}$/;
   function cleanPhone(v) { return String(v).replace(/[\s.\-()]/g, ''); }
   function setErr(input, msg) { var f = input.closest('.field'); f.classList.toggle('has-err', !!msg); $('.err', f).textContent = msg || ''; input.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; }
-  $('#toCheckout').addEventListener('click', function () {
+  function openCheckout() {
     if (!cart.length) return;
     $('#coSum').innerHTML = cart.map(function (it) { var i = itemInfo(it.id); return '<div><span>' + it.qty + ' × ' + esc(i.name) + '</span><span>' + fmt(i.price * it.qty) + '</span></div>'; }).join('') + '<div class="tot"><span>Tổng tạm tính</span><b>' + fmt(cartTotal()) + '</b></div>';
     coForm.hidden = false; coOk.hidden = true;
-    closeCart(); openModal(co);
-  });
+    drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true');
+    openModal(co);
+  }
+  $('#toCheckout').addEventListener('click', openCheckout);
   coForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var n = $('#cName'), p = $('#cPhone'), a = $('#cAddr');
     var ok = setErr(n, n.value.trim().length < 2 ? 'Vui lòng nhập họ tên' : '');
-    ok = setErr(p, !PHONE.test(cleanPhone(p.value)) ? 'Số điện thoại không hợp lệ (VD: 0912 345 678)' : '') && ok;
-    ok = setErr(a, a.value.trim().length < 6 ? 'Vui lòng nhập địa chỉ cụ thể' : '') && ok;
+    ok = setErr(p, !PHONE.test(cleanPhone(p.value)) ? 'Số điện thoại chưa đúng (VD: 0912 345 678)' : '') && ok;
+    ok = setErr(a, a.value.trim().length < 4 ? 'Vui lòng nhập địa chỉ hoặc tên xưởng' : '') && ok;
     if (!ok) { var f = $('.has-err input', coForm); if (f) f.focus(); return; }
     var code = 'DP' + String(Date.now()).slice(-6);
-    $('#coOkTxt').innerHTML = 'Cảm ơn <b>' + esc(n.value.trim()) + '</b>! Mã đơn <b>' + code + '</b> · ' + cartCount() + ' sản phẩm · ' + fmt(cartTotal()) + '.<br>Kỹ thuật viên sẽ gọi <b>' + esc(cleanPhone(p.value)) + '</b> để xác nhận. (Trang mẫu – không gửi dữ liệu)';
+    var pay = ($('input[name="pay"]:checked', coForm) || {}).value, ship = ($('input[name="ship"]:checked', coForm) || {}).value;
+    $('#coOkTxt').innerHTML = 'Cảm ơn <b>' + esc(n.value.trim()) + '</b>. Mã đơn <b>' + code + '</b> · ' + cartCount() + ' sản phẩm · <b>' + fmt(cartTotal()) + '</b><br>' + (ship === 'nha' ? 'Giao &amp; lắp tận nơi' : 'Lắp tại xưởng') + ' · Thanh toán: ' + esc(pay) + '.<br>Nhân viên sẽ gọi <b>' + esc(cleanPhone(p.value)) + '</b> để xác nhận.<br><small>(Trang mẫu – không gửi dữ liệu, không thu tiền)</small>';
     coForm.hidden = true; coOk.hidden = false;
     cart = []; saveCart(); renderCart(); coForm.reset();
-    if (hasGsap && !reduce) gsap.fromTo($('svg', coOk), { scale: .4, rotate: -30, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: .7, ease: 'back.out(2)' });
   });
   ['#cName', '#cPhone', '#cAddr', '#bName', '#bPhone', '#bCar', '#bDate'].forEach(function (s) { $(s).addEventListener('input', function () { if (this.closest('.field').classList.contains('has-err')) setErr(this, ''); }); });
+
+  /* ---------------- mobile menu ---------------- */
+  var mnav = $('#mnav'), burger = $('#burger');
+  $('#mnavCats').innerHTML = D.CATS.map(function (c) { return '<li><a href="#san-pham" data-goto-cat="' + c.id + '"><img src="' + PIMG(c.img) + '" alt="" width="36" height="36" loading="lazy"><span>' + esc(c.name) + '<small>' + countCat(c.id) + ' sản phẩm</small></span>' + ICON.right + '</a></li>'; }).join('');
+  function openMenu() { mnav.classList.add('is-open'); mnav.setAttribute('aria-hidden', 'false'); burger.setAttribute('aria-expanded', 'true'); lockScroll(true); lastFocus = doc.activeElement; setTimeout(function () { $('.mnav .xbtn').focus(); }, 60); }
+  function closeMenu() { if (!mnav.classList.contains('is-open')) return; mnav.classList.remove('is-open'); mnav.setAttribute('aria-hidden', 'true'); burger.setAttribute('aria-expanded', 'false'); lockScroll(false); }
+  burger.addEventListener('click', openMenu);
+  doc.addEventListener('click', function (e) {
+    if (e.target.closest('[data-open-menu]')) openMenu();
+    else if (e.target.closest('[data-close-menu]')) closeMenu();
+  });
 
   /* ---------------- Esc ---------------- */
   doc.addEventListener('keydown', function (e) {
@@ -462,124 +621,100 @@
     if (openModalEl) closeModal();
     else if (drawer.classList.contains('is-open')) closeCart();
     else if (mnav.classList.contains('is-open')) closeMenu();
-    else closeSugg();
+    else { closeSugg(); hideMega(); }
   });
 
-  /* ---------------- combos ---------------- */
-  var MAXHP = 260, MAXNM = 380;
-  $('#combos').innerHTML = D.COMBOS.map(function (c) {
-    var gain = c.hp[1] - c.hp[0];
-    function meter(label, a, b, max, unit, inverse) {
-      var fa = inverse ? (10 - a) / 6 : a / max, fb = inverse ? (10 - b) / 6 : b / max;
-      return '<div class="meter"><div class="meter__t"><span>' + label + '</span><b>' + String(a).replace('.', ',') + ' → ' + String(b).replace('.', ',') + ' ' + unit + '</b></div>' +
-        '<div class="meter__bar"><em data-to="' + fb.toFixed(3) + '"></em><i data-to="' + fa.toFixed(3) + '"></i></div></div>';
+  /* ---------------- banner slider ---------------- */
+  (function () {
+    var track = $('#bTrack'), slides = $$('.slide', track), tabs = $$('#bTabs button'), view = $('.bslider__view');
+    var i = 0, timer = null, hover = false;
+    function go(n, user) {
+      i = (n + slides.length) % slides.length;
+      track.style.transform = 'translate3d(' + (-i * 100) + '%,0,0)';
+      tabs.forEach(function (t, k) { t.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+      slides.forEach(function (s, k) {
+        s.setAttribute('aria-hidden', k === i ? 'false' : 'true'); s.tabIndex = k === i ? 0 : -1;
+        if (Math.abs(k - i) <= 1) { var im = $('img', s); if (im.loading === 'lazy') im.loading = 'eager'; }
+      });
+      if (user) restart();
     }
-    return '<article class="cb' + (c.featured ? ' cb--feat' : '') + '" data-reveal>' +
-      '<div class="cb__img"><img src="' + IMG(c.img, 720, 405) + '" alt="' + esc(c.name) + '" width="720" height="405" loading="lazy" decoding="async"><div class="cb__stage"><b>' + c.stage + '</b><span>' + c.tag + '</span></div></div>' +
-      '<div class="cb__b"><h3>' + esc(c.name) + '</h3>' +
-      '<div class="cb__hp"><b data-from="' + c.hp[0] + '" data-to="' + c.hp[1] + '">' + c.hp[1] + '</b><span>HP</span><em>+' + gain + ' HP</em></div>' +
-      meter('Công suất', c.hp[0], c.hp[1], MAXHP, 'HP') + meter('Mô-men xoắn', c.nm[0], c.nm[1], MAXNM, 'Nm') + meter('0–100 km/h', c.acc[0], c.acc[1], 0, 's', true) +
-      '<ul>' + c.items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>' +
-      '<div class="cb__price"><b>' + fmt(c.price) + '</b><s>' + fmt(c.old) + '</s><small>Tiết kiệm ' + fmt(c.old - c.price) + ' · gồm công lắp & dyno</small></div>' +
-      '<button class="btn btn--red btn--block" data-add="' + c.id + '"><span>Chọn combo này</span></button></div></article>';
-  }).join('');
-
-  /* ---------------- builds & reviews ---------------- */
-  $('#gallery').innerHTML = D.BUILDS.map(function (b, i) {
-    return '<article class="build"><img src="' + IMG(b.img, 720, 900) + '" alt="' + esc(b.name + ' – ' + b.car) + '" width="720" height="900" loading="lazy" decoding="async" draggable="false">' +
-      '<span class="build__idx">' + pad(i + 1) + ' / ' + pad(D.BUILDS.length) + '</span><span class="build__gain">' + b.gain + '</span>' +
-      '<div class="build__t"><span class="build__n">' + esc(b.name) + '</span><span class="build__c">' + esc(b.car) + '</span><div class="build__tags">' + b.mods.map(function (m) { return '<span>' + esc(m) + '</span>'; }).join('') + '</div></div></article>';
-  }).join('');
-  $('#reviews').innerHTML = D.REVIEWS.map(function (r) {
-    var parts = r.n.split(' '), ini = (parts[parts.length - 2] || '').charAt(0) + parts[parts.length - 1].charAt(0);
-    return '<article class="rcard">' + stars(r.r) + '<p class="rcard__q">' + esc(r.t) + '</p><div class="rcard__u"><span class="av">' + esc(ini) + '</span><div><b>' + esc(r.n) + '</b><small>' + esc(r.car) + '</small></div><span class="verified">✓ Đã mua</span></div></article>';
-  }).join('');
-
-  /* ---------------- FAQ ---------------- */
-  $('#faqList').innerHTML = D.FAQ.map(function (f, i) {
-    return '<div class="qa' + (i === 0 ? ' is-open' : '') + '" data-reveal><button class="qa__q" aria-expanded="' + (i === 0) + '" aria-controls="qa' + i + '"><span>' + esc(f.q) + '</span><i class="qa__ic" aria-hidden="true"></i></button><div class="qa__a" id="qa' + i + '" role="region"><div><p>' + esc(f.a) + '</p></div></div></div>';
-  }).join('');
-  $('#faqList').addEventListener('click', function (e) {
-    var q = e.target.closest('.qa__q'); if (!q) return;
-    var item = q.parentNode, open = !item.classList.contains('is-open');
-    $$('.qa', this).forEach(function (x) { x.classList.remove('is-open'); $('.qa__q', x).setAttribute('aria-expanded', 'false'); });
-    if (open) { item.classList.add('is-open'); q.setAttribute('aria-expanded', 'true'); }
-    if (hasGsap) setTimeout(function () { ScrollTrigger.refresh(); }, 450);
-  });
-
-  /* ---------------- booking ---------------- */
-  var bookForm = $('#bookForm'), bDate = $('#bDate');
-  (function () { var t = new Date(); t.setDate(t.getDate() + 1); var iso = function (d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }; bDate.min = iso(new Date()); bDate.value = iso(t); })();
-  bookForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var n = $('#bName'), p = $('#bPhone'), c = $('#bCar');
-    var ok = setErr(n, n.value.trim().length < 2 ? 'Vui lòng nhập họ tên' : '');
-    ok = setErr(p, !PHONE.test(cleanPhone(p.value)) ? 'Số điện thoại không hợp lệ (VD: 0912 345 678)' : '') && ok;
-    ok = setErr(c, c.value.trim().length < 2 ? 'Vui lòng nhập dòng xe' : '') && ok;
-    ok = setErr(bDate, (!bDate.value || bDate.value < bDate.min) ? 'Chọn ngày từ hôm nay trở đi' : '') && ok;
-    if (!ok) { var f = $('.has-err input', bookForm); if (f) f.focus(); return; }
-    var slot = ($('input[name="slot"]:checked', bookForm) || {}).value || '';
-    var dd = bDate.value.split('-');
-    $('#bookOkTxt').innerHTML = 'Hẹn <b>' + esc(n.value.trim()) + '</b> lúc <b>' + slot + ', ' + dd[2] + '/' + dd[1] + '/' + dd[0] + '</b> cho xe <b>' + esc(c.value.trim()) + '</b> – hạng mục ' + esc($('#bSvc').value) + '. Chúng tôi sẽ gọi xác nhận trong 15 phút. (Trang mẫu – không gửi dữ liệu)';
-    $('#bookOk').hidden = false;
-    if (hasGsap && !reduce) gsap.fromTo('#bookOk svg', { scale: .4, rotate: -30, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: .7, ease: 'back.out(2)' });
-  });
-  $('#bookAgain').addEventListener('click', function () { $('#bookOk').hidden = true; bookForm.reset(); var t = new Date(); t.setDate(t.getDate() + 1); bDate.value = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); });
-
-  /* ---------------- sliders ---------------- */
-  function Slider(el, interval) {
-    var lastTouch = 0, hover = false, visible = false, down = null, moved = false, raf = 0;
-    var prog = el.id === 'gallery' ? $('#galProg') : null;
-    function step() { var c = el.children[0]; if (!c) return 300; var gap = parseFloat(getComputedStyle(el).columnGap) || 18; return c.offsetWidth + gap; }
-    function atEnd() { return el.scrollLeft + el.clientWidth >= el.scrollWidth - 8; }
-    function next() { if (atEnd()) el.scrollTo({ left: 0, behavior: 'smooth' }); else el.scrollBy({ left: step(), behavior: 'smooth' }); }
-    function prev() { if (el.scrollLeft <= 4) el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' }); else el.scrollBy({ left: -step(), behavior: 'smooth' }); }
-    function touch() { lastTouch = Date.now(); }
-    setInterval(function () {
-      if (!visible || hover || doc.hidden || reduce || Date.now() - lastTouch < 6000) return;
-      next();
-    }, interval);
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: .35 }).observe(el);
-    else visible = true;
-    el.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') hover = true; });
-    el.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hover = false; touch(); } });
-    el.addEventListener('touchstart', touch, { passive: true });
-    el.addEventListener('touchend', touch, { passive: true });
-    el.addEventListener('wheel', touch, { passive: true });
-    el.addEventListener('focusin', touch);
-    el.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { e.preventDefault(); touch(); next(); } if (e.key === 'ArrowLeft') { e.preventDefault(); touch(); prev(); } });
-    /* mouse drag */
-    el.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse' || e.button !== 0) return; down = { x: e.clientX, s: el.scrollLeft }; moved = false; });
-    window.addEventListener('pointermove', function (e) {
-      if (!down) return;
-      var dx = e.clientX - down.x;
-      if (!moved && Math.abs(dx) > 5) { moved = true; el.classList.add('is-drag'); }
-      if (moved) el.scrollLeft = down.s - dx;
-    });
-    window.addEventListener('pointerup', function () {
-      if (!down) return; down = null; touch();
-      if (moved) { var s = step(), target = Math.round(el.scrollLeft / s) * s; el.classList.remove('is-drag'); el.scrollTo({ left: target, behavior: 'smooth' }); }
-    });
-    el.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
-    if (prog) el.addEventListener('scroll', function () {
-      if (raf) return;
-      raf = requestAnimationFrame(function () { raf = 0; var max = el.scrollWidth - el.clientWidth; var p = max > 0 ? el.scrollLeft / max : 1; prog.style.transform = 'scaleX(' + (0.12 + p * 0.88) + ')'; });
+    function restart() { clearInterval(timer); if (!reduce) timer = setInterval(function () { if (!hover && !doc.hidden) go(i + 1); }, 5000); }
+    tabs.forEach(function (t, k) { t.addEventListener('click', function () { go(k, true); }); t.addEventListener('mouseenter', function () { if (!isMobile()) go(k, true); }); });
+    $('#bPrev').addEventListener('click', function () { go(i - 1, true); });
+    $('#bNext').addEventListener('click', function () { go(i + 1, true); });
+    var bs = $('#bslider');
+    bs.addEventListener('mouseenter', function () { hover = true; });
+    bs.addEventListener('mouseleave', function () { hover = false; });
+    /* swipe */
+    var sx = null, sy = 0, dx = 0, w = 1;
+    view.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; dx = 0; w = view.offsetWidth; track.style.transition = 'none'; }, { passive: true });
+    view.addEventListener('touchmove', function (e) {
+      if (sx === null) return;
+      dx = e.touches[0].clientX - sx;
+      if (Math.abs(e.touches[0].clientY - sy) > Math.abs(dx)) return;
+      track.style.transform = 'translate3d(calc(' + (-i * 100) + '% + ' + dx + 'px),0,0)';
     }, { passive: true });
-    $$('[data-sl-next="' + el.id + '"]').forEach(function (b) { b.addEventListener('click', function () { touch(); next(); }); });
-    $$('[data-sl-prev="' + el.id + '"]').forEach(function (b) { b.addEventListener('click', function () { touch(); prev(); }); });
-  }
-  Slider($('#gallery'), 4200);
-  Slider($('#reviews'), 5200);
+    view.addEventListener('touchend', function () {
+      track.style.transition = '';
+      if (Math.abs(dx) > w * .18) go(i + (dx < 0 ? 1 : -1), true); else go(i);
+      sx = null;
+    });
+    go(0); restart();
+  })();
 
-  /* ---------------- dyno chart ---------------- */
-  var svg = $('#dynoSvg'), X0 = 56, X1 = 624, Y0 = 336, Y1 = 22, HPMAX = 260, R0 = 1000, R1 = 7000;
+  /* ---------------- horizontal rows: arrows ---------------- */
+  function rowStep(el) { var c = el.firstElementChild; if (!c) return 240; var gap = parseFloat(getComputedStyle(el).columnGap) || 10; return (c.offsetWidth + gap) * Math.max(1, Math.floor(el.clientWidth / (c.offsetWidth + gap)) - 1); }
+  function rowArrows(el) {
+    var wrap = doc.createElement('div'); wrap.className = 'hrow-wrap';
+    el.parentNode.insertBefore(wrap, el); wrap.appendChild(el);
+    var prev = doc.createElement('button'), next = doc.createElement('button');
+    prev.className = 'rarr rarr--prev'; next.className = 'rarr rarr--next';
+    prev.type = next.type = 'button';
+    prev.setAttribute('aria-label', 'Cuộn sang trái'); next.setAttribute('aria-label', 'Cuộn sang phải');
+    prev.innerHTML = ICON.left; next.innerHTML = ICON.right;
+    wrap.appendChild(prev); wrap.appendChild(next);
+    function upd() { prev.hidden = el.scrollLeft < 8; next.hidden = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8; }
+    prev.addEventListener('click', function () { el.scrollBy({ left: -rowStep(el), behavior: 'smooth' }); });
+    next.addEventListener('click', function () { el.scrollBy({ left: rowStep(el), behavior: 'smooth' }); });
+    el.addEventListener('scroll', function () { requestAnimationFrame(upd); }, { passive: true });
+    window.addEventListener('resize', upd, { passive: true });
+    new MutationObserver(function () { setTimeout(upd, 30); }).observe(el, { childList: true });
+    setTimeout(upd, 50);
+  }
+  ['#flashRow', '#carRow'].forEach(function (s) { rowArrows($(s)); });
+  $$('[data-row-next]').forEach(function (b) { b.addEventListener('click', function () { var el = doc.getElementById(b.getAttribute('data-row-next')); el.scrollBy({ left: rowStep(el), behavior: 'smooth' }); }); });
+  $$('[data-row-prev]').forEach(function (b) { b.addEventListener('click', function () { var el = doc.getElementById(b.getAttribute('data-row-prev')); el.scrollBy({ left: -rowStep(el), behavior: 'smooth' }); }); });
+
+  /* ---------------- combos + dyno ---------------- */
+  var stageIdx = 1;
+  $('#stageTabs').innerHTML = D.COMBOS.map(function (c, i) {
+    return '<button role="tab" aria-selected="' + (i === stageIdx) + '" data-stage="' + i + '"><b>' + c.stage + ' <span>· ' + esc(c.tag) + '</span></b><small><em>+' + (c.hp[1] - c.hp[0]) + ' HP</em><i> · </i><em>' + fmt(c.price) + '</em></small></button>';
+  }).join('');
+  function renderCombo(i) {
+    var c = D.COMBOS[i];
+    $('#cbox').innerHTML =
+      '<div class="cbox__top"><img src="' + IMG(c.img, 240, 240) + '" alt="' + esc(c.name) + '" width="120" height="120" loading="lazy" decoding="async">' +
+      '<div><span class="tg tg--red">' + esc(c.tag) + '</span><h3>' + esc(c.name) + '</h3><p>Thi công ' + esc(c.time) + ' · đo dyno trước &amp; sau · bảo hành 24 tháng</p></div></div>' +
+      '<table class="cbox__tbl"><thead><tr><th>Thông số</th><th>Xe zin</th><th>Sau khi độ</th></tr></thead><tbody>' +
+      '<tr><td>Công suất</td><td>' + c.hp[0] + ' HP</td><td><b>' + c.hp[1] + ' HP</b> <em>+' + (c.hp[1] - c.hp[0]) + '</em></td></tr>' +
+      '<tr><td>Mô-men xoắn</td><td>' + c.nm[0] + ' Nm</td><td><b>' + c.nm[1] + ' Nm</b> <em>+' + (c.nm[1] - c.nm[0]) + '</em></td></tr>' +
+      '<tr><td>0–100 km/h</td><td>' + String(c.acc[0]).replace('.', ',') + ' s</td><td><b>' + String(c.acc[1]).replace('.', ',') + ' s</b> <em>−' + String((c.acc[0] - c.acc[1]).toFixed(1)).replace('.', ',') + '</em></td></tr>' +
+      '</tbody></table>' +
+      '<p class="cbox__lbl">Gói gồm:</p><ul class="cbox__items">' + c.items.map(function (x) { return '<li>' + ICON.tick + esc(x) + '</li>'; }).join('') + '</ul>' +
+      '<div class="cbox__price"><b>' + fmt(c.price) + '</b><s>' + fmt(c.old) + '</s><span>Tiết kiệm ' + fmt(c.old - c.price) + '</span></div>' +
+      '<div class="cbox__btns"><button class="btn btn--red" type="button" data-add="' + c.id + '">Chọn combo này</button><a class="btn btn--line" href="#dat-lich" data-book-svc="Combo ' + c.stage + '">Đặt lịch lắp</a></div>';
+  }
+  renderCombo(stageIdx);
+  doc.addEventListener('click', function (e) { var a = e.target.closest('[data-book-svc]'); if (a) $('#bSvc').value = a.getAttribute('data-book-svc'); }, true);
+
+  var svg = $('#dynoSvg'), X0 = 46, X1 = 628, Y0 = 316, Y1 = 16, HPMAX = 260, R0 = 1000, R1 = 7000;
   var xr = function (r) { return X0 + (r - R0) / (R1 - R0) * (X1 - X0); };
   var yh = function (h) { return Y0 - h / HPMAX * (Y0 - Y1); };
-  (function grid() {
-    var g = '<g class="dgrid">';
-    for (var h = 0; h <= 250; h += 50) g += '<line x1="' + X0 + '" x2="' + X1 + '" y1="' + yh(h) + '" y2="' + yh(h) + '"/><text x="' + (X0 - 10) + '" y="' + (yh(h) + 5) + '" text-anchor="end">' + h + '</text>';
-    for (var r = 1000; r <= 7000; r += 1000) g += '<line x1="' + xr(r) + '" x2="' + xr(r) + '" y1="' + Y1 + '" y2="' + Y0 + '"/><text x="' + xr(r) + '" y="' + (Y0 + 22) + '" text-anchor="middle">' + (r / 1000) + 'k</text>';
-    g += '<text class="ax" x="' + X1 + '" y="' + (Y0 + 40) + '" text-anchor="end">VÒNG TUA (RPM)</text><text x="' + (X0 - 10) + '" y="' + (Y1 - 6) + '" text-anchor="end">HP</text></g>';
+  (function () {
+    var g = '';
+    for (var h = 0; h <= 250; h += 50) g += '<line class="gl" x1="' + X0 + '" x2="' + X1 + '" y1="' + yh(h) + '" y2="' + yh(h) + '"/><text x="' + (X0 - 8) + '" y="' + (yh(h) + 4) + '" text-anchor="end">' + h + '</text>';
+    for (var r = 1000; r <= 7000; r += 1000) g += '<text x="' + xr(r) + '" y="' + (Y0 + 20) + '" text-anchor="middle">' + (r / 1000) + 'k</text>';
+    g += '<text x="' + X1 + '" y="' + (Y0 + 38) + '" text-anchor="end" class="ax">Vòng tua (rpm)</text><text x="' + (X0 - 8) + '" y="' + (Y1 - 4) + '" text-anchor="end" class="ax">HP</text>';
     $('#dynoGrid').innerHTML = g;
   })();
   function pathFrom(vals) {
@@ -587,207 +722,171 @@
     var d = 'M' + pts[0][0].toFixed(1) + ',' + pts[0][1].toFixed(1);
     for (var i = 0; i < pts.length - 1; i++) {
       var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-      var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6, c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
-      d += 'C' + c1x.toFixed(1) + ',' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ',' + c2y.toFixed(1) + ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1);
+      d += 'C' + (p1[0] + (p2[0] - p0[0]) / 6).toFixed(1) + ',' + (p1[1] + (p2[1] - p0[1]) / 6).toFixed(1) + ' ' + (p2[0] - (p3[0] - p1[0]) / 6).toFixed(1) + ',' + (p2[1] - (p3[1] - p1[1]) / 6).toFixed(1) + ' ' + p2[0].toFixed(1) + ',' + p2[1].toFixed(1);
     }
     return d;
   }
-  var stockP = $('#dynoStock'), tunedP = $('#dynoTuned'), areaP = $('#dynoArea'), peakG = $('#dynoPeak');
-  var cur = D.DYNO.stages[1].hp.slice(), stageIdx = 1;
+  var tunedP = $('#dynoTuned'), areaP = $('#dynoArea'), peakG = $('#dynoPeak');
+  var cur = D.DYNO.stages[stageIdx].hp.slice();
   function drawTuned(vals) {
     var d = pathFrom(vals);
     tunedP.setAttribute('d', d);
-    areaP.setAttribute('d', d + 'L' + xr(D.DYNO.rpm[D.DYNO.rpm.length - 1]) + ',' + Y0 + 'L' + xr(D.DYNO.rpm[0]) + ',' + Y0 + 'Z');
+    areaP.setAttribute('d', d + 'L' + xr(7000) + ',' + Y0 + 'L' + xr(1500) + ',' + Y0 + 'Z');
     var mi = 0; vals.forEach(function (v, i) { if (v > vals[mi]) mi = i; });
     peakG.setAttribute('transform', 'translate(' + xr(D.DYNO.rpm[mi]) + ',' + yh(vals[mi]) + ')');
   }
-  stockP.setAttribute('d', pathFrom(D.DYNO.stock));
+  $('#dynoStock').setAttribute('d', pathFrom(D.DYNO.stock));
   drawTuned(cur);
-  function setKpi(i, animate) {
-    var s = D.DYNO.stages[i], gain = Math.round((s.peakHp / 178 - 1) * 100);
-    var tgt = { hp: s.peakHp, nm: s.nm, g: gain };
-    var els = { hp: $('#kHp'), nm: $('#kNm'), g: $('#kGain') };
-    if (!hasGsap || !animate || reduce) { els.hp.textContent = tgt.hp; els.nm.textContent = tgt.nm; els.g.textContent = '+' + tgt.g; return; }
-    var o = { hp: +els.hp.textContent || 0, nm: +els.nm.textContent || 0, g: parseInt(els.g.textContent, 10) || 0 };
-    gsap.to(o, { hp: tgt.hp, nm: tgt.nm, g: tgt.g, duration: .9, ease: 'power2.out', onUpdate: function () { els.hp.textContent = Math.round(o.hp); els.nm.textContent = Math.round(o.nm); els.g.textContent = '+' + Math.round(o.g); } });
+  function tween(dur, fn) {
+    if (reduce || !dur) { fn(1); return; }
+    var t0 = performance.now();
+    (function f(now) { var t = Math.min(1, (now - t0) / dur); fn(t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2); if (t < 1) requestAnimationFrame(f); })(t0);
   }
-  setKpi(1, false);
-  $('#dynoSeg').addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
+  function setKpi(i, animate) {
+    var s = D.DYNO.stages[i], c = D.COMBOS[i];
+    var to = { hp: s.peakHp, nm: s.nm, g: Math.round((s.peakHp / 178 - 1) * 100), a: c.acc[1] };
+    var els = { hp: $('#kHp'), nm: $('#kNm'), g: $('#kGain'), a: $('#kAcc') };
+    var from = { hp: +els.hp.textContent, nm: +els.nm.textContent, g: parseInt(els.g.textContent, 10), a: parseFloat(els.a.textContent.replace(',', '.')) };
+    tween(animate ? 700 : 0, function (k) {
+      els.hp.textContent = Math.round(from.hp + (to.hp - from.hp) * k);
+      els.nm.textContent = Math.round(from.nm + (to.nm - from.nm) * k);
+      els.g.textContent = '+' + Math.round(from.g + (to.g - from.g) * k);
+      els.a.textContent = (from.a + (to.a - from.a) * k).toFixed(1).replace('.', ',');
+    });
+  }
+  setKpi(stageIdx, false);
+  $('#stageTabs').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-stage]'); if (!b) return;
     var i = +b.getAttribute('data-stage'); if (i === stageIdx) return; stageIdx = i;
-    $$('button', this).forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
-    var target = D.DYNO.stages[i].hp;
-    if (hasGsap && !reduce) { gsap.to(cur, { endArray: target, duration: .9, ease: 'power3.inOut', onUpdate: function () { drawTuned(cur); } }); }
-    else { cur = target.slice(); drawTuned(cur); }
+    $$('[data-stage]', this).forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+    var from = cur.slice(), target = D.DYNO.stages[i].hp;
+    tween(800, function (k) { for (var j = 0; j < cur.length; j++) cur[j] = from[j] + (target[j] - from[j]) * k; drawTuned(cur); });
     setKpi(i, true);
-    var g = $('[data-gauge]'); if (g) g.textContent = D.DYNO.stages[i].peakHp;
+    renderCombo(i);
   });
   /* hover read-out */
-  var tip = $('#dynoTip'), hov = $('#dynoHover'), fig = $('.dyno__chart'), svgRect = null, figRect = null;
-  function cacheRects() { svgRect = svg.getBoundingClientRect(); figRect = fig.getBoundingClientRect(); }
-  svg.addEventListener('pointerenter', cacheRects);
-  svg.addEventListener('pointermove', function (e) {
-    if (!svgRect) cacheRects();
-    var vx = (e.clientX - svgRect.left) / svgRect.width * 640;
-    var r = R0 + (vx - X0) / (X1 - X0) * (R1 - R0);
-    var rpm = D.DYNO.rpm, i = Math.round((r - rpm[0]) / 500);
+  var tip = $('#dynoTip'), hov = $('#dynoHover'), fig = $('#dyno');
+  function dynoAt(clientX) {
+    var sr = svg.getBoundingClientRect(), fr = fig.getBoundingClientRect();
+    var vx = (clientX - sr.left) / sr.width * 640;
+    var rpm = D.DYNO.rpm, i = Math.round((R0 + (vx - X0) / (X1 - X0) * (R1 - R0) - rpm[0]) / 500);
     i = Math.max(0, Math.min(rpm.length - 1, i));
     var x = xr(rpm[i]), y = yh(cur[i]);
     hov.setAttribute('opacity', 1);
     $('#dhLine').setAttribute('x1', x); $('#dhLine').setAttribute('x2', x);
     $('#dhDot').setAttribute('cx', x); $('#dhDot').setAttribute('cy', y);
     tip.hidden = false;
-    tip.innerHTML = rpm[i].toLocaleString('vi-VN') + ' rpm · Zin ' + D.DYNO.stock[i] + ' · Độ <b>' + Math.round(cur[i]) + ' HP</b>';
-    var px = svgRect.left - figRect.left + x / 640 * svgRect.width, py = svgRect.top - figRect.top + y / 380 * svgRect.height - 12;
-    px = Math.max(110, Math.min(figRect.width - 110, px));
+    tip.innerHTML = '<b>' + rpm[i].toLocaleString('vi-VN') + ' rpm</b>Zin ' + D.DYNO.stock[i] + ' HP · Độ <em>' + Math.round(cur[i]) + ' HP</em>';
+    var px = sr.left - fr.left + x / 640 * sr.width, py = sr.top - fr.top + y / 360 * sr.height - 10;
+    px = Math.max(90, Math.min(fr.width - 90, px));
     tip.style.transform = 'translate(' + px + 'px,' + py + 'px) translate(-50%,-100%)';
+  }
+  svg.addEventListener('pointermove', function (e) { dynoAt(e.clientX); });
+  svg.addEventListener('pointerleave', function () { hov.setAttribute('opacity', 0); tip.hidden = true; });
+
+  /* ---------------- builds ---------------- */
+  $('#builds').innerHTML = D.BUILDS.map(function (b) {
+    return '<figure class="build"><span class="build__img"><img src="' + IMG(b.img, 400, 300) + '" alt="' + esc(b.name) + '" width="400" height="300" loading="lazy" decoding="async"><em>' + esc(b.gain) + '</em></span><figcaption><b>' + esc(b.name) + '</b><small>' + esc(b.car) + '</small></figcaption></figure>';
+  }).join('');
+
+  /* ---------------- reviews ---------------- */
+  (function () {
+    var total = D.RATING_DIST.reduce(function (s, r) { return s + r[1]; }, 0);
+    var avg = D.RATING_DIST.reduce(function (s, r) { return s + r[0] * r[1]; }, 0) / total;
+    $('#revSum').innerHTML = '<div class="rev__avg"><b>' + avg.toFixed(1).replace('.', ',') + '</b><span>/5</span></div>' + starsHTML(avg.toFixed(1)) + '<p>' + total.toLocaleString('vi-VN') + ' lượt đánh giá</p>' +
+      '<ul class="rev__dist">' + D.RATING_DIST.map(function (r) { var w = r[1] / total; return '<li><span>' + r[0] + ICON.star + '</span><i><em style="transform:scaleX(' + w.toFixed(3) + ')"></em></i><small>' + r[1].toLocaleString('vi-VN') + '</small></li>'; }).join('') + '</ul>' +
+      '<button type="button" class="btn btn--line btn--block" data-demo="Trang mẫu – chức năng gửi đánh giá chưa mở.">Viết đánh giá</button>';
+    $('#revList').innerHTML = D.REVIEWS.map(function (r) {
+      return '<article class="rv-it"><div class="rv-it__u"><span class="av">' + esc(r.n.charAt(0)) + '</span><div><b>' + esc(r.n) + '</b><small class="ok-buy">' + ICON.check + 'Đã mua tại xưởng</small></div><time>' + r.d + '</time></div>' +
+        '<div class="rv-it__r">' + starsHTML(r.r) + '<small>' + esc(r.car) + '</small></div><p>' + esc(r.t) + '</p>' +
+        (r.ph ? '<div class="rv-it__ph">' + r.ph.map(function (id) { return '<img src="' + IMG(id, 128, 128) + '" alt="Ảnh khách gửi" width="64" height="64" loading="lazy" decoding="async">'; }).join('') + '</div>' : '') + '</article>';
+    }).join('');
+  })();
+
+  /* ---------------- news ---------------- */
+  $('#news').innerHTML = D.NEWS.map(function (n, i) {
+    var w = i ? 240 : 720, h = i ? 160 : 405;
+    return '<a class="nw' + (i ? '' : ' nw--big') + '" href="#tin-tuc" data-demo="Bài viết minh hoạ – nội dung đang cập nhật."><span class="nw__img"><img src="' + IMG(n.img, w, h) + '" alt="" width="' + w + '" height="' + h + '" loading="lazy" decoding="async"></span><span class="nw__b"><span class="tg">' + esc(n.tag) + '</span><b>' + esc(n.t) + '</b>' + (n.ex ? '<span class="nw__ex">' + esc(n.ex) + '</span>' : '') + '<time>' + ICON.clock + n.d + '</time></span></a>';
+  }).join('');
+  $('[data-news-all]').setAttribute('data-demo', 'Chuyên mục minh hoạ – đang cập nhật.');
+
+  /* ---------------- showrooms ---------------- */
+  $('#slist').innerHTML = D.SHOWROOMS.map(function (s, i) {
+    return '<li class="st"><img src="' + IMG(s.img, 240, 180) + '" alt="' + esc(s.n) + '" width="120" height="90" loading="lazy" decoding="async"><div class="st__b"><b>' + esc(s.n) + '</b>' +
+      '<p>' + ICON.pin + '<span>' + esc(s.a) + ' <em>(minh hoạ)</em></span></p><p>' + ICON.clock + '<span>' + esc(s.h) + '</span></p><p>' + ICON.phone + '<a href="tel:' + s.p.replace(/\s/g, '') + '">' + esc(s.p) + '</a></p><p class="st__f">' + esc(s.f) + '</p>' +
+      '<div class="st__btns"><button type="button" class="lnk" data-demo="Địa chỉ minh hoạ – chưa có bản đồ.">Chỉ đường</button><button type="button" class="lnk lnk--red" data-store="' + i + '">Đặt lịch tại đây</button></div></div></li>';
+  }).join('');
+  $('#bStore').innerHTML = D.SHOWROOMS.map(function (s, i) { return '<option value="' + i + '">' + esc(s.n) + '</option>'; }).join('');
+  doc.addEventListener('click', function (e) { var b = e.target.closest('[data-store]'); if (b) { $('#bStore').value = b.getAttribute('data-store'); goTo('dat-lich'); setTimeout(function () { $('#bName').focus({ preventScroll: true }); }, 500); } });
+
+  /* ---------------- photo credits ---------------- */
+  $('#credits').innerHTML = D.P.map(function (p) { return '<li>' + esc(p.name.split(' (')[0]) + ': <a href="' + esc(p.src[2]) + '" target="_blank" rel="noopener">' + esc(p.src[0]) + '</a>, ' + esc(p.src[1]) + '</li>'; }).join('');
+
+  /* ---------------- FAQ ---------------- */
+  $('#faqList').innerHTML = D.FAQ.map(function (f, i) {
+    return '<div class="qa' + (i === 0 ? ' is-open' : '') + '"><button class="qa__q" type="button" aria-expanded="' + (i === 0) + '" aria-controls="qa' + i + '"><span>' + esc(f.q) + '</span><i aria-hidden="true"></i></button><div class="qa__a" id="qa' + i + '" role="region"><div><p>' + esc(f.a) + '</p></div></div></div>';
+  }).join('');
+  $('#faqList').addEventListener('click', function (e) {
+    var q = e.target.closest('.qa__q'); if (!q) return;
+    var item = q.parentNode, open = !item.classList.contains('is-open');
+    item.classList.toggle('is-open', open); q.setAttribute('aria-expanded', open);
   });
-  svg.addEventListener('pointerleave', function () { hov.setAttribute('opacity', 0); tip.hidden = true; svgRect = null; });
-  window.addEventListener('resize', function () { svgRect = null; }, { passive: true });
+
+  /* ---------------- booking ---------------- */
+  var bookForm = $('#bookForm'), bDate = $('#bDate');
+  function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function resetDate() { var t = new Date(); t.setDate(t.getDate() + 1); bDate.min = iso(new Date()); bDate.value = iso(t); }
+  resetDate();
+  bookForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var n = $('#bName'), p = $('#bPhone'), c = $('#bCar');
+    var ok = setErr(n, n.value.trim().length < 2 ? 'Vui lòng nhập họ tên' : '');
+    ok = setErr(p, !PHONE.test(cleanPhone(p.value)) ? 'Số điện thoại chưa đúng (VD: 0912 345 678)' : '') && ok;
+    ok = setErr(c, c.value.trim().length < 2 ? 'Vui lòng nhập dòng xe' : '') && ok;
+    ok = setErr(bDate, (!bDate.value || bDate.value < bDate.min) ? 'Chọn ngày từ hôm nay trở đi' : '') && ok;
+    if (!ok) { var f = $('.has-err input', bookForm); if (f) f.focus(); return; }
+    var slotV = ($('input[name="slot"]:checked', bookForm) || {}).value || '';
+    var dd = bDate.value.split('-');
+    $('#bookOkTxt').innerHTML = 'Hẹn <b>' + esc(n.value.trim()) + '</b> lúc <b>' + slotV + ', ' + dd[2] + '/' + dd[1] + '/' + dd[0] + '</b> tại <b>' + esc(D.SHOWROOMS[+$('#bStore').value].n) + '</b> cho xe <b>' + esc(c.value.trim()) + '</b> – hạng mục ' + esc($('#bSvc').value) + '.<br><small>(Trang mẫu – không gửi dữ liệu)</small>';
+    $('#bookOk').hidden = false;
+  });
+  $('#bookAgain').addEventListener('click', function () { $('#bookOk').hidden = true; bookForm.reset(); resetDate(); });
+
+  /* newsletter */
+  $('#nlForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('#nlMail').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { toast('Vui lòng nhập email hợp lệ.'); $('#nlMail').focus(); return; }
+    this.reset(); toast(ICON.check + '<span>Đã đăng ký nhận ưu đãi (trang mẫu – không gửi dữ liệu).</span>');
+  });
+
+  /* ---------------- header shadow, back-to-top, bottom nav state ---------------- */
+  var toTop = $('#toTop'), ticking = false;
+  var bnavItems = $$('.bnav > a, .bnav > button');
+  function onScroll() {
+    ticking = false;
+    var y = window.pageYOffset, vh = window.innerHeight;
+    hdr.classList.toggle('is-stuck', y > 40);
+    toTop.classList.toggle('is-show', y > 900);
+    var fs = doc.getElementById('flash-sale').getBoundingClientRect(), bk = doc.getElementById('he-thong').getBoundingClientRect();
+    var act = (bk.top < vh * .5 && bk.bottom > 0) ? 3 : (fs.top < vh * .5 && fs.bottom > vh * .2) ? 2 : (y < 300 ? 0 : -1);
+    bnavItems.forEach(function (a, k) { a.classList.toggle('is-on', k === act); });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  toTop.addEventListener('click', function () { goTo('trang-chu'); });
+  onScroll();
 
   /* ---------------- initial render ---------------- */
   refresh(false);
   var yr = $('#yr'); if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ======================= GSAP ANIMATION ======================= */
-  function batchReveal(els) {
-    if (!hasGsap || reduce) { if (window.gsap) gsap.set(els, { opacity: 1 }); return; }
-    gsap.set(els, { opacity: 0, y: 34 });
-    ScrollTrigger.batch(els, {
-      start: 'top 90%',
-      once: true,
-      onEnter: function (b) { gsap.to(b, { opacity: 1, y: 0, duration: .8, stagger: .08, ease: 'power3.out', overwrite: true, clearProps: 'transform' }); }
+  /* ---------------- reveal on scroll (chỉ phần dưới màn hình đầu) ---------------- */
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    $$('main > .box, main > .finder').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('rv'); io.observe(el); }
     });
   }
-
-  function countUp(el, to, opts) {
-    opts = opts || {};
-    var dec = opts.dec || 0, sep = opts.sep, o = { v: opts.from || 0 };
-    return gsap.to(o, { v: to, duration: opts.dur || 1.8, ease: 'power2.out', delay: opts.delay || 0, onUpdate: function () {
-      var v = dec ? o.v.toFixed(dec).replace('.', ',') : Math.round(o.v);
-      el.textContent = sep ? String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '+' : v;
-    } });
-  }
-
-  if (!hasGsap) return;
-
-  if (reduce) {
-    gsap.set('[data-reveal], .hero__eye, .hl > span, .hero__sub, .hero__cta, .hero__stats li, .gauge', { opacity: 1 });
-    $$('[data-count]').forEach(function (el) { var v = el.getAttribute('data-count'); el.textContent = el.hasAttribute('data-sep') ? v.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + '+' : v.replace('.', ','); });
-    $$('.meter__bar [data-to]').forEach(function (b) { b.style.transform = 'scaleX(' + b.getAttribute('data-to') + ')'; });
-    $('.steps').style.setProperty('--p', 1);
-    $('#needle').style.transform = 'rotate(' + (-90 + 228 / 300 * 180) + 'deg)';
-    return;
-  }
-
-  /* --- hero intro --- */
-  var mm = gsap.matchMedia();
-  var intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  intro
-    .fromTo('.hero__media', { scale: 1.14 }, { scale: 1, duration: 2.2, ease: 'power2.out' }, 0)
-    .fromTo('.hero__eye', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .6 }, .2)
-    .fromTo('.hl > span', { opacity: 0, x: -140, skewX: 18 }, { opacity: 1, x: 0, skewX: 0, duration: .9, stagger: .13, ease: 'expo.out' }, .3)
-    .fromTo('.hero__sub', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7 }, .8)
-    .fromTo('.hero__cta', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7 }, .95)
-    .fromTo('.hero__stats li', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6, stagger: .1 }, 1.1)
-    .fromTo('.gauge', { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: .9 }, .7)
-    .fromTo('#needle', { rotate: -90 }, { rotate: 90, duration: .8, ease: 'power2.in', svgOrigin: '120 130' }, 1.0)
-    .to('#needle', { rotate: -90 + 228 / 300 * 180, duration: 1.1, ease: 'elastic.out(1, .45)', svgOrigin: '120 130' }, '>');
-  $$('.hero [data-count]').forEach(function (el, i) {
-    var v = parseFloat(el.getAttribute('data-count'));
-    intro.add(countUp(el, v, { dec: +el.getAttribute('data-dec') || 0, sep: el.hasAttribute('data-sep'), dur: 1.8 }), 1.15 + i * .1);
-  });
-  intro.add(countUp($('[data-gauge]'), 228, { from: 178, dur: 1.6 }), 1.3);
-
-  /* --- speed streaks (paused off-screen) --- */
-  var streakBox = $('#streaks');
-  var streakTl = gsap.timeline({ paused: true });
-  var N = isMobile() ? 5 : 12;
-  for (var i = 0; i < N; i++) {
-    var s = doc.createElement('i');
-    s.className = 'streak' + (i % 4 === 0 ? ' streak--red' : '');
-    s.style.top = isMobile() ? (24 + Math.random() * 300).toFixed(0) + 'px' : (8 + Math.random() * 84).toFixed(1) + '%';
-    s.style.width = (18 + Math.random() * 26).toFixed(1) + 'vw';
-    streakBox.appendChild(s);
-    var dur = .55 + Math.random() * .9;
-    streakTl.add(gsap.fromTo(s, { xPercent: 420, opacity: .15 + Math.random() * .55 }, { xPercent: -120, duration: dur, ease: 'none', repeat: -1, repeatDelay: Math.random() * 1.6, delay: Math.random() * 2 }), 0);
-  }
-  ScrollTrigger.create({ trigger: '.hero', start: 'top bottom', end: 'bottom top', onToggle: function (self) { if (self.isActive) streakTl.play(); else streakTl.pause(); } });
-  streakTl.play();
-
-  /* --- hero parallax --- */
-  gsap.to('.hero__img', { yPercent: 9, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('.hero__copy', { y: -70, opacity: .15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'center 40%', end: 'bottom top', scrub: true } });
-
-  /* --- header solid --- */
-  ScrollTrigger.create({ start: 10, end: 'max', onToggle: function (self) { hdr.classList.toggle('is-solid', self.isActive); } });
-
-  /* --- marquee (paused off-screen) --- */
-  var mqV = 1;
-  var mq = gsap.to('#marquee', { xPercent: -50, duration: 28, ease: 'none', repeat: -1 });
-  ScrollTrigger.create({ trigger: '.marquee', start: 'top bottom', end: 'bottom top', onToggle: function (self) { if (self.isActive) mq.play(); else mq.pause(); },
-    onUpdate: function (self) { if (isMobile()) return; var v = Math.round(Math.min(4, 1 + Math.abs(self.getVelocity()) / 900) * 2) / 2; if (v > 1 && v !== mqV) { mqV = v; gsap.to(mq, { timeScale: v, duration: .3, overwrite: true }); } } });
-  ScrollTrigger.addEventListener('scrollEnd', function () { mqV = 1; gsap.to(mq, { timeScale: 1, duration: 1.2, overwrite: true }); });
-
-  /* --- reveals --- */
-  batchReveal($$('[data-reveal]').filter(function (el) { return !el.closest('.grid'); }));
-  gsap.utils.toArray('.sec-head .eyebrow i, .eyebrow i').forEach(function (el) {
-    gsap.fromTo(el, { scaleX: 0 }, { scaleX: 1, transformOrigin: 'left', duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
-  });
-
-  /* --- categories hover tilt is CSS; parallax inside tiles on scroll (desktop) --- */
-  mm.add('(min-width: 761px)', function () {
-    gsap.fromTo('.fit__car', { x: 120, opacity: 0 }, { x: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.fit', start: 'top 70%', once: true } });
-    gsap.fromTo('.book__bg img', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.book', start: 'top bottom', end: 'bottom top', scrub: true } });
-  });
-  /* car wheels spin when fitment section enters */
-  gsap.fromTo('.carsvg .part--mam', { rotate: -720 }, { rotate: 0, transformOrigin: '50% 50%', duration: 2, ease: 'power3.out', scrollTrigger: { trigger: '.fit', start: 'top 70%', once: true } });
-
-  /* --- combos: counters + gauges --- */
-  $$('.cb').forEach(function (cb) {
-    ScrollTrigger.create({ trigger: cb, start: 'top 80%', once: true, onEnter: function () {
-      var hp = $('.cb__hp b', cb);
-      countUp(hp, +hp.getAttribute('data-to'), { from: +hp.getAttribute('data-from'), dur: 1.6, delay: .2 });
-      $$('.meter__bar [data-to]', cb).forEach(function (b, k) {
-        gsap.to(b, { scaleX: +b.getAttribute('data-to'), duration: 1.3, delay: .2 + k * .06, ease: 'power3.out' });
-      });
-    } });
-  });
-  gsap.to('.bigtxt span', { xPercent: -28, ease: 'none', scrollTrigger: { trigger: '.combo', start: 'top bottom', end: 'bottom top', scrub: true } });
-
-  /* --- dyno draw-in --- */
-  (function () {
-    var len = tunedP.getTotalLength(), slen = stockP.getTotalLength();
-    gsap.set(tunedP, { strokeDasharray: len, strokeDashoffset: len });
-    gsap.set(stockP, { strokeDasharray: '6 6', opacity: 0 });
-    ScrollTrigger.create({ trigger: '#dynoSvg', start: 'top 75%', once: true, onEnter: function () {
-      var tl = gsap.timeline();
-      tl.to(stockP, { opacity: 1, duration: .6 })
-        .to(tunedP, { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut', onComplete: function () { tunedP.style.strokeDasharray = 'none'; } }, .2)
-        .to(areaP, { opacity: 1, duration: .8 }, 1.2)
-        .fromTo(peakG, { opacity: 0 }, { opacity: 1, duration: .4 }, 1.8);
-      setKpi(stageIdx, false);
-      var o = { hp: 0, nm: 0, g: 0 }, s = D.DYNO.stages[stageIdx];
-      tl.to(o, { hp: s.peakHp, nm: s.nm, g: Math.round((s.peakHp / 178 - 1) * 100), duration: 1.8, ease: 'power2.out', onUpdate: function () { $('#kHp').textContent = Math.round(o.hp); $('#kNm').textContent = Math.round(o.nm); $('#kGain').textContent = '+' + Math.round(o.g); } }, .2);
-      void slen;
-    } });
-  })();
-
-  /* --- process line --- */
-  gsap.fromTo('.steps', { '--p': 0 }, { '--p': 1, ease: 'none', scrollTrigger: { trigger: '.steps', start: 'top 80%', end: 'bottom 55%', scrub: .6 } });
-  gsap.utils.toArray('.step').forEach(function (st, k) {
-    gsap.fromTo(st, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .8, ease: 'power3.out', delay: k * .12, scrollTrigger: { trigger: '.steps', start: 'top 82%', once: true } });
-  });
-
-  /* --- gallery / reviews entrance --- */
-  gsap.fromTo('#gallery .build', { opacity: 0, x: 80 }, { opacity: 1, x: 0, duration: 1, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '#gallery', start: 'top 85%', once: true } });
-  gsap.fromTo('#reviews .rcard', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .8, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '#reviews', start: 'top 85%', once: true } });
-
-  /* pause CSS infinite animations when off-screen */
-  [['.gauge', '.hero'], ['.fit__car', '.fit']].forEach(function (pair) {
-    ScrollTrigger.create({ trigger: pair[1], start: 'top bottom', end: 'bottom top', onToggle: function (self) { $(pair[0]).classList.toggle('paused', !self.isActive); } });
-  });
-
-  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
 })();
