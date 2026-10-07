@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
-import LivePreview from './LivePreview.jsx'
+import Thumb from './Thumb.jsx'
 import { formatVND } from '../data/site.js'
 
 // Thẻ mẫu tối giản: ảnh xem trước, tên, giá, hai nút Xem thử / Chi tiết.
@@ -8,7 +8,7 @@ export default function TemplateCard({ t }) {
   return (
     <article className="tcard">
       <Link to={`/demo/${t.slug}`} className="tcard__media" aria-label={`Xem thử ${t.name}`}>
-        <LivePreview slug={t.slug} url={t.url} tall />
+        <Thumb k={t.slug} alt={`Giao diện mẫu ${t.name}`} />
         <div className="tcard__badges">
           {t.isNew && <span className="badge badge--new">Mới</span>}
           {t.free && <span className="badge badge--free">Miễn phí</span>}

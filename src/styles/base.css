@@ -493,6 +493,19 @@ p {
   max-width: 680px;
 }
 
+/* ---------- Ảnh xem trước mẫu (Thumb): khung 16:10, ảnh cao gấp 3 khung ---------- */
+.thumb {
+  position: relative;
+  aspect-ratio: 1280 / 800;
+  overflow: hidden;
+  background: var(--mist);
+}
+.thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- Live preview (iframe thu nhỏ) ---------- */
 .live-preview {
   position: relative;

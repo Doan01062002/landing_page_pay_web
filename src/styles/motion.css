@@ -369,6 +369,16 @@
   transform: scale(var(--s)) translateY(var(--ty));
   transition: transform 6s linear;
 }
+/* Ảnh xem trước (Thumb): rê chuột thì ảnh cuộn tới cuối (ảnh cao gấp 3 khung → dịch 2/3 chiều cao ảnh) */
+.thumb img {
+  transition: transform 0.9s var(--ease-out);
+}
+@media (hover: hover) {
+  .motion .tcard:hover .thumb img {
+    transform: translateY(-66.667%);
+    transition: transform 6s linear;
+  }
+}
 
 /* ---------- Segments, bento ---------- */
 .segments__list li svg {
@@ -1241,6 +1251,9 @@
   .motion .d-browser__link:hover .live-preview--tall iframe,
   .motion .lpcard:hover .live-preview--tall iframe {
     transform: scale(var(--s));
+  }
+  .motion .tcard:hover .thumb img {
+    transform: none;
   }
   html {
     scroll-behavior: auto;

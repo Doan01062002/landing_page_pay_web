@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
-import LivePreview from './LivePreview.jsx'
+import Thumb from './Thumb.jsx'
 import { typeLabel } from '../data/projects.js'
 
 // Mẫu dựng riêng (trang tĩnh /du-an/<slug>/) trong lưới Kho mẫu: cùng khung thẻ tối giản với TemplateCard.
@@ -8,7 +8,7 @@ export default function ProjectTile({ p }) {
   return (
     <article className="tcard tcard--project">
       <Link to={`/demo-du-an/${p.slug}`} className="tcard__media" aria-label={`Xem thử ${p.name}`}>
-        <LivePreview slug={p.slug} url={p.url} tall title={`${typeLabel(p.type)} ${p.name}`} />
+        <Thumb k={`du-an-${p.slug}`} alt={`Giao diện ${typeLabel(p.type)} ${p.name}`} />
         <div className="tcard__badges">
           <span className="badge badge--custom">Dựng riêng</span>
         </div>
