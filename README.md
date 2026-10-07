@@ -107,8 +107,8 @@ Thêm một object vào `templates` trong `src/data/templates.js`. Chọn `hero.
 
 ## Hero trang chủ
 
-- `src/components/HomeHero.jsx` + `src/styles/hero.css`: nền tối, vòng 37 thẻ 3D xoay chậm phía sau, khung trình duyệt đè phía trước, chữ ngắn ở giữa. Máy tính / máy tính bảng dùng khung thiết kế 1172 × 657 px phóng bằng `--k`; điện thoại (≤ 700px) dùng bố cục cột.
-- Ảnh thẻ: `public/images/hero/<slug>.webp` (mẫu phần mềm, chụp `/preview/<slug>?embed=1`) và `du-an-<slug>.webp` (mẫu dựng riêng, chụp `/du-an/<slug>/`), khung điện thoại 390 × 900 thu về 260 × 600. Khung trình duyệt: `*-desk.webp`, chụp 1280 × 800 thu về rộng 1200. Thêm mẫu mới thì chụp thêm ảnh cùng tên, nếu thiếu ảnh thẻ hiện nền gradient.
+- `src/components/HomeHero.jsx` + `src/styles/hero.css`: nền sáng, chữ ngắn ở giữa, vòng 37 thẻ 3D xoay chậm bên dưới (vị trí thẻ cố định, mỗi khung hình chỉ xoay phần tử cha `.hx-spin`). Máy tính / máy tính bảng dùng khung thiết kế 1172 px phóng bằng `--k` để vừa màn hình đầu; điện thoại (≤ 700px) dùng bố cục cột.
+- Ảnh thẻ: `public/images/hero/<slug>.webp` (mẫu phần mềm, chụp `/preview/<slug>?embed=1`) và `du-an-<slug>.webp` (mẫu dựng riêng, chụp `/du-an/<slug>/`), khung điện thoại 390 × 900 ở DPR 2 rồi thu về 390 × 900 (WebP chất lượng 70). Thêm mẫu mới thì chụp thêm ảnh cùng tên; nếu thiếu ảnh, thẻ hiện nền gradient.
 - `src/components/IntroSplash.jsx`: màn mở đầu logo (một lần mỗi phiên, `?intro=1` để xem lại); xong thì phát sự kiện `chungauto:intro-done` để hero chạy hiệu ứng hiện chữ.
 
 ## Hiệu ứng chuyển động

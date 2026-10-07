@@ -10,11 +10,10 @@ import '../styles/lp.css'
 import '../styles/hero.css'
 
 /*
-  Hero trang chủ: nền tối, vòng thẻ 3D xoay chậm phía sau (ảnh chụp thật của từng mẫu),
-  khung trình duyệt đè lên phía trước, chữ ngắn ở giữa.
+  Hero trang chủ: nền sáng, chữ ngắn ở giữa, vòng thẻ 3D (ảnh chụp thật của từng mẫu) xoay chậm bên dưới.
 
-  Bố cục máy tính / máy tính bảng: mọi thứ đặt theo toạ độ của một khung thiết kế 1172 × 657 px
-  rồi phóng cả khung bằng MỘT transform: k = min(rộng / W, cao màn hình còn lại / 560).
+  Máy tính / máy tính bảng: mọi thứ đặt theo toạ độ của một khung thiết kế 1172 px, cả khung phóng bằng MỘT
+  transform: k = min(rộng / W, cao màn hình còn lại / VIS_H) để hero luôn vừa màn hình đầu.
   Điện thoại (≤ 700px): bố cục cột bình thường (xem hero.css).
 */
 
@@ -25,20 +24,13 @@ const DEMOS = [
   { type: 'video', src: '/videos/demo-ceramic.mp4', poster: '/videos/demo-ceramic.jpg', title: 'Landing page tặng kèm: Ceramic Studio', caption: 'Một ưu đãi, video xưởng, đếm ngược, form giữ suất' },
 ]
 
-// Ảnh chụp các mẫu (public/images/hero, chụp lại bằng script: xem README) → thẻ trên vòng xoay
+// Ảnh chụp các mẫu (public/images/hero, 390 × 900; chụp lại bằng script: xem README) → thẻ trên vòng xoay
 const SHOTS = [
   ...projects.map((p) => ({ img: `/images/hero/du-an-${p.slug}.webp`, name: p.name })),
   ...templates.map((t) => ({ img: `/images/hero/${t.slug}.webp`, name: t.name })),
 ]
-// Khung trình duyệt phía trước: lần lượt đổi mẫu
-const DESKS = [
-  { img: '/images/hero/autopro-desk.webp', host: 'autopro-garage.vn', alt: 'Mẫu phần mềm AutoPro Garage' },
-  { img: '/images/hero/du-an-vinfast-desk.webp', host: 'xedien-vinfast.demo', alt: 'Landing page xe điện VinFast (bản mẫu)' },
-  { img: '/images/hero/partshub-desk.webp', host: 'partshub.vn', alt: 'Mẫu cửa hàng phụ tùng PartsHub' },
-  { img: '/images/hero/du-an-minhphat-desk.webp', host: 'minhphatauto.demo', alt: 'Landing page gara Minh Phát (bản mẫu)' },
-]
 
-// Hình học vòng xoay: camera đặt ở tâm trụ (perspective = bán kính) nên mỗi thẻ luôn nhìn thẳng vào camera;
+// Hình học vòng xoay: camera đặt ở tâm trụ (perspective = bán kính R) nên mỗi thẻ luôn nhìn thẳng vào camera;
 // 37 thẻ cách nhau 360/37°, thẻ quá ±42° bị ẩn (nửa sau của trụ).
 const R = 891
 const N = 37
@@ -48,45 +40,37 @@ const SPEED = 1.9 // độ / giây
 
 // Khung thiết kế
 const CW = 1172
-const CH = 657
-const VIS_H = 780 // phần khung được hiện (dài hơn 657 để khung trình duyệt lộ nhiều trang hơn)
+const VIS_H = 730 // chiều cao được hiện: đáy thẻ giữa (560 + 150) + chỗ cho bóng đổ
 const TAB_MIN = 701
 const TAB_MAX = 1080
 const DW_MIN = 920
 
-// Bầu sao: một div 1px, cả trường sao là một danh sách box-shadow (rẻ, không cần ảnh)
-function starShadow(n, blur, aMin, aMax, seed) {
-  let s = seed
-  const rnd = () => (s = (s * 16807) % 2147483647) / 2147483647
-  return Array.from({ length: n }, () => `${(rnd() * 100).toFixed(2)}vw ${(rnd() * 100).toFixed(2)}vh ${blur}px 0 rgba(255,255,255,${(aMin + rnd() * (aMax - aMin)).toFixed(2)})`).join(',')
-}
-
+/*
+  Mỗi thẻ có vị trí CỐ ĐỊNH trên trụ (đặt một lần); mỗi khung hình chỉ xoay MỘT phần tử cha (.hx-spin).
+  Trước đây ghi transform cho từng thẻ mỗi khung hình. Thẻ chỉ đổi visibility khi đi qua mép ±42° (rất hiếm).
+*/
 function Ring() {
-  const ringRef = useRef(null)
+  const spinRef = useRef(null)
   const cards = useMemo(() => Array.from({ length: N }, (_, i) => SHOTS[i % SHOTS.length]), [])
 
   useEffect(() => {
-    const els = [...ringRef.current.children]
-    const shades = els.map((el) => el.querySelector('.hx-card__shade'))
+    const spin = spinRef.current
+    const els = [...spin.children]
+    const shown = new Array(N).fill(null)
     let phase = -2
     let last = performance.now()
     let raf = 0
     let visible = true
 
     const place = () => {
+      spin.style.transform = `translateZ(${R}px) rotateY(${(-phase).toFixed(3)}deg) translateZ(${-R}px)`
       for (let i = 0; i < N; i++) {
         const a = ((((i * STEP + phase) % 360) + 540) % 360) - 180 // góc có dấu, -180..180
-        const el = els[i]
-        if (Math.abs(a) > CULL) {
-          if (el.style.visibility !== 'hidden') el.style.visibility = 'hidden'
-          continue
+        const on = Math.abs(a) <= CULL
+        if (on !== shown[i]) {
+          shown[i] = on
+          els[i].style.visibility = on ? 'visible' : 'hidden'
         }
-        el.style.visibility = 'visible'
-        const r = (a * Math.PI) / 180
-        const c = Math.cos(r)
-        el.style.transform = `translate3d(${(R * Math.sin(r)).toFixed(2)}px,0,${(R * (1 - c)).toFixed(2)}px) rotateY(${(-a).toFixed(3)}deg)`
-        // thẻ ở rìa tối dần: lớp phủ tối thay vì filter: brightness (rẻ hơn nhiều khi vẽ lại mỗi khung hình)
-        shades[i].style.opacity = ((Math.abs(a) / CULL) * 0.55).toFixed(3)
       }
     }
     const tick = (t) => {
@@ -104,7 +88,7 @@ function Ring() {
       visible = e.isIntersecting
       last = performance.now()
     })
-    io.observe(ringRef.current)
+    io.observe(spin.parentElement)
     const onVis = () => (last = performance.now()) // quay lại tab: không nhảy
     document.addEventListener('visibilitychange', onVis)
     return () => {
@@ -115,45 +99,16 @@ function Ring() {
   }, [])
 
   return (
-    <div className="hx-ring" ref={ringRef} aria-hidden="true">
-      {cards.map((c, i) => (
-        <div className="hx-card" key={i}>
-          <img src={c.img} alt="" width="260" height="600" decoding="async" onError={(e) => e.currentTarget.parentElement.classList.add('is-broken')} />
-          <span className="hx-card__cap">{c.name}</span>
-          <i className="hx-card__shade" />
-          <i className="hx-card__edge" />
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function Browser() {
-  const [i, setI] = useState(0)
-  useEffect(() => {
-    if (!motionAllowed()) return
-    const id = setInterval(() => setI((x) => (x + 1) % DESKS.length), 4800)
-    return () => clearInterval(id)
-  }, [])
-  return (
-    <Link to="/mau-phan-mem" className="hx-browser" aria-label="Xem kho mẫu">
-      <span className="hx-browser__bar">
-        <span className="hx-browser__dots">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span className="hx-browser__omni">
-          <Icon name="ShieldCheck" size={11} />
-          <span key={i}>{DESKS[i].host}</span>
-        </span>
-      </span>
-      <span className="hx-browser__page">
-        {DESKS.map((d, j) => (
-          <img key={d.img} src={d.img} alt={j === i ? d.alt : ''} className={j === i ? 'is-on' : ''} width="1200" height="750" decoding="async" />
+    <div className="hx-ring" aria-hidden="true">
+      <div className="hx-spin" ref={spinRef}>
+        {cards.map((c, i) => (
+          <div className="hx-card" key={i} style={{ transform: `translateZ(${R}px) rotateY(${(-i * STEP).toFixed(3)}deg) translateZ(${-R}px)` }}>
+            <img src={c.img} alt="" width="390" height="900" decoding="async" onError={(e) => e.currentTarget.parentElement.classList.add('is-broken')} />
+            <span className="hx-card__cap">{c.name}</span>
+          </div>
         ))}
-      </span>
-    </Link>
+      </div>
+    </div>
   )
 }
 
@@ -171,8 +126,7 @@ function useEntrance(rootRef) {
       ['.hx-h1--b', { opacity: 0, translate: '0 15px', clipPath: 'inset(100% 0 -30% 0)' }, 900, 320],
       ['.hx-sub', { opacity: 0, translate: '0 10px' }, 620, 540],
       ['.hx-cta > *', { opacity: 0, translate: '0 13px', scale: '.985' }, 620, 680],
-      ['.hx-ring', { opacity: 0, translate: '0 18px', scale: '.99' }, 950, 550],
-      ['.hx-browser', { opacity: 0, translate: '0 26px' }, 900, 760],
+      ['.hx-ring', { opacity: 0, translate: '0 40px' }, 1100, 600],
     ]
     const run = () => {
       steps.forEach(([sel, from, dur, delay]) =>
@@ -197,7 +151,6 @@ function useEntrance(rootRef) {
 export default function HomeHero() {
   const [demo, setDemo] = useState(null)
   const rootRef = useRef(null)
-  const stars = useMemo(() => ({ a: starShadow(150, 0, 0.05, 0.3, 7), b: starShadow(18, 1.2, 0.35, 0.7, 13) }), [])
   const total = templates.length + projects.length
 
   // Phóng khung thiết kế theo bề rộng và chiều cao màn hình còn lại dưới thanh menu
@@ -215,8 +168,8 @@ export default function HomeHero() {
       // máy tính bảng dựng đứng: cửa sổ hẹp hơn nữa để chữ đọc rõ (hai bên vòng thẻ được phép tràn khỏi khung)
       if (vw < TAB_MAX && window.innerHeight > vw * 1.15) W = Math.min(W, 840)
       const top = root.getBoundingClientRect().top + window.scrollY
-      const vh = Math.max(560, window.innerHeight - top)
-      const k = Math.min(vw / W, vh / 560)
+      const vh = Math.max(600, window.innerHeight - top)
+      const k = Math.min(vw / W, vh / VIS_H)
       root.style.setProperty('--k', k.toFixed(4))
       root.style.height = `${Math.round(VIS_H * k)}px`
     }
@@ -229,12 +182,9 @@ export default function HomeHero() {
 
   return (
     <section className="hx" ref={rootRef}>
-      <div className="hx-bg" aria-hidden="true">
-        <i className="hx-stars" style={{ boxShadow: stars.a }} />
-        <i className="hx-stars" style={{ boxShadow: stars.b }} />
-      </div>
+      <div className="hx-bg" aria-hidden="true" />
 
-      <div className="hx-canvas" style={{ '--fill': `${VIS_H - CH}px` }}>
+      <div className="hx-canvas">
         <Link to="/mau-landing-page" className="hx-badge">
           <i>
             <Icon name="Gift" size={15} />
@@ -264,7 +214,6 @@ export default function HomeHero() {
 
         <div className="hx-show">
           <Ring />
-          <Browser />
         </div>
       </div>
 

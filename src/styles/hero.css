@@ -1,33 +1,56 @@
-/* Hero trang chủ (HomeHero): nền tối, vòng thẻ 3D xoay phía sau, khung trình duyệt phía trước, chữ ngắn ở giữa.
-   Máy tính / máy tính bảng: các phần tử đặt theo toạ độ khung thiết kế 1172 × 657 px (.hx-canvas),
-   cả khung được phóng bằng --k (tính trong HomeHero.jsx). Điện thoại ≤ 700px: bố cục cột (cuối file). */
+/* Hero trang chủ (HomeHero): nền sáng, chữ ngắn ở giữa, vòng thẻ 3D xoay chậm bên dưới.
+   Máy tính / máy tính bảng: các phần tử đặt theo toạ độ khung thiết kế 1172 px (.hx-canvas), cả khung phóng bằng --k
+   (tính trong HomeHero.jsx). Điện thoại ≤ 700px: bố cục cột (cuối file). */
 .hx {
   --red: #ea212b;
+  --hx-bg: #f5f3f2;
   position: relative;
   overflow: hidden;
-  min-height: 640px;
-  background: #050406;
-  color: #fff;
+  min-height: 600px;
+  background: var(--hx-bg);
+  color: var(--ink);
   isolation: isolate;
 }
+/* nền: xám ấm rất nhạt, quầng đỏ nhẹ sau tiêu đề, lưới mảnh mờ dần, sàn hơi đậm dưới vòng thẻ */
 .hx-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(48% 34% at 50% 92%, rgba(234, 33, 43, 0.13), transparent 70%),
-    linear-gradient(180deg, rgba(234, 33, 43, 0) 38%, rgba(234, 33, 43, 0.035) 56%, rgba(234, 33, 43, 0.05) 72%, rgba(234, 33, 43, 0.03) 100%),
-    #050406;
+    radial-gradient(42% 30% at 50% 22%, rgba(234, 33, 43, 0.09), transparent 72%),
+    radial-gradient(70% 40% at 50% 100%, rgba(22, 24, 29, 0.07), transparent 70%),
+    linear-gradient(180deg, #fbfaf9 0%, var(--hx-bg) 55%, #ecebec 100%);
 }
-/* bầu sao: mỗi lớp là 1 điểm 1px, cả trường sao nằm trong box-shadow (vw / vh) */
-.hx-stars {
+.hx-bg::before {
+  content: '';
   position: absolute;
-  left: 0;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(22, 24, 29, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 24, 29, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(60% 55% at 50% 30%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(60% 55% at 50% 30%, #000 20%, transparent 75%);
+}
+/* hai mép mờ dần về màu nền: thay cho lớp tối từng thẻ (trước đây đổi opacity 9 thẻ mỗi khung hình) */
+.hx::before,
+.hx::after {
+  content: '';
+  position: absolute;
   top: 0;
-  width: 1px;
-  height: 1px;
-  border-radius: 50%;
-  background: #fff;
+  bottom: 0;
+  z-index: 2;
+  width: 16%;
+  pointer-events: none;
+}
+.hx::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--hx-bg) 8%, rgba(245, 243, 242, 0));
+}
+.hx::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--hx-bg) 8%, rgba(245, 243, 242, 0));
 }
 
 .hx-canvas {
@@ -36,7 +59,7 @@
   top: 0;
   z-index: 1;
   width: 1172px;
-  height: 657px;
+  height: 730px;
   transform: translateX(-50%) scale(var(--k, 1));
   transform-origin: 50% 0;
 }
@@ -44,24 +67,24 @@
   position: absolute;
 }
 
-/* ---------- Nhãn: ô biểu tượng cố định bên trái, chữ bên phải (không phải viên thuốc căn giữa) ---------- */
+/* ---------- Nhãn: ô biểu tượng cố định bên trái, chữ bên phải ---------- */
 .hx-badge {
   left: 586px;
-  top: 74px;
-  z-index: 300;
+  top: 64px;
+  z-index: 3;
   height: 39px;
   transform: translateX(-50%);
   display: block;
   padding: 0 16px 0 45px;
-  border: 1px solid rgba(255, 255, 255, 0.115);
+  border: 1px solid rgba(22, 24, 29, 0.1);
   border-radius: 12px;
-  background: linear-gradient(to top, rgba(255, 190, 190, 0.16) 0, rgba(255, 190, 190, 0.11) 2px, rgba(255, 190, 190, 0.06) 4px, rgba(255, 190, 190, 0.02) 6px, rgba(255, 255, 255, 0.012) 9px, rgba(255, 255, 255, 0.012) 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 2px rgba(22, 24, 29, 0.05), 0 6px 16px -10px rgba(22, 24, 29, 0.25);
   white-space: nowrap;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 .hx-badge:hover {
-  border-color: rgba(255, 255, 255, 0.28);
+  border-color: rgba(234, 33, 43, 0.35);
 }
 .hx-badge i {
   position: absolute;
@@ -73,27 +96,23 @@
   place-items: center;
   border-radius: 8px;
   color: #fff;
-  background: linear-gradient(to top, #ff7a72 0, #f2453f 2px, #c91b1d 4px, #a4141a 6px, #7e1016 8px, #5f0e14 10px, #430c11 12px, #2c0a0e 14px, #1f090c 17px, #170a0c 22px, #120a0c 29px);
-  box-shadow:
-    inset 1px 0 0 rgba(255, 170, 165, 0.4),
-    inset -1px 0 0 rgba(255, 170, 165, 0.5),
-    0 0 6px rgba(234, 33, 43, 0.22),
-    0 3px 8px -5px rgba(255, 90, 80, 0.6);
+  background: linear-gradient(160deg, #ff5a51, #d3141c);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 3px 8px -3px rgba(234, 33, 43, 0.6);
 }
 .hx-badge b {
   display: flex;
   align-items: center;
   height: 37px;
   font-size: 13px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.94);
+  font-weight: 600;
+  color: var(--ink);
 }
 
 /* ---------- Tiêu đề (Montserrat 800: đủ dấu tiếng Việt, line-height đủ cho dấu chồng Ầ Ề Ô) ---------- */
 .hx-h1 {
   left: 586px;
-  top: 128px;
-  z-index: 300;
+  top: 118px;
+  z-index: 3;
   margin: 0;
   transform: translateX(-50%);
   text-align: center;
@@ -104,74 +123,65 @@
   line-height: 1.14;
   letter-spacing: -0.012em;
   text-transform: uppercase;
-  text-shadow: 0 0 34px rgba(255, 150, 150, 0.16);
+  color: #16181d;
 }
 .hx-h1 span {
   display: block;
 }
 .hx-h1--b {
-  background: linear-gradient(180deg, #ff6b63, #ea212b 70%);
+  background: linear-gradient(180deg, #f2423b, #c8121b 85%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: none;
 }
 
 .hx-sub {
   left: 586px;
-  top: 270px;
-  z-index: 300;
+  top: 260px;
+  z-index: 3;
   margin: 0;
   transform: translateX(-50%);
   text-align: center;
   white-space: nowrap;
   font-size: 14px;
   line-height: 1.65;
-  color: #a9aeb5;
+  color: #5b616b;
 }
 .hx-sub b {
   font-weight: 600;
-  color: #fff;
+  color: var(--ink);
 }
 
 .hx-cta {
   left: 586px;
-  top: 334px;
-  z-index: 300;
+  top: 322px;
+  z-index: 3;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-/* ---------- Nút phát sáng: dải sáng đỏ ở chân nút là nền gradient, bị cắt gọn bởi chính bo góc nút ---------- */
+/* ---------- Nút chính: thân tối, dải sáng đỏ ở chân là nền gradient bị cắt gọn bởi bo góc của nút ---------- */
 .hx-btn {
   position: relative;
   display: grid;
   place-items: center;
   width: 158px;
-  height: 54px;
+  height: 52px;
   overflow: hidden; /* bắt buộc: giữ dải sáng trong bo góc */
   border-radius: 13px;
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  background: linear-gradient(to top, #ffb1aa 1px, #ff948b 2px, #ff7369 3px, #ff5148 4px, #f2312a 5px, #d81c1a 6px, #c01515 7px, #a51211 8px, #8a0f10 9px, #6d0d10 10px, #570c10 12px, #4a0c10 13px, #3e0b0f 14px, #300a0e 16px, #250a0d 18px, #1d0a0d 20px, #160a0d 24px, #120a0d 30px, #110a0d 34px, #110a0d 100%);
+  background: linear-gradient(to top, #ffb1aa 1px, #ff948b 2px, #ff7369 3px, #ff5148 4px, #f2312a 5px, #d81c1a 6px, #c01515 7px, #a51211 8px, #8a0f10 9px, #6d0d10 10px, #570c10 12px, #4a0c10 13px, #3e0b0f 14px, #300a0e 16px, #250a0d 18px, #1d0a0d 20px, #170b0e 24px, #15100f 30px, #16181d 36px, #16181d 100%);
   box-shadow:
-    inset 0 3px 3px -2px rgba(255, 200, 195, 0.1),
-    inset 1px 0 0 rgba(255, 255, 255, 0.09),
-    inset -1px 0 0 rgba(255, 255, 255, 0.09),
-    1px 0 0 rgba(255, 160, 150, 0.17),
-    -1px 0 0 rgba(255, 160, 150, 0.17),
-    0 0 8px rgba(234, 33, 43, 0.12),
-    0 2px 5px -3px rgba(255, 90, 80, 0.45);
-  transition:
-    transform 0.25s,
-    box-shadow 0.25s,
-    filter 0.25s;
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 2px rgba(22, 24, 29, 0.2),
+    0 8px 18px -8px rgba(200, 18, 27, 0.55);
+  transition: transform 0.25s, box-shadow 0.25s;
 }
-/* ánh sáng hai cạnh bên, mờ dần lên trên (mask bắt buộc, nếu không cả nút bị loá) */
 .hx-btn::after {
   content: '';
   position: absolute;
@@ -182,80 +192,84 @@
   background:
     linear-gradient(90deg, rgba(255, 215, 210, 0.7), rgba(255, 215, 210, 0) 13px),
     linear-gradient(270deg, rgba(255, 215, 210, 0.7), rgba(255, 215, 210, 0) 13px);
-  -webkit-mask: linear-gradient(to top, #000 0, #000 6px, rgba(0, 0, 0, 0.4) 12px, rgba(0, 0, 0, 0.15) 18px, rgba(0, 0, 0, 0.09) 24px, rgba(0, 0, 0, 0.02) 30px, rgba(0, 0, 0, 0.02) 100%);
-  mask: linear-gradient(to top, #000 0, #000 6px, rgba(0, 0, 0, 0.4) 12px, rgba(0, 0, 0, 0.15) 18px, rgba(0, 0, 0, 0.09) 24px, rgba(0, 0, 0, 0.02) 30px, rgba(0, 0, 0, 0.02) 100%);
+  -webkit-mask: linear-gradient(to top, #000 0, #000 6px, rgba(0, 0, 0, 0.4) 12px, rgba(0, 0, 0, 0.15) 18px, rgba(0, 0, 0, 0.05) 24px, transparent 30px);
+  mask: linear-gradient(to top, #000 0, #000 6px, rgba(0, 0, 0, 0.4) 12px, rgba(0, 0, 0, 0.15) 18px, rgba(0, 0, 0, 0.05) 24px, transparent 30px);
 }
 .hx-btn span {
   position: relative;
   z-index: 2;
   line-height: 1;
   margin-top: -2px;
-  text-shadow: 0 1px 2px rgba(30, 0, 0, 0.5);
 }
 .hx-btn:hover {
   transform: translateY(-1px);
-  filter: brightness(1.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 2px rgba(22, 24, 29, 0.2),
+    0 12px 24px -8px rgba(200, 18, 27, 0.6);
 }
 .hx-play {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 54px;
+  height: 52px;
   padding: 0 18px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(22, 24, 29, 0.14);
   border-radius: 13px;
-  background: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.9);
+  background: #fff;
+  color: var(--ink);
   font: inherit;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition:
-    background 0.25s,
-    border-color 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 .hx-play svg {
-  color: #ff6b63;
+  color: var(--red);
 }
 .hx-play:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(22, 24, 29, 0.3);
+  box-shadow: 0 6px 16px -10px rgba(22, 24, 29, 0.35);
 }
 
-/* ---------- Vòng thẻ 3D (vị trí từng thẻ tính trong JS mỗi khung hình) ---------- */
+/* ---------- Vòng thẻ 3D: vị trí từng thẻ cố định, chỉ .hx-spin xoay (JS) ---------- */
 .hx-show {
   left: 0;
   top: 0;
   width: 1172px;
-  height: 657px;
+  height: 730px;
 }
 .hx-ring {
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 5;
   width: 1172px;
-  height: 657px;
+  height: 730px;
   perspective: 891px;
-  perspective-origin: 586px 918px;
-  transform-style: preserve-3d;
+  perspective-origin: 586px 862px; /* tâm trụ nằm dưới mặt phẳng thẻ 302px: thẻ hai bên nhô lên cao dần */
   pointer-events: none;
+}
+.hx-spin {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 .hx-card {
   position: absolute;
   left: 586px;
-  top: 616px;
+  top: 560px;
   width: 130px;
   height: 300px;
-  margin: -150px 0 0 -65px; /* tâm thẻ nằm đúng tại (586, 616) */
+  margin: -150px 0 0 -65px; /* tâm thẻ nằm đúng tại (586, 560) */
   overflow: hidden;
   border-radius: 12px;
-  background: linear-gradient(155deg, #2b2f3a, #14161d 60%, #221316);
+  background: linear-gradient(155deg, #ffffff, #e9e7e6);
   box-shadow:
-    0 24px 46px rgba(0, 0, 0, 0.6),
-    0 3px 8px rgba(0, 0, 0, 0.5);
+    0 0 0 1px rgba(22, 24, 29, 0.06),
+    0 2px 6px rgba(22, 24, 29, 0.1),
+    0 18px 30px -14px rgba(22, 24, 29, 0.4);
   backface-visibility: hidden;
-  will-change: transform;
   visibility: hidden;
 }
 .hx-card img {
@@ -274,120 +288,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 26px 10px 10px;
-  background: linear-gradient(180deg, rgba(5, 4, 6, 0), rgba(5, 4, 6, 0.88) 60%);
+  padding: 26px 10px 9px;
+  background: linear-gradient(180deg, rgba(16, 17, 20, 0), rgba(16, 17, 20, 0.82) 62%);
   font-size: 7px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #fff;
-}
-.hx-card__shade {
-  position: absolute;
-  inset: 0;
-  background: #050406;
-  opacity: 0;
-}
-.hx-card__edge {
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.15),
-    inset 0 16px 30px rgba(255, 255, 255, 0.05);
-}
-
-/* ---------- Khung trình duyệt: phía TRƯỚC vòng thẻ, tràn xuống đáy ---------- */
-.hx-browser {
-  position: absolute;
-  left: 165px;
-  top: 558px;
-  z-index: 100;
-  display: block;
-  width: 842px;
-  height: calc(99px + var(--fill, 0px));
-  overflow: hidden;
-  border-radius: 28px 28px 0 0;
-  background: rgba(20, 20, 26, 0.86);
-  box-shadow: 0 -14px 44px rgba(0, 0, 0, 0.55);
-}
-.hx-browser__bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 42px;
-  background: linear-gradient(180deg, rgba(36, 24, 30, 0.6), rgba(26, 18, 22, 0.7));
-}
-.hx-browser__dots {
-  position: absolute;
-  left: 27px;
-  top: 16px;
-  display: flex;
-  gap: 3px;
-}
-.hx-browser__dots i {
-  width: 7.6px;
-  height: 7.6px;
-  border-radius: 50%;
-  background: #ee5c62;
-}
-.hx-browser__dots i:nth-child(2) {
-  background: #f6b719;
-}
-.hx-browser__dots i:nth-child(3) {
-  background: #12c02f;
-}
-.hx-browser__omni {
-  position: absolute;
-  left: 50%;
-  top: 7px;
-  width: 336px;
-  height: 26px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border-radius: 6px;
-  background: rgba(12, 9, 12, 0.93);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.045);
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.72);
-}
-.hx-browser__omni svg {
-  color: #4ade80;
-}
-.hx-browser__omni span {
-  animation: hx-fade 0.6s ease both;
-}
-@keyframes hx-fade {
-  from {
-    opacity: 0;
-    transform: translateY(3px);
-  }
-}
-.hx-browser__page {
-  position: absolute;
-  left: 7px;
-  right: 6px;
-  top: 42px;
-  bottom: 0;
-  overflow: hidden;
-  border-radius: 10px 10px 0 0;
-  background: #fff;
-}
-.hx-browser__page img {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  transition: opacity 0.9s ease;
-}
-.hx-browser__page img.is-on {
-  opacity: 1;
 }
 
 /* ---------- Điện thoại: bố cục cột, vòng thẻ giữ nguyên hình học 3D nhưng đặt lại vị trí ---------- */
@@ -395,6 +302,10 @@
   .hx {
     min-height: 0;
     height: auto;
+  }
+  .hx::before,
+  .hx::after {
+    width: 10%;
   }
   .hx-canvas {
     position: relative;
@@ -415,7 +326,6 @@
   }
   .hx-badge {
     height: 36px;
-    border-radius: 12px;
     padding-left: 42px;
   }
   .hx-badge b {
@@ -448,48 +358,16 @@
   }
   .hx-btn {
     width: 150px;
-    height: 52px;
-  }
-  .hx-play {
-    height: 52px;
   }
   .hx-show {
     width: calc(100% + 40px);
-    height: 420px;
-    margin-top: 18px;
+    height: 350px;
+    margin-top: 8px;
     overflow: hidden;
   }
   .hx-ring {
     left: 50%;
-    top: -446px;
+    top: -384px; /* tâm thẻ giữa (y = 560) rơi vào y ≈ 176 của khung */
     margin-left: -586px;
-    transform: scale(1.02);
-    transform-origin: 586px 466px;
-  }
-  .hx-browser {
-    left: 50%;
-    top: 214px;
-    bottom: 0;
-    width: calc(100% - 16px);
-    height: auto;
-    transform: translateX(-50%);
-    border-radius: 20px 20px 0 0;
-  }
-  .hx-browser__bar {
-    height: 36px;
-  }
-  .hx-browser__dots {
-    left: 16px;
-    top: 14px;
-  }
-  .hx-browser__omni {
-    width: 58%;
-    height: 24px;
-    top: 6px;
-  }
-  .hx-browser__page {
-    top: 36px;
-    left: 5px;
-    right: 5px;
   }
 }
