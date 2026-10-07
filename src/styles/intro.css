@@ -55,7 +55,6 @@
 
 /* Trong lúc chạy: ẩn logo thật trên menu (logo màn mở đầu bay vào đúng chỗ đó) và giữ phần hero chờ hiện */
 html.intro-hold .site-header__logo .logo__img,
-html.intro-hold .hh__copy > *,
-html.intro-hold .hh-layer {
+html.intro-hold .hx-canvas > * {
   opacity: 0;
 }

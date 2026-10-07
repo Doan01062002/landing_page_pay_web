@@ -24,27 +24,8 @@ function shouldPlay() {
   }
 }
 
-// Phần hero hiện lần lượt sau khi logo đã vào chỗ
-function playHeroEntrance() {
-  const copy = document.querySelectorAll('.hh__copy > *')
-  copy.forEach((el, i) =>
-    el.animate([{ opacity: 0, transform: 'translateY(26px)' }, { opacity: 1, transform: 'none' }], {
-      duration: 700,
-      delay: i * 90,
-      easing: EASE_OUT,
-      fill: 'backwards',
-    }),
-  )
-  document.querySelectorAll('.hh-layer').forEach((el, i) =>
-    el.animate([{ opacity: 0, transform: 'translateY(40px) scale(.94)' }, { opacity: 1, transform: 'none' }], {
-      duration: 900,
-      delay: 200 + i * 120,
-      easing: EASE_OUT,
-      fill: 'backwards',
-      composite: 'add', // giữ nguyên transform parallax sẵn có của lớp
-    }),
-  )
-}
+// Báo cho hero biết logo đã vào chỗ: hero (HomeHero) tự chạy hiệu ứng hiện chữ, vòng thẻ, khung trình duyệt
+const announceDone = () => window.dispatchEvent(new Event('chungauto:intro-done'))
 
 export default function IntroSplash() {
   const [on, setOn] = useState(shouldPlay)
@@ -82,7 +63,7 @@ export default function IntroSplash() {
       anims.forEach((a) => a.cancel())
       html.classList.remove('intro-hold')
       setOn(false)
-      playHeroEntrance()
+      announceDone() // cùng lượt với việc bỏ intro-hold: hero bắt đầu từ trạng thái ẩn, không loé
     }
 
     // 1) logo hiện: hình xe "chạy" vào từ trái, chữ mở ra, vệt tốc độ lướt dưới chân
