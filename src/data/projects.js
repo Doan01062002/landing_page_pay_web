@@ -62,6 +62,81 @@ export const projects = [
     highlights: ['Xe xoay 360°', 'Đổi màu xe', 'Thanh trượt tự chạy', 'Chọn mẫu xe + thông số', 'Đăng ký lái thử', 'Tối ưu điện thoại'],
   },
   {
+    slug: 'dopro',
+    type: 'shop',
+    category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
+    name: 'Độ Pro Garage – độ xe hiệu suất',
+    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
+    area: 'Hà Nội · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 123',
+    deployed: '10/2026',
+    url: dir('dopro'),
+    accent: '#e10600',
+    summary:
+      'Cửa hàng phụ kiện độ xe nền sáng kiểu Thế Giới Di Động: turbo, cổ góp xả, mâm, coilover, đèn LED; flash sale theo khung giờ, tìm phụ kiện theo xe, combo Stage 1–3 kèm biểu đồ dyno, dịch vụ body kit, dán đổi màu tại xưởng.',
+    highlights: ['Flash sale theo khung giờ', 'Tìm phụ kiện theo xe', 'Combo Stage 1–3 + dyno', 'Dịch vụ độ tại xưởng', 'Trả góp 0%', 'Đặt lịch lắp đặt'],
+  },
+  {
+    slug: 'ankhang',
+    type: 'shop',
+    category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
+    name: 'An Khang Auto – phụ kiện ô tô',
+    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
+    area: 'TP. Hồ Chí Minh · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 268',
+    deployed: '10/2026',
+    url: dir('ankhang'),
+    accent: '#ff6a13',
+    summary:
+      'Cửa hàng phụ kiện ô tô kiểu sàn thương mại điện tử: camera hành trình, bơm lốp, đồ cứu hộ, máy hút bụi, sạc; ảnh sản phẩm nền trắng, flash sale, mua 2 tặng 1, ví voucher tự áp mã, lắp đặt tận nơi.',
+    highlights: ['Flash Sale đếm ngược', 'Mua 2 tặng 1', 'Ví voucher tự áp mã', 'Lọc theo dòng xe', 'Lắp đặt tận nơi', 'Giỏ hàng tự lưu'],
+  },
+  {
+    slug: 'lumen',
+    type: 'shop',
+    category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
+    name: 'Lumen – độ đèn ô tô',
+    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
+    area: 'Đà Nẵng · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 368',
+    deployed: '10/2026',
+    url: dir('lumen'),
+    accent: '#2ee6ff',
+    summary:
+      'Cửa hàng đèn ô tô kiểu CellphoneS: bóng LED, xenon, halogen, LED dây, cảm biến; chọn đèn theo xe, so sánh trước / sau, thử màu ambient, tra cứu bảo hành, đặt lịch độ bi-LED.',
+    highlights: ['Chọn đèn theo xe', 'Flash sale đếm ngược', 'So sánh trước / sau', 'Thử màu ambient', 'Tra cứu bảo hành', 'Trả góp 0%'],
+  },
+  {
+    slug: 'vanhviet',
+    type: 'shop',
+    category: 'lop', // cửa hàng mẫu, thương hiệu minh hoạ
+    name: 'Vành Việt – mâm & lốp',
+    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
+    area: 'Hải Phòng · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 468',
+    deployed: '10/2026',
+    url: dir('vanhviet'),
+    accent: '#ffcc00',
+    summary:
+      'Cửa hàng mâm đúc 15–20 inch, mâm zin tháo xe, lốp và phụ kiện: tìm lốp theo xe hoặc cỡ, giá trọn bộ 4 bánh, giải mã cỡ lốp, bảng giá cân bằng động, tính trả góp 0%.',
+    highlights: ['Tìm lốp theo xe & cỡ', 'Giá trọn bộ 4 mâm', 'Flash sale đếm ngược', 'Giải mã cỡ lốp', 'Bảng giá dịch vụ', 'Trả góp 0%'],
+  },
+  {
+    slug: 'bongstudio',
+    type: 'shop',
+    category: 'detailing', // cửa hàng mẫu, thương hiệu minh hoạ
+    name: 'Bóng Studio – chăm sóc xe',
+    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
+    area: 'Cần Thơ · thông tin liên hệ minh hoạ',
+    hotline: '0900 000 515',
+    deployed: '10/2026',
+    url: dir('bongstudio'),
+    accent: '#c8a45c',
+    summary:
+      'Cửa hàng chăm sóc xe kiểu Hasaki: dung dịch rửa, sáp, ceramic, khăn microfiber; bảng giá dán phim, PPF, phủ ceramic theo cỡ xe, tự chọn combo −10%, đặt lịch chọn giờ.',
+    highlights: ['Flash deal mỗi ngày', 'Bảng giá theo cỡ xe', 'Tự chọn combo −10%', 'Đặt lịch chọn giờ', 'Kéo so sánh trước / sau', 'Giỏ hàng & thanh toán'],
+  },
+  {
     slug: 'minhphat',
     type: 'landing',
     category: 'oto',
@@ -138,81 +213,6 @@ export const projects = [
     summary:
       'Website sàn mua bán ô tô & phụ kiện 18 trang: lọc xe theo hãng, kiểu dáng, giá; trang chi tiết có thư viện ảnh, tuỳ chọn, tính trả góp; so sánh 3 xe, đặt cọc, giỏ hàng, ký gửi bán xe, hệ thống showroom.',
     highlights: ['Bộ lọc xe nhiều tiêu chí', 'So sánh tối đa 3 xe', 'Tính trả góp tức thì', 'Đặt cọc & giỏ hàng', 'Ký gửi bán xe', 'Ảnh xe thật đúng mẫu'],
-  },
-  {
-    slug: 'dopro',
-    type: 'shop',
-    category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
-    name: 'Độ Pro Garage – độ xe hiệu suất',
-    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
-    area: 'Hà Nội · thông tin liên hệ minh hoạ',
-    hotline: '0900 000 123',
-    deployed: '10/2026',
-    url: dir('dopro'),
-    accent: '#e10600',
-    summary:
-      'Cửa hàng phụ kiện độ xe nền sáng kiểu Thế Giới Di Động: turbo, cổ góp xả, mâm, coilover, đèn LED; flash sale theo khung giờ, tìm phụ kiện theo xe, combo Stage 1–3 kèm biểu đồ dyno, dịch vụ body kit, dán đổi màu tại xưởng.',
-    highlights: ['Flash sale theo khung giờ', 'Tìm phụ kiện theo xe', 'Combo Stage 1–3 + dyno', 'Dịch vụ độ tại xưởng', 'Trả góp 0%', 'Đặt lịch lắp đặt'],
-  },
-  {
-    slug: 'ankhang',
-    type: 'shop',
-    category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
-    name: 'An Khang Auto – phụ kiện ô tô',
-    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
-    area: 'TP. Hồ Chí Minh · thông tin liên hệ minh hoạ',
-    hotline: '0900 000 268',
-    deployed: '10/2026',
-    url: dir('ankhang'),
-    accent: '#ff6a13',
-    summary:
-      'Cửa hàng phụ kiện ô tô kiểu sàn thương mại điện tử: camera hành trình, bơm lốp, đồ cứu hộ, máy hút bụi, sạc; ảnh sản phẩm nền trắng, flash sale, mua 2 tặng 1, ví voucher tự áp mã, lắp đặt tận nơi.',
-    highlights: ['Flash Sale đếm ngược', 'Mua 2 tặng 1', 'Ví voucher tự áp mã', 'Lọc theo dòng xe', 'Lắp đặt tận nơi', 'Giỏ hàng tự lưu'],
-  },
-  {
-    slug: 'lumen',
-    type: 'shop',
-    category: 'phutung', // cửa hàng mẫu, thương hiệu minh hoạ
-    name: 'Lumen – độ đèn ô tô',
-    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
-    area: 'Đà Nẵng · thông tin liên hệ minh hoạ',
-    hotline: '0900 000 368',
-    deployed: '10/2026',
-    url: dir('lumen'),
-    accent: '#2ee6ff',
-    summary:
-      'Cửa hàng đèn ô tô kiểu CellphoneS: bóng LED, xenon, halogen, LED dây, cảm biến; chọn đèn theo xe, so sánh trước / sau, thử màu ambient, tra cứu bảo hành, đặt lịch độ bi-LED.',
-    highlights: ['Chọn đèn theo xe', 'Flash sale đếm ngược', 'So sánh trước / sau', 'Thử màu ambient', 'Tra cứu bảo hành', 'Trả góp 0%'],
-  },
-  {
-    slug: 'vanhviet',
-    type: 'shop',
-    category: 'lop', // cửa hàng mẫu, thương hiệu minh hoạ
-    name: 'Vành Việt – mâm & lốp',
-    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
-    area: 'Hải Phòng · thông tin liên hệ minh hoạ',
-    hotline: '0900 000 468',
-    deployed: '10/2026',
-    url: dir('vanhviet'),
-    accent: '#ffcc00',
-    summary:
-      'Cửa hàng mâm đúc 15–20 inch, mâm zin tháo xe, lốp và phụ kiện: tìm lốp theo xe hoặc cỡ, giá trọn bộ 4 bánh, giải mã cỡ lốp, bảng giá cân bằng động, tính trả góp 0%.',
-    highlights: ['Tìm lốp theo xe & cỡ', 'Giá trọn bộ 4 mâm', 'Flash sale đếm ngược', 'Giải mã cỡ lốp', 'Bảng giá dịch vụ', 'Trả góp 0%'],
-  },
-  {
-    slug: 'bongstudio',
-    type: 'shop',
-    category: 'detailing', // cửa hàng mẫu, thương hiệu minh hoạ
-    name: 'Bóng Studio – chăm sóc xe',
-    client: 'Cửa hàng mẫu (thương hiệu minh hoạ)',
-    area: 'Cần Thơ · thông tin liên hệ minh hoạ',
-    hotline: '0900 000 515',
-    deployed: '10/2026',
-    url: dir('bongstudio'),
-    accent: '#c8a45c',
-    summary:
-      'Cửa hàng chăm sóc xe kiểu Hasaki: dung dịch rửa, sáp, ceramic, khăn microfiber; bảng giá dán phim, PPF, phủ ceramic theo cỡ xe, tự chọn combo −10%, đặt lịch chọn giờ.',
-    highlights: ['Flash deal mỗi ngày', 'Bảng giá theo cỡ xe', 'Tự chọn combo −10%', 'Đặt lịch chọn giờ', 'Kéo so sánh trước / sau', 'Giỏ hàng & thanh toán'],
   },
 ]
 
