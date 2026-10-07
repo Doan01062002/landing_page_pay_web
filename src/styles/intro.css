@@ -41,6 +41,30 @@
 .intro__text {
   clip-path: inset(36% 0 0 0);
 }
+.intro__logo {
+  container-type: inline-size; /* đơn vị cqw = 1% bề rộng logo, để dòng chữ nhỏ luôn đúng tỉ lệ */
+}
+.intro__text img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* "PHỤ KIỆN Ô TÔ": chữ hoa cao ~12% chiều cao logo, rộng ~34% logo, giữa hai gạch đỏ (đo từ logo gốc) */
+.intro__tag {
+  position: absolute;
+  left: 50.4%;
+  top: 75.5%;
+  transform: translateX(-50%);
+  font-family: 'Barlow Condensed', 'Be Vietnam Pro', sans-serif;
+  font-weight: 600;
+  font-size: 5.6cqw;
+  line-height: 1;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #1c1c1c;
+}
 .intro__line {
   position: absolute;
   left: 4%;

@@ -1,5 +1,4 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { site } from '../data/site.js'
 import { motionAllowed } from './Motion.jsx'
 import '../styles/intro.css'
 
@@ -11,6 +10,8 @@ import '../styles/intro.css'
   - Dùng Web Animations API (chỉ transform / opacity / clip-path), không cần thư viện.
 */
 const KEY = 'chungauto_intro'
+// Logo vector dò từ /brand/logo-mobile.png (cùng khung 227 × 65): hình xe, chữ CHUNGAUTO.VN, hai gạch đỏ
+const LOGO_SVG = '/brand/logo-vector.svg'
 const EASE = 'cubic-bezier(.65,0,.35,1)'
 const EASE_OUT = 'cubic-bezier(.2,.7,.2,1)'
 
@@ -60,6 +61,8 @@ export default function IntroSplash() {
       if (done) return
       done = true
       clearTimeout(flyTimer)
+      // ẩn lớp phủ TRƯỚC khi huỷ hiệu ứng: nếu huỷ trước, logo nhảy về cỡ lớn giữa màn hình trong 1 khung hình (bị "nháy")
+      root.style.visibility = 'hidden'
       anims.forEach((a) => a.cancel())
       html.classList.remove('intro-hold')
       setOn(false)
@@ -115,9 +118,13 @@ export default function IntroSplash() {
     <div className="intro" ref={rootRef} aria-hidden="true">
       <div className="intro__bg" />
       <div className="intro__mark">
+        {/* logo vector (dò lại từ logo gốc) để phóng to vẫn nét; dòng chữ nhỏ viết bằng chữ thật */}
         <div className="intro__logo">
-          <img className="intro__car" src={site.logo} alt="" width="227" height="65" />
-          <img className="intro__text" src={site.logo} alt="" width="227" height="65" />
+          <img className="intro__car" src={LOGO_SVG} alt="" width="227" height="65" />
+          <div className="intro__text">
+            <img src={LOGO_SVG} alt="" width="227" height="65" />
+            <span className="intro__tag">Phụ kiện ô tô</span>
+          </div>
           <span className="intro__line" />
         </div>
       </div>
