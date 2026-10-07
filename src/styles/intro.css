@@ -108,3 +108,20 @@ html.intro-hold .g-body {
   transform: translateY(16px);
   transition: none;
 }
+
+/* Trước khi JS tải xong (trang dựng sẵn từ máy chủ): script trong <head> gắn html.intro-pre để che trang,
+   tránh nội dung hiện ra rồi mới bị màn mở đầu phủ lên. Tự gỡ sau 4 giây nếu JS lỗi / tải quá chậm. */
+html.intro-pre body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #fff;
+  animation: intro-pre-out 0.3s ease 4s forwards;
+}
+@keyframes intro-pre-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

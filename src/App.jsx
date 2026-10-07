@@ -17,6 +17,8 @@ import LpPreview from './pages/LpPreview.jsx'
 
 // Trang quản trị demo của từng mẫu: tải riêng khi mở /quan-tri
 const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
+// Trang quản trị thật của ChungAuto (đăng nhập, dữ liệu trên máy chủ): /admin
+const CaAdminApp = lazy(() => import('./caadmin/CaAdminApp.jsx'))
 
 // Cuộn lên đầu khi đổi trang, hoặc tới #section nếu URL có hash.
 function ScrollManager() {
@@ -86,6 +88,14 @@ export default function App() {
           element={
             <Suspense fallback={<div className="adm-loading">Đang tải trang quản trị…</div>}>
               <AdminApp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/*"
+          element={
+            <Suspense fallback={<div className="adm-loading">Đang tải trang quản trị…</div>}>
+              <CaAdminApp />
             </Suspense>
           }
         />

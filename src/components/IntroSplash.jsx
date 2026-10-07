@@ -1,4 +1,5 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
+import { useIsoLayoutEffect } from '../lib/iso.js'
 import { introKey, introWillPlay, INTRO_DONE } from './introState.js'
 import '../styles/intro.css'
 
@@ -19,12 +20,20 @@ const EASE_OUT = 'cubic-bezier(.2,.7,.2,1)'
 const announceDone = () => window.dispatchEvent(new Event(INTRO_DONE))
 
 export default function IntroSplash() {
-  const [on, setOn] = useState(introWillPlay)
+  // false cả lúc dựng phía máy chủ lẫn lần hydrate đầu (HTML khớp nhau); bật ngay trước lần vẽ đầu nếu cần chạy.
+  // Trước khi JS tải xong, script trong <head> (index.html) đã che trang bằng lớp html.intro-pre.
+  const [on, setOn] = useState(false)
   const rootRef = useRef(null)
 
-  useLayoutEffect(() => {
+  useIsoLayoutEffect(() => {
+    if (introWillPlay()) setOn(true)
+    else document.documentElement.classList.remove('intro-pre', 'intro-hold')
+  }, [])
+
+  useIsoLayoutEffect(() => {
     if (!on) return
     const html = document.documentElement
+    html.classList.remove('intro-pre')
     html.classList.add('intro-hold')
     window.scrollTo(0, 0)
     try {

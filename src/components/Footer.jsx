@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import Logo from './Logo.jsx'
 import Icon from './Icon.jsx'
-import { site } from '../data/site.js'
+import { useSite } from '../lib/siteData.jsx'
 import { categories } from '../data/templates.js'
 
 export default function Footer() {
+  const site = useSite()
   return (
     <footer className="site-footer">
       <div className="wrap site-footer__grid">

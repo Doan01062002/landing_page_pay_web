@@ -22,5 +22,6 @@ const projectPages = () => {
 
 export default defineConfig({
   plugins: [react(), projectPages()],
-  server: { port: Number(process.env.PORT) || 5180 },
+  // khi phát triển: API chạy riêng (npm run dev:api, cổng 8080)
+  server: { port: Number(process.env.VITE_PORT) || 5180, proxy: { '/api': process.env.API_URL || 'http://localhost:8080' } },
 })

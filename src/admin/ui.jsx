@@ -86,10 +86,10 @@ export function Tabs({ items, value, onChange, small }) {
   )
 }
 
-export function Switch({ checked, onChange, label }) {
+export function Switch({ checked, onChange, label, disabled }) {
   return (
-    <label className="adm-switch">
-      <input type="checkbox" checked={!!checked} onChange={(e) => onChange(e.target.checked)} />
+    <label className={`adm-switch ${disabled ? 'is-disabled' : ''}`}>
+      <input type="checkbox" checked={!!checked} disabled={disabled} onChange={(e) => onChange(e.target.checked)} />
       <span className="adm-switch__ui" aria-hidden="true" />
       {label && <span>{label}</span>}
     </label>
@@ -308,7 +308,7 @@ export function Field({ f, value, onChange, error, ctx }) {
       input = <ItemsInput value={value || []} onChange={onChange} f={f} ctx={ctx} />
       break
     default:
-      input = <input {...common} type={f.type === 'phone' ? 'tel' : f.type === 'email' ? 'email' : f.type === 'date' ? 'date' : f.type === 'time' ? 'time' : 'text'} value={value ?? ''} onChange={(e) => onChange(e.target.value)} placeholder={f.placeholder} list={f.suggest ? id + '-list' : undefined} />
+      input = <input {...common} type={f.type === 'phone' ? 'tel' : f.type === 'email' ? 'email' : f.type === 'date' ? 'date' : f.type === 'time' ? 'time' : f.type === 'password' ? 'password' : 'text'} autoComplete={f.type === 'password' ? 'new-password' : undefined} value={value ?? ''} onChange={(e) => onChange(e.target.value)} placeholder={f.placeholder} list={f.suggest ? id + '-list' : undefined} />
   }
   return (
     <div className={`adm-field ${f.wide ? 'adm-field--wide' : ''} ${f.type === 'boolean' ? 'adm-field--switch' : ''}`}>

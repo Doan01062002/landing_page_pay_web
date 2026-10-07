@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import Icon from './Icon.jsx'
 import Logo from './Logo.jsx'
-import { site } from '../data/site.js'
+import { useSite } from '../lib/siteData.jsx'
 import { useConsult } from './ConsultContext.jsx'
 import { useScrolled } from './Motion.jsx'
 
@@ -15,6 +15,7 @@ const links = [
 ]
 
 export default function Header() {
+  const site = useSite()
   const [open, setOpen] = useState(false)
   const { pathname, hash } = useLocation()
   const { open: openConsult } = useConsult()

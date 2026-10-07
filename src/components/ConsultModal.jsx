@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react'
 import Icon from './Icon.jsx'
 import ConsultForm from './ConsultForm.jsx'
-import { site, formatVND } from '../data/site.js'
+import { formatVND } from '../data/site.js'
+import { useSite } from '../lib/siteData.jsx'
 
 export default function ConsultModal({ template, onClose }) {
+  const site = useSite()
   const ref = useRef(null)
 
   useEffect(() => {

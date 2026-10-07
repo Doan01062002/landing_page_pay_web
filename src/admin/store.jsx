@@ -139,8 +139,9 @@ function createStore(site, staticSeed) {
 
 const Ctx = createContext(null)
 
-export function AdminProvider({ site, staticSeed, children }) {
-  const store = useMemo(() => createStore(site, staticSeed), [site, staticSeed])
+// store: truyền kho dữ liệu riêng (vd kho gọi API máy chủ của trang quản trị ChungAuto); mặc định dùng localStorage
+export function AdminProvider({ site, staticSeed, store: external, children }) {
+  const store = useMemo(() => external || createStore(site, staticSeed), [external, site, staticSeed])
   const [toasts, setToasts] = useState([])
   const tid = useRef(0)
   const toast = useCallback((text, tone = 'ok') => {

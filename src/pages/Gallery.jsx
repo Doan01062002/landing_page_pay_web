@@ -3,8 +3,9 @@ import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon.jsx'
 import TemplateCard from '../components/TemplateCard.jsx'
 import ProjectTile from '../components/ProjectTile.jsx'
-import { templates } from '../data/templates.js'
-import { projects, typeLabel } from '../data/projects.js'
+import { typeLabel } from '../data/projects.js'
+import { useCatalog } from '../lib/siteData.jsx'
+import { Seo, ld, useOrigin } from '../lib/seo.jsx'
 import '../styles/gallery.css'
 
 // Hình thức: mẫu dựng riêng (trang tĩnh /du-an/<slug>/, luôn xếp trước) hoặc mẫu phần mềm
@@ -43,6 +44,8 @@ const normalize = (s) =>
     .replace(/đ/g, 'd')
 
 export default function Gallery() {
+  const { templates, projects } = useCatalog()
+  const origin = useOrigin()
   const [params, setParams] = useSearchParams()
   const key = params.get('key') || ''
   const cat = params.get('loai') || 'all'
@@ -119,6 +122,20 @@ export default function Gallery() {
 
   return (
     <>
+      <Seo
+        title="Kho mẫu website & phần mềm ngành ô tô"
+        description={`${projects.length + templates.length} mẫu website, landing page và phần mềm dựng sẵn cho gara ô tô, đại lý, showroom xe cũ, cửa hàng phụ kiện. Xem thử trực tiếp, kèm trang quản trị.`}
+        path="/mau-phan-mem"
+        jsonLd={[
+          ld.breadcrumb(origin, [['Trang chủ', '/'], ['Kho mẫu', '/mau-phan-mem']]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Mẫu phần mềm ngành ô tô',
+            itemListElement: templates.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: `${origin}/mau-phan-mem/${t.slug}`, name: t.name })),
+          },
+        ]}
+      />
       <section className="g-hero">
         <div className="wrap g-hero__inner">
           <nav className="crumbs" aria-label="Đường dẫn">

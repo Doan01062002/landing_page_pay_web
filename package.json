@@ -5,18 +5,37 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev:api": "node --watch server/index.js",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-server && node scripts/prerender.mjs",
+    "start": "node server/index.js",
+    "db:migrate": "node server/migrate.js",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "node tests/e2e/run.mjs",
+    "ssr:check": "node scripts/ssr-check.mjs"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "compression": "^1.8.2",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.1",
+    "helmet": "^8.3.0",
     "lucide-react": "^0.460.0",
+    "pg": "^8.23.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "playwright-core": "^1.63.0",
-    "vite": "^5.4.11"
+    "supertest": "^7.3.1",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

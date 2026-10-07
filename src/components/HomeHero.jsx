@@ -1,11 +1,11 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { useIsoLayoutEffect } from '../lib/iso.js'
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
 import { motionAllowed } from './Motion.jsx'
 import { Lightbox } from '../landings/media.jsx'
-import { templates } from '../data/templates.js'
-import { projects } from '../data/projects.js'
-import { site, formatVND } from '../data/site.js'
+import { formatVND } from '../data/site.js'
+import { useCatalog, useSite } from '../lib/siteData.jsx'
 import '../styles/lp.css'
 import '../styles/hero.css'
 
@@ -25,7 +25,7 @@ const DEMOS = [
 ]
 
 // Ảnh chụp các mẫu (public/images/hero, 390 × 900; chụp lại bằng script: xem README) → thẻ trên vòng xoay
-const SHOTS = [
+const shotsOf = ({ templates, projects }) => [
   ...projects.map((p) => ({ img: `/images/hero/du-an-${p.slug}.webp`, name: p.name })),
   ...templates.map((t) => ({ img: `/images/hero/${t.slug}.webp`, name: t.name })),
 ]
@@ -51,7 +51,11 @@ const DW_MIN = 920
 */
 function Ring() {
   const spinRef = useRef(null)
-  const cards = useMemo(() => Array.from({ length: N }, (_, i) => SHOTS[i % SHOTS.length]), [])
+  const catalog = useCatalog()
+  const cards = useMemo(() => {
+    const shots = shotsOf(catalog)
+    return Array.from({ length: N }, (_, i) => shots[i % shots.length])
+  }, [catalog])
 
   useEffect(() => {
     const spin = spinRef.current
@@ -115,8 +119,9 @@ function Ring() {
 // Hiệu ứng vào trang: chạy ngay, hoặc chờ màn mở đầu logo (IntroSplash) xong.
 // Dùng các thuộc tính translate / scale / clip-path riêng, không đụng transform đã dùng để căn vị trí.
 function useEntrance(rootRef) {
-  // useLayoutEffect: gắn hiệu ứng trước lần vẽ đầu tiên, nội dung không loé lên trước khi chạy
-  useLayoutEffect(() => {
+  // Chỉ chạy sau màn mở đầu logo. Lần vào sau (không có màn mở đầu) nội dung đã dựng sẵn từ máy chủ hiện ngay,
+  // không ẩn rồi hiện lại (tránh nháy, tốt cho tốc độ hiển thị).
+  useIsoLayoutEffect(() => {
     const root = rootRef.current
     if (!motionAllowed() || !root.animate) return
     const EXPO = 'cubic-bezier(.16,1,.3,1)'
@@ -144,11 +149,12 @@ function useEntrance(rootRef) {
       window.addEventListener('chungauto:intro-done', run, { once: true })
       return () => window.removeEventListener('chungauto:intro-done', run)
     }
-    run()
   }, [rootRef])
 }
 
 export default function HomeHero() {
+  const site = useSite()
+  const { templates, projects } = useCatalog()
   const [demo, setDemo] = useState(null)
   const rootRef = useRef(null)
   const total = templates.length + projects.length

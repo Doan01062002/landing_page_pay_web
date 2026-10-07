@@ -287,6 +287,17 @@ p {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
+/* ô bẫy spam: đưa ra ngoài màn hình (không dùng display:none để bot vẫn điền) */
+.cf__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.cf__err {
+  margin: 0;
+}
 .cf__privacy {
   display: flex;
   align-items: center;

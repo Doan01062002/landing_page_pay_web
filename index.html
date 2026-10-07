@@ -3,19 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ea212b" />
+    <!--head:start-->
     <title>ChungAuto – Phần mềm cho gara, đại lý & showroom ô tô</title>
-    <meta name="description" content="Kho mẫu phần mềm dựng sẵn cho gara ô tô, tiệm sửa xe máy, đại lý ô tô, showroom xe cũ. Triển khai phần mềm, tặng kèm landing page quảng cáo." />
+    <meta name="description" content="Kho mẫu website và phần mềm dựng sẵn cho gara ô tô, tiệm sửa xe máy, đại lý ô tô, showroom xe cũ, cửa hàng phụ kiện. Triển khai nhanh, tặng kèm landing page quảng cáo." />
+    <!--head:end-->
     <link rel="icon" href="/brand/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/brand/logo-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Phông tải không chặn hiển thị (font-display: swap); noscript dự phòng -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Oswald:wght@500;600;700&family=Montserrat:wght@500;700;800&family=Lexend:wght@400;600;700&family=Roboto+Condensed:wght@600;700&family=Anton&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@500;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" />
+    </noscript>
+    <!-- Màn mở đầu logo (trang chủ, Kho mẫu; một lần mỗi phiên): che trang ngay từ lần vẽ đầu, trước khi JS tải xong -->
+    <script>
+      ;(function () {
+        try {
+          var p = location.pathname.replace(/(.)\/$/, '$1')
+          var k = { '/': 'chungauto_intro', '/mau-phan-mem': 'chungauto_intro_kho' }[p]
+          var q = new URLSearchParams(location.search)
+          if (!k || q.get('embed') === '1') return
+          if (q.get('intro') !== '1' && sessionStorage.getItem(k)) return
+          document.documentElement.classList.add('intro-pre', 'intro-hold')
+        } catch (e) {}
+      })()
+    </script>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div id="root"><!--app-html--></div>
+    <!--app-boot-->
+    <script type="module" src="/src/entry-client.jsx"></script>
   </body>
 </html>

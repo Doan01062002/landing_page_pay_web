@@ -1,14 +1,29 @@
 import { useState } from 'react'
 import Icon from './Icon.jsx'
-import { templates } from '../data/templates.js'
 import { landings } from '../data/landings.js'
-import { site } from '../data/site.js'
+import { useCatalog, useSite } from '../lib/siteData.jsx'
 
 const businessTypes = ['Gara ô tô', 'Tiệm / chuỗi sửa xe máy', 'Lốp & ắc quy', 'Rửa xe, detailing', 'Sơn, gò đồng', 'Phụ tùng', 'Xưởng xe điện', 'Khác']
 const branchOptions = ['1 điểm', '2 – 5 chi nhánh', '6 – 10 chi nhánh', 'Trên 10 chi nhánh']
 
-// Chưa có backend: lưu tạm yêu cầu vào localStorage để dễ nối API sau này.
-function saveLead(lead) {
+const UTM_KEY = 'ca_utm'
+// Ghi nhớ nguồn chiến dịch (utm_*) của lượt truy cập để gắn vào yêu cầu tư vấn
+function readUtm() {
+  const utm = {}
+  try {
+    new URLSearchParams(window.location.search).forEach((v, k) => {
+      if (/^utm_[a-z]+$/.test(k) && v) utm[k] = v.slice(0, 120)
+    })
+    if (Object.keys(utm).length) sessionStorage.setItem(UTM_KEY, JSON.stringify(utm))
+    else return JSON.parse(sessionStorage.getItem(UTM_KEY) || '{}')
+  } catch {
+    /* trình duyệt chặn lưu trữ */
+  }
+  return utm
+}
+
+// Không có máy chủ (bản tĩnh): lưu tạm yêu cầu trên trình duyệt để không mất thông tin khách nhập
+function saveLocal(lead) {
   try {
     const key = 'chungauto_leads'
     const list = JSON.parse(localStorage.getItem(key) || '[]')
@@ -19,7 +34,29 @@ function saveLead(lead) {
   }
 }
 
+// Gửi yêu cầu lên máy chủ → hiện ngay trong trang quản trị /admin. Trả về { ok } hoặc { fields } / { error }.
+async function sendLead(values, website) {
+  const body = { ...values, website, page: window.location.pathname, utm: readUtm() }
+  let res
+  try {
+    res = await fetch('/api/leads', { method: 'POST', headers: { 'content-type': 'application/json', 'x-ca-csrf': '1' }, body: JSON.stringify(body) })
+  } catch {
+    saveLocal(values)
+    return { ok: true }
+  }
+  const data = (res.headers.get('content-type') || '').includes('application/json') ? await res.json().catch(() => null) : null
+  if (res.ok && data) return { ok: true }
+  if (!data) {
+    saveLocal(values)
+    return { ok: true }
+  }
+  if (data.fields) return { fields: data.fields }
+  return { error: data.message || 'Chưa gửi được yêu cầu, vui lòng thử lại.' }
+}
+
 export default function ConsultForm({ defaultTemplate = '', idPrefix = 'cf', compact = false }) {
+  const site = useSite()
+  const { templates } = useCatalog()
   const [values, setValues] = useState({
     name: '',
     phone: '',
@@ -31,10 +68,11 @@ export default function ConsultForm({ defaultTemplate = '', idPrefix = 'cf', com
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [website, setWebsite] = useState('')
 
   const set = (k) => (e) => setValues((v) => ({ ...v, [k]: e.target.value }))
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     const errs = {}
     if (values.name.trim().length < 2) errs.name = 'Nhập họ tên để chúng tôi tiện xưng hô.'
@@ -42,13 +80,12 @@ export default function ConsultForm({ defaultTemplate = '', idPrefix = 'cf', com
     if (!/^0\d{9}$/.test(phone)) errs.phone = 'Số điện thoại gồm 10 số, bắt đầu bằng 0.'
     setErrors(errs)
     if (Object.keys(errs).length) return
-    // Giả lập thời gian gửi lên máy chủ
     setLoading(true)
-    setTimeout(() => {
-      saveLead(values)
-      setLoading(false)
-      setSent(values)
-    }, 700)
+    const out = await sendLead({ ...values, phone }, website)
+    setLoading(false)
+    if (out.ok) setSent(values)
+    else if (out.fields) setErrors({ name: out.fields.name, phone: out.fields.phone, form: Object.values(out.fields)[0] })
+    else setErrors({ form: out.error })
   }
 
   if (sent) {
@@ -124,11 +161,21 @@ export default function ConsultForm({ defaultTemplate = '', idPrefix = 'cf', com
           </optgroup>
         </select>
       </div>
+      {/* ô bẫy spam: người dùng không thấy, bot tự điền */}
+      <div className="cf__hp" aria-hidden="true">
+        <label htmlFor={`${idPrefix}-website`}>Website</label>
+        <input id={`${idPrefix}-website`} tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+      </div>
       {!compact && (
         <div className="field">
           <label htmlFor={`${idPrefix}-note`}>Ghi chú (không bắt buộc)</label>
           <textarea id={`${idPrefix}-note`} rows={3} value={values.note} onChange={set('note')} placeholder="Ví dụ: cần bán phụ tùng online, có 3 chi nhánh ở Hà Nội…" />
         </div>
+      )}
+      {errors.form && !errors.name && !errors.phone && (
+        <p className="field__err cf__err" role="alert">
+          {errors.form} Hoặc gọi {site.hotline}.
+        </p>
       )}
       <button type="submit" className={'btn btn--signal btn--lg btn--block' + (loading ? ' is-loading' : '')} disabled={loading}>
         {loading ? (

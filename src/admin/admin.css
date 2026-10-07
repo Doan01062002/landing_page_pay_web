@@ -1354,6 +1354,15 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   transition: transform 0.18s;
 }
+.adm-switch.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.adm-loading-rows {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--adm-ink-3);
+}
 .adm-switch input:checked + .adm-switch__ui {
   background: var(--adm-accent, #ea212b);
 }
@@ -2710,4 +2719,40 @@
     break-inside: avoid;
     box-shadow: none;
   }
+}
+
+/* ---------- Trang quản trị ChungAuto (/admin) ---------- */
+.adm-login__logo {
+  width: 180px;
+  height: auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #fff;
+}
+.adm-login__err {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--danger) 10%, #fff);
+  color: var(--danger);
+  font-weight: 600;
+}
+.adm-login__form .adm-login__hint {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+}
+.adm-fieldset {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+}
+.adm-fieldset:disabled input,
+.adm-fieldset:disabled textarea,
+.adm-fieldset:disabled select {
+  background: var(--adm-bg, #f6f7f9);
+  cursor: not-allowed;
+}
+.adm-form--narrow {
+  max-width: 460px;
+  grid-template-columns: minmax(0, 1fr);
 }

@@ -1,63 +1,40 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [{ "source": "/du-an", "destination": "/mau-phan-mem?ht=rieng", "permanent": true }],
   "rewrites": [
-    {
-      "source": "/du-an/:slug",
-      "destination": "/du-an/:slug/index.html"
-    },
-    {
-      "source": "/du-an/:slug/",
-      "destination": "/du-an/:slug/index.html"
-    },
-    {
-      "source": "/mau/:slug",
-      "destination": "/mau/:slug/index.html"
-    },
-    {
-      "source": "/mau/:slug/",
-      "destination": "/mau/:slug/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/du-an/:slug", "destination": "/du-an/:slug/index.html" },
+    { "source": "/du-an/:slug/", "destination": "/du-an/:slug/index.html" },
+    { "source": "/mau/:slug", "destination": "/mau/:slug/index.html" },
+    { "source": "/mau/:slug/", "destination": "/mau/:slug/index.html" },
+    { "source": "/mau-phan-mem", "destination": "/mau-phan-mem/index.html" },
+    { "source": "/mau-phan-mem/:slug", "destination": "/mau-phan-mem/:slug/index.html" },
+    { "source": "/mau-landing-page", "destination": "/mau-landing-page/index.html" },
+    { "source": "/(admin|quan-tri|demo|demo-landing|demo-du-an|preview|lp|mau-website)(.*)", "destination": "/app-shell.html" }
   ],
   "headers": [
     {
+      "source": "/(admin|quan-tri|demo|demo-landing|demo-du-an|preview|lp)(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
       "source": "/videos/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
     },
     {
       "source": "/images/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
     },
     {
       "source": "/du-an/:slug/assets/img/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
     },
     {
       "source": "/du-an/:slug/(img|videos)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
     }
   ]
 }

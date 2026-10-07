@@ -6,6 +6,8 @@ import { Badge, Stars } from '../ui.jsx'
 import { orderTotal, repairTotal } from '../schemas.jsx'
 
 export function DetailBody({ schema, row, ctx, statusOf }) {
+  // chi tiết tuỳ biến (component) – dùng cho trang quản trị ChungAuto
+  if (typeof schema.detail === 'function') return <schema.detail schema={schema} row={row} ctx={ctx} />
   if (schema.detail === 'invoice') return <Invoice schema={schema} row={row} ctx={ctx} />
   if (schema.detail === 'customer') return <CustomerDetail row={row} ctx={ctx} />
   if (schema.detail === 'vehicle') return <VehicleDetail row={row} ctx={ctx} />

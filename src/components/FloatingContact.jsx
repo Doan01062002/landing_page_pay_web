@@ -1,8 +1,9 @@
 import Icon from './Icon.jsx'
-import { site } from '../data/site.js'
+import { useSite } from '../lib/siteData.jsx'
 import { useScrolled } from './Motion.jsx'
 
 export default function FloatingContact() {
+  const site = useSite()
   const showTop = useScrolled(700)
   return (
     <div className="float-contact">

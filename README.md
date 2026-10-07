@@ -1,15 +1,47 @@
 # ChungAuto – Kho mẫu phần mềm ngành ô tô
 
-Frontend (React + Vite) cho trang bán mẫu phần mềm dành cho gara ô tô, tiệm sửa xe máy, chuỗi lốp – ắc quy, detailing, phụ tùng, đại lý ô tô và showroom xe cũ. Chưa có backend, toàn bộ dữ liệu là dữ liệu mẫu.
+Website bán mẫu phần mềm cho gara ô tô, tiệm sửa xe máy, chuỗi lốp – ắc quy, detailing, phụ tùng, đại lý ô tô và showroom xe cũ, kèm **trang quản trị `/admin`** (yêu cầu tư vấn, khách hàng, hợp đồng, thu tiền, Kho mẫu, hỏi đáp, cài đặt website, tài khoản, nhật ký).
+
+- **Giao diện:** React 18 + Vite 5, react-router. Trang công khai dựng HTML phía máy chủ (SSR) rồi hydrate – có title, description, canonical, Open Graph, JSON-LD, sitemap, 404 thật.
+- **Máy chủ:** Node.js 22 + Express 5 (`server/`), PostgreSQL (`server/db/migrations`), đăng nhập bằng phiên cookie, phân quyền theo vai trò.
+- **Triển khai:** VPS bằng Docker (PostgreSQL + app + Caddy HTTPS) – xem **[DEPLOY.md](DEPLOY.md)**. Vercel vẫn chạy được bản tĩnh (không có trang quản trị).
 
 ## Chạy dự án
 
 ```bash
 npm install
-npm run dev
+cp .env.example .env      # đặt DATABASE_URL, ADMIN_EMAIL, ADMIN_PASSWORD, COOKIE_SECURE=false
+npm run dev:api           # API + database ở cổng 8080 (tự migration, tạo tài khoản quản trị)
+npm run dev               # giao diện ở http://localhost:5180 (gọi /api qua proxy)
 ```
 
-Mở http://localhost:5180
+Chỉ xem giao diện (không cần database): `npm run dev` – website chạy bằng dữ liệu trong `src/data`, form tư vấn lưu tạm trên trình duyệt.
+
+| Lệnh | Việc |
+| --- | --- |
+| `npm run build` | Dựng giao diện + bản SSR (`dist-server/`) + trang tĩnh cho Vercel |
+| `npm start` | Chạy bản production (cần build trước) |
+| `npm run db:migrate` | Chạy migration + dữ liệu khởi tạo |
+| `npm test` | Test máy chủ (vitest + supertest, cần PostgreSQL test) |
+| `npm run test:e2e` | Test bằng Chrome thật (cần build trước) |
+
+## Máy chủ & cơ sở dữ liệu
+
+```
+server/
+  index.js        Khởi động: migration → dữ liệu khởi tạo → phục vụ
+  app.js          Express: API, robots.txt, sitemap.xml, tệp tĩnh, SSR
+  api.js          /api/leads (form tư vấn), /api/auth/*, /api/admin/*
+  resources.js    Bảng quản trị: kiểm tra dữ liệu (zod), SQL, ràng buộc nghiệp vụ
+  auth.js         Mật khẩu bcrypt, phiên, CSRF, quyền theo vai trò
+  bootstrap.js    Dữ liệu website lấy từ database (cache 30 giây, xoá khi sửa)
+  db/migrations/  001_init.sql: users, sessions, settings, catalog_items, faqs,
+                  customers, leads, orders, payments, audit_logs, view order_totals
+src/caadmin/      Trang quản trị /admin (dùng chung bộ giao diện src/admin)
+tests/            server/*.test.js (vitest), e2e/run.mjs (Playwright)
+```
+
+Vai trò: **Quản trị viên** (toàn quyền), **Quản lý** (mọi thứ trừ tài khoản), **Kinh doanh** (yêu cầu tư vấn, khách hàng, hợp đồng, thu tiền), **Biên tập** (Kho mẫu, hỏi đáp, cài đặt website).
 
 ## Các trang
 

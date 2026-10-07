@@ -1,0 +1,52 @@
+# Chạy trên VPS: PostgreSQL + ứng dụng ChungAuto + Caddy (HTTPS tự động Let's Encrypt).
+# Chuẩn bị: cp .env.example .env  → sửa DOMAIN, DB_PASSWORD, ADMIN_EMAIL, ADMIN_PASSWORD
+# Chạy:     docker compose up -d --build
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: chungauto
+      POSTGRES_USER: chungauto
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Chưa đặt DB_PASSWORD trong .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U chungauto -d chungauto']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      DATABASE_URL: postgres://chungauto:${DB_PASSWORD}@db:5432/chungauto
+      PUBLIC_URL: https://${DOMAIN:?Chưa đặt DOMAIN trong .env}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

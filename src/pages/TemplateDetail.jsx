@@ -4,8 +4,9 @@ import Icon from '../components/Icon.jsx'
 import LivePreview from '../components/LivePreview.jsx'
 import TemplateCard from '../components/TemplateCard.jsx'
 import { useConsult } from '../components/ConsultContext.jsx'
-import { getTemplate, templates } from '../data/templates.js'
-import { site, formatVND } from '../data/site.js'
+import { formatVND } from '../data/site.js'
+import { useCatalog, useSite } from '../lib/siteData.jsx'
+import { Seo, ld, useOrigin } from '../lib/seo.jsx'
 import NotFound from './NotFound.jsx'
 import { getPages } from '../templates/pages.jsx'
 import '../styles/gallery.css'
@@ -14,10 +15,13 @@ import '../styles/gallery.css'
 const formatDate = (iso) => iso.split('-').reverse().join('/')
 
 export default function TemplateDetail() {
+  const site = useSite()
+  const { templates } = useCatalog()
   const { slug } = useParams()
-  const t = getTemplate(slug)
+  const t = templates.find((x) => x.slug === slug)
   const [palette, setPalette] = useState(0)
   const { open } = useConsult()
+  const origin = useOrigin()
 
   if (!t) return <NotFound />
   const pages = getPages(t)
@@ -26,6 +30,26 @@ export default function TemplateDetail() {
 
   return (
     <>
+      <Seo
+        title={`${t.name} – mẫu phần mềm ${t.categoryLabel.toLowerCase()}`}
+        description={`${t.tagline} ${t.free ? 'Miễn phí' : 'Giá từ ' + formatVND(t.price)}, tặng kèm landing page quảng cáo.`}
+        path={`/mau-phan-mem/${t.slug}`}
+        image={t.hero?.image}
+        type="product"
+        jsonLd={[
+          ld.breadcrumb(origin, [['Trang chủ', '/'], ['Kho mẫu', '/mau-phan-mem'], [t.name, `/mau-phan-mem/${t.slug}`]]),
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: t.name,
+            description: t.description || t.tagline,
+            image: t.hero?.image ? (/^https?:/.test(t.hero.image) ? t.hero.image : origin + t.hero.image) : undefined,
+            category: `Phần mềm ${t.categoryLabel}`,
+            brand: { '@type': 'Brand', name: site.brand },
+            offers: { '@type': 'Offer', priceCurrency: 'VND', price: t.free ? 0 : t.price, availability: 'https://schema.org/InStock', url: `${origin}/mau-phan-mem/${t.slug}` },
+          },
+        ]}
+      />
       <section className="d-top">
         <div className="wrap">
           <nav className="crumbs" aria-label="Đường dẫn">

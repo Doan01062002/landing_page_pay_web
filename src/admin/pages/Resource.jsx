@@ -13,11 +13,19 @@ import { DetailBody } from './Details.jsx'
 
 export default function Resource({ schema }) {
   const { site, store, toast } = useAdmin()
-  const ctx = useMemo(() => ({ site, store, read: (c) => store.read(c) }), [site, store])
-  const rows = useCollection(schema.collection)
+  const ctx = useMemo(() => ({ site, store, read: (c) => store.read(c), me: site.me, perms: site.perms }), [site, store])
+  const allRows = useCollection(schema.collection)
+  // filterRows: một bảng dữ liệu chia nhiều trang (vd Kho mẫu: mẫu phần mềm / mẫu dựng riêng)
+  const rows = useMemo(() => (schema.filterRows ? schema.filterRows(allRows) : allRows), [allRows, schema])
+  const loading = !!store.isLoading?.(schema.collection)
+  // quyền theo tài khoản (trang quản trị ChungAuto); trang demo luôn đủ quyền
+  const may = { create: schema.canCreate !== false && !schema.noCreate, edit: schema.canEdit !== false, remove: schema.canRemove !== false && !schema.noDelete }
+  const basePath = site.basePath || `/quan-tri/${site.key}`
   const [params, setParams] = useSearchParams()
   const navigate = useNavigate()
   const statusOf = schema.statusOf || ((r) => r[schema.statusField || 'status'])
+  const [busy, setBusy] = useState(false)
+  const fail = (e) => toast(e?.message || 'Có lỗi xảy ra, vui lòng thử lại', 'danger')
 
   const [q, setQ] = useState(params.get('q') || '')
   const [tab, setTab] = useState(params.get('tab') || 'all')
@@ -34,13 +42,14 @@ export default function Resource({ schema }) {
   useEffect(() => {
     const id = params.get('open')
     if (!id) return
-    const r = rows.find((x) => x.id === id)
-    if (r) params.get('edit') ? openEdit(r) : setViewId(id)
+    const r = rows.find((x) => String(x.id) === id)
+    if (!r && loading) return // dữ liệu đang tải từ máy chủ: chờ
+    if (r) params.get('edit') ? openEdit(r) : setViewId(r.id)
     params.delete('open')
     params.delete('edit')
     setParams(params, { replace: true })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [rows, loading])
   useEffect(() => {
     setQ(params.get('q') || '')
     if (params.get('tab')) setTab(params.get('tab'))
@@ -98,7 +107,10 @@ export default function Resource({ schema }) {
     const values = r ? JSON.parse(JSON.stringify(r)) : { ...(schema.defaults ? schema.defaults(ctx) : {}) }
     setEditing({ id: r?.id || null, values, errors: {} })
   }
-  function save() {
+  // Kho dữ liệu có thể đồng bộ (demo, localStorage) hoặc bất đồng bộ (API máy chủ): luôn await.
+  // Lỗi kiểm tra từ máy chủ (err.fields) hiện ngay dưới ô nhập tương ứng.
+  async function save() {
+    if (busy) return
     const v = editing.values
     const errors = validate(schema.fields, v, ctx)
     if (Object.keys(errors).length) {
@@ -109,17 +121,28 @@ export default function Resource({ schema }) {
     }
     let data = schema.beforeSave ? schema.beforeSave(v, ctx) : v
     if (schema.codePrefix && !data.code) data = { ...data, code: nextCode(rows, schema.codePrefix) }
-    if (editing.id) {
-      const prev = rows.find((r) => r.id === editing.id)
-      store.update(schema.collection, editing.id, data, label(data))
-      schema.afterSave?.({ ...prev, ...data }, prev, ctx)
-      toast('Đã lưu thay đổi')
-    } else {
-      const row = store.add(schema.collection, data, label(data))
-      schema.afterSave?.(row, null, ctx)
-      toast(`Đã thêm ${label(row)}`)
+    setBusy(true)
+    try {
+      if (editing.id) {
+        const prev = rows.find((r) => r.id === editing.id)
+        await store.update(schema.collection, editing.id, data, label(data))
+        schema.afterSave?.({ ...prev, ...data }, prev, ctx)
+        toast('Đã lưu thay đổi')
+      } else {
+        const row = await store.add(schema.collection, data, label(data))
+        schema.afterSave?.(row, null, ctx)
+        toast(`Đã thêm ${label(row)}`)
+      }
+      setEditing(null)
+    } catch (e) {
+      if (e?.fields) {
+        setEditing((cur) => cur && { ...cur, errors: e.fields })
+        requestAnimationFrame(() => document.querySelector('.adm-drawer [aria-invalid="true"]')?.focus())
+      }
+      fail(e)
+    } finally {
+      setBusy(false)
     }
-    setEditing(null)
   }
   async function del(ids) {
     const targets = rows.filter((r) => ids.includes(r.id))
@@ -127,38 +150,60 @@ export default function Resource({ schema }) {
     if (block) return toast(block, 'danger')
     const ok = await confirm({ title: 'Xoá dữ liệu', text: ids.length > 1 ? `Xoá ${ids.length} ${schema.single}? Không thể hoàn tác.` : `Xoá ${label(targets[0])}? Không thể hoàn tác.`, danger: true, ok: 'Xoá' })
     if (!ok) return
-    store.remove(schema.collection, ids, ids.length > 1 ? `${ids.length} ${schema.single}` : label(targets[0]))
-    setSel(new Set())
-    setViewId(null)
-    toast('Đã xoá')
+    try {
+      await store.remove(schema.collection, ids, ids.length > 1 ? `${ids.length} ${schema.single}` : label(targets[0]))
+      setSel(new Set())
+      setViewId(null)
+      toast('Đã xoá')
+    } catch (e) {
+      fail(e)
+    }
   }
   async function runAction(a, r) {
     if (a.confirm && !(await confirm({ title: a.label, text: a.confirm, danger: a.danger }))) return
     let input
     if (a.ask) {
-      input = await ask({ title: `${a.label} – ${r.code || r.name || ''}`, input: a.ask })
+      input = await ask({ title: `${a.label} – ${r.code || r.name || ''}`, input: typeof a.ask === 'function' ? a.ask(r, ctx) : a.ask })
       if (input === null) return
     }
-    if (a.run) {
-      const res = a.run(r, ctx)
-      if (res?.toast) toast(res.toast)
-      if (res?.go) navigate(`/quan-tri/${site.key}/${res.go}`)
-      return
+    try {
+      if (a.run) {
+        const res = await a.run(r, ctx, input)
+        if (res?.toast) toast(res.toast)
+        if (res?.go) navigate(`${basePath}/${res.go}`)
+        return
+      }
+      if (a.patch) {
+        const patch = typeof a.patch === 'function' ? a.patch(r, input) : a.patch
+        await store.update(schema.collection, r.id, patch, `${label(r)}: ${a.label.toLowerCase()}`)
+        schema.afterSave?.({ ...r, ...patch }, r, ctx)
+      }
+      toast(a.toast ? a.toast(r) : `${a.label}: ${r.code || r.name || r.title || ''}`)
+    } catch (e) {
+      fail(e)
     }
-    if (a.patch) {
-      const patch = typeof a.patch === 'function' ? a.patch(r, input) : a.patch
-      store.update(schema.collection, r.id, patch, `${label(r)}: ${a.label.toLowerCase()}`)
-      schema.afterSave?.({ ...r, ...patch }, r, ctx)
-    }
-    toast(a.toast ? a.toast(r) : `${a.label}: ${r.code || r.name || r.title || ''}`)
   }
-  function bulkPatch(patch, text) {
+  async function bulkPatch(patch, text) {
     const ids = [...sel]
     const before = rows.filter((r) => sel.has(r.id))
-    store.updateMany(schema.collection, ids, patch, `đã cập nhật ${ids.length} ${schema.single}: ${text}`)
-    if (schema.afterSave) before.forEach((r) => schema.afterSave({ ...r, ...patch }, r, ctx))
-    setSel(new Set())
-    toast(`Đã cập nhật ${ids.length} dòng`)
+    try {
+      await store.updateMany(schema.collection, ids, patch, `đã cập nhật ${ids.length} ${schema.single}: ${text}`)
+      if (schema.afterSave) before.forEach((r) => schema.afterSave({ ...r, ...patch }, r, ctx))
+      setSel(new Set())
+      toast(`Đã cập nhật ${ids.length} dòng`)
+    } catch (e) {
+      fail(e)
+    }
+  }
+  async function quickUpdate(r, patch, msg) {
+    try {
+      await store.update(schema.collection, r.id, patch, msg)
+      schema.afterSave?.({ ...r, ...patch }, r, ctx)
+      return true
+    } catch (e) {
+      fail(e)
+      return false
+    }
   }
   function exportCSV() {
     const cols = schema.columns.filter((c) => !c.toggle).map((c) => ({ ...c, csv: c.csv || (c.key === 'status' ? statusOf : (r) => r[c.key]) }))
@@ -208,9 +253,11 @@ export default function Resource({ schema }) {
         <button type="button" className="adm-btn" onClick={exportCSV}>
           <Download size={16} /> Xuất CSV
         </button>
-        <button type="button" className="adm-btn adm-btn--primary" onClick={() => openEdit(null)}>
-          <Plus size={16} /> Thêm {schema.single}
-        </button>
+        {may.create && (
+          <button type="button" className="adm-btn adm-btn--primary" onClick={() => openEdit(null)}>
+            <Plus size={16} /> Thêm {schema.single}
+          </button>
+        )}
       </PageHead>
 
       {schema.summary && (
@@ -285,7 +332,7 @@ export default function Resource({ schema }) {
         {sel.size > 0 && view === 'table' && (
           <div className="adm-bulk">
             <b>Đã chọn {sel.size}</b>
-            {schema.statuses && !schema.statusOf && (
+            {may.edit && schema.statuses && !schema.statusOf && (
               <select defaultValue="" onChange={(e) => e.target.value && bulkPatch({ [schema.statusField || 'status']: e.target.value }, e.target.value)} aria-label="Đổi trạng thái">
                 <option value="">Đổi trạng thái…</option>
                 {schema.statuses.map((s) => (
@@ -293,14 +340,16 @@ export default function Resource({ schema }) {
                 ))}
               </select>
             )}
-            {(schema.bulk || []).map((b) => (
+            {(may.edit ? schema.bulk || [] : []).map((b) => (
               <button key={b.label} type="button" className="adm-btn adm-btn--sm" onClick={() => bulkPatch(b.patch, b.label)}>
                 {b.label}
               </button>
             ))}
-            <button type="button" className="adm-btn adm-btn--sm adm-btn--danger" onClick={() => del([...sel])}>
-              <Trash2 size={14} /> Xoá
-            </button>
+            {may.remove && (
+              <button type="button" className="adm-btn adm-btn--sm adm-btn--danger" onClick={() => del([...sel])}>
+                <Trash2 size={14} /> Xoá
+              </button>
+            )}
             <button type="button" className="adm-btn adm-btn--sm adm-btn--ghost" onClick={() => setSel(new Set())}>
               Bỏ chọn
             </button>
@@ -315,12 +364,15 @@ export default function Resource({ schema }) {
             statuses={schema.statuses}
             cfg={schema.board}
             onOpen={(r) => setViewId(r.id)}
-            onMove={(r, status) => {
-              store.update(schema.collection, r.id, { status }, `${label(r)}: chuyển sang "${status}"`)
-              schema.afterSave?.({ ...r, status }, r, ctx)
-              toast(`${r.name || r.code} → ${status}`)
+            onMove={async (r, status) => {
+              if (!may.edit) return toast('Tài khoản không có quyền sửa', 'danger')
+              if (await quickUpdate(r, { status }, `${label(r)}: chuyển sang "${status}"`)) toast(`${r.name || r.code} → ${status}`)
             }}
           />
+        ) : loading && !rows.length ? (
+          <div className="adm-loading-rows" role="status">
+            Đang tải dữ liệu…
+          </div>
         ) : list.length ? (
           <>
             <div className="adm-tablewrap">
@@ -358,7 +410,7 @@ export default function Resource({ schema }) {
                         {schema.columns.map((c) => (
                           <td key={c.key} data-label={c.label} className={`${c.align === 'num' ? 'num' : ''} ${c.main ? 'is-main' : ''} ${c.hideSm ? 'hide-sm' : ''}`}>
                             {c.toggle ? (
-                              <Switch checked={r[c.toggle]} onChange={(val) => (store.update(schema.collection, r.id, { [c.toggle]: val }, `${label(r)}: ${val ? 'bật' : 'tắt'} ${c.label.toLowerCase()}`), toast(val ? 'Đã bật' : 'Đã tắt'))} />
+                              <Switch checked={r[c.toggle]} disabled={!may.edit} onChange={async (val) => (await quickUpdate(r, { [c.toggle]: val }, `${label(r)}: ${val ? 'bật' : 'tắt'} ${c.label.toLowerCase()}`)) && toast(val ? 'Đã bật' : 'Đã tắt')} />
                             ) : c.render ? (
                               c.render(r, ctx)
                             ) : (
@@ -367,7 +419,7 @@ export default function Resource({ schema }) {
                           </td>
                         ))}
                         <td className="adm-table__actions">
-                          {acts[0] && schema.rowQuick !== false && (
+                          {may.edit && acts[0] && schema.rowQuick !== false && (
                             <button type="button" className={`adm-btn adm-btn--sm ${acts[0].danger ? 'adm-btn--ghost' : 'adm-btn--soft'}`} onClick={() => runAction(acts[0], r)}>
                               {acts[0].label}
                             </button>
@@ -375,9 +427,11 @@ export default function Resource({ schema }) {
                           <button type="button" className="adm-iconbtn" onClick={() => setViewId(r.id)} aria-label="Xem chi tiết" title="Xem chi tiết">
                             <Eye size={16} />
                           </button>
-                          <button type="button" className="adm-iconbtn" onClick={() => openEdit(r)} aria-label="Sửa" title="Sửa">
-                            <Pencil size={16} />
-                          </button>
+                          {may.edit && (
+                            <button type="button" className="adm-iconbtn" onClick={() => openEdit(r)} aria-label="Sửa" title="Sửa">
+                              <Pencil size={16} />
+                            </button>
+                          )}
                         </td>
                       </tr>
                     )
@@ -394,9 +448,11 @@ export default function Resource({ schema }) {
                 Xoá bộ lọc
               </button>
             ) : (
-              <button type="button" className="adm-btn adm-btn--primary" onClick={() => openEdit(null)}>
-                <Plus size={16} /> Thêm {schema.single}
-              </button>
+              may.create && (
+                <button type="button" className="adm-btn adm-btn--primary" onClick={() => openEdit(null)}>
+                  <Plus size={16} /> Thêm {schema.single}
+                </button>
+              )
             )}
           </Empty>
         )}
@@ -411,20 +467,24 @@ export default function Resource({ schema }) {
         footer={
           viewing && (
             <>
-              <button type="button" className="adm-btn adm-btn--ghost adm-btn--danger-text" onClick={() => del([viewing.id])}>
-                <Trash2 size={16} /> Xoá
-              </button>
+              {may.remove && (
+                <button type="button" className="adm-btn adm-btn--ghost adm-btn--danger-text" onClick={() => del([viewing.id])}>
+                  <Trash2 size={16} /> Xoá
+                </button>
+              )}
               <div className="adm-spacer" />
-              {(schema.actions || [])
+              {(may.edit ? schema.actions || [] : [])
                 .filter((a) => !a.when || a.when(viewing))
                 .map((a) => (
                   <button key={a.label} type="button" className={`adm-btn ${a.danger ? 'adm-btn--ghost' : ''}`} onClick={() => runAction(a, viewing)}>
                     {a.label}
                   </button>
                 ))}
-              <button type="button" className="adm-btn adm-btn--primary" onClick={() => (openEdit(viewing), setViewId(null))}>
-                <Pencil size={16} /> Sửa
-              </button>
+              {may.edit && (
+                <button type="button" className="adm-btn adm-btn--primary" onClick={() => (openEdit(viewing), setViewId(null))}>
+                  <Pencil size={16} /> Sửa
+                </button>
+              )}
             </>
           )
         }
@@ -443,7 +503,7 @@ export default function Resource({ schema }) {
             <button type="button" className="adm-btn" onClick={() => setEditing(null)}>
               Huỷ
             </button>
-            <button type="button" className="adm-btn adm-btn--primary" onClick={save}>
+            <button type="button" className="adm-btn adm-btn--primary" onClick={save} disabled={busy}>
               {editing?.id ? 'Lưu thay đổi' : `Thêm ${schema.single}`}
             </button>
           </>

@@ -3,7 +3,9 @@ import Icon from '../components/Icon.jsx'
 import LpCard from '../components/LpCard.jsx'
 import { useConsult } from '../components/ConsultContext.jsx'
 import { landings } from '../data/landings.js'
-import { site, formatVND } from '../data/site.js'
+import { formatVND } from '../data/site.js'
+import { useSite } from '../lib/siteData.jsx'
+import { Seo, ld, useOrigin } from '../lib/seo.jsx'
 import '../styles/gallery.css'
 
 const perks = [
@@ -14,9 +16,17 @@ const perks = [
 ]
 
 export default function LpGallery() {
+  const site = useSite()
   const { open } = useConsult()
+  const origin = useOrigin()
   return (
     <>
+      <Seo
+        title="Mẫu landing page quảng cáo tặng kèm"
+        description={`Landing page quảng cáo một chương trình (thay dầu, kiểm tra xe, khuyến mãi…) có form thu số điện thoại, tặng kèm khi triển khai phần mềm, trị giá ${formatVND(site.promo.giftValue)}.`}
+        path="/mau-landing-page"
+        jsonLd={[ld.breadcrumb(origin, [['Trang chủ', '/'], ['Landing tặng kèm', '/mau-landing-page']])]}
+      />
       <section className="g-hero">
         <div className="wrap g-hero__inner">
           <nav className="crumbs" aria-label="Đường dẫn">

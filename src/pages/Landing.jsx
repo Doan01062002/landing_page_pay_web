@@ -5,17 +5,17 @@ import TemplateCard from '../components/TemplateCard.jsx'
 import LpCard from '../components/LpCard.jsx'
 import { landings } from '../data/landings.js'
 import ProjectCard from '../components/ProjectCard.jsx'
-import { projects } from '../data/projects.js'
 import ConsultForm from '../components/ConsultForm.jsx'
 import { useConsult } from '../components/ConsultContext.jsx'
 import { CountUp, motionAllowed, useCycle } from '../components/Motion.jsx'
 import HomeHero from '../components/HomeHero.jsx'
-import { templates } from '../data/templates.js'
-import { segments, steps, packages, testimonials, faqs } from '../data/landing.js'
-import { site, formatVND } from '../data/site.js'
+import { segments, steps, packages, testimonials } from '../data/landing.js'
+import { formatVND } from '../data/site.js'
+import { useCatalog, useFaqs, useSite } from '../lib/siteData.jsx'
+import { Seo, ld, useOrigin } from '../lib/seo.jsx'
 import '../styles/landing.css'
 
-const featured = ['autopro', 'vinfast', 'xpander', 'xeluot', 'motofix', 'shine'].map((s) => templates.find((t) => t.slug === s))
+const FEATURED = ['autopro', 'vinfast', 'xpander', 'xeluot', 'motofix', 'shine']
 
 const SLOT_LIST = ['08:00', '09:30', '11:00', '13:30', '15:00', '16:30']
 const SLOT_FREE = [0, 1, 2, 4, 5]
@@ -72,15 +72,17 @@ const timeLeft = () => {
   return [Math.floor(d / 864e5), Math.floor(d / 36e5) % 24, Math.floor(d / 6e4) % 60, Math.floor(d / 1e3) % 60]
 }
 function Countdown() {
-  const [v, setV] = useState(timeLeft)
+  // giá trị theo giờ máy người xem: tính sau khi tải trang (HTML dựng sẵn hiện --)
+  const [v, setV] = useState(null)
   useEffect(() => {
+    setV(timeLeft())
     const id = setInterval(() => setV(timeLeft()), 1000)
     return () => clearInterval(id)
   }, [])
   const labels = ['ngày', 'giờ', 'phút', 'giây']
   return (
-    <div className="promo-lp__count" aria-label={`Còn ${v[0]} ngày ${v[1]} giờ`}>
-      {v.map((x, i) => (
+    <div className="promo-lp__count" aria-label={v ? `Còn ${v[0]} ngày ${v[1]} giờ` : 'Thời gian còn lại của ưu đãi'}>
+      {(v || ['--', '--', '--', '--']).map((x, i) => (
         <span key={labels[i]}>
           <b key={i === 3 ? x : 'v'} className={i === 3 ? 'tick' : undefined}>
             {String(x).padStart(2, '0')}
@@ -200,6 +202,11 @@ function Features() {
 }
 
 function FeaturedTemplates() {
+  const { templates } = useCatalog()
+  // mẫu nổi bật: ưu tiên mẫu quản trị đánh dấu nổi bật, rồi danh sách mặc định (bỏ mẫu đã ẩn)
+  const featured = [...templates.filter((t) => t.featured), ...FEATURED.map((s) => templates.find((t) => t.slug === s))]
+    .filter((t, i, a) => t && a.indexOf(t) === i)
+    .slice(0, 6)
   return (
     <section className="section section--mist" id="mau">
       <div className="wrap">
@@ -341,6 +348,7 @@ function WebVsLanding() {
 }
 
 function Gift() {
+  const site = useSite()
   const { open } = useConsult()
   const campaigns = ['Thay dầu giảm 30%', 'Kiểm tra xe miễn phí mùa mưa', 'Vệ sinh điều hòa 199.000đ', 'Khai trương chi nhánh mới']
   return (
@@ -448,6 +456,7 @@ function GiftTemplates() {
 }
 
 function Projects() {
+  const { projects } = useCatalog()
   return (
     <section className="section" id="du-an">
       <div className="wrap">
@@ -574,6 +583,8 @@ function Testimonials() {
 }
 
 function Faq() {
+  const site = useSite()
+  const faqs = useFaqs()
   return (
     <section className="section" id="hoi-dap">
       <div className="wrap faq">
@@ -601,6 +612,7 @@ function Faq() {
 }
 
 function Consult() {
+  const site = useSite()
   return (
     <section className="section consult" id="tu-van">
       <div className="wrap consult__grid">
@@ -630,8 +642,12 @@ function Consult() {
 }
 
 export default function Landing() {
+  const site = useSite()
+  const faqs = useFaqs()
+  const origin = useOrigin()
   return (
     <>
+      <Seo path="/" jsonLd={[ld.organization(site, origin), ld.website(site, origin), ld.faq(faqs)]} />
       <HomeHero />
       <Segments />
       <Features />

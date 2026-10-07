@@ -142,10 +142,11 @@ export function CountUp({ value, duration = 1400 }) {
   const str = String(value)
   const m = str.match(/^([^\d]*)(\d[\d.,]*)(.*)$/)
   const [ref, inView] = useInView({ threshold: 0.4 })
-  const [shown, setShown] = useState(() => (m && motionAllowed() ? null : str))
+  // HTML dựng sẵn giữ số thật (SEO); khi cuộn tới mới chạy từ 0
+  const [shown, setShown] = useState(str)
 
   useEffect(() => {
-    if (!m || !inView || shown === str) return
+    if (!m || !inView || !motionAllowed()) return
     const [, pre, num, post] = m
     const isDecimal = num.includes(',')
     const target = isDecimal ? parseFloat(num.replace(',', '.')) : parseInt(num.replace(/\./g, ''), 10)
@@ -165,11 +166,9 @@ export function CountUp({ value, duration = 1400 }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView])
 
-  // Trước khi chạy, hiện số 0 với cùng định dạng để bố cục không nhảy.
-  const placeholder = m ? m[1] + (m[2].includes(',') ? '0,' + '0'.repeat(m[2].split(',')[1].length) : '0') + m[3] : str
   return (
     <span ref={ref} className="countup" aria-label={str}>
-      {shown ?? placeholder}
+      {shown}
     </span>
   )
 }
