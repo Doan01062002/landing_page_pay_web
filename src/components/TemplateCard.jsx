@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
 import LivePreview from './LivePreview.jsx'
-import { getPages } from '../templates/pages.jsx'
 import { featureFilters } from '../data/templates.js'
 import { formatVND } from '../data/site.js'
 
@@ -53,9 +52,6 @@ export default function TemplateCard({ t }) {
                 <strong>{formatVND(t.price)}</strong>
               </>
             )}
-          </span>
-          <span className="tcard__pages" title="Số trang của phần mềm, chưa kể trang quản trị">
-            <Icon name="FileText" size={14} /> {getPages(t).length} trang + quản trị
           </span>
         </div>
       </div>

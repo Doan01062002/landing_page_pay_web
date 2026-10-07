@@ -44,9 +44,6 @@ export default function ProjectTile({ p }) {
             <small>Mẫu dựng riêng</small>
             <strong>Báo giá theo yêu cầu</strong>
           </span>
-          <span className="tcard__pages">
-            <Icon name="FileText" size={14} /> {p.type === 'landing' ? '1 trang' : 'Nhiều trang'}
-          </span>
         </div>
       </div>
     </article>
