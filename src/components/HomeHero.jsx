@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useIsoLayoutEffect } from '../lib/iso.js'
 import { Link } from 'react-router-dom'
 import Icon from './Icon.jsx'
 import { motionAllowed } from './Motion.jsx'
@@ -126,49 +125,13 @@ function Ring() {
       <div className="hx-spin" ref={spinRef}>
         {cards.map((c, i) => (
           <div className="hx-card" key={i} style={{ transform: `translateZ(${R}px) rotateY(${(-i * STEP).toFixed(3)}deg) translateZ(${-R}px)` }}>
-            <img src={Math.abs(angleOf(i, PHASE0)) <= NEAR ? c.img : undefined} data-src={c.img} alt="" width="390" height="900" decoding="async" onError={(e) => e.currentTarget.parentElement.classList.add('is-broken')} />
+            <img src={Math.abs(angleOf(i, PHASE0)) <= NEAR ? c.img : undefined} data-src={c.img} alt="" width="390" height="900" decoding="async" fetchpriority={Math.abs(angleOf(i, PHASE0)) <= CULL ? 'high' : undefined} onError={(e) => e.currentTarget.parentElement.classList.add('is-broken')} />
             <span className="hx-card__cap">{c.name}</span>
           </div>
         ))}
       </div>
     </div>
   )
-}
-
-// Hiệu ứng vào trang: chạy ngay, hoặc chờ màn mở đầu logo (IntroSplash) xong.
-// Dùng các thuộc tính translate / scale / clip-path riêng, không đụng transform đã dùng để căn vị trí.
-function useEntrance(rootRef) {
-  // Chỉ chạy sau màn mở đầu logo. Lần vào sau (không có màn mở đầu) nội dung đã dựng sẵn từ máy chủ hiện ngay,
-  // không ẩn rồi hiện lại (tránh nháy, tốt cho tốc độ hiển thị).
-  useIsoLayoutEffect(() => {
-    const root = rootRef.current
-    if (!motionAllowed() || !root.animate) return
-    const EXPO = 'cubic-bezier(.16,1,.3,1)'
-    const steps = [
-      ['.hx-badge', { opacity: 0, translate: '0 11px', scale: '.985' }, 560, 120],
-      ['.hx-h1--a', { opacity: 0, translate: '0 15px', clipPath: 'inset(100% 0 -30% 0)' }, 900, 230],
-      ['.hx-h1--b', { opacity: 0, translate: '0 15px', clipPath: 'inset(100% 0 -30% 0)' }, 900, 320],
-      ['.hx-sub', { opacity: 0, translate: '0 10px' }, 620, 540],
-      ['.hx-cta > *', { opacity: 0, translate: '0 13px', scale: '.985' }, 620, 680],
-      ['.hx-ring', { opacity: 0, translate: '0 40px' }, 1100, 600],
-    ]
-    const run = () => {
-      steps.forEach(([sel, from, dur, delay]) =>
-        root.querySelectorAll(sel).forEach((el, n) => {
-          const to = { opacity: 1 }
-          if (from.translate) to.translate = '0 0'
-          if (from.scale) to.scale = '1'
-          if (from.clipPath) to.clipPath = 'inset(-30% 0 -30% 0)'
-          el.animate([from, to], { duration: dur, delay: delay + n * 70, easing: EXPO, fill: 'backwards' })
-        }),
-      )
-    }
-    // đang chạy màn mở đầu logo: chữ được giấu bằng CSS (intro.css), chờ sự kiện xong rồi mới hiện
-    if (document.documentElement.classList.contains('intro-hold')) {
-      window.addEventListener('chungauto:intro-done', run, { once: true })
-      return () => window.removeEventListener('chungauto:intro-done', run)
-    }
-  }, [rootRef])
 }
 
 export default function HomeHero() {
@@ -203,8 +166,6 @@ export default function HomeHero() {
     return () => window.removeEventListener('resize', fit)
   }, [])
 
-  useEntrance(rootRef)
-
   return (
     <section className="hx" ref={rootRef}>
       <div className="hx-bg" aria-hidden="true" />
@@ -225,7 +186,7 @@ export default function HomeHero() {
         <p className="hx-sub">
           <b>{total} mẫu dựng sẵn</b> cho gara, đại lý, detailing và phụ tùng.{' '}
           <br />
-          Bàn giao trong 7 ngày, chạy mượt trên điện thoại.
+          Bàn giao trong 3 ngày, chạy mượt trên điện thoại.
         </p>
 
         <div className="hx-cta">

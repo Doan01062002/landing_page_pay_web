@@ -77,9 +77,10 @@
   transform-origin: left center;
 }
 
-/* Trong lúc chạy: ẩn logo thật trên menu (logo màn mở đầu bay vào đúng chỗ đó) và giữ phần hero chờ hiện */
-html.intro-hold .site-header__logo .logo__img,
-html.intro-hold .hx-canvas > * {
+/* Trong lúc chạy: ẩn logo thật trên menu (logo màn mở đầu bay vào đúng chỗ đó).
+   Hero KHÔNG bị giấu: đã dựng, đã tải ảnh sẵn phía sau nền trắng của màn mở đầu (.intro__bg); nền mờ dần là hero lộ ra,
+   nên lúc logo vào chỗ thì hero đã hiện đủ, không phải chờ hiệu ứng vào từng phần. */
+html.intro-hold .site-header__logo .logo__img {
   opacity: 0;
 }
 

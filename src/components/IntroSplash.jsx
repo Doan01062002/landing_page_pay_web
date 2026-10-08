@@ -5,7 +5,8 @@ import '../styles/intro.css'
 
 /*
   Màn mở đầu trang chủ và Kho mẫu (giống landing VinFast): logo hiện giữa màn hình — hình xe chạy vào, chữ mở ra,
-  vệt tốc độ lướt qua — rồi thu nhỏ bay đúng vào chỗ logo trên thanh menu; sau đó phần hero hiện lần lượt.
+  vệt tốc độ lướt qua — rồi thu nhỏ bay đúng vào chỗ logo trên thanh menu. Hero đã dựng sẵn phía sau nền trắng
+  (ảnh đã tải, giải mã) và lộ ra khi nền mờ dần, nên logo vào chỗ là hero đã hiện đủ.
   - Chạy một lần mỗi phiên trình duyệt cho mỗi trang (PAGES); thêm ?intro=1 vào link để xem lại.
   - App gắn key theo đường dẫn nên chuyển sang Kho mẫu lần đầu trong phiên cũng chạy.
   - Không chạy trong ảnh thu nhỏ (embed=1). Bấm hoặc nhấn phím bất kỳ để bỏ qua.
@@ -16,8 +17,16 @@ const LOGO_SVG = '/brand/logo-vector.svg'
 const EASE = 'cubic-bezier(.65,0,.35,1)'
 const EASE_OUT = 'cubic-bezier(.2,.7,.2,1)'
 
-// Báo logo đã vào chỗ: hero (HomeHero) chạy hiệu ứng hiện chữ, vòng thẻ; LivePreview bắt đầu tải iframe
+// Báo logo đã vào chỗ: LivePreview bắt đầu tải iframe
 const announceDone = () => window.dispatchEvent(new Event(INTRO_DONE))
+
+// Hero hiện ra sau nền trắng khi logo bay: chờ ảnh các thẻ đang hiện tải + giải mã xong (tối đa `ms`) để không lộ thẻ trống.
+// Trang không có thẻ hero (Kho mẫu) thì xong ngay.
+const heroImagesReady = (ms) => {
+  const imgs = [...document.querySelectorAll('.hx-card img[src]')]
+  if (!imgs.length) return Promise.resolve()
+  return Promise.race([Promise.allSettled(imgs.map((img) => img.decode())), new Promise((r) => setTimeout(r, ms))])
+}
 
 export default function IntroSplash() {
   // false cả lúc dựng phía máy chủ lẫn lần hydrate đầu (HTML khớp nhau); bật ngay trước lần vẽ đầu nếu cần chạy.
@@ -56,6 +65,7 @@ export default function IntroSplash() {
       return a
     }
     let done = false
+    let dead = false // đã gỡ khỏi trang (đổi trang giữa chừng): không chạy tiếp
     const finish = () => {
       if (done) return
       done = true
@@ -65,7 +75,7 @@ export default function IntroSplash() {
       anims.forEach((a) => a.cancel())
       html.classList.remove('intro-hold')
       setOn(false)
-      announceDone() // cùng lượt với việc bỏ intro-hold: hero bắt đầu từ trạng thái ẩn, không loé
+      announceDone()
     }
 
     // 1) logo hiện: hình xe "chạy" vào từ trái, chữ mở ra, vệt tốc độ lướt dưới chân
@@ -82,8 +92,9 @@ export default function IntroSplash() {
       { duration: 900, delay: 820, easing: EASE },
     )
 
-    // 2) thu nhỏ, bay đúng vào logo trên menu; nền trắng mờ dần để lộ trang
+    // 2) thu nhỏ, bay đúng vào logo trên menu; nền trắng mờ dần để lộ trang (hero đã sẵn sàng phía sau)
     const fly = () => {
+      if (done || dead) return
       const target = document.querySelector('.site-header__logo .logo__img')
       if (!target) return finish()
       const from = mark.getBoundingClientRect()
@@ -97,13 +108,15 @@ export default function IntroSplash() {
         easing: EASE,
       }).finished.then(finish, () => {})
     }
-    const flyTimer = setTimeout(fly, 1800)
+    // đủ 1,8 giây xem logo thì bay; nếu ảnh hero chưa kịp thì chờ thêm tối đa 1,2 giây (mạng chậm) rồi bay luôn
+    const flyTimer = setTimeout(() => heroImagesReady(1200).then(fly), 1800)
 
     // bỏ qua
     const skip = () => finish()
     root.addEventListener('pointerdown', skip)
     window.addEventListener('keydown', skip)
     return () => {
+      dead = true
       root.removeEventListener('pointerdown', skip)
       window.removeEventListener('keydown', skip)
       clearTimeout(flyTimer)
