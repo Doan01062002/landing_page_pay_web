@@ -84,31 +84,7 @@ html.intro-hold .site-header__logo .logo__img {
   opacity: 0;
 }
 
-/* Kho mẫu: giữ tiêu đề, ô tìm kiếm và lưới mẫu chờ logo vào chỗ, rồi hiện lần lượt */
-.g-hero__inner > *,
-.g-body {
-  transition:
-    opacity 0.6s ease,
-    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.g-hero__inner > :nth-child(2) {
-  transition-delay: 0.08s;
-}
-.g-hero__inner > :nth-child(3) {
-  transition-delay: 0.16s;
-}
-.g-hero__inner > :nth-child(4) {
-  transition-delay: 0.24s;
-}
-.g-body {
-  transition-delay: 0.3s;
-}
-html.intro-hold .g-hero__inner > *,
-html.intro-hold .g-body {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: none;
-}
+/* Kho mẫu cũng vậy: tiêu đề, ô tìm kiếm và lưới mẫu dựng sẵn phía sau nền trắng, không giấu rồi hiện lần lượt sau logo. */
 
 /* Trước khi JS tải xong (trang dựng sẵn từ máy chủ): script trong <head> gắn html.intro-pre để che trang,
    tránh nội dung hiện ra rồi mới bị màn mở đầu phủ lên. Tự gỡ sau 4 giây nếu JS lỗi / tải quá chậm. */

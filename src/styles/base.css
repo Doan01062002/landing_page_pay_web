@@ -513,6 +513,9 @@ p {
   overflow: hidden;
   background: var(--mist);
 }
+.thumb picture {
+  display: contents;
+}
 .thumb img {
   display: block;
   width: 100%;

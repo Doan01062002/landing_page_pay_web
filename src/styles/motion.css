@@ -35,6 +35,26 @@
   opacity: 1;
   transform: none;
 }
+/* Màn nhỏ / cảm ứng: hiện nhanh và ít dịch chuyển hơn (cuộn nhanh, thẻ cao; chờ 0,7 giây mới đủ rõ thì thấy "chững") */
+@media (max-width: 960px), (hover: none) {
+  .motion [data-reveal] {
+    transition:
+      opacity 0.4s ease-out,
+      transform 0.5s var(--ease-out);
+  }
+  .motion [data-reveal='up'] {
+    transform: translateY(14px);
+  }
+  .motion [data-reveal='left'] {
+    transform: translateX(-18px);
+  }
+  .motion [data-reveal='right'] {
+    transform: translateX(18px);
+  }
+  .motion [data-reveal].is-in {
+    transform: none;
+  }
+}
 
 @keyframes rise-in {
   from {

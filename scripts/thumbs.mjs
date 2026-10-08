@@ -1,6 +1,7 @@
 // Chụp ảnh xem trước cho thẻ trong Kho mẫu → src/assets/thumbs/<key>.webp (Vite gắn mã băm theo nội dung: chụp lại là trình duyệt tải ảnh mới)
 // (thẻ dùng ảnh tĩnh thay cho iframe: nhúng 9 website thật một lúc làm điện thoại giật, tải hơn chục MB).
 // - Ảnh: khung máy tính 1280 px, cao 3 màn hình (2400 px) để rê chuột vào thẻ thì ảnh cuộn xuống; thu về rộng 720 px.
+//   Kèm <key>-top.webp: chỉ 1/3 trên, dành cho màn cảm ứng (Thumb.jsx).
 // - key: mẫu phần mềm = <slug>, mẫu dựng riêng = du-an-<slug>.
 // Chạy (cần Chrome và ffmpeg trong PATH; trang phải đang chạy, vd `npm run build && npm run preview`):
 //   node scripts/thumbs.mjs                       (tất cả, mặc định http://localhost:4173)
@@ -69,6 +70,8 @@ for (const job of jobs) {
   await page.close()
   // fullPage ngắn hơn 2400 px: ffmpeg đệm nền trắng cho đủ khung
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', png, '-vf', `pad=${W}:${TALL}:0:0:white,scale=720:-2`, '-c:v', 'libwebp', '-quality', '72', join(OUT, `${job.key}.webp`)])
+  // bản chỉ lấy 1/3 trên (720 × 450) cho màn cảm ứng không rê chuột được: nhẹ hơn ~65% (xem Thumb.jsx)
+  execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', png, '-vf', `pad=${W}:${TALL}:0:0:white,scale=720:-2,crop=720:450:0:0`, '-c:v', 'libwebp', '-quality', '72', join(OUT, `${job.key}-top.webp`)])
   rmSync(png)
   console.log('✓', job.key)
 }

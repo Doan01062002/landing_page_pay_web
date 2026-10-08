@@ -34,12 +34,17 @@ function checkWatchers() {
 function scheduleCheck() {
   if (!pending) pending = setTimeout(checkWatchers, 60)
 }
-export function whenVisible(el, cb, { threshold = 0.12, ratio = 0.94 } = {}) {
+// ahead: hiện trước khi phần tử cuộn tới (cách mép dưới màn hình 30%) — dùng trên màn nhỏ / cảm ứng,
+// nơi cuộn nhanh và thẻ cao: hiện đúng lúc thẻ lọt vào màn hình thì hiệu ứng chưa kịp xong đã trôi mất.
+export function whenVisible(el, cb, { threshold = 0.12, ratio = 0.94, ahead = false } = {}) {
   let done = false
-  const io = new IntersectionObserver(([e]) => e.isIntersecting && w.fire(), { threshold, rootMargin: '0px 0px -6% 0px' })
+  const io = new IntersectionObserver(([e]) => e.isIntersecting && w.fire(), {
+    threshold: ahead ? 0 : threshold,
+    rootMargin: ahead ? '0px 0px 30% 0px' : '0px 0px -6% 0px',
+  })
   const w = {
     el,
-    ratio,
+    ratio: ahead ? 1.3 : ratio,
     fire() {
       if (done) return
       done = true
@@ -86,19 +91,26 @@ export function RevealManager() {
       }, 950 + delay * 90)
     }
 
+    // màn nhỏ / cảm ứng (cùng ngưỡng với @media trong motion.css)
+    const compact = window.matchMedia('(max-width: 960px), (hover: none)')
+
     let queued = null
     const scan = () => {
       queued = null
       document.querySelectorAll('[data-stagger]').forEach((parent) => {
+        // So le theo CỘT trong hàng, không theo thứ tự cả danh sách: lưới 1 cột (điện thoại) thì thẻ nào cũng hiện ngay,
+        // không bắt thẻ thứ 7 chờ thêm 0,6 giây dù nó đang đứng một mình trên màn hình.
+        const cs = getComputedStyle(parent)
+        const cols = cs.display === 'grid' ? Math.max(1, cs.gridTemplateColumns.split(' ').length) : 8
         ;[...parent.children].forEach((child, i) => {
           if (child.hasAttribute('data-reveal') || child.hasAttribute('data-revealed')) return
           child.setAttribute('data-reveal', parent.dataset.stagger || 'up')
-          child.style.setProperty('--d', String(i % 8))
+          child.style.setProperty('--d', String(i % Math.min(cols, 8)))
         })
       })
       document.querySelectorAll('[data-reveal]:not([data-obs])').forEach((el) => {
         el.setAttribute('data-obs', '')
-        const stop = whenVisible(el, () => reveal(el))
+        const stop = whenVisible(el, () => reveal(el), { ahead: compact.matches && !!el.parentElement?.hasAttribute('data-stagger') })
         stops.push(() => {
           stop()
           // Cho phép theo dõi lại nếu hiệu ứng được gắn lại (StrictMode, hot reload).
