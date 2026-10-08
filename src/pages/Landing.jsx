@@ -486,7 +486,7 @@ function Process() {
       <div className="wrap">
         <div className="section-head" data-reveal="up">
           <p className="eyebrow">Quy trình triển khai</p>
-          <h2>Từ lúc chọn mẫu đến khi phần mềm chạy: 7 ngày</h2>
+          <h2>Từ lúc chọn mẫu đến khi phần mềm chạy: 3 ngày</h2>
         </div>
         <ol className="steps" data-stagger="up">
           {steps.map((s, i) => (

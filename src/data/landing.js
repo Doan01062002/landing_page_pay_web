@@ -12,22 +12,22 @@ export const segments = [
 
 export const steps = [
   {
-    day: 'Ngày 1',
+    day: 'Ngày 1 · Sáng',
     title: 'Chọn mẫu & tư vấn',
     text: 'Bạn chọn mẫu ưng ý trong kho, chuyên viên gọi lại để chốt tính năng: đặt lịch, số chi nhánh, bán phụ tùng.',
   },
   {
-    day: 'Ngày 2',
+    day: 'Ngày 1 · Chiều',
     title: 'Gửi nội dung',
     text: 'Gửi logo, bảng giá dịch vụ, địa chỉ chi nhánh và ảnh xưởng. Chưa có ảnh đẹp? Chúng tôi dùng ảnh minh họa có bản quyền.',
   },
   {
-    day: 'Ngày 3 – 6',
+    day: 'Ngày 2',
     title: 'Dựng phần mềm + landing page',
     text: 'Phần mềm được dựng theo nhận diện của bạn. Song song, chúng tôi làm landing page quảng cáo cho chương trình khuyến mãi bạn chọn.',
   },
   {
-    day: 'Ngày 7',
+    day: 'Ngày 3',
     title: 'Bàn giao & chạy quảng cáo',
     text: 'Gắn tên miền, hướng dẫn quản trị 1-1 và cài sẵn mã đo lường để bạn chạy Facebook Ads, Google Ads ngay.',
   },
@@ -105,8 +105,8 @@ export const testimonials = [
     name: 'Anh Phạm Quốc Huy',
     role: 'Giám đốc Lốp Ắc Quy Huy Phát, Đà Nẵng',
     quote:
-      'Khách tra kích cỡ lốp ngay trên web rồi mới tới cửa hàng, nhân viên đỡ phải tư vấn lại từ đầu. Bàn giao đúng 7 ngày như cam kết.',
-    metric: '7',
+      'Khách tra kích cỡ lốp ngay trên web rồi mới tới cửa hàng, nhân viên đỡ phải tư vấn lại từ đầu. Bàn giao đúng 3 ngày như cam kết.',
+    metric: '3',
     metricLabel: 'ngày từ lúc chọn mẫu đến lúc chạy',
     template: 'Lốp Việt',
   },

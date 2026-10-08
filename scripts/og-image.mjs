@@ -37,7 +37,7 @@ const html = `<!doctype html><html><head><meta charset="utf-8"><style>
   <div class="left">
     <img class="logo" src="${logo}">
     <h1>Phần mềm &amp; website cho <b>gara, đại lý, showroom ô tô</b></h1>
-    <p>Mẫu dựng sẵn, xem thử trực tiếp, bàn giao trong 7 ngày – tặng kèm landing page quảng cáo.</p>
+    <p>Mẫu dựng sẵn, xem thử trực tiếp, bàn giao trong 3 ngày – tặng kèm landing page quảng cáo.</p>
     <div class="tags"><span>Gara ô tô</span><span>Đại lý xe</span><span>Phụ tùng</span><span>Detailing</span></div>
   </div>
   <div class="hot">Hotline <i>${site.hotline}</i></div>

@@ -48,7 +48,7 @@ Vai trò: **Quản trị viên** (toàn quyền), **Quản lý** (mọi thứ tr
 
 | Đường dẫn | Nội dung |
 | --- | --- |
-| `/` | Landing page chào hàng: tính năng, mẫu nổi bật, quà tặng landing page, quy trình 7 ngày, bảng giá, đánh giá, hỏi đáp, form tư vấn |
+| `/` | Landing page chào hàng: tính năng, mẫu nổi bật, quà tặng landing page, quy trình 3 ngày, bảng giá, đánh giá, hỏi đáp, form tư vấn |
 | `/mau-phan-mem` | Kho mẫu: mẫu dựng riêng (`projects.js`) xếp trước, rồi mẫu phần mềm. Tìm kiếm (không dấu), lọc theo hình thức, loại hình, tính năng, chi phí; sắp xếp. Hỗ trợ `?key=`, `?loai=`, `?ht=rieng\|phanmem` |
 | `/mau-phan-mem/:slug` | Chi tiết mẫu: xem trước máy tính + điện thoại, đổi bộ màu, "Chọn mẫu này", "Xem thử" |
 | `/demo/:slug` | Xem thử toàn màn hình: đổi thiết bị (máy tính / máy tính bảng / điện thoại), đổi màu, đổi mẫu |
